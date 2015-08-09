@@ -1,0 +1,11 @@
+node_modules
+dist
+.tmp
+temp
+.sass-cache
+bower_components
+app/lib
+app/styles
+app/scripts/config.js
+buildTmp
+*.log

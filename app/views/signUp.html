@@ -1,0 +1,45 @@
+<div class="container" ng-controller="SignUpController">
+    <div class="sign-in-up" id="to-top">
+        <section class="sign-in-up-section">
+            <div class="container">
+                <section class="sign-in-up-content">
+                      <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="text-center">
+                                <label><span class="fa fa-sign-in"></span> {{'logon_signUp' | translate}}</label>
+                            </h1>  
+                            <form name="loginForm" ng-submit="signup()"
+                                class="form-horizontal" role="form" novalidate>
+                                 <div class="form-group">
+                                    <label>{{'logon_name' | translate}}</label>
+                                    <input type="text" class="form-control" name="name" ng-model="user.name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>{{'logon_mail' | translate}}</label>
+                                    <input type="email" class="form-control" name="email" ng-model="user.email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>{{'logon_pass' | translate}}</label>
+                                    <input type="password" class="form-control" name="password" ng-model="user.password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>{{'logon_confirm_pass' | translate}}</label>
+                                    <input type="password" class="form-control" name="password" ng-model="user.confirmpassword" required>
+                                </div>
+                                <button type="submit" value="Submit"                                        
+                                        ng-disabled="commentForm.$invalid"
+                                        ng-click="commentForm.$setPristine()"
+                                        class="btn btn-primary btn-block">{{'logon_ingresar' | translate}}</button>
+                            </form>
+                            <hr>
+
+                             <p>{{'logon_ya_registrado' | translate}} <a ui-sref="login">{{'logon_login' | translate}}</a></p>
+                        </div>
+                      </div>
+                    </form>
+                </section>
+            </div>
+        </section>
+    </div>  
+    
+</div>

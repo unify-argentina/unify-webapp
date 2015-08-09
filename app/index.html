@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html data-ng-app="unifyApp">
+ 
+<head>
+    <title>UNIFY</title>
+
+    <meta charset="utf-8">
+
+    <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>	
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <script type="text/javascript"  src="lib/angular/angular.min.js"></script>
+    <script type="text/javascript"  src="lib/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript"  src="lib/angular-translate/angular-translate.min.js"></script>
+    <script src="lib/angular-ui-map/ui-map.min.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="lib/satellizer/satellizer.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    
+    <!-- build:js scripts/app.js -->
+        <script type="text/javascript" src="scripts/app.js"></script>
+        <script type="text/javascript" src="scripts/config.js"></script>
+        <script type="text/javascript" src="scripts/route.js"></script>
+        <script type="text/javascript" src="scripts/translate.js"></script>
+        <script type="text/javascript" src="scripts/auth.js"></script>
+
+        <!-- Controllers -->
+        <script type="text/javascript" src="scripts/controller/login.controller.js"></script>
+        <script type="text/javascript" src="scripts/controller/main.controller.js"></script>
+        <script type="text/javascript" src="scripts/controller/signUp.controller.js"></script>
+        <script type="text/javascript" src="scripts/controller/profile.controller.js"></script>
+        <script type="text/javascript" src="scripts/controller/circle.controller.js"></script>
+
+        <!-- Services -->
+        <script type="text/javascript" src="scripts/service/authentication.service.js"></script>
+        <script type="text/javascript" src="scripts/service/profile.service.js"></script>
+        <script type="text/javascript" src="scripts/service/circle.service.js"></script>
+
+        <!-- Directives -->
+        <script type="text/javascript" src="scripts/directives/main-content.js"></script>
+    <!-- endbuild -->
+
+</head>
+ 
+<body class="container" ng-controller="MainController">
+<!--    <div data-ng-include src="headerSrc"></div> -->
+    <div>
+        <div ui-view></div>
+    </div>
+</body>
+ 
+</html>

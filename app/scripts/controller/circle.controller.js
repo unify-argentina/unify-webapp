@@ -1,0 +1,74 @@
+unifyApp.controller("CircleController", function (CircleService, AuthenticationService) {
+
+	var circleCtrl = this;
+
+	circleCtrl.circle_id = AuthenticationService.getMainCircleId();
+
+	circleCtrl.getCircle = function(){
+		CircleService.circle.get({
+			user_id : AuthenticationService.getUserId(),
+			circle_id : circleCtrl.circle_id
+		},function(response){
+			circleCtrl.circle=response.circle;
+	        localStorage.setItem('response', JSON.stringify(response));
+		});
+	};
+
+	circleCtrl.edit = function(){
+		circleCtrl.editProfile=true;
+		circleCtrl.newCircle.name = "";
+	};
+
+	circleCtrl.update = function(){
+		CircleService.updateCircle(
+			AuthenticationService.getUserId(),
+			circleCtrl.newUser
+		).then(function(data) {
+			console.log("Save: " + data);
+			circleCtrl.user.name=circleCtrl.newUser.name;
+			circleCtrl.user.email=circleCtrl.newUser.email;
+			circleCtrl.editProfile=false;
+		});
+	};
+
+	circleCtrl.saveCircle = function(){
+		circleCtrl.newCircle.user_id = AuthenticationService.getUserId();
+		circleCtrl.newCircle.parent = circleCtrl.circle_id;
+		CircleService.saveCircle(
+			circleCtrl.newCircle
+		).then(function(data) {
+			circleCtrl.getCircleTree();
+			circleCtrl.editProfile=false;
+		});
+	};
+
+	circleCtrl.cancelCircle = function(){
+		circleCtrl.newCircle.name = "";
+		circleCtrl.editProfile=false;
+	};
+
+	circleCtrl.getCircleTree = function(){
+		CircleService.getCircleTree(
+			AuthenticationService.getUserId(),
+			circleCtrl.circle_id
+		).then(function(data) {
+			console.log("Tree: " + data);
+			circleCtrl.tree=data.tree[0];
+		});
+	};
+	
+	circleCtrl.goToChild = function(circle_id){
+		circleCtrl.circle_id = circle_id;
+		circleCtrl.getCircle();
+		circleCtrl.getCircleTree();
+	}
+
+	circleCtrl.goToParent = function(){
+		circleCtrl.circle_id = circleCtrl.circle.parent;
+		circleCtrl.getCircle();
+		circleCtrl.getCircleTree();
+	}
+	
+	circleCtrl.getCircleTree();
+	circleCtrl.getCircle();
+});
