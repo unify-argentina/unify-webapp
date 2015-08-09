@@ -1,0 +1,56 @@
+<div class="container" ng-controller="LoginController">
+	<div class="sign-in-up" id="to-top">
+	
+	    <section class="sign-in-up-section">
+	      <div class="container">
+	        <div class="row">
+	          <div class="col-md-12">
+
+	          </div>
+	        </div>
+	
+	        <section class="sign-in-up-content">
+		       
+		          <div class="row">
+		            <div class="col-md-12">
+		            	<h4 class="text-center">
+							<label>{{'logon_login' | translate}}</label> - 
+							{{loggueado}}
+		            	</h4>        
+
+		            	<form name="loginForm" ng-submit="login()"
+                          class="form-horizontal" role="form" novalidate>
+		               		<div class="form-group">
+			                  	<input class="form-control" ng-model="user.email" id="email" type='text' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}"/ required>
+							</div>
+			                <div class="form-group">
+			                	<input id="pass" type='password' ng-model="user.password" tabindex="2" class="form-control" placeholder="{{'logon_pass_placeholder' | translate}}"/ required>
+			                </div>
+				            <div class="row">
+                                <button type="submit" value="Submit"                                        
+                                        ng-disabled="commentForm.$invalid"
+                                        ng-click="commentForm.$setPristine()"
+                                        class="btn btn-primary btn-block">{{'logon_ingresar' | translate}}</button>
+                            </div>
+	                    </form>
+
+		                <section class="sign-in-up-links text-center">
+		 	    			<a href='#'>{{'logon_pass_forgot' | translate}}</a> 
+			                  <span class="sep">&ndash;</span> 
+			                  <a ui-sref="signUp">{{'logon_signUp' | translate}}</a>
+		                  </p>
+		                </section>
+		                <div class="text-center">
+		                    <a ng-click="authenticate('facebook')" class="btn btn-primary"><span class="fa fa-facebook"></span> {{'logon_facebook' | translate}}</a>
+		                    <a ng-click="authenticate('twitter')" class="btn btn-info"><span class="fa fa-twitter"></span> {{'logon_twitter' | translate}}</a>
+		                    <a  ng-click="authenticate('instagram')" class="btn btn-primary"><i class="fa fa-instagram"></i></span> {{'logon_instagram' | translate}}</a>
+		                    <a ng-click="authenticate('google')" class="btn btn-danger"><i class="fa fa-google"></i></span> {{'logon_google' | translate}}</a>
+		                </div>
+		            </div>
+		          </div>
+				</form>
+	        </section>
+	        </div>
+		 </section>
+	</div>	
+</div>
