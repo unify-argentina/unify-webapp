@@ -37,6 +37,9 @@ module.exports = function(config) {
       'app/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
       'app/lib/satellizer/satellizer.js',
       'app/lib/angular-ui-router/release/angular-ui-router.js',
+      'app/lib/angular-loader/angular-loader.js',
+      'app/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+      'app/lib/angular-loading-bar/build/loading-bar.js',
       'app/lib/angular-mocks/angular-mocks.js',
       'app/lib/angular-scenario/angular-scenario.js',
       // endbower

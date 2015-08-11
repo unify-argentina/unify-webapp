@@ -59,6 +59,7 @@ unifyApp.controller("CircleController", function (CircleService, AuthenticationS
 	circleCtrl.goToChild = function(circle_id){
 		circleCtrl.circle_id = circle_id;
 		circleCtrl.cancelCircle();
+		circleCtrl.circle={};
 		circleCtrl.getCircle();
 		circleCtrl.getCircleTree();
 	}
@@ -66,6 +67,7 @@ unifyApp.controller("CircleController", function (CircleService, AuthenticationS
 	circleCtrl.goToParent = function(){
 		circleCtrl.circle_id = circleCtrl.circle.parent;
 		circleCtrl.cancelCircle();
+		circleCtrl.circle={};
 		circleCtrl.getCircle();
 		circleCtrl.getCircleTree();
 	}
@@ -76,6 +78,7 @@ unifyApp.controller("CircleController", function (CircleService, AuthenticationS
 	
 	circleCtrl.closeContact = function(){
 		circleCtrl.editContact = false;
+		circleCtrl.circle={};
 		circleCtrl.getCircle();
 	};
 

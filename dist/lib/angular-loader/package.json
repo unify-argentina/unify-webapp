@@ -1,8 +1,8 @@
 {
-  "name": "angular",
+  "name": "angular-loader",
   "version": "1.4.3",
-  "description": "HTML enhanced for web apps",
-  "main": "index.js",
+  "description": "AngularJS module for asynchronously loading modules",
+  "main": "angular-loader.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +14,7 @@
     "angular",
     "framework",
     "browser",
+    "loader",
     "client-side"
   ],
   "author": "Angular Core Team <angular-core+npm@google.com>",

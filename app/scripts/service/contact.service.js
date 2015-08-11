@@ -16,12 +16,12 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 					name : contact.name,
 					picture : contact.picture,
 					circle_id : contact.circle_id,
-					facebook_id : contact.facebook.id,
-					twitter_id : contact.twitter.id,
-					instagram_id : contact.instagram.id,
-					facebook_display_name : contact.facebook.name,
-					twitter_username : contact.twitter.username,	
-					instagram_username : contact.instagram.username
+					facebook_id : (contact.facebook!=null?contact.facebook.id:null),
+					twitter_id : (contact.twitter!=null?contact.twitter.id:null),
+					instagram_id : (contact.instagram!=null?contact.instagram.id:null),
+					facebook_display_name : (contact.facebook!=null?contact.facebook.name:null),
+					twitter_username : (contact.twitter!=null?contact.twitter.username:null),	
+					instagram_username : (contact.instagram!=null?contact.instagram.username:null)
 				}
 			).then(function(response) {	
         		return response.data;

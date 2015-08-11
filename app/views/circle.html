@@ -24,7 +24,7 @@
 			</div>
 			<div class="clearfix"></div>
 			<div class="list-group" style="margin-top: 20px;" ng-if="circleCtrl.circle.contacts">
-				<a>Contactos</a>
+				<span class="list-group-item active">Contactos</span>
 				<a class="list-group-item" ng-repeat="contact in circleCtrl.circle.contacts">
 					<img ng-src="{{contact.picture}}" class="img-circle image-contact-small" ng-if="contact.picture">
 					<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact-small" ng-if="!contact.picture">

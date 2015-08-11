@@ -1,7 +1,7 @@
-# packaged angular
+# packaged angular-loader
 
 This repo is for distribution on `npm` and `bower`. The source for this module is in the
-[main AngularJS repo](https://github.com/angular/angular.js).
+[main AngularJS repo](https://github.com/angular/angular.js/blob/master/src/loader.js).
 Please file issues and pull requests against that repo.
 
 ## Install
@@ -11,33 +11,34 @@ You can install this package either with `npm` or with `bower`.
 ### npm
 
 ```shell
-npm install angular
+npm install angular-loader
 ```
 
-Then add a `<script>` to your `index.html`:
+Add a `<script>` to your `index.html`:
 
 ```html
-<script src="/node_modules/angular/angular.js"></script>
+<script src="/node_modules/angular-loader/angular-loader.js"></script>
 ```
 
-Or `require('angular')` from your code.
+Note that this package is not in CommonJS format, so doing `require('angular-loader')` will
+return `undefined`.
 
 ### bower
 
 ```shell
-bower install angular
+bower install angular-loader
 ```
 
-Then add a `<script>` to your `index.html`:
+Add a `<script>` to your `index.html`:
 
 ```html
-<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/angular-loader/angular-loader.js"></script>
 ```
 
 ## Documentation
 
 Documentation is available on the
-[AngularJS docs site](http://docs.angularjs.org/).
+[AngularJS docs site](http://docs.angularjs.org/guide/bootstrap).
 
 ## License
 
