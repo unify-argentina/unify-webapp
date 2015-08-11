@@ -1,7 +1,6 @@
 unifyApp.directive('uwMainContent', function($auth) {
 
     var link = function(scope, elm, attrs, ctrl) {
-        console.log($auth.isAuthenticated());
     };
 
     return {

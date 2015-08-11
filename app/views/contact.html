@@ -1,0 +1,68 @@
+<div id="contact" class="well col-md-12" style="margin-top: 20px;" ng-controller="ContactController as contactCtrl"  ng-init="contactCtrl.circle_id=circleCtrl.circle_id">
+  	<div class="spinner" ng-if="!circleCtrl.circle">
+	  <div class="rect1"></div>
+	  <div class="rect2"></div>
+	  <div class="rect3"></div>
+	  <div class="rect4"></div>
+	  <div class="rect5"></div>
+	</div>
+	<div class="text-center">
+		<img ng-src="{{contactCtrl.contact.picture}}" class="img-circle image-contact" ng-if="contactCtrl.contact.picture">
+		<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact" ng-if="!contactCtrl.contact.picture">
+		<input class="form-control" ng-model="contactCtrl.contact.name"/>
+		<a class="btn btn-danger" ng-click="contactCtrl.saveContact();circleCtrl.closeContact();">Guardar Contacto</a>
+		<div class="clearfix"></div>
+		<div class="col-md-4 form-group" style="margin-top: 20px;">
+			<img ng-src="{{contactCtrl.contact.facebook.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.facebook.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.facebook.picture">
+			<img src="resources/contact/stormtrooper.jpg" class="img-circle image-social" ng-if="!contactCtrl.contact.facebook.picture">
+			<label class="form-label">Nombre:</label>
+			<input class="form-control" ng-model="contactCtrl.contact.facebook.name"/>
+       		<select class="form-control" ng-model="contactCtrl.contact.facebook" ng-options="friend.name for friend in contactCtrl.friends.facebook.list | orderBy:'name'" size="10">
+       			<option value="">-- Selecciona un amigo --</option>
+       		</select>
+       	</div>
+		<div class="col-md-4 form-group" style="margin-top: 20px;">
+			<img ng-src="{{contactCtrl.contact.twitter.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.twitter.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.twitter.picture">
+			<img src="resources/contact/stormtrooper.jpg" class="img-circle image-social" ng-if="!contactCtrl.contact.twitter.picture">
+			<label class="form-label">Nombre:</label>
+			<input class="form-control" ng-model="contactCtrl.contact.twitter.name"/>
+       		<select class="form-control"  ng-model="contactCtrl.contact.twitter" ng-options="friend.name for friend in contactCtrl.friends.twitter.list | orderBy:'name'" size="10">
+      			<option value="">-- Selecciona un amigo --</option>
+      		</select>
+      	</div>
+		<div class="col-md-4 form-group" style="margin-top: 20px;">
+			<img ng-src="{{contactCtrl.contact.instagram.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.instagram.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.instagram.picture">
+			<img src="resources/contact/stormtrooper.jpg" class="img-circle image-social" ng-if="!contactCtrl.contact.instagram.picture">
+			<label class="form-label">Nombre:</label>
+			<input class="form-control" ng-model="contactCtrl.contact.instagram.name"/>
+       		<select class="form-control" ng-model="contactCtrl.contact.instagram" ng-options="friend.name for friend in contactCtrl.friends.instagram.list | orderBy:'name'" size="10">
+      			<option value="">-- Selecciona un amigo --</option>
+      		</select>
+      	</div>
+	<!--	
+			<img src="resources/contact/mario.jpg"> 
+			<div class="well text-center" style="margin-top: 20px;">
+			<a ng-click="circleCtrl.goToParent();" ng-show="circleCtrl.circle.parent"><i class="fa fa-arrow-up"></i>Subir un nivel</a>
+			<div class="col-md-12">
+				<img ng-src="{{circleCtrl.circle.picture}}" class="img-circle image-profile" ng-if="circleCtrl.circle.picture">
+				<img src="circle.png" class="img-circle image-profile" ng-if="!circleCtrl.circle.picture"> 
+				{{circleCtrl.circle.name}}
+			</div>
+			<br>
+			<div class="col-md-12 " ng-show="!circleCtrl.editProfile" style="margin-top: 10px;">
+				<a class="btn btn-primary col-md-8 col-md-offset-2" ng-click="circleCtrl.edit();">Crear Circulo</a><br>
+				<a class="btn btn-success col-md-8 col-md-offset-2" ng-click="circleCtrl.createContact();" stylle="margin-top: 5px;">Crear Contacto</a>
+			</div>
+			<div class="col-md-12" ng-show="circleCtrl.editProfile">
+				<input type="text" class="form-control" name="circleCtrl.newCircle" ng-model="circleCtrl.newCircle.name" required>
+				<a class="btn btn-primary" ng-click="circleCtrl.saveCircle();">Crear</a>
+				<a class="btn btn-success" ng-click="circleCtrl.cancelCircle();">Cancelar</a>
+			</div>
+			<div class="clearfix"></div>
+			<div class="list-group" style="margin-top: 20px;">
+			  <a ng-click="circleCtrl.goToChild(subcircle._id);" class="list-group-item" ng-repeat="subcircle in circleCtrl.tree.subcircles">{{subcircle.name}}</a>
+			</div>
+		</div>
+-->
+	</div>
+</div>

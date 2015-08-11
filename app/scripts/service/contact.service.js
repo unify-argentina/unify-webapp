@@ -13,16 +13,15 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 			 var promise = $http.post(ENV.apiEndPoint + '/api/user/' + contact.user_id + '/contact', 
 				{
 					user_id : contact.user_id,
-					contact_id : contact.contact_id,
 					name : contact.name,
 					picture : contact.picture,
 					circle_id : contact.circle_id,
-					facebook_id : contact.facebook_id,
-					twitter_id : contact.twitter_id,
-					instagram_id : contact.instagram_id,
-					facebook_display_name : contact.facebook_display_name,
-					twitter_username : contact.twitter_username,	
-					instagram_username : contact.instagram_username
+					facebook_id : contact.facebook.id,
+					twitter_id : contact.twitter.id,
+					instagram_id : contact.instagram.id,
+					facebook_display_name : contact.facebook.name,
+					twitter_username : contact.twitter.username,	
+					instagram_username : contact.instagram.username
 				}
 			).then(function(response) {	
         		return response.data;

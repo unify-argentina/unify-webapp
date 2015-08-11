@@ -1,11 +1,5 @@
 <div id="profile" class="container" ng-controller="ProfileController">
-  	<div class="spinner" ng-if="!user">
-	  <div class="rect1"></div>
-	  <div class="rect2"></div>
-	  <div class="rect3"></div>
-	  <div class="rect4"></div>
-	  <div class="rect5"></div>
-	</div>
+	<uw-loader ng-if="!user"></uw-loader>
 	<div class="content col-md-12" ng-if="user">
 		<div class="col-md-12 well text-center" style="margin-top: 20px;">
 			<div class="col-md-6">

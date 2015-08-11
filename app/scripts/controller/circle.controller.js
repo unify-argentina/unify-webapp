@@ -15,11 +15,11 @@ unifyApp.controller("CircleController", function (CircleService, AuthenticationS
 	};
 
 	circleCtrl.edit = function(){
-		circleCtrl.editProfile=true;
-		circleCtrl.newCircle.name = "";
+		circleCtrl.editCircle=true;
+		circleCtrl.newCircle = {};
 	};
 
-	circleCtrl.update = function(){
+	circleCtrl.updateCircle = function(){
 		CircleService.updateCircle(
 			AuthenticationService.getUserId(),
 			circleCtrl.newUser
@@ -27,7 +27,7 @@ unifyApp.controller("CircleController", function (CircleService, AuthenticationS
 			console.log("Save: " + data);
 			circleCtrl.user.name=circleCtrl.newUser.name;
 			circleCtrl.user.email=circleCtrl.newUser.email;
-			circleCtrl.editProfile=false;
+			circleCtrl.editCircle=false;
 		});
 	};
 
@@ -38,13 +38,13 @@ unifyApp.controller("CircleController", function (CircleService, AuthenticationS
 			circleCtrl.newCircle
 		).then(function(data) {
 			circleCtrl.getCircleTree();
-			circleCtrl.editProfile=false;
+			circleCtrl.editCircle=false;
 		});
 	};
 
 	circleCtrl.cancelCircle = function(){
-		circleCtrl.newCircle.name = "";
-		circleCtrl.editProfile=false;
+		circleCtrl.editCircle = false;
+		circleCtrl.newCircle = {};
 	};
 
 	circleCtrl.getCircleTree = function(){
@@ -52,23 +52,33 @@ unifyApp.controller("CircleController", function (CircleService, AuthenticationS
 			AuthenticationService.getUserId(),
 			circleCtrl.circle_id
 		).then(function(data) {
-			console.log("Tree: " + data);
 			circleCtrl.tree=data.tree[0];
 		});
 	};
 	
 	circleCtrl.goToChild = function(circle_id){
 		circleCtrl.circle_id = circle_id;
+		circleCtrl.cancelCircle();
 		circleCtrl.getCircle();
 		circleCtrl.getCircleTree();
 	}
 
 	circleCtrl.goToParent = function(){
 		circleCtrl.circle_id = circleCtrl.circle.parent;
+		circleCtrl.cancelCircle();
 		circleCtrl.getCircle();
 		circleCtrl.getCircleTree();
 	}
 	
+	circleCtrl.createContact = function(){
+		circleCtrl.editContact=true;
+	}
+	
+	circleCtrl.closeContact = function(){
+		circleCtrl.editContact = false;
+		circleCtrl.getCircle();
+	};
+
 	circleCtrl.getCircleTree();
 	circleCtrl.getCircle();
 });
