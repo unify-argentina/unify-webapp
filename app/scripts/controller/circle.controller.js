@@ -1,10 +1,11 @@
-unifyApp.controller("CircleController", function (CircleService, AuthenticationService) {
+unifyApp.controller("CircleController", function ($scope,  video, CircleService, AuthenticationService) {
 
 	var circleCtrl = this;
 
 	circleCtrl.circle_id = AuthenticationService.getMainCircleId();
 
 	circleCtrl.getCircle = function(){
+		circleCtrl.circle=null;
 		CircleService.circle.get({
 			user_id : AuthenticationService.getUserId(),
 			circle_id : circleCtrl.circle_id
@@ -55,33 +56,54 @@ unifyApp.controller("CircleController", function (CircleService, AuthenticationS
 			circleCtrl.tree=data.tree[0];
 		});
 	};
+
+	circleCtrl.getCircleFeed = function(){
+		circleCtrl.feed=null;
+		CircleService.getCircleFeed(
+			AuthenticationService.getUserId(),
+			circleCtrl.circle_id
+		).then(function(data) {
+			circleCtrl.feed=data.media;
+		});
+	};
 	
 	circleCtrl.goToChild = function(circle_id){
 		circleCtrl.circle_id = circle_id;
 		circleCtrl.cancelCircle();
-		circleCtrl.circle={};
 		circleCtrl.getCircle();
 		circleCtrl.getCircleTree();
+		circleCtrl.getCircleFeed();
 	}
 
 	circleCtrl.goToParent = function(){
 		circleCtrl.circle_id = circleCtrl.circle.parent;
 		circleCtrl.cancelCircle();
-		circleCtrl.circle={};
 		circleCtrl.getCircle();
 		circleCtrl.getCircleTree();
+		circleCtrl.getCircleFeed();
 	}
 	
 	circleCtrl.createContact = function(){
 		circleCtrl.editContact=true;
+		circleCtrl.contact_id=null;
 	}
 	
 	circleCtrl.closeContact = function(){
 		circleCtrl.editContact = false;
-		circleCtrl.circle={};
 		circleCtrl.getCircle();
+	};
+
+	circleCtrl.cancelContact = function(){
+		circleCtrl.editContact = false;
 	};
 
 	circleCtrl.getCircleTree();
 	circleCtrl.getCircle();
+	circleCtrl.getCircleFeed();
+	
+
+
+
+
 });
+

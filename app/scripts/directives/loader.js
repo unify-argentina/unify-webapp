@@ -1,4 +1,4 @@
-unifyApp.directive('uwLoader', function($auth) {
+unifyApp.directive('uwLoader', function() {
 
     return {
         restrict: 'E',

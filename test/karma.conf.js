@@ -40,7 +40,10 @@ module.exports = function(config) {
       'app/lib/angular-loader/angular-loader.js',
       'app/lib/angular-bootstrap/ui-bootstrap-tpls.js',
       'app/lib/angular-loading-bar/build/loading-bar.js',
+      'app/lib/lodash/lodash.js',
       'app/lib/angular-mocks/angular-mocks.js',
+      'app/lib/bootstrap/dist/js/bootstrap.js',
+      'app/lib/ngvideo/dist/ng-video.js',
       'app/lib/angular-scenario/angular-scenario.js',
       // endbower
       "app/scripts/**/*.js",

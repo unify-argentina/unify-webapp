@@ -26,6 +26,16 @@ unifyApp.factory('ProfileService', 	function($http, $resource, ENV) {
 			return promise;
 		};
 
+		var getFeed = function(user_id){
+			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/media')
+			 .then(function(response) {	
+        		return response.data;
+			}, function(response) {
+	        	console.log("ERROR: "+response.data ? response.data.message : response);
+			});	
+			return promise;
+		};
+
 	return{
 		user : user,
 		saveUser : saveUser

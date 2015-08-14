@@ -61,10 +61,21 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 			return promise;
 		};
 
+		var getContactFeed = function(user_id, contact_id){
+			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/contact/'+contact_id+'/media')
+			 .then(function(response) {	
+        		return response.data;
+			}, function(response) {
+	        	console.log("ERROR: "+response.data ? response.data.message : response);
+			});	
+			return promise;
+		};
+
 	return{
 		contact 		: contact,
 		saveContact		: saveContact,
 		updateContact	: updateContact,
-		getFriends		: getFriends
+		getFriends		: getFriends,
+		getContactFeed	: getContactFeed 
 	}
 });

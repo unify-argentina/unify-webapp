@@ -52,11 +52,21 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 			return promise;
 		};
 
+		var getCircleFeed = function(user_id, circle_id){
+			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/circle/'+circle_id+'/media')
+			 .then(function(response) {	
+        		return response.data;
+			}, function(response) {
+	        	console.log("ERROR: "+response.data ? response.data.message : response);
+			});	
+			return promise;
+		};
 
 	return{
 		circle 			: circle,
 		saveCircle		: saveCircle,
 		updateCircle	: updateCircle,
-		getCircleTree	: getCircleTree
+		getCircleTree	: getCircleTree,
+		getCircleFeed	: getCircleFeed
 	}
 });
