@@ -1,4 +1,4 @@
-unifyApp.controller("ContactController", function ($scope, ContactService, AuthenticationService) {
+unifyApp.controller("ContactController", function ($scope, $state, ContactService, AuthenticationService) {
 
 	var contactCtrl = this;
 
@@ -25,7 +25,15 @@ unifyApp.controller("ContactController", function ($scope, ContactService, Authe
 					});
 				}
 			}
-	        localStorage.setItem('response', JSON.stringify(response));
+		});
+	};
+
+	contactCtrl.deleteContact = function(contact_id){
+		ContactService.contact.delete({
+			user_id : AuthenticationService.getUserId(),
+			contact_id : contact_id
+		},function(response){
+			$state.go("circles");
 		});
 	};
 
@@ -40,7 +48,6 @@ unifyApp.controller("ContactController", function ($scope, ContactService, Authe
 		ContactService.saveContact(
 			contactCtrl.contact
 		).then(function(data) {
-			contactCtrl.contact = {};
 		});
 	};
 
@@ -50,10 +57,6 @@ unifyApp.controller("ContactController", function ($scope, ContactService, Authe
 		ContactService.updateContact(
 			contactCtrl.contact
 		).then(function(data) {
-			console.log("Save: " + data);
-			contactCtrl.contact.name=contactCtrl.contact.name;
-			contactCtrl.contact.email=contactCtrl.contact.email;
-			contactCtrl.editProfile=false;
 		});
 	};
 
@@ -75,6 +78,14 @@ unifyApp.controller("ContactController", function ($scope, ContactService, Authe
 		return promise;
 		
 	};
+
+	$scope.$watch('contactCtrl.parentController.editContact', function(newValue, oldValue) {
+		if(newValue==true && contactCtrl.contact_id){
+				contactCtrl.getContact(contactCtrl.contact_id);
+		}else{
+			contactCtrl.contact = {};
+		}
+	});
 
 	contactCtrl.init = function(circle_id,contact_id, parentController){
 		contactCtrl.circle_id=circle_id;

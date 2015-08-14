@@ -11,6 +11,16 @@ unifyApp.controller("CircleController", function ($scope,  video, CircleService,
 			circle_id : circleCtrl.circle_id
 		},function(response){
 			circleCtrl.circle=response.circle;
+		});
+	};
+
+	circleCtrl.deleteCircle = function(){
+		circleCtrl.circle=null;
+		CircleService.circle.delete({
+			user_id : AuthenticationService.getUserId(),
+			circle_id : circleCtrl.circle_id
+		},function(response){
+			circleCtrl.circle=response.circle;
 	        localStorage.setItem('response', JSON.stringify(response));
 		});
 	};
@@ -91,6 +101,7 @@ unifyApp.controller("CircleController", function ($scope,  video, CircleService,
 	circleCtrl.closeContact = function(){
 		circleCtrl.editContact = false;
 		circleCtrl.getCircle();
+		circleCtrl.getCircleTree();
 		circleCtrl.getCircleFeed();
 	};
 

@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		<div class="col-md-9">
-			<uw-contact-data uw-circle-id="circleCtrl.circle_id" uw-parent-controller="circleCtrl" ng-if="circleCtrl.editContact"></uw-contact-data>
+			<uw-contact-data uw-circle-id="circleCtrl.circle_id" uw-parent-controller="circleCtrl" ng-show="circleCtrl.editContact"></uw-contact-data>
 			<div ng-show="!circleCtrl.editContact">
   				<uw-loader ng-if="!circleCtrl.feed"></uw-loader>
 				<uw-time-line uw-media="circleCtrl.feed" ng-if="circleCtrl.feed"></uw-time-line>
