@@ -7,7 +7,8 @@ angular.module('unifyApp').config(function($authProvider, ENV) {
 
     $authProvider.facebook({
       clientId: '805638479520745',
-      url: '/auth/facebook'
+      url: '/auth/facebook',
+      scope: ['email', 'public_profile', 'user_friends', 'user_likes', 'publish_actions', 'user_posts', 'user_videos', 'user_photos', 'user_status']
     });
 
     $authProvider.google({

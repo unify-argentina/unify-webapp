@@ -11,7 +11,7 @@
 			<br>
 			<div class="col-md-12 " ng-show="!circleCtrl.editCircle" style="margin-top: 10px;">
 				<a class="btn btn-primary col-md-8 col-md-offset-2" ng-click="circleCtrl.edit();">Crear Circulo</a><br>
-				<a class="btn btn-success col-md-8 col-md-offset-2" ng-click="circleCtrl.createContact();" stylle="margin-top: 5px;">Crear Contacto</a>
+				<a class="btn btn-success col-md-8 col-md-offset-2" ng-click="circleCtrl.createContact();" style="margin-top: 5px;">Crear Contacto</a>
 			</div>
 			<div class="col-md-12" ng-show="circleCtrl.editCircle">
 				<input type="text" class="form-control" name="circleCtrl.newCircle" ng-model="circleCtrl.newCircle.name" required>
@@ -25,7 +25,7 @@
 			<div class="clearfix"></div>
 			<div class="list-group" style="margin-top: 20px;" ng-if="circleCtrl.circle.contacts">
 				<span class="list-group-item active">Contactos</span>
-				<a href="" ng-click="circleCtrl.editContact=true;circleCtrl.contact_id=contact._id;" class="list-group-item" ng-repeat="contact in circleCtrl.circle.contacts">
+				<a  href="#/contact/{{contact._id}}" class="list-group-item" ng-repeat="contact in circleCtrl.circle.contacts">
 					<img ng-src="{{contact.picture}}" class="img-circle image-contact-small" ng-if="contact.picture">
 					<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact-small" ng-if="!contact.picture">
 					{{contact.name}}
@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		<div class="col-md-9">
-			<div ng-include="'views/contact.html'" ng-if="circleCtrl.editContact"></div>
+		<uw-contact-data uw-circle-id="circleCtrl.circle_id" ng-if="circleCtrl.editContact"></uw-contact-data>
 			<div ng-if="!circleCtrl.editContact">
   					<uw-loader ng-if="!circleCtrl.feed"></uw-loader>
 				<uw-time-line uw-media="circleCtrl.feed" ng-if="circleCtrl.feed"></uw-time-line>

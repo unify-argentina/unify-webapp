@@ -23,14 +23,20 @@ angular.module('unifyApp').config(function ($stateProvider, $urlRouterProvider) 
     templateUrl: 'views/dashboard.html'
   });
 
-    $stateProvider.state('circles', {
+ $stateProvider.state('profile', {
+    url: '/profile',
+    templateUrl: 'views/profile.html'
+  });
+
+  $stateProvider.state('circles', {
     url: '/circles',
     templateUrl: 'views/circle.html'
   });
 
-  $stateProvider.state('bookTickets', {
-    url: '#/bookTickets/:id',
-    templateUrl: 'views/bookTickets.html'
+  $stateProvider.state('contact', {
+    url: '/contact/:contact_id',
+    templateUrl: 'views/contactProfile.html'
   });
+
   
  });

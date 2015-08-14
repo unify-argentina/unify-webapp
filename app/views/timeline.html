@@ -1,13 +1,15 @@
 
 <div class="well col-md-12" style="margin-top: 20px;margin-bottom: 0px;" ng-repeat="post in uwMedia.list">
-	<img ng-src="{{post.contact.picture}}" class="img-circle image-contact-small" ng-if="post.contact.picture">
-	<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact-small" ng-if="!post.contact.picture">
-	<span><b>{{post.contact.name}}</b></span>
-	<i class="fa" ng-class="{'fa-facebook-official': post.provider == 'facebook','fa-twitter': post.provider == 'twitter','fa-instagram': post.provider == 'instagram'}"></i>
+    <div ng-if="post.contact.name">
+    	<img ng-src="{{post.contact.picture}}" class="img-circle image-contact-small" ng-if="post.contact.picture">
+    	<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact-small" ng-if="!post.contact.picture">
+    	<span><b>{{post.contact.name}}</b></span>
+	</div>
+    <i class="fa" ng-class="{'fa-facebook-official': post.provider == 'facebook','fa-twitter': post.provider == 'twitter','fa-instagram': post.provider == 'instagram'}"></i>
 	<div class="col-md-12" ng-if="post.type=='text'">
 		<span class="col-md-12">{{post.text}}</span>
 	</div>
-	<div class="col-md-12" ng-if="post.type=='image'">
+	<div class="col-md-12" ng-if="post.type=='image' || post.type=='photo' || post.type=='animated_gif'">
 		<span class="col-md-12">{{post.text}}</span>
 		<img ng-src="{{post.media_url}}" class="col-md-12">
 	</div>
@@ -17,48 +19,3 @@
         <uw-video video-src="post.media_url" ng-if="post.media_url"></uw-video>
 	</div>
 </div>
-<!--
-<video ng-src="{{post.media_url}}" controls></video>
-{
-                   "provider": "twitter",
-                    "id": "627667076744904704",
-                    "type": "text",
-                    "created_time": 1438482467,
-                    "link": "https://twitter.com/statuses/627667076744904704",
-                    "likes": 0,
-                    "text": "Pami, pati, pael, paella @ Charly's House https://t.co/181HbfsaEv",
-                    "user_has_liked": false
-                },
-
-                      {
-                    "provider": "twitter",
-                    "id": "627667076744904704",
-                    "type": "text",
-                    "created_time": 1438482467,
-                    "link": "https://twitter.com/statuses/627667076744904704",
-                    "likes": 0,
-                    "text": "Pami, pati, pael, paella @ Charly's House https://t.co/181HbfsaEv",
-                    "user_has_liked": false,
-                    "contact": {
-                        "id": "55c0315cccab88ba31786d71",
-                        "name": "Joel",
-                        "picture": "https://graph.facebook.com/v2.3/10153267328674738/picture?type=large"
-                    }
-                },
-                 {
-                    "provider": "instagram",
-                    "id": "1042388941278905607_993803680",
-                    "type": "image",
-                    "created_time": 1438482466,
-                    "link": "https://instagram.com/p/53TzgiuYUHAinWlkLpGfEoP160Kccs90O22Es0/",
-                    "likes": 5,
-                    "media_url": "https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/e15/11376143_1476803242620418_1662626864_n.jpg",
-                    "text": "Pami, pati, pael, paella",
-                    "user_has_liked": "",
-                    "contact": {
-                        "id": "55c0315cccab88ba31786d71",
-                        "name": "Joel",
-                        "picture": "https://graph.facebook.com/v2.3/10153267328674738/picture?type=large"
-                    }
-                }
--->

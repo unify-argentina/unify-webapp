@@ -32,16 +32,16 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 		};
 
 		var updateContact = function(contact){
-			 var promise = $http.put(ENV.apiEndPoint + '/api/user/' + contact.user_id + '/contact/' + contact.contact_id, 
+			 var promise = $http.put(ENV.apiEndPoint + '/api/user/' + contact.user_id + '/contact/' + contact._id, 
 				{
 					user_id : contact.user_id,
-					contact_id : contact.contact_id,
+					contact_id : contact._id,
 					name : contact.name,
 					picture : contact.picture,
-					circle_id : contact.circle_id,
-					facebook_id : contact.facebook_id,
-					twitter_id : contact.twitter_id,
-					instagram_id : contact.instagram_id
+					circle_id : contact.parents[0].circle,
+					facebook_id : (contact.facebook!=null?contact.facebook.id:null),
+					twitter_id : (contact.twitter!=null?contact.twitter.id:null),
+					instagram_id : (contact.instagram!=null?contact.instagram.id:null)
 				}
 			).then(function(response) {	
         		return response.data;
@@ -55,6 +55,7 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+ user_id +'/friends')
 			 .then(function(response) {	
         		return response.data;
+        		console.log(response.data );
 			}, function(response) {
 	        	console.log("ERROR: "+response.data ? response.data.message : response);
 			});	
