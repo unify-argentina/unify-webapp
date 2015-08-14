@@ -5,7 +5,8 @@ unifyApp.directive('uwContactData', function() {
         templateUrl: 'views/contact.html',
         scope:{
         	uwContactId: "=",
-        	uwCircleId: "="
+        	uwCircleId: "=",
+        	uwParentController: "="
         }
     };
 });

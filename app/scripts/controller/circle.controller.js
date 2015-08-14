@@ -91,6 +91,7 @@ unifyApp.controller("CircleController", function ($scope,  video, CircleService,
 	circleCtrl.closeContact = function(){
 		circleCtrl.editContact = false;
 		circleCtrl.getCircle();
+		circleCtrl.getCircleFeed();
 	};
 
 	circleCtrl.cancelContact = function(){

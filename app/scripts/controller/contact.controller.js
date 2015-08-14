@@ -76,8 +76,9 @@ unifyApp.controller("ContactController", function ($scope, ContactService, Authe
 		
 	};
 
-	contactCtrl.init = function(circle_id,contact_id){
+	contactCtrl.init = function(circle_id,contact_id, parentController){
 		contactCtrl.circle_id=circle_id;
+		contactCtrl.parentController=parentController;
 		contactCtrl.contact_id=contact_id;
 		contactCtrl.getFriends().then(function() {
 			if(contactCtrl.contact_id){

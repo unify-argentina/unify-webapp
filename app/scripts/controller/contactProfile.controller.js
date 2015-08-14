@@ -16,6 +16,16 @@ unifyApp.controller("ContactProfileController", function ($scope, $stateParams, 
 		contactCtrl.editContact=true;
 	};
 
+	contactCtrl.closeContact = function(){
+		contactCtrl.editContact = false;
+		contactCtrl.getContact(contactCtrl.contact_id);
+		contactCtrl.getContactFeed();
+	};
+
+	contactCtrl.cancelContact = function(){
+		contactCtrl.editContact = false;
+	};
+	
 	contactCtrl.cancelContact = function(){
 		contactCtrl.contact_id=null;
 		contactCtrl.circle_id=null;
@@ -23,7 +33,7 @@ unifyApp.controller("ContactProfileController", function ($scope, $stateParams, 
 	};
 
 
-	contactCtrl.getCircleFeed = function(){
+	contactCtrl.getContactFeed = function(){
 		contactCtrl.feed=null;
 		ContactService.getContactFeed(
 			AuthenticationService.getUserId(),
@@ -36,7 +46,7 @@ unifyApp.controller("ContactProfileController", function ($scope, $stateParams, 
 	if($stateParams.contact_id){
 		contactCtrl.contact_id=$stateParams.contact_id;
 		contactCtrl.getContact(contactCtrl.contact_id);
-		contactCtrl.getCircleFeed();
+		contactCtrl.getContactFeed();
 	}
 
 });

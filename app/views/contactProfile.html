@@ -28,8 +28,8 @@
 			</div>
 		</div>
 		<div class="col-md-9">
-		<uw-contact-data uw-contact-id="contactProfileCtrl.contact._id"  uw-circle-id="contactProfileCtrl.contact.parents[0]._id" ng-if="contactProfileCtrl.editContact"></uw-contact-data>
-			<div ng-if="!contactProfileCtrl.editContact">
+		<uw-contact-data uw-contact-id="contactProfileCtrl.contact._id"  uw-circle-id="contactProfileCtrl.contact.parents[0]._id" uw-parent-controller="contactProfileCtrl" ng-if="contactProfileCtrl.editContact"></uw-contact-data>
+			<div ng-show="!contactProfileCtrl.editContact">
   					<uw-loader ng-if="!contactProfileCtrl.feed"></uw-loader>
 				<uw-time-line uw-media="contactProfileCtrl.feed" ng-if="contactProfileCtrl.feed"></uw-time-line>
 			</div>
