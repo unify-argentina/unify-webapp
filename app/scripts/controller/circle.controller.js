@@ -11,6 +11,23 @@ unifyApp.controller("CircleController", function ($scope,  video, CircleService,
 			circle_id : circleCtrl.circle_id
 		},function(response){
 			circleCtrl.circle=response.circle;
+			console.log("lala");
+			if(!circleCtrl.circle.picture){
+			console.log("lala1");
+				if(circleCtrl.circle.contacts){
+
+			console.log("lala2");
+					circleCtrl.contactSize=_.size(circleCtrl.circle.contacts);
+					circleCtrl.imagesCircle={}
+					if(circleCtrl.contactSize > 0){
+			console.log("lala3");
+						var limit= (circleCtrl.contactSize < 4 ? circleCtrl.contactSize : 4);
+						circleCtrl.imagesCircle=_.sample(circleCtrl.circle.contacts, 4);
+					}
+				}else{
+					circleCtrl.contactSize=0;
+				}
+			}
 		});
 	};
 

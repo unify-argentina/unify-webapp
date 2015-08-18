@@ -5,8 +5,46 @@
 			<a href="" ng-click="circleCtrl.goToParent();" ng-show="circleCtrl.circle.parent"><i class="fa fa-arrow-up"></i>Subir un nivel</a>
 			<div class="col-md-12">
 				<img ng-src="{{circleCtrl.circle.picture}}" class="img-circle image-profile" ng-if="circleCtrl.circle.picture">
-				<img src="resources/circle/circle.png" class="img-circle image-profile" ng-if="!circleCtrl.circle.picture">
-				{{circleCtrl.circle.name}}
+
+				<div ng-if="!circleCtrl.circle.picture" class="img-circle image-profile">
+					<img src="resources/circle/circle.png" class="col-md-12 no-padding" ng-if="circleCtrl.contactSize==0">
+					
+					<div ng-if="circleCtrl.contactSize==1" class="img-circle image-profile">
+						<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="col-md-12 no-padding" >
+					</div>
+
+					<div ng-if="circleCtrl.contactSize==2" class="img-circle image-profile">
+						<div class="col-md-6 no-padding">
+							<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="image-profile-half">
+						</div>
+						<div class="col-md-6 no-padding">
+							<img ng-src="{{circleCtrl.imagesCircle[1].picture}}" class="image-profile-half">
+						</div>
+					</div>
+					
+					<div ng-if="circleCtrl.contactSize==3" class="img-circle image-profile">
+						<div class="col-md-6 no-padding">
+							<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="image-profile-half">
+						</div>
+						<div class="col-md-6 no-padding">
+							<img ng-src="{{circleCtrl.imagesCircle[1].picture}}" class="image-profile-quarter">
+							<img ng-src="{{circleCtrl.imagesCircle[2].picture}}" class="image-profile-quarter">
+						</div>
+					</div>
+					
+					<div ng-if="circleCtrl.contactSize>=4" class="img-circle image-profile">
+						<div class="col-md-6 no-padding">
+							<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="image-profile-quarter">
+							<img ng-src="{{circleCtrl.imagesCircle[1].picture}}" class="image-profile-quarter">
+						</div>
+						<div class="col-md-6 no-padding">
+							<img ng-src="{{circleCtrl.imagesCircle[2].picture}}" class="image-profile-quarter">
+							<img ng-src="{{circleCtrl.imagesCircle[3].picture}}" class="image-profile-quarter">
+						</div>
+					</div>
+				</div>
+				
+				<h1>{{circleCtrl.circle.name}}</h1>
 			</div>
 			<br>
 			<div class="col-md-12 " ng-show="!circleCtrl.editCircle" style="margin-top: 10px;">
