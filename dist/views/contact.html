@@ -13,7 +13,7 @@
 		<div class="clearfix"></div>
 		<uw-loader ng-if="!contactCtrl.friends"></uw-loader>
 		<div ng-if="contactCtrl.friends">
-			<div class="col-md-4 form-group" style="margin-top: 20px;">
+			<div class="col-md-4 form-group" style="margin-top: 20px;" ng-if="contactCtrl.friends.facebook">
 				<img ng-src="{{contactCtrl.contact.facebook.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.facebook.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.facebook.picture;contactCtrl.contact.name=contactCtrl.contact.facebook.name;">
 				<img src="resources/contact/stormtrooper.jpg" class="img-circle image-social" ng-if="!contactCtrl.contact.facebook.picture">
 				<label class="form-label">Nombre:</label>
@@ -22,7 +22,7 @@
 	       			<option value="">-- Selecciona un amigo --</option>
 	       		</select>
 	       	</div>
-			<div class="col-md-4 form-group" style="margin-top: 20px;">
+			<div class="col-md-4 form-group" style="margin-top: 20px;" ng-if="contactCtrl.friends.twitter">
 				<img ng-src="{{contactCtrl.contact.twitter.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.twitter.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.twitter.picture;contactCtrl.contact.name=contactCtrl.contact.twitter.name;">
 				<img src="resources/contact/stormtrooper.jpg" class="img-circle image-social" ng-if="!contactCtrl.contact.twitter.picture">
 				<label class="form-label">Nombre:</label>
@@ -31,7 +31,7 @@
 	      			<option value="">-- Selecciona un amigo --</option>
 	      		</select>
 	      	</div>
-			<div class="col-md-4 form-group" style="margin-top: 20px;">
+			<div class="col-md-4 form-group" style="margin-top: 20px;" ng-if="contactCtrl.friends.instagram">
 				<img ng-src="{{contactCtrl.contact.instagram.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.instagram.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.instagram.picture;contactCtrl.contact.name=contactCtrl.contact.instagram.name;">
 				<img src="resources/contact/stormtrooper.jpg" class="img-circle image-social" ng-if="!contactCtrl.contact.instagram.picture">
 				<label class="form-label">Nombre:</label>
