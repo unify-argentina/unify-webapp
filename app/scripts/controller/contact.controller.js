@@ -37,7 +37,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 	};
 
 	contactCtrl.checkFriends = function(){
-		console.log("LALA4");
+	/*	console.log("LALA4");
 		var check = $interval(function(){
 			console.log("LALA");
 			contactCtrl.friends=AuthenticationService.getFriends();
@@ -49,7 +49,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 	    	if(newValue){
             	$interval.cancel(check);
 	    	}
-		});
+		});*/
 	};
 
 	contactCtrl.deleteContact = function(contact_id){
