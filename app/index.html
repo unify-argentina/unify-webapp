@@ -64,8 +64,8 @@
 
 </head>
  
-<body class="container" ng-controller="MainController">
-    <!--<div ng-include="'views/header.html'"></div> -->
+<body class="container" ng-controller="MainController as mainController">
+    <div ng-include="'views/header.html'" ng-if="mainController.auth"></div>
     <div>
         <div ui-view></div>
     </div>

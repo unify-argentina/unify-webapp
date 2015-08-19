@@ -8,7 +8,7 @@ unifyApp.directive('uwMainContent', function($auth) {
         link: link,
         templateUrl: function(elem, attr){
             if($auth.isAuthenticated()){
-                return 'views/dashboard.html';
+                return 'views/userProfile.html';
             }
             return 'views/loginSignUp.html';
         }

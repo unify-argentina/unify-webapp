@@ -1,9 +1,10 @@
 
 
-unifyApp.service('AuthenticationService', function ($http, $auth, $state, ENV) {
+unifyApp.service('AuthenticationService', function ($http, $auth, $state, $window, ENV) {
 
 	var userId;
 	var mainCircleId;
+	var friends;
 	
     var getUserId = function() {
     	if(userId==null){
@@ -29,6 +30,21 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, ENV) {
     	mainCircleId=value; 
     };
 
+	var getFriends = function() {
+		if(getUserId()){
+	    	if(friends==null){
+	    		getUserFriends(getUserId()).then(function(data) {
+					if(data){
+						friends=data.friends;
+					}
+				});
+	    	}
+	    	return friends; 
+    	}else{
+    		return null;
+    	}
+	};
+
     var signup = function(user) {
 		console.log(user.name);
 		$auth.signup({
@@ -41,7 +57,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, ENV) {
 			setMainCircleId(response.data.user.main_circle);
 			localStorage.setItem('response', JSON.stringify(response));
 	        console.log('You have successfully logged in: '+response.data.token); 
-	        $state.go('dashboard');
+			$window.location.href = "/";
 	      })
 		.catch(function(response) {
 	        console.log(response.data ? response.data.message : response);
@@ -57,11 +73,11 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, ENV) {
 			setMainCircleId(response.data.user.main_circle);
 	        localStorage.setItem('response', JSON.stringify(response));
 	        console.log('You have successfully logged in: '+response.data.token); 
-	        $state.go('dashboard');
-	      })
-	      .catch(function(response) {
-	        console.log(response.data ? response.data.message : response);
-	      });
+			$window.location.href = "/";
+		})
+		.catch(function(response) {
+			console.log(response.data ? response.data.message : response);
+		});
 	  };
 
 	var authenticate = function(provider) {
@@ -71,6 +87,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, ENV) {
 			setMainCircleId(response.data.user.main_circle);
 	        localStorage.setItem('response', JSON.stringify(response));
 	        console.log('You have successfully logged in: '+response.data.token); 
+			$window.location.href = "/";
 	      })
 	      .catch(function(response) {
 	        console.log(response.data ? response.data.message : response);
@@ -90,20 +107,37 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, ENV) {
 	    	localStorage.setItem('response', JSON.stringify(response));
 	    	localStorage.setItem('satellizer_token', response.data.token);
 	        console.log('You have successfully unlogged in: '+response.data.token); 
-	        $state.go('dashboard');
+			$window.location.href = "/";
 	    })
 	    .catch(function(response) {
 	        console.log("ERROR: "+response.data ? response.data.message : response);
 	    });
 	};
 	
+	var getUserFriends = function(user_id){
+		 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+ user_id +'/friends')
+		 .then(function(response) {	
+    		return response.data;
+		}, function(response) {
+        	console.log("ERROR: "+response.data ? response.data.message : response);
+		});	
+		return promise;
+	};
+
+	var logout = function(){
+		localStorage.clear();
+		$window.location.href = "/";
+	};
+
 	return {
 		signup 			: signup,
 		login 			: login,
 		authenticate 	: authenticate,
 		unlink			: unlink,
 		getUserId 		: getUserId,
-		getMainCircleId	: getMainCircleId
+		getMainCircleId	: getMainCircleId,
+		getFriends		: getFriends,
+		logout			: logout
     };
 
 });

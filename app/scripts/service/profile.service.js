@@ -37,7 +37,8 @@ unifyApp.factory('ProfileService', 	function($http, $resource, ENV) {
 		};
 
 	return{
-		user : user,
-		saveUser : saveUser
+		user 		: user,
+		saveUser	: saveUser,
+		getFeed		: getFeed
 	}
 });

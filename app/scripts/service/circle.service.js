@@ -26,10 +26,10 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 		};
 
 		var updateCircle = function(circle){
-			 var promise = $http.put(ENV.apiEndPoint + '/api/user/' + circle.user_id + '/circle/' + circle.circle_id, 
+			 var promise = $http.put(ENV.apiEndPoint + '/api/user/' + circle.user_id + '/circle/' + circle._id, 
 				{
 					user_id : circle.user_id,
-					circle_id : circle.circle_id,
+					circle_id : circle._id,
 					name : circle.name,
 					parent_id : circle.parent,
 					picture : circle.picture

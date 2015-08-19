@@ -1,4 +1,4 @@
-unifyApp.controller("ContactController", function ($scope, $state, ContactService, AuthenticationService) {
+unifyApp.controller("ContactController", function ($scope, $state, $interval, ContactService, AuthenticationService) {
 
 	var contactCtrl = this;
 
@@ -9,22 +9,46 @@ unifyApp.controller("ContactController", function ($scope, $state, ContactServic
 		},function(response){
 			contactCtrl.contact=response.contact;
 			if(contactCtrl.friends){
-				if(response.contact.facebook){
-					contactCtrl.contact.facebook=_.find(contactCtrl.friends.facebook.list, function(friend) {
-					  return friend.id == response.contact.facebook.id;
-					});
-				}
-				if(response.contact.twitter){
-					contactCtrl.contact.twitter=_.find(contactCtrl.friends.twitter.list, function(friend) {
-					  return friend.id == response.contact.twitter.id;
-					});
-				}
-				if(response.contact.instagram){
-					contactCtrl.contact.instagram=_.find(contactCtrl.friends.instagram.list, function(friend) {
-					  return friend.id == response.contact.instagram.id;
-					});
-				}
+				contactCtrl.getFriends();
+			}else{
+				contactCtrl.checkFriends();
 			}
+		});
+	};
+
+	contactCtrl.getFriends = function(){	
+		if(contactCtrl.friends){	
+			if(contactCtrl.contact.facebook){
+				contactCtrl.contact.facebook=_.find(contactCtrl.friends.facebook.list, function(friend) {
+				  return friend.id == contactCtrl.contact.facebook.id;
+				});
+			}
+			if(contactCtrl.contact.twitter){
+				contactCtrl.contact.twitter=_.find(contactCtrl.friends.twitter.list, function(friend) {
+				  return friend.id == contactCtrl.contact.twitter.id;
+				});
+			}
+			if(contactCtrl.contact.instagram){
+				contactCtrl.contact.instagram=_.find(contactCtrl.friends.instagram.list, function(friend) {
+				  return friend.id == contactCtrl.contact.instagram.id;
+				});
+			}
+		}
+	};
+
+	contactCtrl.checkFriends = function(){
+		console.log("LALA4");
+		var check = $interval(function(){
+			console.log("LALA");
+			contactCtrl.friends=AuthenticationService.getFriends();
+			if(contactCtrl.friends){
+				contactCtrl.getFriends();
+			}
+	    },2000);
+	    $scope.$watch('contactCtrl.friends', function(newValue, oldValue) {
+	    	if(newValue){
+            	$interval.cancel(check);
+	    	}
 		});
 	};
 
@@ -67,18 +91,6 @@ unifyApp.controller("ContactController", function ($scope, $state, ContactServic
 		contactCtrl.editProfile = false;
 	};
 
-	contactCtrl.getFriends = function(){
-		var promise = ContactService.getFriends(
-				AuthenticationService.getUserId()
-			).then(function(data) {
-				if(data){
-					contactCtrl.friends=data.friends;
-				}
-			});	
-		return promise;
-		
-	};
-
 	$scope.$watch('contactCtrl.parentController.editContact', function(newValue, oldValue) {
 		if(newValue==true && contactCtrl.contact_id){
 				contactCtrl.getContact(contactCtrl.contact_id);
@@ -91,11 +103,14 @@ unifyApp.controller("ContactController", function ($scope, $state, ContactServic
 		contactCtrl.circle_id=circle_id;
 		contactCtrl.parentController=parentController;
 		contactCtrl.contact_id=contact_id;
-		contactCtrl.getFriends().then(function() {
-			if(contactCtrl.contact_id){
-				contactCtrl.getContact(contactCtrl.contact_id);
+		contactCtrl.friends=AuthenticationService.getFriends();
+		if(contactCtrl.contact_id){
+			contactCtrl.getContact(contactCtrl.contact_id);
+		}else{
+			if(!contactCtrl.friends){
+				contactCtrl.checkFriends();
 			}
-		});
+		}
 	};
 
 });

@@ -18,17 +18,18 @@ angular.module('unifyApp').config(function ($stateProvider, $urlRouterProvider) 
     templateUrl: 'views/signUp.html'
   });
 
-  $stateProvider.state('dashboard', {
-    url: '/dashboard',
-    templateUrl: 'views/dashboard.html'
-  });
-
  $stateProvider.state('profile', {
     url: '/profile',
-    templateUrl: 'views/profile.html'
+    templateUrl: 'views/userProfile.html'
   });
 
-  $stateProvider.state('circles', {
+  $stateProvider.state('editProfile', {
+    url: '/profile/edit',
+    templateUrl: 'views/userEditProfile.html'
+  });
+ 
+
+  $stateProvider.state('dashboard', {
     url: '/circles',
     templateUrl: 'views/circle.html'
   });

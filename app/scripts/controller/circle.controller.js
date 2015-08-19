@@ -3,7 +3,8 @@ unifyApp.controller("CircleController", function ($scope,  video, CircleService,
 	var circleCtrl = this;
 
 	circleCtrl.circle_id = AuthenticationService.getMainCircleId();
-
+	circleCtrl.mainCircle_id = AuthenticationService.getMainCircleId();
+	
 	circleCtrl.getCircle = function(){
 		circleCtrl.circle=null;
 		CircleService.circle.get({
@@ -27,30 +28,32 @@ unifyApp.controller("CircleController", function ($scope,  video, CircleService,
 	};
 
 	circleCtrl.deleteCircle = function(){
-		circleCtrl.circle=null;
+		var circle_id = circleCtrl.circle_id;
 		CircleService.circle.delete({
 			user_id : AuthenticationService.getUserId(),
 			circle_id : circleCtrl.circle_id
 		},function(response){
-			circleCtrl.circle=response.circle;
-	        localStorage.setItem('response', JSON.stringify(response));
+			circleCtrl.goToCircle(circle_id);
 		});
 	};
 
-	circleCtrl.edit = function(){
-		circleCtrl.editCircle=true;
+	circleCtrl.create = function(){
+		circleCtrl.createCircle=true;
 		circleCtrl.newCircle = {};
 	};
 
+	circleCtrl.edit = function(){
+		circleCtrl.editingCircle=true;
+		circleCtrl.editCircle = circleCtrl.circle;
+	};
+
 	circleCtrl.updateCircle = function(){
+		circleCtrl.editCircle.user_id = AuthenticationService.getUserId();
 		CircleService.updateCircle(
-			AuthenticationService.getUserId(),
-			circleCtrl.newUser
+			circleCtrl.editCircle
 		).then(function(data) {
-			console.log("Save: " + data);
-			circleCtrl.user.name=circleCtrl.newUser.name;
-			circleCtrl.user.email=circleCtrl.newUser.email;
-			circleCtrl.editCircle=false;
+			circleCtrl.circle=circleCtrl.editCircle;
+			circleCtrl.editingCircle=false;
 		});
 	};
 
@@ -61,13 +64,15 @@ unifyApp.controller("CircleController", function ($scope,  video, CircleService,
 			circleCtrl.newCircle
 		).then(function(data) {
 			circleCtrl.getCircleTree();
-			circleCtrl.editCircle=false;
+			circleCtrl.createCircle=false;
 		});
 	};
 
 	circleCtrl.cancelCircle = function(){
-		circleCtrl.editCircle = false;
+		circleCtrl.createCircle = false;
 		circleCtrl.newCircle = {};
+		circleCtrl.editingCircle=false;
+		circleCtrl.editCircle = circleCtrl.circle;
 	};
 
 	circleCtrl.getCircleTree = function(){
@@ -89,8 +94,9 @@ unifyApp.controller("CircleController", function ($scope,  video, CircleService,
 		});
 	};
 	
-	circleCtrl.goToChild = function(circle_id){
+	circleCtrl.goToCircle = function(circle_id){
 		circleCtrl.circle_id = circle_id;
+		circleCtrl.cancelContact();
 		circleCtrl.cancelCircle();
 		circleCtrl.getCircle();
 		circleCtrl.getCircleTree();
@@ -99,6 +105,7 @@ unifyApp.controller("CircleController", function ($scope,  video, CircleService,
 
 	circleCtrl.goToParent = function(){
 		circleCtrl.circle_id = circleCtrl.circle.parent;
+		circleCtrl.cancelContact();
 		circleCtrl.cancelCircle();
 		circleCtrl.getCircle();
 		circleCtrl.getCircleTree();

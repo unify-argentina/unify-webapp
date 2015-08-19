@@ -1,36 +1,47 @@
-unifyApp.controller("ProfileController", function ($scope, ProfileService, AuthenticationService) {
+unifyApp.controller("ProfileController", function (ProfileService, AuthenticationService) {
+
+	var profileCtlr = this;
 
 	ProfileService.user.get({
 		user_id: AuthenticationService.getUserId()
 	},function(response){
-		$scope.user=response.user;
-        localStorage.setItem('response', JSON.stringify(response));
+		profileCtlr.user=response.user;
 	});
 
-	$scope.authenticate = function(provider) {
+	profileCtlr.authenticate = function(provider) {
 		AuthenticationService.authenticate(provider);
 	};
 
-	$scope.unlink = function(provider) {
+	profileCtlr.unlink = function(provider) {
 		AuthenticationService.unlink(provider);
 	};
 
-	$scope.edit = function(){
-		$scope.newUser={};
-		$scope.newUser.name=$scope.user.name;
-		$scope.newUser.email=$scope.user.email;
-		$scope.editProfile=true;
+	profileCtlr.edit = function(){
+		profileCtlr.newUser={};
+		profileCtlr.newUser.name=profileCtlr.user.name;
+		profileCtlr.newUser.email=profileCtlr.user.email;
+		profileCtlr.editProfile=true;
 	}
 
-	$scope.save = function(){
+	profileCtlr.save = function(){
 		ProfileService.saveUser(
 			AuthenticationService.getUserId(),
-			$scope.newUser
+			profileCtlr.newUser
 		).then(function(data) {
-			$scope.user.name=$scope.newUser.name;
-			$scope.user.email=$scope.newUser.email;
-			$scope.editProfile=false;
+			profileCtlr.user.name=profileCtlr.newUser.name;
+			profileCtlr.user.email=profileCtlr.newUser.email;
+			profileCtlr.editProfile=false;
 		});
 	};
 
+	profileCtlr.getFeed = function(){
+		profileCtlr.feed=null;
+		ProfileService.getFeed(
+			AuthenticationService.getUserId()
+		).then(function(data) {
+			profileCtlr.feed=data.media;
+		});
+	};
+
+	profileCtlr.getFeed();
 });
