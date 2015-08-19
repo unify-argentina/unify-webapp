@@ -18,17 +18,17 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 
 	contactCtrl.getFriends = function(){	
 		if(contactCtrl.friends){	
-			if(contactCtrl.contact.facebook){
+			if(contactCtrl.contact.facebook && contactCtrl.friends.facebook){
 				contactCtrl.contact.facebook=_.find(contactCtrl.friends.facebook.list, function(friend) {
 				  return friend.id == contactCtrl.contact.facebook.id;
 				});
 			}
-			if(contactCtrl.contact.twitter){
+			if(contactCtrl.contact.twitter && contactCtrl.friends.twitter){
 				contactCtrl.contact.twitter=_.find(contactCtrl.friends.twitter.list, function(friend) {
 				  return friend.id == contactCtrl.contact.twitter.id;
 				});
 			}
-			if(contactCtrl.contact.instagram){
+			if(contactCtrl.contact.instagram && contactCtrl.friends.instagram){
 				contactCtrl.contact.instagram=_.find(contactCtrl.friends.instagram.list, function(friend) {
 				  return friend.id == contactCtrl.contact.instagram.id;
 				});
