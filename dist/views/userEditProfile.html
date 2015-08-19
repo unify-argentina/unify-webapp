@@ -1,0 +1,139 @@
+<div id="profile" class="container" ng-controller="ProfileController as profileCtlr">
+	<uw-loader ng-if="!profileCtlr.user"></uw-loader>
+	<div class="content col-md-12" ng-if="profileCtlr.user">
+		<div class="col-md-12 well text-center" style="margin-top: 20px;">
+			<div class="col-md-6">
+				{{'profile_name' | translate}} : 
+				{{profileCtlr.user.name}}
+			</div>
+			<div class="col-md-6">
+				{{'profile_email' | translate}} : 
+				{{profileCtlr.user.email}}
+			</div>
+			<a class="btn btn-primary" ng-click="profileCtlr.edit();" ng-hide="editProfile">Editar</a>
+			<a class="btn btn-success" ui-sref="profileCtlr.circles" ng-hide="editProfile">Circulos</a>
+		</div>
+		<div class="col-md-12 well" ng-hide="profileCtlr.editProfile">
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+			    	<div class="panel-heading">
+			        	<h3 class="panel-title">{{'profile_facebook' | translate}}</h3>
+			      	</div>
+			      	<div class="panel-body" ng-if="profileCtlr.user.facebook">
+				        <div class="col-md-12">
+							<img ng-src="{{profileCtlr.user.facebook.picture}}" class="img-circle image-profile">
+						</div>
+						<div class="col-md-12 text-center">
+							<b>{{profileCtlr.user.facebook.display_name}}</b><br>
+							{{profileCtlr.user.facebook.email}}<br>
+							<a ng-click="profileCtlr.unlink('facebook')" class="btn btn-primary" style="margin-top: 5px;"><span class="fa fa-facebook"></span> {{'profile_unlink' | translate}}</a>
+						</div>
+			      	</div>
+			      	<div class="panel-body" ng-if="!profileCtlr.user.facebook">
+						<div class="col-md-12 text-center">
+							<h3>{{'profile_notlink' | translate}}</h3>
+							<a ng-click="profileCtlr.authenticate('facebook')" class="btn btn-primary"><span class="fa fa-facebook"></span> {{'profile_link' | translate}}</a>
+						</div>
+			  		</div>	
+				</div>
+			</div>
+			<div class="col-md-6" >
+				<div class="panel panel-info">
+			    	<div class="panel-heading">
+			        	<h3 class="panel-title">{{'profile_twitter' | translate}}</h3>
+			      	</div>
+			      	<div class="panel-body" ng-if="profileCtlr.user.twitter">
+						<div class="col-md-12">
+							<img ng-src="{{profileCtlr.user.twitter.picture}}" class="img-circle image-profile">
+						</div>
+						<div class="col-md-12 text-center">
+							<b>{{profileCtlr.user.twitter.display_name}}</b><br>
+							@{{profileCtlr.user.twitter.username}}<br>
+							<a ng-click="profileCtlr.unlink('twitter')" class="btn btn-info" style="margin-top: 5px;"><span class="fa fa-twitter"></span> {{'profile_unlink' | translate}}</a>
+						</div>
+		  		  	</div>	
+			    	<div class="panel-body"ng-if="!profileCtlr.user.twitter">
+						<div class="col-md-12 text-center">
+							<h3>{{'profile_notlink' | translate}}</h3>
+							<a ng-click="profileCtlr.authenticate('twitter')" class="btn btn-info"><span class="fa fa-twitter"></span> {{'profile_link' | translate}}</a>
+						</div>
+			  		</div>	
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+			    	<div class="panel-heading">
+			        	<h3 class="panel-title">{{'profile_instagram' | translate}}</h3>
+			      	</div>
+			      	<div class="panel-body" ng-if="profileCtlr.user.instagram">
+						<div class="col-md-12">
+							<img ng-src="{{profileCtlr.user.instagram.picture}}" class="img-circle image-profile">
+						</div>
+						<div class="col-md-12 text-center">
+							<b>{{profileCtlr.user.instagram.display_name}}</b><br>
+							{{profileCtlr.user.instagram.username}}<br>
+							<a  ng-click="profileCtlr.unlink('instagram')" class="btn btn-primary" style="margin-top: 5px;"><i class="fa fa-instagram"></i></span> {{'profile_unlink' | translate}}</a>
+						</div>
+			  		</div>	
+			      	<div class="panel-body" ng-if="!profileCtlr.user.instagram">
+						<div class="col-md-12 text-center">
+							<h3>{{'profile_notlink' | translate}}</h3>
+							<a  ng-click="profileCtlr.authenticate('instagram')" class="btn btn-primary"><i class="fa fa-instagram"></i></span> {{'profile_link' | translate}}</a>
+						</div>
+			  		</div>	
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-danger">
+			    	<div class="panel-heading">
+			        	<h3 class="panel-title">{{'profile_google' | translate}}</h3>
+			      	</div>
+			      	<div class="panel-body" ng-if="profileCtlr.user.google">
+						<div class="col-md-12">
+							<img ng-src="{{profileCtlr.user.google.picture}}" class="img-circle image-profile">
+						</div>
+						<div class="col-md-12 text-center">
+							<b>{{profileCtlr.user.google.display_name}}</b><br>
+							{{profileCtlr.user.google.email}}<br>
+				            <a ng-click="profileCtlr.unlink('google')" class="btn btn-danger" style="margin-top: 5px;"><i class="fa fa-google"></i></span> {{'profile_unlink' | translate}}</a>
+						</div>
+					</div>
+			      	<div class="panel-body" ng-if="!profileCtlr.user.google">
+						<div class="col-md-12 text-center">
+							<h3>{{'profile_notlink' | translate}}</h3>
+							<a ng-click="profileCtlr.authenticate('google')" class="btn btn-danger"><i class="fa fa-google"></i></span> {{'profile_link' | translate}}</a>
+						</div>
+			  		</div>	
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="row" ng-show="profileCtlr.editProfile">
+			<form name="profileForm" ng-submit="profileCtlr.save()" class="col-md-6 col-md-offset-3 form-horizontal" role="form" novalidate>
+					<div class="form-group">
+                        <label>{{'logon_name' | translate}}</label>
+                        <input type="text" class="form-control" name="name" ng-model="profileCtlr.newUser.name" required>
+                    </div>
+					<div class="form-group">
+                        <label>{{'logon_mail' | translate}}</label>
+                        <input type="email" class="form-control" name="email" ng-model="profileCtlr.newUser.email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'logon_pass' | translate}}</label>
+                        <input type="password" class="form-control" name="password" ng-model="profileCtlr.newUser.password" required>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'logon_confirm_pass' | translate}}</label>
+                        <input type="password" class="form-control" name="password" ng-model="profileCtlr.newUser.confirm_password" required>
+                    </div>
+                    <div class="form-group">
+		                <button type="submit" value="Submit"                                        
+		                        ng-disabled="commentForm.$invalid"
+		                        ng-click="commentForm.$setPristine()"
+		                        class="btn btn-primary col-md-6">Guardar</button>
+		                <a class="btn btn-danger col-md-6" ng-click="profileCtlr.editProfile=false;">Cancelar</a>
+	                </div>
+       		</form>
+		</div>
+	</div>
+</div>

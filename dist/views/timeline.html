@@ -1,0 +1,21 @@
+
+<div class="well col-md-12" style="margin-top: 20px;margin-bottom: 0px;" ng-repeat="post in uwMedia.list">
+    <div ng-if="post.contact.name">
+    	<img ng-src="{{post.contact.picture}}" class="img-circle image-contact-small" ng-if="post.contact.picture">
+    	<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact-small" ng-if="!post.contact.picture">
+    	<span><b>{{post.contact.name}}</b></span>
+	</div>
+    <i class="fa" ng-class="{'fa-facebook-official': post.provider == 'facebook','fa-twitter': post.provider == 'twitter','fa-instagram': post.provider == 'instagram'}"></i>
+	<div class="col-md-12" ng-if="post.type=='text'">
+		<span class="col-md-12">{{post.text}}</span>
+	</div>
+	<div class="col-md-12" ng-if="post.type=='image' || post.type=='photo' || post.type=='animated_gif'">
+		<span class="col-md-12">{{post.text}}</span>
+		<img ng-src="{{post.media_url}}" class="col-md-12">
+	</div>
+	<div class="col-md-12" ng-if="post.type=='video'">
+		<span class="col-md-12">{{post.text}}</span>
+        
+        <uw-video video-src="post.media_url" ng-if="post.media_url"></uw-video>
+	</div>
+</div>

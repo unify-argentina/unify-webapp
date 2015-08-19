@@ -1,0 +1,37 @@
+<div id="contactProfile" class="container" ng-controller="ProfileController as profileCtlr">
+  	<uw-loader ng-if="!profileCtlr.user"></uw-loader>
+	<div class="content col-md-12" ng-if="profileCtlr.user">
+		<div class="col-md-3 well text-center word-break" style="margin-top: 20px;">
+			<div class="col-md-12">
+				<h2>{{profileCtlr.user.name}}</h2>
+				<h4>{{profileCtlr.user.email}}</h4>
+			</div>
+			<div class="clearfix"></div>
+			<div class="list-group" style="margin-top: 20px;" ng-if="profileCtlr.user.facebook.display_name || profileCtlr.user.twitter.username || profileCtlr.user.instagram.username||profileCtlr.user.google.email">
+				<span class="list-group-item active">Contactos</span>
+				<a class="list-group-item" ng-if="profileCtlr.user.facebook.display_name">
+					<span class="fa fa-facebook"></span> 
+					{{profileCtlr.user.facebook.display_name}}
+				</a>
+				<a class="list-group-item" ng-if="profileCtlr.user.twitter.username">
+					<span class="fa fa-twitter"></span>
+					@{{profileCtlr.user.twitter.username}}
+				</a>
+				<a class="list-group-item" ng-if="profileCtlr.user.instagram.username">
+					<span class="fa fa-instagram"></span> 
+					{{profileCtlr.user.instagram.username}}
+				</a>
+				<a class="list-group-item" ng-if="profileCtlr.user.google.email">
+					<span class="fa fa-google"></span> 
+					{{profileCtlr.user.google.email}}
+				</a>
+			</div>
+			<div class="clearfix"></div>
+			<a style="margin-top: 20px;" class="btn btn-success col-md-8 col-md-offset-2" ui-sref="editProfile" style="margin-top: 5px;">Editar</a>
+		</div>
+		<div class="col-md-9">
+  			<uw-loader ng-if="!profileCtlr.feed"></uw-loader>
+			<uw-time-line uw-media="profileCtlr.feed" ng-if="profileCtlr.feed"></uw-time-line>
+		</div>
+	</div>
+</div>

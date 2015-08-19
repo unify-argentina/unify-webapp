@@ -1,31 +1,82 @@
 <div id="circle" class="container" ng-controller="CircleController as circleCtrl">
   	<uw-loader ng-if="!circleCtrl.circle"></uw-loader>
 	<div class="content col-md-12" ng-if="circleCtrl.circle">
-		<div class="col-md-3 well text-center" style="margin-top: 20px;">
-			<a ng-click="circleCtrl.goToParent();" ng-show="circleCtrl.circle.parent"><i class="fa fa-arrow-up"></i>Subir un nivel</a>
-			<div class="col-md-12">
-				<img ng-src="{{circleCtrl.circle.picture}}" class="img-circle image-profile" ng-if="circleCtrl.circle.picture">
-				<img src="resources/circle/circle.png" class="img-circle image-profile" ng-if="!circleCtrl.circle.picture">
-				{{circleCtrl.circle.name}}
+		<div class="col-md-3 well text-center word-break" style="margin-top: 20px;">
+			<div ng-show="!circleCtrl.createCircle && !circleCtrl.editingCircle">
+				<a href="" ng-click="circleCtrl.goToParent();" ng-show="circleCtrl.circle.parent"><i class="fa fa-arrow-up"></i>Subir un nivel</a>
+				<div class="col-md-12">
+					<img ng-src="{{circleCtrl.circle.picture}}" class="img-circle image-profile" ng-if="circleCtrl.circle.picture">
+
+					<div ng-if="!circleCtrl.circle.picture" class="img-circle image-profile">
+						<img src="resources/circle/circle.png" class="col-md-12 no-padding" ng-if="circleCtrl.contactSize==0">
+						
+						<div ng-if="circleCtrl.contactSize==1" class="img-circle image-profile">
+							<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="col-md-12 no-padding" >
+						</div>
+
+						<div ng-if="circleCtrl.contactSize==2" class="img-circle image-profile">
+							<div class="col-md-6 no-padding">
+								<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="image-profile-half">
+							</div>
+							<div class="col-md-6 no-padding">
+								<img ng-src="{{circleCtrl.imagesCircle[1].picture}}" class="image-profile-half">
+							</div>
+						</div>
+						
+						<div ng-if="circleCtrl.contactSize==3" class="img-circle image-profile">
+							<div class="col-md-6 no-padding">
+								<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="image-profile-half">
+							</div>
+							<div class="col-md-6 no-padding">
+								<img ng-src="{{circleCtrl.imagesCircle[1].picture}}" class="image-profile-quarter">
+								<img ng-src="{{circleCtrl.imagesCircle[2].picture}}" class="image-profile-quarter">
+							</div>
+						</div>
+						
+						<div ng-if="circleCtrl.contactSize>=4" class="img-circle image-profile">
+							<div class="col-md-6 no-padding">
+								<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="image-profile-quarter">
+								<img ng-src="{{circleCtrl.imagesCircle[1].picture}}" class="image-profile-quarter">
+							</div>
+							<div class="col-md-6 no-padding">
+								<img ng-src="{{circleCtrl.imagesCircle[2].picture}}" class="image-profile-quarter">
+								<img ng-src="{{circleCtrl.imagesCircle[3].picture}}" class="image-profile-quarter">
+							</div>
+						</div>
+					</div>
+					
+					<h1>{{circleCtrl.circle.name}}</h1>
+				</div>
+				<br>
+				<div class="col-md-12" style="margin-top: 10px;">
+					<a class="btn btn-primary col-md-8 col-md-offset-2" ng-click="circleCtrl.create();">Crear Circulo</a><br>
+					<a class="btn btn-success col-md-8 col-md-offset-2" ng-click="circleCtrl.edit();" style="margin-top: 5px;">Editar Circulo</a><br>
+					<a class="btn btn-info col-md-8 col-md-offset-2" ng-click="circleCtrl.createContact();" style="margin-top: 5px;">Crear Contacto</a>
+				</div>
 			</div>
-			<br>
-			<div class="col-md-12 " ng-show="!circleCtrl.editCircle" style="margin-top: 10px;">
-				<a class="btn btn-primary col-md-8 col-md-offset-2" ng-click="circleCtrl.edit();">Crear Circulo</a><br>
-				<a class="btn btn-success col-md-8 col-md-offset-2" ng-click="circleCtrl.createContact();" stylle="margin-top: 5px;">Crear Contacto</a>
-			</div>
-			<div class="col-md-12" ng-show="circleCtrl.editCircle">
+			<div class="col-md-12" ng-show="circleCtrl.createCircle">
 				<input type="text" class="form-control" name="circleCtrl.newCircle" ng-model="circleCtrl.newCircle.name" required>
-				<a class="btn btn-primary" ng-click="circleCtrl.saveCircle();">Crear</a>
-				<a class="btn btn-success" ng-click="circleCtrl.cancelCircle();">Cancelar</a>
+				<div style="margin-top: 10px;">
+					<a class="btn btn-primary" ng-click="circleCtrl.saveCircle();">Crear</a>
+					<a class="btn btn-success" ng-click="circleCtrl.cancelCircle();">Cancelar</a>
+				</div>
+			</div>
+			<div class="col-md-12" ng-show="circleCtrl.editingCircle">
+				<input type="text" class="form-control" name="circleCtrl.newCircle" ng-model="circleCtrl.editCircle.name" required>
+				<div style="margin-top: 10px;">
+					<a class="btn btn-primary" ng-click="circleCtrl.updateCircle();">Guardar</a>
+					<a class="btn btn-success" ng-click="circleCtrl.cancelCircle();">Cancelar</a>
+					<a class="btn btn-danger" ng-click="circleCtrl.deleteCircle();" ng-if="circleCtrl.circle_id !=	circleCtrl.mainCircle_id">Eliminar</a>
+				</div>
 			</div>
 			<div class="clearfix"></div>
 			<div class="list-group" style="margin-top: 20px;">
-			  <a ng-click="circleCtrl.goToChild(subcircle._id);" class="list-group-item" ng-repeat="subcircle in circleCtrl.tree.subcircles">{{subcircle.name}}</a>
+			  <a href="" ng-click="circleCtrl.goToCircle(subcircle._id);" class="list-group-item" ng-repeat="subcircle in circleCtrl.tree.subcircles">{{subcircle.name}}</a>
 			</div>
 			<div class="clearfix"></div>
 			<div class="list-group" style="margin-top: 20px;" ng-if="circleCtrl.circle.contacts">
 				<span class="list-group-item active">Contactos</span>
-				<a class="list-group-item" ng-repeat="contact in circleCtrl.circle.contacts">
+				<a  href="#/contact/{{contact._id}}" class="list-group-item" ng-repeat="contact in circleCtrl.circle.contacts">
 					<img ng-src="{{contact.picture}}" class="img-circle image-contact-small" ng-if="contact.picture">
 					<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact-small" ng-if="!contact.picture">
 					{{contact.name}}
@@ -33,8 +84,13 @@
 			</div>
 		</div>
 		<div class="col-md-9">
-			<div ng-include="'views/contact.html'" ng-if="circleCtrl.editContact">
+			<uw-contact-data uw-circle-id="circleCtrl.circle_id" uw-parent-controller="circleCtrl" ng-if="circleCtrl.editContact"></uw-contact-data>
+			<div ng-show="!circleCtrl.editContact">
+  				<uw-loader ng-if="!circleCtrl.feed"></uw-loader>
+				<uw-time-line uw-media="circleCtrl.feed" ng-if="circleCtrl.feed"></uw-time-line>
 			</div>
 		</div>
 	</div>
+
+
 </div>

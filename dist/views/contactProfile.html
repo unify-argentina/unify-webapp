@@ -1,0 +1,40 @@
+<div id="contactProfile" class="container" ng-controller="ContactProfileController as contactProfileCtrl">
+  	<uw-loader ng-if="!contactProfileCtrl.contact"></uw-loader>
+	<div class="content col-md-12" ng-if="contactProfileCtrl.contact">
+		<div class="col-md-3 well text-center word-break" style="margin-top: 20px;">
+			<div class="col-md-12">
+				<img ng-src="{{contactProfileCtrl.contact.picture}}" class="img-circle image-profile" ng-if="contactProfileCtrl.contact.picture">
+				<img src="resources/contact/stormtrooper.jpg" class="img-circle image-profile" ng-if="!contactProfileCtrl.contact.picture">
+				<h2>{{contactProfileCtrl.contact.name}}</h2>
+			</div>
+			<br>
+			<a class="btn btn-success col-md-8 col-md-offset-2" ng-click="contactProfileCtrl.edit();" style="margin-top: 5px;">Editar</a>
+			<br>
+			<div class="clearfix"></div>
+			<div class="list-group" style="margin-top: 20px;" ng-if="contactProfileCtrl.contact.facebook.display_name || contactProfileCtrl.contact.twitter.username || contactProfileCtrl.contact.instagram.username">
+				<span class="list-group-item active">Contactos</span>
+				<a class="list-group-item" ng-if="contactProfileCtrl.contact.facebook.display_name">
+					<span class="fa fa-facebook"></span> 
+					{{contactProfileCtrl.contact.facebook.display_name}}
+				</a>
+				<a class="list-group-item" ng-if="contactProfileCtrl.contact.twitter.username">
+					<span class="fa fa-twitter"></span>
+					@{{contactProfileCtrl.contact.twitter.username}}
+				</a>
+				<a class="list-group-item" ng-if="contactProfileCtrl.contact.instagram.username">
+					<span class="fa fa-instagram"></span> 
+					{{contactProfileCtrl.contact.instagram.username}}
+				</a>
+			</div>
+		</div>
+		<div class="col-md-9">
+		<uw-contact-data uw-contact-id="contactProfileCtrl.contact._id"  uw-circle-id="contactProfileCtrl.contact.parents[0]._id" uw-parent-controller="contactProfileCtrl" ng-show="contactProfileCtrl.editContact"></uw-contact-data>
+			<div ng-show="!contactProfileCtrl.editContact">
+  					<uw-loader ng-if="!contactProfileCtrl.feed"></uw-loader>
+				<uw-time-line uw-media="contactProfileCtrl.feed" ng-if="contactProfileCtrl.feed"></uw-time-line>
+			</div>
+		</div>
+	</div>
+
+
+</div>

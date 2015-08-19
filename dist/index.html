@@ -22,20 +22,21 @@
     <script type="text/javascript"  src="lib/angular-translate/angular-translate.min.js"></script>
     <script src="lib/angular-ui-map/ui-map.min.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
-    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="lib/angular-loader/angular-loader.js"></script>
-    <script src="lib/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="lib/angular-loading-bar/build/loading-bar.min.js"></script>
     <script src="lib/satellizer/satellizer.min.js"></script>
-    
+    <script src="lib/lodash/lodash.min.js"></script>
+    <script src="lib/ngvideo/dist/ng-video.js"></script>
+
     <link rel="stylesheet" type="text/css" href="styles/main.css">
     
     <script src="scripts/app.js"></script>
 
 </head>
  
-<body class="container" ng-controller="MainController">
-<!--    <div data-ng-include src="headerSrc"></div> -->
+<body class="container" ng-controller="MainController as mainController">
+    <div ng-include="'views/header.html'" ng-if="mainController.auth"></div>
     <div>
         <div ui-view></div>
     </div>
