@@ -31,18 +31,10 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
     };
 
 	var getFriends = function() {
-		if(getUserId()){
-	    	if(friends==null){
-	    		getUserFriends(getUserId()).then(function(data) {
-					if(data){
-						friends=data.friends;
-					}
-				});
-	    	}
-	    	return friends; 
-    	}else{
-    		return null;
-    	}
+		return friends;
+	};
+	var setFriends = function(userFriends) {
+		friends=userFriends;
 	};
 
     var signup = function(user) {
@@ -116,8 +108,9 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 	
 	var getUserFriends = function(user_id){
 		 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+ user_id +'/friends')
-		 .then(function(response) {	
-    		return response.data;
+		 .then(function(response) {
+		 	friends=response.data.friends;
+    		return response.data.friends;
 		}, function(response) {
         	console.log("ERROR: "+response.data ? response.data.message : response);
 		});	
@@ -137,6 +130,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 		getUserId 		: getUserId,
 		getMainCircleId	: getMainCircleId,
 		getFriends		: getFriends,
+		getUserFriends	: getUserFriends,
 		logout			: logout
     };
 

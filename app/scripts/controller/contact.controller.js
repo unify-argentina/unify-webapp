@@ -9,8 +9,10 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 		},function(response){
 			contactCtrl.contact=response.contact;
 			if(contactCtrl.friends){
+				console.log("SEEEEEE");
 				contactCtrl.getFriends();
 			}else{
+				console.log("No :(");
 				contactCtrl.checkFriends();
 			}
 		});
@@ -37,8 +39,8 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 	};
 
 	contactCtrl.checkFriends = function(){
-	/*	console.log("LALA4");
-		var check = $interval(function(){
+		console.log("LALA4");
+	/*	var check = $interval(function(){
 			console.log("LALA");
 			contactCtrl.friends=AuthenticationService.getFriends();
 			if(contactCtrl.friends){
@@ -103,6 +105,22 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 		contactCtrl.circle_id=circle_id;
 		contactCtrl.parentController=parentController;
 		contactCtrl.contact_id=contact_id;
+		if(!AuthenticationService.getFriends()){
+			console.log("FOREVER ALONE");
+			AuthenticationService.getUserFriends(
+				AuthenticationService.getUserId()
+			).then(function(data){
+				console.log(data);
+				contactCtrl.friends=data;
+				if(contactCtrl.contact_id){
+					contactCtrl.getContact(contactCtrl.contact_id);
+				}
+			});
+		}else{
+			console.log("GOT FRIENDS!!!");
+			contactCtrl.friends=AuthenticationService.getFriends();
+		}
+		/*
 		contactCtrl.friends=AuthenticationService.getFriends();
 		if(contactCtrl.contact_id){
 			contactCtrl.getContact(contactCtrl.contact_id);
@@ -110,7 +128,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 			if(!contactCtrl.friends){
 				contactCtrl.checkFriends();
 			}
-		}
+		}*/
 	};
 
 });
