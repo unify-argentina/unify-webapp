@@ -109,7 +109,8 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 	var getUserFriends = function(user_id){
 		 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+ user_id +'/friends')
 		 .then(function(response) {
-		 	friends=response.data.friends;
+			localStorage.setItem('response', JSON.stringify(response));
+	    	friends=response.data.friends;
     		return response.data.friends;
 		}, function(response) {
         	console.log("ERROR: "+response.data ? response.data.message : response);
