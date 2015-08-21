@@ -58,6 +58,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 		ContactService.saveContact(
 			contactCtrl.contact
 		).then(function(data) {
+			contactCtrl.parentController.closeContact();
 		});
 	};
 
@@ -67,6 +68,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 		ContactService.updateContact(
 			contactCtrl.contact
 		).then(function(data) {
+			contactCtrl.parentController.closeContact();
 		});
 	};
 

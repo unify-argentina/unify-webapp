@@ -5,8 +5,8 @@
 		<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact" ng-if="!contactCtrl.contact.picture">
 		<input class="form-control" ng-model="contactCtrl.contact.name"/>
 		<div style="margin-top: 10px;">
-			<a class="btn btn-success" ng-click="contactCtrl.saveContact();uwParentController.closeContact();" ng-if="!uwContactId">Guardar Contacto</a>
-			<a class="btn btn-success" ng-click="contactCtrl.updateContact();uwParentController.closeContact();" ng-if="uwContactId">Guardar Contacto</a>
+			<a class="btn btn-success" ng-click="contactCtrl.saveContact();" ng-if="!uwContactId">Guardar Contacto</a>
+			<a class="btn btn-success" ng-click="contactCtrl.updateContact();" ng-if="uwContactId">Guardar Contacto</a>
 			<a class="btn btn-primary" ng-click="uwParentController.cancelContact();">Cancelar</a>
 			<a class="btn btn-danger" ng-click="contactCtrl.deleteContact(uwContactId);" ng-if="uwContactId">Eliminar Contacto</a>
 		</div>
