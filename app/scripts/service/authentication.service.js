@@ -44,7 +44,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 			email: user.email,
 			password: user.password,
 			confirm_password: user.confirmpassword
-		}).then(function() {
+		}).then(function(response) {
 			setUserId(response.data.user._id);
 			setMainCircleId(response.data.user.main_circle);
 			localStorage.setItem('response', JSON.stringify(response));
@@ -60,7 +60,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 	    $auth.login({ 
 	      email: user.email, 
 	      password: user.password 
-	    }).then(function() {
+	    }).then(function(response) {
 			setUserId(response.data.user._id);
 			setMainCircleId(response.data.user.main_circle);
 	        localStorage.setItem('response', JSON.stringify(response));

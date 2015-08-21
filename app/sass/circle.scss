@@ -23,3 +23,15 @@
     width:  50px;
     margin: 0 auto;
 }
+
+.contacto {
+    background-size: 200% 100%;
+    background-image: linear-gradient(to left, #579f9b 50%, #fff 50%);
+    -webkit-transition: background-position 1s ease-in-out;
+    -moz-transition: background-position 1s ease-in-out;
+    transition: background-position 1s ease-in-out;
+}
+
+.contacto:hover {
+    background-position: 100% 0;
+}
