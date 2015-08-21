@@ -21,7 +21,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 	contactCtrl.getFriends = function(){	
 		if(contactCtrl.friends){	
 			if(contactCtrl.contact.facebook && contactCtrl.friends.facebook){
-				contactCtrl.contact.facebook=_.find(contactCtrl.friends.facebook.list, function(friend) {
+				contactCtrl.contact.facebook=_.find(contactCtrl.friends.facebook_friends.list, function(friend) {
 				  return friend.id == contactCtrl.contact.facebook.id;
 				});
 			}
