@@ -15,7 +15,7 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 					user_id : contact.user_id,
 					name : contact.name,
 					picture : contact.picture,
-					circle_id : contact.circle_id,
+					circles_ids : [contact.circle_id],
 					facebook_id : (contact.facebook!=null?contact.facebook.id:null),
 					twitter_id : (contact.twitter!=null?contact.twitter.id:null),
 					instagram_id : (contact.instagram!=null?contact.instagram.id:null),
@@ -38,10 +38,13 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 					contact_id : contact._id,
 					name : contact.name,
 					picture : contact.picture,
-					circle_id : contact.parents[0].circle,
+					circles_ids : [contact.parents[0].circle],
 					facebook_id : (contact.facebook!=null?contact.facebook.id:null),
 					twitter_id : (contact.twitter!=null?contact.twitter.id:null),
-					instagram_id : (contact.instagram!=null?contact.instagram.id:null)
+					instagram_id : (contact.instagram!=null?contact.instagram.id:null),
+					facebook_display_name : (contact.facebook!=null?contact.facebook.name:null),
+					twitter_username : (contact.twitter!=null?contact.twitter.username:null),	
+					instagram_username : (contact.instagram!=null?contact.instagram.username:null)
 				}
 			).then(function(response) {	
         		return response.data;
