@@ -7,13 +7,15 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 			user_id : AuthenticationService.getUserId(),
 			contact_id : contact_id
 		},function(response){
+			response.contact.circles_ids=[];
+			_(response.contact.parents).forEach(function(parent) {
+			  console.log(parent);
+			  response.contact.circles_ids.push(parent.circle);
+			}).value();
+
 			contactCtrl.contact=response.contact;
 			if(contactCtrl.friends){
-				console.log("SEEEEEE");
 				contactCtrl.getFriends();
-			}else{
-				console.log("No :(");
-				contactCtrl.checkFriends();
 			}
 		});
 	};
@@ -54,7 +56,8 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 
 	contactCtrl.saveContact = function(){
 		contactCtrl.contact.user_id = AuthenticationService.getUserId();
-		contactCtrl.contact.circle_id = contactCtrl.circle_id;
+		contactCtrl.contact.circles_ids=[];
+		contactCtrl.contact.circles_ids.push(contactCtrl.circle_id);
 		ContactService.saveContact(
 			contactCtrl.contact
 		).then(function(data) {
