@@ -19,6 +19,7 @@
     <script type="text/javascript"  src="lib/angular/angular.min.js"></script>
     <script type="text/javascript"  src="lib/angular-animate/angular-animate.min.js"></script>
     <script type="text/javascript"  src="lib/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript"  src="lib/angular-scroll/angular-scroll.min.js"></script>
     <script type="text/javascript"  src="lib/angular-translate/angular-translate.min.js"></script>
     <script src="lib/angular-ui-map/ui-map.min.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -47,6 +48,7 @@
         <script type="text/javascript" src="scripts/controller/contact.controller.js"></script>
         <script type="text/javascript" src="scripts/controller/contactProfile.controller.js"></script>
         <script type="text/javascript" src="scripts/controller/video.controller.js"></script>
+        <script type="text/javascript" src="scripts/controller/comingSoon.controller.js"></script>
 
         <!-- Services -->
         <script type="text/javascript" src="scripts/service/authentication.service.js"></script>
@@ -60,12 +62,16 @@
         <script type="text/javascript" src="scripts/directives/timeline.js"></script>
         <script type="text/javascript" src="scripts/directives/video.js"></script>
         <script type="text/javascript" src="scripts/directives/contactData.js"></script>
+
+
+        <!-- Filters -->
+        <script type="text/javascript" src="scripts/filters/clock.filter.js"></script>
     <!-- endbuild -->
 
 </head>
  
-<body class="container" ng-controller="MainController as mainController">
-    <div ng-include="'views/header.html'" ng-if="mainController.auth"></div>
+<body ng-class="{'overflow-hidden': !mainController.auth}" ng-controller="MainController as mainController">
+    <!-- <div ng-include="'views/header.html'" ng-if="mainController.auth"></div> -->
     <div>
         <div ui-view></div>
     </div>

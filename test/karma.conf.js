@@ -44,6 +44,7 @@ module.exports = function(config) {
       'app/lib/angular-mocks/angular-mocks.js',
       'app/lib/bootstrap/dist/js/bootstrap.js',
       'app/lib/ngvideo/dist/ng-video.js',
+      'app/lib/angular-scroll/angular-scroll.js',
       'app/lib/angular-scenario/angular-scenario.js',
       // endbower
       "app/scripts/**/*.js",

@@ -10,7 +10,7 @@ unifyApp.directive('uwMainContent', function($auth) {
             if($auth.isAuthenticated()){
                 return 'views/userProfile.html';
             }
-            return 'views/loginSignUp.html';
+            return 'views/comingSoon.html';
         }
     };    
 });

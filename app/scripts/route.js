@@ -39,5 +39,10 @@ angular.module('unifyApp').config(function ($stateProvider, $urlRouterProvider) 
     templateUrl: 'views/contactProfile.html'
   });
 
+  $stateProvider.state('waiting', {
+    url: '/waiting',
+    templateUrl: 'views/comingSoon.html'
+  });
+
   
  });
