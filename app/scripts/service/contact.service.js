@@ -15,7 +15,11 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 					user_id : contact.user_id,
 					name : contact.name,
 					picture : contact.picture,
+<<<<<<< HEAD
 					circles_ids : contact.circles_ids,
+=======
+					circles_ids : [contact.circle_id],
+>>>>>>> dc7d75f9969449e27c1463437c58a5cae92588ec
 					facebook_id : (contact.facebook!=null?contact.facebook.id:null),
 					twitter_id : (contact.twitter!=null?contact.twitter.id:null),
 					instagram_id : (contact.instagram!=null?contact.instagram.id:null),
@@ -38,7 +42,11 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 					contact_id : contact._id,
 					name : contact.name,
 					picture : contact.picture,
+<<<<<<< HEAD
 					circles_ids : contact.circles_ids,
+=======
+					circles_ids : [contact.parents[0].circle],
+>>>>>>> dc7d75f9969449e27c1463437c58a5cae92588ec
 					facebook_id : (contact.facebook!=null?contact.facebook.id:null),
 					twitter_id : (contact.twitter!=null?contact.twitter.id:null),
 					instagram_id : (contact.instagram!=null?contact.instagram.id:null),
