@@ -67,7 +67,6 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 
 	contactCtrl.updateContact = function(){
 		contactCtrl.contact.user_id = AuthenticationService.getUserId();
-		contactCtrl.contact.circle_id=contactCtrl.circle_id;
 		ContactService.updateContact(
 			contactCtrl.contact
 		).then(function(data) {

@@ -71,7 +71,7 @@
 </head>
  
 <body ng-class="{'overflow-hidden': !mainController.auth}" ng-controller="MainController as mainController">
-    <!-- <div ng-include="'views/header.html'" ng-if="mainController.auth"></div> -->
+    <div ng-include="'views/header.html'" ng-if="mainController.auth"></div>
     <div>
         <div ui-view></div>
     </div>
