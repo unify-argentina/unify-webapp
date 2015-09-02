@@ -160,10 +160,20 @@ $sea-deep-down: #558f89;
 .countdown{
   color: #fff;
   position: absolute;
-  right:30px;
-  bottom:10px;
+  right: 30px;
+  bottom: 20px;
   font-size: 50px;
-  width: 280px;
+  width: 300px;
+  .fragment{
+    width: 75px;
+    float: left;
+    text-align: center;
+    line-height: 100%;
+    .disclaimer{
+      font: 14px 'antennaRegular';
+      text-align: left;
+    }
+  }
 }
 .whoLink{
   color: #fff;

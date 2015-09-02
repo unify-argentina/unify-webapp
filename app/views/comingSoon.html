@@ -13,7 +13,22 @@
 		
 				
 			<div class="countdown">
-				{{csctrl.days | clock}}:{{csctrl.hours | clock}}:{{csctrl.minutes | clock}}:{{csctrl.seconds | clock}}
+				<div class="fragment">
+					<div class="disclaimer">Días</div>
+					{{csctrl.days | clock}}:
+				</div>
+				<div class="fragment">
+					<div class="disclaimer">Horas</div>
+					{{csctrl.hours | clock}}:
+				</div>
+				<div class="fragment">
+					<div class="disclaimer">Min</div>
+					{{csctrl.minutes | clock}}:
+				</div>
+				<div class="fragment">
+					<div class="disclaimer">Segundos</div>
+					{{csctrl.seconds | clock}}
+				</div>
 			</div>
 			<div class="whoLink text-center row">
 				<a href="#whoPage" du-smooth-scroll duration="1000">¿Qué es Unify?</a>
