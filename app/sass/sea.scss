@@ -230,17 +230,19 @@ color: #fff;
 
 .submarine{
   float: left;
+  position: absolute;
+  z-index: 5;
   height: 150px;
-  margin-left: 30px;
-  margin-top: 20vh;
+  left: 775px;
+  bottom: 350px;
 }
 
 .submarine-light{
-  position:absolute;
+  position: absolute;
   z-index: 0;
   float: left;
-  margin-left: 35px;
-  margin-top: -168px;
+  left: 40px;
+  bottom: -210px;
 }
 
 .descoverText{
@@ -248,7 +250,7 @@ color: #fff;
   z-index: 10;
   color: #dc911e;
   font: 15px 'antennaRegularItalic';
-  left: 500px;
+  left: 475px;
   bottom: 200px;
 }
 
@@ -277,7 +279,7 @@ color: #fff;
 .pulpix-float{
   width: 75px;
   bottom: 40px;
-  left: 350px;
+  left: 325px;
   position: absolute;
   z-index: 10;
   animation-name: tossing;
@@ -319,5 +321,5 @@ color: #fff;
   z-index: 10;
   height: 95px;
   bottom: 40px;
-  left: 445px;
+  left: 420px;
 }
