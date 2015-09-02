@@ -39,7 +39,10 @@ unifyApp.controller("ProfileController", function (ProfileService, Authenticatio
 		ProfileService.getFeed(
 			AuthenticationService.getUserId()
 		).then(function(data) {
-			profileCtlr.feed=data.media;
+			if(data.user_id==AuthenticationService.getUserId())
+			{
+				profileCtlr.feed=data.media;
+			}
 		});
 	};
 

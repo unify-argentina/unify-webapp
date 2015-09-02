@@ -39,7 +39,10 @@ unifyApp.controller("ContactProfileController", function ($scope, $stateParams, 
 			AuthenticationService.getUserId(),
 			contactCtrl.contact_id
 		).then(function(data) {
-			contactCtrl.feed=data.media;
+			if(data.contact_id==contactCtrl.contact_id)
+			{
+				contactCtrl.feed=data.media;
+			}
 		});
 	};
 

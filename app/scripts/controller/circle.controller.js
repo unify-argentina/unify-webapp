@@ -90,7 +90,10 @@ unifyApp.controller("CircleController", function ($scope,  video, CircleService,
 			AuthenticationService.getUserId(),
 			circleCtrl.circle_id
 		).then(function(data) {
-			circleCtrl.feed=data.media;
+			if(data.circle_id==circleCtrl.circle_id)
+			{
+				circleCtrl.feed=data.media;
+			}
 		});
 	};
 	
