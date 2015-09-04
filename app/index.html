@@ -2,7 +2,7 @@
 <html data-ng-app="unifyApp">
  
 <head>
-    <title>UNIFY</title>
+    <title>Unify</title>
 
     <meta charset="utf-8">
 
@@ -14,6 +14,11 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     
+    <!-- Compiled and minified CSS 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+          -->
+          
     <link rel='stylesheet' href='lib/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
 
     <script type="text/javascript"  src="lib/angular/angular.min.js"></script>
@@ -49,12 +54,14 @@
         <script type="text/javascript" src="scripts/controller/contactProfile.controller.js"></script>
         <script type="text/javascript" src="scripts/controller/video.controller.js"></script>
         <script type="text/javascript" src="scripts/controller/comingSoon.controller.js"></script>
+        <script type="text/javascript" src="scripts/controller/mail.controller.js"></script>
 
         <!-- Services -->
         <script type="text/javascript" src="scripts/service/authentication.service.js"></script>
         <script type="text/javascript" src="scripts/service/profile.service.js"></script>
         <script type="text/javascript" src="scripts/service/circle.service.js"></script>
         <script type="text/javascript" src="scripts/service/contact.service.js"></script>
+        <script type="text/javascript" src="scripts/service/mail.service.js"></script>
 
         <!-- Directives -->
         <script type="text/javascript" src="scripts/directives/main-content.js"></script>
@@ -68,6 +75,8 @@
         <script type="text/javascript" src="scripts/filters/clock.filter.js"></script>
     <!-- endbuild -->
 
+    <link rel="icon" href="resources/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon"/>
 </head>
  
 <body ng-class="{'overflow-hidden': !mainController.auth}" ng-controller="MainController as mainController">

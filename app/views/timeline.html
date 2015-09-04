@@ -1,5 +1,4 @@
-
-<div class="well col-md-12" style="margin-top: 20px;margin-bottom: 0px;" ng-repeat="post in uwMedia.list">
+<div class="well col-md-12 word-break" style="margin-top: 20px;margin-bottom: 0px;" ng-repeat="post in uwMedia.list">
     <div ng-if="post.contact.name">
     	<img ng-src="{{post.contact.picture}}" class="img-circle image-contact-small" ng-if="post.contact.picture">
     	<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact-small" ng-if="!post.contact.picture">

@@ -44,5 +44,8 @@ angular.module('unifyApp').config(function ($stateProvider, $urlRouterProvider) 
     templateUrl: 'views/comingSoon.html'
   });
 
-  
+  $stateProvider.state('emails', {
+    url: '/emails',
+    templateUrl: 'views/mailDash.html'
+  });
  });
