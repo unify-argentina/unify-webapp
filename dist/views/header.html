@@ -9,12 +9,13 @@
       </button>
       <a class="navbar-brand">UNIFY</a>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
+    <div id="navbar" class="navbar-collapse collapse text-center ">
       <ul class="nav navbar-nav">
-        <li><a ui-sref="profile">Profile</a></li>
-        <li><a ui-sref="dashboard">Dashboard</a></li>
+        <li><a ui-sref="main"><i class="fa fa-home fa-2x"></i>Home</a></li>
+        <li><a ui-sref="emails"><i class="fa fa-envelope-o fa-2x"></i>Email</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><a ui-sref="profile">{{mainController.user}}</a></li>
         <li><a href="" ng-click="mainController.logout();">Cerrar Sesión</a></li>
       </ul>
     </div>
