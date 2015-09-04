@@ -52,7 +52,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 			$window.location.href = "/";
 	      })
 		.catch(function(response) {
-	        console.log(response.data ? response.data.message : response);
+	        console.log(response.data ? response.data.errors : response);
 		});
     };
 
@@ -68,7 +68,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 			$window.location.href = "/";
 		})
 		.catch(function(response) {
-			console.log(response.data ? response.data.message : response);
+			console.log(response.data ? response.data.errors : response);
 		});
 	  };
 
@@ -82,7 +82,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 			$window.location.href = "/";
 	      })
 	      .catch(function(response) {
-	        console.log(response.data ? response.data.message : response);
+	        console.log(response.data ? response.data.errors : response);
 	      });
 	  };
 
@@ -102,7 +102,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 			$window.location.href = "/";
 	    })
 	    .catch(function(response) {
-	        console.log("ERROR: "+response.data ? response.data.message : response);
+	        console.log("ERROR: "+response.data ? response.data.errors : response);
 	    });
 	};
 	
@@ -113,7 +113,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 	    	friends=response.data.friends;
     		return response.data.friends;
 		}, function(response) {
-        	console.log("ERROR: "+response.data ? response.data.message : response);
+        	console.log("ERROR: "+response.data ? response.data.errors : response);
 		});	
 		return promise;
 	};

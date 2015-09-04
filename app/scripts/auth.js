@@ -15,7 +15,8 @@ angular.module('unifyApp').config(function($authProvider, ENV) {
    
 $authProvider.google({
       clientId: '79996335280-gc0hh1efoo859u1lqaqct2v3u1larsrj.apps.googleusercontent.com',
-      url: '/auth/google'
+      url: '/auth/google',
+      scope: [' https://mail.google.com/']
     });
 
    $authProvider.twitter({
