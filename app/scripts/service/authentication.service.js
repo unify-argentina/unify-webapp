@@ -62,7 +62,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 	      password: user.password 
 	    }).then(function(response) {
 			setUserId(response.data.user._id);
-			setMainCircleId(response.data.user.main_circle);
+			setMainCircleId(response.data.user.main_circle._id);
 	        localStorage.setItem('response', JSON.stringify(response));
 	        console.log('You have successfully logged in: '+response.data.token); 
 			$window.location.href = "/";
@@ -76,7 +76,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 	    $auth.authenticate(provider)
 	      .then(function(response) {
 			setUserId(response.data.user._id);
-			setMainCircleId(response.data.user.main_circle);
+			setMainCircleId(response.data.user.main_circle._id);
 	        localStorage.setItem('response', JSON.stringify(response));
 	        console.log('You have successfully logged in: '+response.data.token); 
 			$window.location.href = "/";
