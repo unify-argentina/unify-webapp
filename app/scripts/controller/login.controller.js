@@ -1,6 +1,6 @@
 
 
-unifyApp.controller("LoginController", function ($scope, $auth, AuthenticationService) {
+unifyApp.controller("LoginController", function ($scope, $auth, $window, AuthenticationService) {
   
   $scope.login = function() {
     AuthenticationService.login($scope.user);
@@ -10,7 +10,7 @@ unifyApp.controller("LoginController", function ($scope, $auth, AuthenticationSe
     AuthenticationService.authenticate(provider);
   };
 
-  	var ocean = angular.element("#ocean"),
+  	var ocean = angular.element(".ocean"),
 	    waveWidth = 10,
 	    waveCount = Math.floor(window.innerWidth/waveWidth),
 	    docFrag = document.createDocumentFragment();
@@ -24,4 +24,8 @@ unifyApp.controller("LoginController", function ($scope, $auth, AuthenticationSe
 	}
 	
 	ocean.append(docFrag);
+	var w = angular.element($window);
+    w.bind('resize', function () {
+        $scope.$apply();
+    });
 });

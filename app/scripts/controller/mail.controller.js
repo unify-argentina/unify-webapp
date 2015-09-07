@@ -1,50 +1,34 @@
-unifyApp.controller("MailController", function (PMailService, AuthenticationService) {
+unifyApp.controller("MailController", function (MailService, AuthenticationService) {
 
 	var mailCtlr = this;
 
-	ProfileService.user.get({
-		user_id: AuthenticationService.getUserId()
-	},function(response){
-		profileCtlr.user=response.user;
-	});
-
-	profileCtlr.authenticate = function(provider) {
-		AuthenticationService.authenticate(provider);
-	};
-
-	profileCtlr.unlink = function(provider) {
-		AuthenticationService.unlink(provider);
-	};
-
-	profileCtlr.edit = function(){
-		profileCtlr.newUser={};
-		profileCtlr.newUser.name=profileCtlr.user.name;
-		profileCtlr.newUser.email=profileCtlr.user.email;
-		profileCtlr.editProfile=true;
-	}
-
-	profileCtlr.save = function(){
-		ProfileService.saveUser(
-			AuthenticationService.getUserId(),
-			profileCtlr.newUser
-		).then(function(data) {
-			profileCtlr.user.name=profileCtlr.newUser.name;
-			profileCtlr.user.email=profileCtlr.newUser.email;
-			profileCtlr.editProfile=false;
-		});
-	};
-
-	profileCtlr.getFeed = function(){
-		profileCtlr.feed=null;
-		ProfileService.getFeed(
+	
+	mailCtlr.getInbox = function(){
+		MailService.getInbox(
 			AuthenticationService.getUserId()
 		).then(function(data) {
-			if(data.user_id==AuthenticationService.getUserId())
-			{
-				profileCtlr.feed=data.media;
-			}
+			mailCtlr.inbox=data.emails;
 		});
 	};
-
-	profileCtlr.getFeed();
+	mailCtlr.getDraft = function(){
+		MailService.getDraft(
+			AuthenticationService.getUserId()
+		).then(function(data) {
+			mailCtlr.draft=data.emails;
+		});
+	};
+	mailCtlr.getSent = function(){
+		MailService.getSent(
+			AuthenticationService.getUserId()
+		).then(function(data) {
+			mailCtlr.sent=data.emails;
+		});
+	};
+	mailCtlr.getTrash = function(){
+		MailService.getTrash(
+			AuthenticationService.getUserId()
+		).then(function(data) {
+			mailCtlr.trash=data.emails;
+		});
+	};
 });

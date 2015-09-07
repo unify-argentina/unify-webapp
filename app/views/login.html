@@ -1,7 +1,7 @@
 <div class="container" ng-controller="LoginController">
+
 	<div class="sign-in-up" id="to-top">
-	
-	    <section class="sign-in-up-section">
+	    <section id="loginForm" class="sign-in-up-section">
 	      <div class="container">
 	        <div class="row">
 	          <div class="col-md-12">
@@ -12,34 +12,37 @@
 	        <section class="sign-in-up-content">
 		       
 		          <div class="row">
-		            <div class="col-md-12">
-		            	<h4 class="text-center">
-							<label>{{'logon_login' | translate}}</label>
-		            	</h4>        
+		            <div class="col-md-12 text-center no-padding">
+		            	<img src="resources/unify-logo.png" width="400"></img>
+		            	<div class="title-logon">
+							{{'logon_login' | translate}}
+		            	</div>        
 
 		            	<form name="loginForm" ng-submit="login()"
                           class="form-horizontal" role="form" novalidate>
 		               		<div class="form-group">
-			                  	<input class="form-control" ng-model="user.email" id="email" type='text' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}"/ required>
+			                  	<input class="form-control" ng-class="{'form-input':user.email, 'form-empty':!user.email}" ng-model="user.email" id="email" type='text' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}" required/>
 							</div>
 			                <div class="form-group">
-			                	<input id="pass" type='password' ng-model="user.password" tabindex="2" class="form-control" placeholder="{{'logon_pass_placeholder' | translate}}"/ required>
+			                	<input id="pass" type='password' ng-model="user.password" tabindex="2" class="form-control" ng-class="{'form-input':user.password, 'form-empty':!user.password}" placeholder="{{'logon_pass' | translate}}" required/>
 			                </div>
 				            <div class="row">
                                 <button type="submit" value="Submit"                                        
                                         ng-disabled="commentForm.$invalid"
                                         ng-click="commentForm.$setPristine()"
-                                        class="btn btn-primary btn-block">{{'logon_ingresar' | translate}}</button>
+                                        class="btn btn-unify-primary btn-block">{{'logon_ingresar' | translate}}</button>
                             </div>
 	                    </form>
 
 		                <section class="sign-in-up-links text-center">
-		 	    			<a href='#'>{{'logon_pass_forgot' | translate}}</a> 
-			                  <span class="sep">&ndash;</span> 
-			                  <a ui-sref="signUp">{{'logon_signUp' | translate}}</a>
+		 	    			<a href='#' class="dark-link">{{'logon_pass_forgot' | translate}}</a> 
+			                  <span class="dark-link">·</span> 
+			                  <a ui-sref="signUp" class="dark-link">{{'logon_signUp' | translate}}</a>
 		                  </p>
 		                </section>
 		                <div class="text-center">
+		                	<span class="unify-color font-18">También podes ingresar con tus redes sociales</span>
+		                	</p>
 		                    <a ng-click="authenticate('facebook')" class="btn btn-primary"><span class="fa fa-facebook"></span> {{'logon_facebook' | translate}}</a>
 		                    <a ng-click="authenticate('twitter')" class="btn btn-info"><span class="fa fa-twitter"></span> {{'logon_twitter' | translate}}</a>
 		                    <a  ng-click="authenticate('instagram')" class="btn btn-primary"><i class="fa fa-instagram"></i></span> {{'logon_instagram' | translate}}</a>
@@ -51,5 +54,17 @@
 	        </section>
 	        </div>
 		 </section>
+		<div class="ocean">
+		</div>
+		<div class="whoLink text-center row">
+			<a href="#whoPage" du-smooth-scroll duration="1000">¿Qué es Unify?</a>
+		</div>
 	</div>
+	<!--<div id="clouds">
+		<div class="cloud x1"></div>
+		<div class="cloud x2"></div>
+		<div class="cloud x3"></div>
+		<div class="cloud x4"></div>
+		<div class="cloud x5"></div>
+	</div>-->
 </div>
