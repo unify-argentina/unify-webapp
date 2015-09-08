@@ -18,7 +18,7 @@
 				<img src="resources/contact/stormtrooper.jpg" class="img-circle image-social" ng-if="!contactCtrl.contact.facebook.picture">
 				<label class="form-label">Nombre:</label>
 				<input class="form-control" ng-model="contactCtrl.contact.facebook.name"/>
-	       		<select class="form-control" ng-model="contactCtrl.contact.facebook" ng-options="friend.name for friend in contactCtrl.friends.facebook_friends.list | orderBy:'name'" size="10">
+	       		<select class="form-control" ng-model="contactCtrl.contact.facebook" ng-options="friend.name for friend in contactCtrl.friends.facebook_friends.list" size="10">
 	       			<option value="">-- Selecciona un amigo --</option>
 	       		</select>
 	       	</div>
@@ -27,7 +27,7 @@
 				<img src="resources/contact/stormtrooper.jpg" class="img-circle image-social" ng-if="!contactCtrl.contact.twitter.picture">
 				<label class="form-label">Nombre:</label>
 				<input class="form-control" ng-model="contactCtrl.contact.twitter.name"/>
-	       		<select class="form-control"  ng-model="contactCtrl.contact.twitter" ng-options="friend.name for friend in contactCtrl.friends.twitter.list | orderBy:'name'" size="10">
+	       		<select class="form-control"  ng-model="contactCtrl.contact.twitter" ng-options="friend.name for friend in contactCtrl.friends.twitter.list" size="10">
 	      			<option value="">-- Selecciona un amigo --</option>
 	      		</select>
 	      	</div>
@@ -36,7 +36,7 @@
 				<img src="resources/contact/stormtrooper.jpg" class="img-circle image-social" ng-if="!contactCtrl.contact.instagram.picture">
 				<label class="form-label">Nombre:</label>
 				<input class="form-control" ng-model="contactCtrl.contact.instagram.username"/>
-	       		<select class="form-control" ng-model="contactCtrl.contact.instagram" ng-options="friend.username for friend in contactCtrl.friends.instagram.list | orderBy:'name'" size="10">
+	       		<select class="form-control" ng-model="contactCtrl.contact.instagram" ng-options="friend.username for friend in contactCtrl.friends.instagram.list" size="10">
 	      			<option value="">-- Selecciona un amigo --</option>
 	      		</select>
 	      	</div>
