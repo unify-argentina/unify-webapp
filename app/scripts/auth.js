@@ -8,15 +8,14 @@ angular.module('unifyApp').config(function($authProvider, ENV) {
     $authProvider.facebook({
       clientId: '805638479520745',
       url: '/auth/facebook',
-      //scope: ['email', 'user_friends', 'user_likes']
-      scope: ['email', 'user_about_me','user_friends','user_likes','user_photos','user_posts','user_status','user_videos' ]
+      scope: ['email', 'user_about_me','user_friends','user_likes','user_photos','user_posts','user_status','user_videos']
     });
 
    
 $authProvider.google({
       clientId: '79996335280-gc0hh1efoo859u1lqaqct2v3u1larsrj.apps.googleusercontent.com',
       url: '/auth/google',
-      scope: ['https://mail.google.com/']
+      scope: ['profile', 'email', 'https://www.googleapis.com/auth/contacts.readonly', 'https://mail.google.com/', 'https://www.googleapis.com/auth/gmail.labels']
     });
 
    $authProvider.twitter({
