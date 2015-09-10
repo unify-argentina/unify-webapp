@@ -45,6 +45,9 @@ module.exports = function(config) {
       'app/lib/bootstrap/dist/js/bootstrap.js',
       'app/lib/ngvideo/dist/ng-video.js',
       'app/lib/angular-scroll/angular-scroll.js',
+      'app/lib/angular-utf8-base64/angular-utf8-base64.js',
+      'app/lib/moment/moment.js',
+      'app/lib/angular-moment/angular-moment.js',
       'app/lib/angular-scenario/angular-scenario.js',
       // endbower
       "app/scripts/**/*.js",

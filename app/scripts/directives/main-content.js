@@ -10,7 +10,7 @@ unifyApp.directive('uwMainContent', function($auth) {
             if($auth.isAuthenticated()){
                 return 'views/circle.html';
             }
-            return 'views/comingSoon.html';
+            return 'views/home.html';
         }
     };    
 });

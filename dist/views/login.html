@@ -1,55 +1,49 @@
-<div class="container" ng-controller="LoginController">
-	<div class="sign-in-up" id="to-top">
-	
-	    <section class="sign-in-up-section">
-	      <div class="container">
-	        <div class="row">
-	          <div class="col-md-12">
+ <section id="loginForm" class="sign-in-up-section">
+	      	<div class="container">
+		        <div class="row">
+					<div class="col-md-12">
+					</div>
+		        </div>
+		        <section class="sign-in-up-content">
+			        <div class="row">
+			            <div class="col-md-12 text-center no-padding">
+			            	<img src="resources/unify-logo.png"></img>
+			            	<div class="title-logon">
+								{{'logon_login' | translate}}
+			            	</div>        
 
-	          </div>
-	        </div>
-	
-	        <section class="sign-in-up-content">
-		       
-		          <div class="row">
-		            <div class="col-md-12">
-		            	<h4 class="text-center">
-							<label>{{'logon_login' | translate}}</label>
-		            	</h4>        
+			            	<form name="loginForm" ng-submit="lgnCtrl.login()"
+	                          class="form-horizontal" role="form" novalidate>
+			               		<div class="form-group">
+				                  	<input class="form-control" ng-class="{'form-input':lgnCtrl.user.email, 'form-empty':!lgnCtrl.user.email}" ng-model="lgnCtrl.user.email" id="email" type='email' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}" required/>
+								</div>
+				                <div class="form-group">
+				                	<input id="pass" type='password' ng-model="lgnCtrl.user.password" tabindex="2" class="form-control" ng-class="{'form-input':lgnCtrl.user.password, 'form-empty':!lgnCtrl.user.password}" placeholder="{{'logon_pass' | translate}}" required/>
+				                </div>
+					            <div class="row">
+	                                <button type="submit" value="Submit"                                        
+	                                        ng-disabled="loginForm.$invalid"
+	                                        ng-click="loginForm.$setPristine()"
+	                                        class="btn btn-unify-primary btn-block">{{'logon_ingresar' | translate}}</button>
+	                            </div>
+		                    </form>
 
-		            	<form name="loginForm" ng-submit="login()"
-                          class="form-horizontal" role="form" novalidate>
-		               		<div class="form-group">
-			                  	<input class="form-control" ng-model="user.email" id="email" type='text' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}"/ required>
-							</div>
-			                <div class="form-group">
-			                	<input id="pass" type='password' ng-model="user.password" tabindex="2" class="form-control" placeholder="{{'logon_pass_placeholder' | translate}}"/ required>
+			                <section class="sign-in-up-links text-center">
+			 	    			<a href='#' class="dark-link">{{'logon_pass_forgot' | translate}}</a> 
+				                  <span class="dark-link">·</span> 
+				                  <a ng-click="lgnCtrl.isLogin=false; lgnCtrl.isSignUp=true;" href="" class="dark-link">{{'logon_signUp' | translate}}</a>
+			                  </p>
+			                </section>
+			                <div class="text-center">
+			                	<span class="unify-color font-18">También podes ingresar con tus redes sociales</span>
+			                	</p>
+			                    <a ng-click="lgnCtrl.authenticate('facebook')" class="btn btn-primary"><span class="fa fa-facebook"></span> {{'logon_facebook' | translate}}</a>
+			                    <a ng-click="lgnCtrl.authenticate('twitter')" class="btn btn-info"><span class="fa fa-twitter"></span> {{'logon_twitter' | translate}}</a>
+			                    <a  ng-click="lgnCtrl.authenticate('instagram')" class="btn btn-primary"><i class="fa fa-instagram"></i></span> {{'logon_instagram' | translate}}</a>
+			                    <a ng-click="lgnCtrl.authenticate('google')" class="btn btn-danger"><i class="fa fa-google"></i></span> {{'logon_google' | translate}}</a>
 			                </div>
-				            <div class="row">
-                                <button type="submit" value="Submit"                                        
-                                        ng-disabled="commentForm.$invalid"
-                                        ng-click="commentForm.$setPristine()"
-                                        class="btn btn-primary btn-block">{{'logon_ingresar' | translate}}</button>
-                            </div>
-	                    </form>
-
-		                <section class="sign-in-up-links text-center">
-		 	    			<a href='#'>{{'logon_pass_forgot' | translate}}</a> 
-			                  <span class="sep">&ndash;</span> 
-			                  <a ui-sref="signUp">{{'logon_signUp' | translate}}</a>
-		                  </p>
-		                </section>
-		                <div class="text-center">
-		                    <a ng-click="authenticate('facebook')" class="btn btn-primary"><span class="fa fa-facebook"></span> {{'logon_facebook' | translate}}</a>
-		                    <a ng-click="authenticate('twitter')" class="btn btn-info"><span class="fa fa-twitter"></span> {{'logon_twitter' | translate}}</a>
-		                    <a  ng-click="authenticate('instagram')" class="btn btn-primary"><i class="fa fa-instagram"></i></span> {{'logon_instagram' | translate}}</a>
-		                    <a ng-click="authenticate('google')" class="btn btn-danger"><i class="fa fa-google"></i></span> {{'logon_google' | translate}}</a>
-		                </div>
-		            </div>
-		          </div>
-				</form>
-	        </section>
-	        </div>
-		 </section>
-	</div>
-</div>
+			          	</div>
+			        </div>
+			    </section>
+	     	</div>
+		</section>

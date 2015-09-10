@@ -1,9 +1,17 @@
 .sign-in-up{
-	height: 100vh;
+    height: 100vh;
+    min-height: 650px;
+    z-index: 5;
+    position: relative;
 	.whoLink{
-	    bottom: 0px;
+  		position:relative;
+	    bottom: -110px;
 	    left: 0px;
+	    z-index: 10;
 	    background-color: transparent;
+	}
+	.high-tide-link{
+		bottom: -33px;
 	}
 	img{
 		max-width: 100%;
@@ -21,7 +29,6 @@
 }
 
 .sign-in-up-content {
-	background: #fff;
 	border-radius: 4px;
 	margin-bottom: 15px;
 	padding: 15px;
@@ -45,36 +52,62 @@
 }
 
 #loginForm{
-  z-index: 10;
+	position: relative;
+	z-index: 10;
 }
 
 .ocean{
-  position:absolute;
-  width:100%;
-  min-height:100px;
-  bottom:0px;
-  left: 0px;
-  background-image: -webkit-gradient(
-  linear,
-  left bottom,
-  left top,
-  color-stop(0, $sea-bottom),
-  color-stop(0.50, $sea-top)
-  );
+	position:relative;
+	width:100%;
+	min-height: 100px;
+	bottom: -18px;
+	left: 0px;
+	background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, $sea-bottom),
+	color-stop(0.50, $sea-top)
+	);
 }
+
+.high-tide{
+	bottom:59px;
+}
+
 
 .wave{
-  background:#fff;
-  display:inline-block;
-  height:60%;
-  width:10px;
-  position:absolute;
-  -webkit-animation-name:             dostuff; 
-  -webkit-animation-duration:         3s; 
-  -webkit-animation-iteration-count:  infinite;
-  -webkit-transition-timing-function: ease-in-out;
+	background:#fff;
+	display:inline-block;
+	height:60%;
+	width:10px;
+	position:absolute;
+	-webkit-animation-name:             dostuff; 
+	-webkit-animation-duration:         3s; 
+	-webkit-animation-iteration-count:  infinite;
+	-webkit-transition-timing-function: ease-in-out;
 }
 
+.sea{
+	background: $sea-bottom;
+	height: 100vh;
+	width: 100%;
+	left: 0px;
+	min-height: 500px;
+	//background: -moz-linear-gradient(bottom, $sea-bottom, $sea-middle);
+	//background: -webkit-linear-gradient(bottom, $sea-bottom, $sea-middle);
+	//background: -o-linear-gradient(bottom, $sea-bottom, $sea-middle);
+	//background: linear-gradient(bottom, $sea-bottom, $sea-middle);
+
+	background: -moz-linear-gradient(bottom, $sea-deep-down, $sea-bottom);
+	background: -webkit-linear-gradient(bottom, $sea-deep-down, $sea-bottom);
+	background: -o-linear-gradient(bottom, $sea-deep-down, $sea-bottom);
+	background: linear-gradient(bottom, $sea-deep-down, $sea-bottom);
+	.whoPage{
+		margin-top: 0px;
+		min-height: 500px;
+	}
+}
 
 
 #clouds{
@@ -88,7 +121,7 @@
 /* Source for the clouds
 http://thecodeplayer.com/walkthrough/pure-css3-animated-clouds-background */
 .cloud {
-	width: 200px; height: 60px;
+	width: 200px; height: 50px;
 	background: #eee;
 	
 	border-radius: 200px;
@@ -115,7 +148,7 @@ http://thecodeplayer.com/walkthrough/pure-css3-animated-clouds-background */
 }
 
 .cloud:after {
-	width: 120px; height: 120px;
+	width: 120px; height: 110px;
 	top: -55px; left: auto; right: 15px;
 }
 

@@ -2,7 +2,11 @@
 
 unifyApp.controller("MainController", function ($translate, $auth, ENV, ProfileService, AuthenticationService) {
 	var mainController=this;
-
+	
+	mainController.logout = function(){
+		AuthenticationService.logout();
+	}
+	
 	if($auth.isAuthenticated()){
 		AuthenticationService.getFriends();
 		ProfileService.user.get({
@@ -21,8 +25,5 @@ unifyApp.controller("MainController", function ($translate, $auth, ENV, ProfileS
 	}
 
 	mainController.auth=$auth.isAuthenticated();
-
-	mainController.logout = function(){
-		AuthenticationService.logout();
-	}
+	
 });

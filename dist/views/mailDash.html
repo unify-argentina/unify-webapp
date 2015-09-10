@@ -1,11 +1,59 @@
-<div id="mailDash" class="well col-md-12" style="margin-top: 20px;" ng-controller="MailController as mailtCtrl">
-  	<uw-loader ng-if="!contactCtrl.contact"></uw-loader>
-	<div class="content col-md-12">
+<div id="mailDash" class="well col-md-12" style="margin-top: 20px;" ng-controller="MailController as mailCtlr">
+  <div class="content col-md-12" ng-hide="mailCtlr.viewMail">
 		<div class="col-md-2 well text-center word-break" style="margin-top: 20px;">
-			<a class="col-md-offset-1 col-md-10 btn btn-danger" style="margin-top: 5px;">Recibidos</a>
-			<a class="col-md-offset-1 col-md-10 btn btn-primary" style="margin-top: 5px;">Enviados</a>
-			<a class="col-md-offset-1 col-md-10 btn btn-success" style="margin-top: 5px;">Borradores</a>
-			<a class="col-md-offset-1 col-md-10 btn btn-info" style="margin-top: 5px;">Papelera</a>
+			<a ng-click="mailCtlr.getInbox();" class="col-md-offset-1 col-md-10 btn btn-danger" style="margin-top: 5px;">Recibidos</a>
+			<a ng-click="mailCtlr.getSent();" class="col-md-offset-1 col-md-10 btn btn-primary" style="margin-top: 5px;">Enviados</a>
+			<a ng-click="mailCtlr.getDraft();" class="col-md-offset-1 col-md-10 btn btn-success" style="margin-top: 5px;">Borradores</a>
+			<a ng-click="mailCtlr.getTrash();" class="col-md-offset-1 col-md-10 btn btn-info" style="margin-top: 5px;">Papelera</a>
+		</div>
+		<div class="col-md-10 well text-center word-break" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='inbox'">
+			<div class="list-group"  ng-if="mailCtlr.inbox.count > 0">
+					<a ng-click="mailCtlr.getMail(mail)" href="" class="list-group-item" ng-repeat="mail in mailCtlr.inbox.list">
+						{{mail.from}} - {{mail.subject}} - {{mail.date | amCalendar}}
+					</a>
+			</div>
+		</div>
+		<div class="col-md-10 well text-center word-break" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='sent'">
+			<div class="list-group"  ng-if="mailCtlr.sent.count > 0">
+					<a ng-click="mailCtlr.getMail(mail)" href="" class="list-group-item" ng-repeat="mail in mailCtlr.sent.list">
+						{{mail.to}} - {{mail.subject}} - {{mail.date | amCalendar}}
+					</a>
+			</div>
+		</div>
+		<div class="col-md-10 well text-center word-break" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='draft'">
+			<div class="list-group"  ng-if="mailCtlr.draft.count > 0">
+					<a ng-click="mailCtlr.getMail(mail)" href="" class="list-group-item" ng-repeat="mail in mailCtlr.draft.list">
+						{{mail.to}} - {{mail.subject}} - {{mail.date | amCalendar}}
+					</a>
+			</div>
+		</div>
+		<div class="col-md-10 well text-center word-break" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='trash'">
+			<div class="list-group"  ng-if="mailCtlr.trash.count > 0">
+					<a ng-click="mailCtlr.getMail(mail)" href="" class="list-group-item" ng-repeat="mail in mailCtlr.trash.list">
+						{{mail.from}} - {{mail.subject}} - {{mail.date | amCalendar}}
+					</a>
+			</div>
+		</div>
+	</div>
+	<div class="content col-md-12" ng-show="mailCtlr.viewMail">
+		<div class="col-md-2 well text-center" style="margin-top: 20px;">
+			<a ng-click="mailCtlr.viewMail=null" class="col-md-offset-1 col-md-10 btn btn-danger" style="margin-top: 5px;">Volver</a>
+			<span style="margin-top: 5px;" ng-show="mailCtlr.viewMail.from">
+				De: {{mailCtlr.viewMail.from}}
+			</span>
+			<span style="margin-top: 5px;" ng-show="mailCtlr.viewMail.to">
+				Para: {{mailCtlr.viewMail.to}}
+			</span>
+			<span style="margin-top: 5px;" ng-show="mailCtlr.viewMail.cc">
+				CC: {{mailCtlr.viewMail.cc}}
+			</span>
+			<span style="margin-top: 5px;" ng-show="mailCtlr.viewMail.cco">
+				CCO: {{mailCtlr.viewMail.cco}}
+			</span>
+		</div>
+		<div class="col-md-10 well text-center word-break">
+			<h3>{{mailCtlr.viewMail.subject}}</h3>
+			<span ng-bind-html="mailCtlr.mailHtml"></span>
 		</div>
 	</div>
 </div>

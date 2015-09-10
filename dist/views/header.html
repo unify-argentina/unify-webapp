@@ -1,23 +1,26 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top" ng-controller="HeaderController">
   <div class="container">
     <div class="navbar-header">
+      <div class="navbar-brand unifyLogo">
+        <canvas id="myCanvas" width="400" height="70"></canvas>
+        <img src="resources/header-logo.png" height="50">
+      </div>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand">UNIFY</a>
     </div>
-    <div id="navbar" class="navbar-collapse collapse text-center ">
+    <div id="navbar" class="navbar-collapse collapse text-center">
       <ul class="nav navbar-nav">
-        <li><a ui-sref="main"><i class="fa fa-home fa-2x"></i>Home</a></li>
-        <li><a ui-sref="emails"><i class="fa fa-envelope-o fa-2x"></i>Email</a></li>
+        <li><a ui-sref="main"><i class="fa fa-home fa-2x"></i><br>Inicio</a></li>
+        <li><a ui-sref="emails"><i class="fa fa-envelope-o fa-2x"></i><br>Mail</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a ui-sref="profile">{{mainController.user}}</a></li>
         <li><a href="" ng-click="mainController.logout();">Cerrar Sesión</a></li>
-      </ul>
+      
     </div>
   </div>
 </nav>
