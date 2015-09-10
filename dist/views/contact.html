@@ -17,7 +17,7 @@
 				<img ng-src="{{contactCtrl.contact.facebook.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.facebook.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.facebook.picture;contactCtrl.contact.name=contactCtrl.contact.facebook.name;">
 				<img src="resources/contact/stormtrooper.jpg" class="img-circle image-social" ng-if="!contactCtrl.contact.facebook.picture">
 				<label class="form-label">Nombre:</label>
-				<input class="form-control" ng-model="contactCtrl.contact.facebook.name"/>
+				<input class="form-control" ng-model="contactCtrl.contact.facebook.name"/ readonly="true">
 	       		<select class="form-control" ng-model="contactCtrl.contact.facebook" ng-options="friend.name for friend in contactCtrl.friends.facebook_friends.list" size="10">
 	       			<option value="">-- Selecciona un amigo --</option>
 	       		</select>
@@ -26,7 +26,7 @@
 				<img ng-src="{{contactCtrl.contact.twitter.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.twitter.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.twitter.picture;contactCtrl.contact.name=contactCtrl.contact.twitter.name;">
 				<img src="resources/contact/stormtrooper.jpg" class="img-circle image-social" ng-if="!contactCtrl.contact.twitter.picture">
 				<label class="form-label">Nombre:</label>
-				<input class="form-control" ng-model="contactCtrl.contact.twitter.name"/>
+				<input class="form-control" ng-model="contactCtrl.contact.twitter.name"/ readonly="true">
 	       		<select class="form-control"  ng-model="contactCtrl.contact.twitter" ng-options="friend.name for friend in contactCtrl.friends.twitter.list" size="10">
 	      			<option value="">-- Selecciona un amigo --</option>
 	      		</select>
@@ -35,7 +35,7 @@
 				<img ng-src="{{contactCtrl.contact.instagram.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.instagram.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.instagram.picture;contactCtrl.contact.name=contactCtrl.contact.instagram.name;">
 				<img src="resources/contact/stormtrooper.jpg" class="img-circle image-social" ng-if="!contactCtrl.contact.instagram.picture">
 				<label class="form-label">Nombre:</label>
-				<input class="form-control" ng-model="contactCtrl.contact.instagram.username"/>
+				<input class="form-control" ng-model="contactCtrl.contact.instagram.username"/ readonly="true">
 	       		<select class="form-control" ng-model="contactCtrl.contact.instagram" ng-options="friend.username for friend in contactCtrl.friends.instagram.list" size="10">
 	      			<option value="">-- Selecciona un amigo --</option>
 	      		</select>
