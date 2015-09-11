@@ -64,21 +64,21 @@
        		<div class="col-md-3 well text-center" style="margin-top: 20px;">
 				<a ng-click="mailCtlr.writeMail=null" class="col-md-offset-1 col-md-10 btn btn-danger" style="margin-top: 5px;">Volver</a>
 				<div class="form-group">
-	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.to, 'form-empty':!mailCtlr.writeMail.to}" ng-model="mailCtlr.writeMail.to" id="to" type='text' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}" style="margin-top: 5px;" required/>
+	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.to, 'form-empty':!mailCtlr.writeMail.to}" ng-model="mailCtlr.writeMail.to" id="to" type='text' tabindex="1" placeholder="Ingresá a quien le vas a escribir" style="margin-top: 5px;" required/>
 				</div>
 				<div class="form-group">
-	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.cc, 'form-empty':!mailCtlr.writeMail.cc}" ng-model="mailCtlr.writeMail.cc" id="cc" type='text' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}"/>
+	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.cc, 'form-empty':!mailCtlr.writeMail.cc}" ng-model="mailCtlr.writeMail.cc" id="cc" type='text' tabindex="1" placeholder="Ingresá a quien queres copiar"/>
 				</div>
 				<div class="form-group">
-	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.cco, 'form-empty':!mailCtlr.writeMail.cco}" ng-model="mailCtlr.writeMail.cco" id="cco" type='text' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}"/>
+	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.cco, 'form-empty':!mailCtlr.writeMail.cco}" ng-model="mailCtlr.writeMail.cco" id="cco" type='text' tabindex="1" placeholder="Ingresá a quien queres copiar de forma oculta"/>
 				</div>
 			</div>
 			<div class="col-md-9 well text-center word-break"  style="margin-top: 20px;">
 				<div class="form-group">
-	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.subject, 'form-empty':!mailCtlr.writeMail.subject}" ng-model="mailCtlr.writeMail.subject" id="subject" type='text' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}" required/>
+	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.subject, 'form-empty':!mailCtlr.writeMail.subject}" ng-model="mailCtlr.writeMail.subject" id="subject" type='text' tabindex="1" placeholder="Escribí el asunto del mail" required/>
 				</div>
 				<div class="form-group">
-	              	<textarea class="form-control form-input" ng-model="mailCtlr.writeMail.text" id="text" type='text' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}" form="newMailForm" required/>
+	              	<textarea class="form-control form-input" ng-model="mailCtlr.writeMail.text" id="text" type='text' tabindex="1" placeholder="Escribí el tu mail aquí" form="newMailForm" required/>
 	              	</textarea>
 				</div>
 				 <div class="row">
