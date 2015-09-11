@@ -1,7 +1,8 @@
 <div id="mailDash" class="well col-md-12" style="margin-top: 20px;" ng-controller="MailController as mailCtlr">
  	<uw-message ng-model="mailCtlr.errors.google.msg" danger></uw-message>
-  <div class="content col-md-12" ng-hide="mailCtlr.viewMail">
+  <div class="content col-md-12" ng-hide="mailCtlr.viewMail || mailCtlr.writeMail">
 		<div class="col-md-2 well text-center word-break" style="margin-top: 20px;">
+			<a ng-click="mailCtlr.writeMail={};" class="col-md-offset-1 col-md-10 btn btn-info" style="margin-top: 5px;">Nuevo Email</a>
 			<a ng-click="mailCtlr.getInbox();" class="col-md-offset-1 col-md-10 btn btn-danger" style="margin-top: 5px;">Recibidos</a>
 			<a ng-click="mailCtlr.getSent();" class="col-md-offset-1 col-md-10 btn btn-primary" style="margin-top: 5px;">Enviados</a>
 			<a ng-click="mailCtlr.getDraft();" class="col-md-offset-1 col-md-10 btn btn-success" style="margin-top: 5px;">Borradores</a>
@@ -56,5 +57,38 @@
 			<h3>{{mailCtlr.viewMail.subject}}</h3>
 			<span ng-bind-html="mailCtlr.mailHtml"></span>
 		</div>
+	</div>
+	<div class="content col-md-12" ng-show="mailCtlr.writeMail">
+		<form name="newMailForm" ng-submit="mailCtlr.sendMail()"
+          	class="form-horizontal" role="form" novalidate>
+       		<div class="col-md-3 well text-center" style="margin-top: 20px;">
+				<a ng-click="mailCtlr.writeMail=null" class="col-md-offset-1 col-md-10 btn btn-danger" style="margin-top: 5px;">Volver</a>
+				<div class="form-group">
+	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.to, 'form-empty':!mailCtlr.writeMail.to}" ng-model="mailCtlr.writeMail.to" id="to" type='text' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}" style="margin-top: 5px;" required/>
+				</div>
+				<div class="form-group">
+	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.cc, 'form-empty':!mailCtlr.writeMail.cc}" ng-model="mailCtlr.writeMail.cc" id="cc" type='text' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}"/>
+				</div>
+				<div class="form-group">
+	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.cco, 'form-empty':!mailCtlr.writeMail.cco}" ng-model="mailCtlr.writeMail.cco" id="cco" type='text' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}"/>
+				</div>
+			</div>
+			<div class="col-md-9 well text-center word-break"  style="margin-top: 20px;">
+				<div class="form-group">
+	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.subject, 'form-empty':!mailCtlr.writeMail.subject}" ng-model="mailCtlr.writeMail.subject" id="subject" type='text' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}" required/>
+				</div>
+				<div class="form-group">
+	              	<textarea class="form-control form-input" ng-model="mailCtlr.writeMail.text" id="text" type='text' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}" form="newMailForm" required/>
+	              	</textarea>
+				</div>
+				 <div class="row">
+	                <button type="submit" value="Submit"                                        
+	                        ng-disabled="newMailForm.$invalid"
+	                        ng-click="newMailForm.$setPristine()"
+	                        class="btn btn-unify-primary btn-block">Enviar Mail</button>
+	            </div>
+			</div>
+        </form>
+		
 	</div>
 </div>

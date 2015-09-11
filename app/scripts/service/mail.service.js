@@ -42,11 +42,30 @@ unifyApp.factory('MailService', function($http, ENV) {
 			return promise;
 		};
 		
+		var sendMail = function(mail){
+			 var promise = $http.post(ENV.apiEndPoint + '/api/user/' + mail.user_id + '/email', 
+				{
+					user_id : mail.user_id,
+					to	: mail.to,
+					cc	: mail.cc,
+					cco	: mail.cco,
+					subject	: mail.subject,
+					text : mail.text
+				}
+			).then(function(response) {	
+        		return response.data;
+			}, function(response) {
+	        	console.log("ERROR: "+response.data ? response.data.errors : response);
+				return response.data;
+			});
+			return promise;
+		};
 
 	return{
-		getInbox : getInbox,
-		getDraft : getDraft,
-		getSent : getSent,
-		getTrash : getTrash
+		getInbox	: getInbox,
+		getDraft	: getDraft,
+		getSent		: getSent,
+		getTrash	: getTrash,
+		sendMail	: sendMail
 	}
 });
