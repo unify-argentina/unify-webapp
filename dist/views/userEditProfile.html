@@ -1,7 +1,7 @@
 <div id="profile" class="container" ng-controller="ProfileController as profileCtlr">
 	<uw-loader ng-if="!profileCtlr.user"></uw-loader>
 	<div class="content col-md-12" ng-if="profileCtlr.user">
-		<div class="col-md-12 well text-center" style="margin-top: 20px;">
+		<div class="col-md-12 text-center well" style="margin-top: 20px;">
 			<div class="col-md-6">
 				{{'profile_name' | translate}} : 
 				{{profileCtlr.user.name}}
@@ -12,36 +12,36 @@
 			</div>
 			<a class="btn btn-primary" ng-click="profileCtlr.edit();" ng-hide="editProfile">Editar</a>
 		</div>
-		<div class="col-md-12 well" ng-hide="profileCtlr.editProfile">
+		<div class="col-md-12" ng-hide="profileCtlr.editProfile">
 			<div class="col-md-6">
-				<div class="panel panel-primary">
-			    	<div class="panel-heading">
-			        	<h3 class="panel-title">{{'profile_facebook' | translate}}</h3>
+				<div class="social-add-panel font-thin social-add-panel-left">
+			    	<div class="">
+			        	<span class="">{{'profile_facebook' | translate}}</span>
 			      	</div>
-			      	<div class="panel-body" ng-if="profileCtlr.user.facebook">
+			      	<div class="" ng-if="profileCtlr.user.facebook">
 				        <div class="col-md-12">
 							<img ng-src="{{profileCtlr.user.facebook.picture}}" class="img-circle image-profile">
 						</div>
-						<div class="col-md-12 text-center">
+						<div class="col-md-12 text-center ">
 							<b>{{profileCtlr.user.facebook.display_name}}</b><br>
 							{{profileCtlr.user.facebook.email}}<br>
 							<a ng-click="profileCtlr.unlink('facebook')" class="btn btn-primary" style="margin-top: 5px;"><span class="fa fa-facebook"></span> {{'profile_unlink' | translate}}</a>
 						</div>
 			      	</div>
-			      	<div class="panel-body" ng-if="!profileCtlr.user.facebook">
+			      	<div class="" ng-if="!profileCtlr.user.facebook">
 						<div class="col-md-12 text-center">
-							<h3>{{'profile_notlink' | translate}}</h3>
+							<span>{{'profile_notlink' | translate}}</span>
 							<a ng-click="profileCtlr.authenticate('facebook')" class="btn btn-primary"><span class="fa fa-facebook"></span> {{'profile_link' | translate}}</a>
 						</div>
 			  		</div>	
 				</div>
 			</div>
 			<div class="col-md-6" >
-				<div class="panel panel-info">
-			    	<div class="panel-heading">
-			        	<h3 class="panel-title">{{'profile_twitter' | translate}}</h3>
+				<div class="social-add-panel font-thin">
+			    	<div class="">
+			        	<span class="">{{'profile_twitter' | translate}}</span>
 			      	</div>
-			      	<div class="panel-body" ng-if="profileCtlr.user.twitter">
+			      	<div class="" ng-if="profileCtlr.user.twitter">
 						<div class="col-md-12">
 							<img ng-src="{{profileCtlr.user.twitter.picture}}" class="img-circle image-profile">
 						</div>
@@ -51,20 +51,20 @@
 							<a ng-click="profileCtlr.unlink('twitter')" class="btn btn-info" style="margin-top: 5px;"><span class="fa fa-twitter"></span> {{'profile_unlink' | translate}}</a>
 						</div>
 		  		  	</div>	
-			    	<div class="panel-body"ng-if="!profileCtlr.user.twitter">
+			    	<div class="" ng-if="!profileCtlr.user.twitter">
 						<div class="col-md-12 text-center">
-							<h3>{{'profile_notlink' | translate}}</h3>
+							<span>{{'profile_notlink' | translate}}</span>
 							<a ng-click="profileCtlr.authenticate('twitter')" class="btn btn-info"><span class="fa fa-twitter"></span> {{'profile_link' | translate}}</a>
 						</div>
 			  		</div>	
 				</div>
 			</div>
 			<div class="col-md-6">
-				<div class="panel panel-primary">
-			    	<div class="panel-heading">
-			        	<h3 class="panel-title">{{'profile_instagram' | translate}}</h3>
+				<div class="social-add-panel font-thin social-add-panel-left">
+			    	<div class="">
+			        	<span class="">{{'profile_instagram' | translate}}</span>
 			      	</div>
-			      	<div class="panel-body" ng-if="profileCtlr.user.instagram">
+			      	<div class="" ng-if="profileCtlr.user.instagram">
 						<div class="col-md-12">
 							<img ng-src="{{profileCtlr.user.instagram.picture}}" class="img-circle image-profile">
 						</div>
@@ -74,20 +74,20 @@
 							<a  ng-click="profileCtlr.unlink('instagram')" class="btn btn-primary" style="margin-top: 5px;"><i class="fa fa-instagram"></i></span> {{'profile_unlink' | translate}}</a>
 						</div>
 			  		</div>	
-			      	<div class="panel-body" ng-if="!profileCtlr.user.instagram">
+			      	<div class="" ng-if="!profileCtlr.user.instagram">
 						<div class="col-md-12 text-center">
-							<h3>{{'profile_notlink' | translate}}</h3>
+							<span>{{'profile_notlink' | translate}}</span>
 							<a  ng-click="profileCtlr.authenticate('instagram')" class="btn btn-primary"><i class="fa fa-instagram"></i></span> {{'profile_link' | translate}}</a>
 						</div>
 			  		</div>	
 				</div>
 			</div>
 			<div class="col-md-6">
-				<div class="panel panel-danger">
-			    	<div class="panel-heading">
-			        	<h3 class="panel-title">{{'profile_google' | translate}}</h3>
+				<div class="social-add-panel font-thin">
+			    	<div class="">
+			        	<span class="">{{'profile_google' | translate}}</span>
 			      	</div>
-			      	<div class="panel-body" ng-if="profileCtlr.user.google">
+			      	<div class="" ng-if="profileCtlr.user.google">
 						<div class="col-md-12">
 							<img ng-src="{{profileCtlr.user.google.picture}}" class="img-circle image-profile">
 						</div>
@@ -97,9 +97,9 @@
 				            <a ng-click="profileCtlr.unlink('google')" class="btn btn-danger" style="margin-top: 5px;"><i class="fa fa-google"></i></span> {{'profile_unlink' | translate}}</a>
 						</div>
 					</div>
-			      	<div class="panel-body" ng-if="!profileCtlr.user.google">
+			      	<div class="" ng-if="!profileCtlr.user.google">
 						<div class="col-md-12 text-center">
-							<h3>{{'profile_notlink' | translate}}</h3>
+							<span>{{'profile_notlink' | translate}}</span>
 							<a ng-click="profileCtlr.authenticate('google')" class="btn btn-danger"><i class="fa fa-google"></i></span> {{'profile_link' | translate}}</a>
 						</div>
 			  		</div>	
