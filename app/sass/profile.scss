@@ -8,3 +8,24 @@
     width:  100px;
     margin: 0 auto;
 }
+
+.social-add-panel{
+	border: 2px solid #579f9b;
+	border-radius: 25px 0px;
+	height: 250px;
+	width: 250px;
+//    margin: auto;
+}
+.social-add-panel-left{
+//	float: right;
+}
+
+@media (max-width: 768px) {
+	.social-add-panel-left{
+//   		margin: auto;
+	}
+}
+@media (max-width: 992px) {
+}
+@media (max-width: 1200px) {
+}

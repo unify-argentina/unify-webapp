@@ -1,4 +1,5 @@
 <div id="mailDash" class="well col-md-12" style="margin-top: 20px;" ng-controller="MailController as mailCtlr">
+ 	<uw-message ng-model="mailCtlr.errors.google.msg" danger></uw-message>
   <div class="content col-md-12" ng-hide="mailCtlr.viewMail">
 		<div class="col-md-2 well text-center word-break" style="margin-top: 20px;">
 			<a ng-click="mailCtlr.getInbox();" class="col-md-offset-1 col-md-10 btn btn-danger" style="margin-top: 5px;">Recibidos</a>

@@ -2,12 +2,13 @@
 unifyApp.factory('MailService', function($http, ENV) {
 
 		var getInbox = function(user_id){
-			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/email/inbox')
-			 .then(function(response) {	
+			var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/email/inbox')
+			.then(function(response) {	
+	        	console.log("ERROR: "+response.data ? response.data.errors : response);
         		return response.data;
 			}, function(response) {
-	        	console.log("ERROR: "+response.data ? response.data.errors : response);
-			});	
+				return response.data;
+			});
 			return promise;
 		};
 
@@ -15,9 +16,7 @@ unifyApp.factory('MailService', function($http, ENV) {
 			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/email/draft')
 			 .then(function(response) {	
         		return response.data;
-			}, function(response) {
-	        	console.log("ERROR: "+response.data ? response.data.errors : response);
-			});	
+			});
 			return promise;
 		};
 		
@@ -27,7 +26,8 @@ unifyApp.factory('MailService', function($http, ENV) {
         		return response.data;
 			}, function(response) {
 	        	console.log("ERROR: "+response.data ? response.data.errors : response);
-			});	
+				return response.data;
+			});
 			return promise;
 		};
 		
@@ -37,7 +37,8 @@ unifyApp.factory('MailService', function($http, ENV) {
         		return response.data;
 			}, function(response) {
 	        	console.log("ERROR: "+response.data ? response.data.errors : response);
-			});	
+				return response.data;
+			});
 			return promise;
 		};
 		

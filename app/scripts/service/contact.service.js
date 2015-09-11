@@ -26,8 +26,9 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 			).then(function(response) {	
         		return response.data;
 			}, function(response) {
-	        	console.log("ERROR: "+response.data ? response.data.message : response);
-			});	
+	        	console.log("ERROR: "+response.data ? response.data.errors : response);
+				return response.data;
+			});
 			return promise;
 		};
 
@@ -49,8 +50,9 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 			).then(function(response) {	
         		return response.data;
 			}, function(response) {
-	        	console.log("ERROR: "+response.data ? response.data.message : response);
-			});	
+	        	console.log("ERROR: "+response.data ? response.data.errors : response);
+				return response.data;
+			});
 			return promise;
 		};
 
@@ -59,8 +61,9 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 			 .then(function(response) {	
         		return response.data;
 			}, function(response) {
-	        	console.log("ERROR: "+response.data ? response.data.message : response);
-			});	
+	        console.log("ERROR: "+response.data ? response.data.errors : response);
+				return response.data;
+			});
 			return promise;
 		};
 

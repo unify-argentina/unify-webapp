@@ -39,7 +39,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 
     var signup = function(user) {
 		console.log(user.name);
-		$auth.signup({
+		var promise = $auth.signup({
 			name: user.name,
 			email: user.email,
 			password: user.password,
@@ -52,12 +52,13 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 			$window.location.href = "/";
 	      })
 		.catch(function(response) {
-	        console.log(response.data ? response.data.message : response);
+			return response.data;
 		});
+		return promise;
     };
 
     var login = function(user) {
-	    $auth.login({ 
+	    var promise = $auth.login({ 
 	      email: user.email, 
 	      password: user.password 
 	    }).then(function(response) {
@@ -68,22 +69,25 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 			$window.location.href = "/";
 		})
 		.catch(function(response) {
-			console.log(response.data ? response.data.message : response);
+			return response.data;
 		});
+		return promise;
 	  };
 
 	var authenticate = function(provider) {
-	    $auth.authenticate(provider)
-	      .then(function(response) {
+	    var promise = $auth.authenticate(provider)
+		.then(function(response) {
 			setUserId(response.data.user._id);
 			setMainCircleId(response.data.user.main_circle._id);
-	        localStorage.setItem('response', JSON.stringify(response));
-	        console.log('You have successfully logged in: '+response.data.token); 
+			localStorage.setItem('response', JSON.stringify(response));
+			console.log('You have successfully logged in: '+response.data.token); 
 			$window.location.href = "/";
-	      })
-	      .catch(function(response) {
-	        console.log(response.data ? response.data.message : response);
-	      });
+		})
+	    .catch(function(response) {
+	        console.log("ERROR: "+response.data ? response.data.errors : response);
+			return response.data;
+		});
+		return promise;
 	  };
 
 	var unlink  = function(provider) {
@@ -113,7 +117,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 	    	friends=response.data.friends;
     		return response.data.friends;
 		}, function(response) {
-        	console.log("ERROR: "+response.data ? response.data.message : response);
+			return response.data;
 		});	
 		return promise;
 	};

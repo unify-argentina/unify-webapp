@@ -8,7 +8,11 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 			MailService.getInbox(
 				AuthenticationService.getUserId()
 			).then(function(data) {
-				mailCtlr.inbox=data.emails;
+				if(data.errors!={}){
+					mailCtlr.inbox=data.emails;
+				}else{
+					mailCtlr.errors=data.errors;
+				}
 				mailCtlr.viewList="inbox";
 			});
 		}else{
@@ -31,7 +35,11 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 			MailService.getDraft(
 				AuthenticationService.getUserId()
 			).then(function(data) {
-				mailCtlr.draft=data.emails;
+				if(data.errors!={}){
+					mailCtlr.draft=data.emails;
+				}else{
+					mailCtlr.errors=data.errors;
+				}
 				mailCtlr.viewList="draft";
 			});
 		}else{
@@ -43,7 +51,11 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 			MailService.getSent(
 				AuthenticationService.getUserId()
 			).then(function(data) {
-				mailCtlr.sent=data.emails;
+				if(data.errors!={}){
+					mailCtlr.sent=data.emails;
+				}else{
+					mailCtlr.errors=data.errors;
+				}
 				mailCtlr.viewList="sent";
 			});
 		}else{
@@ -55,7 +67,11 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 			MailService.getTrash(
 				AuthenticationService.getUserId()
 			).then(function(data) {
-				mailCtlr.trash=data.emails;
+				if(data.errors!={}){
+					mailCtlr.trash=data.emails;
+				}else{
+					mailCtlr.errors=data.errors;
+				}
 				mailCtlr.viewList="trash";
 			});
 		}else{

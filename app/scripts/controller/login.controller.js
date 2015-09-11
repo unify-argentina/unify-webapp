@@ -5,11 +5,17 @@ unifyApp.controller("LoginController", function ($scope, $auth, $window, $docume
   	var lgnCtrl = this;
 
 	lgnCtrl.login = function() {
-		AuthenticationService.login(lgnCtrl.user);
+		AuthenticationService.login(lgnCtrl.user)
+		.then(function(response) {
+			lgnCtrl.errors=response.errors;
+		});
 	};
 
 	lgnCtrl.authenticate = function(provider) {
-		AuthenticationService.authenticate(provider);
+		AuthenticationService.authenticate(provider)
+		.then(function(response) {
+			lgnCtrl.errors=response.errors;
+		});
 	};
 
 	lgnCtrl.toTheTop = function() {
@@ -18,7 +24,10 @@ unifyApp.controller("LoginController", function ($scope, $auth, $window, $docume
 	}
   	
   	lgnCtrl.signup = function() {
-      AuthenticationService.signup(lgnCtrl.newuser);
+    	AuthenticationService.signup(lgnCtrl.newuser)
+		.then(function(response) {
+			lgnCtrl.errors=response.errors;
+		});
     };
 
     lgnCtrl.isLogin=true; lgnCtrl.isSignUp=false;

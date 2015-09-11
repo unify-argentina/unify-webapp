@@ -1,4 +1,5 @@
 <div class="" ng-controller="LoginController as lgnCtrl">
+ 	<uw-message ng-model="lgnCtrl.errors[0].msg" danger></uw-message>
 	<div class="sign-in-up" id="to-top">
 	    <div ng-include="'views/login.html'" ng-show="lgnCtrl.isLogin"></div>
 	    <div ng-include="'views/signUp.html'" ng-show="lgnCtrl.isSignUp"></div>
