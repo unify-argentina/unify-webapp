@@ -15,7 +15,10 @@ angular.module('unifyApp').config(function($authProvider, ENV) {
 $authProvider.google({
       clientId: '79996335280-gc0hh1efoo859u1lqaqct2v3u1larsrj.apps.googleusercontent.com',
       url: '/auth/google',
-      scope: ['profile', 'email', 'https://www.googleapis.com/auth/contacts.readonly', 'https://mail.google.com/', 'https://www.googleapis.com/auth/gmail.labels']
+      optionalUrlParams: ['access_type', 'approval_prompt'],
+      accessType: 'offline',
+      approvalPromt: 'force',
+      scope: ['profile', 'email', 'https://www.googleapis.com/auth/contacts.readonly', 'https://mail.google.com/', 'https://www.googleapis.com/auth/gmail.labels', 'https://www.googleapis.com/auth/gmail.compose']
     });
 
    $authProvider.twitter({
