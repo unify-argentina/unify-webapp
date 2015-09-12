@@ -21,7 +21,7 @@ unifyApp.controller("MainController", function ($translate, $auth, ENV, ProfileS
 					mainController.user="Usuario Unify";
 				}
 			}
-			mainController.user.gotMail=(user.google.email!=null);
+			mainController.email=(response.user.google!=null?response.user.google.email:null);
 		});
 	}
 

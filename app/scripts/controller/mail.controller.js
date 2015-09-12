@@ -81,4 +81,44 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 			mailCtlr.writeMail="";
 		});
 	}
+
+	mailCtlr.answerMail = function(mail){
+		var from = mail.from.match(/<(.*?)>/g).map(function(val){
+			console.log("VAL:"+val);
+		   return val.replace(/</g,'').replace(/>/g,'');
+		});
+		mailCtlr.viewMail=null;
+		mailCtlr.writeMail={};
+		mailCtlr.writeMail.to=from.toString();
+		mailCtlr.writeMail.subject="RE: "+mail.subject;
+	}
+
+	mailCtlr.answerAllMail = function(mail, myAddress){
+		mailCtlr.viewMail=null;
+		mailCtlr.writeMail={};
+		
+		var from = mail.from.match(/<(.*?)>/g).map(function(val){
+			console.log("VAL:"+val);
+		   return val.replace(/</g,'').replace(/>/g,'');
+		});
+		mailCtlr.writeMail.to=from.toString();
+		
+		if(mail.cc!=[""]){
+			var cc = mail.cc.toString().match(/<(.*?)>/g).map(function(val){
+				console.log("VAL:"+val);
+			   return val.replace(/</g,'').replace(/>/g,'');
+			});
+			var to = mail.to.toString().match(/<(.*?)>/g).map(function(val){
+				console.log("VAL:"+val);
+			   return val.replace(/</g,'').replace(/>/g,'');
+			});
+			cc=to.concat(cc);
+			_.remove(cc, function(mail) {
+				return mail == myAddress;
+			});
+			mailCtlr.writeMail.cc=cc.toString();
+		}
+		mailCtlr.writeMail.subject="RE: "+mail.subject;
+	}
+	mailCtlr.getInbox();
 });
