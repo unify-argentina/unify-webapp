@@ -38,22 +38,25 @@
 		</div>
 	</div>
 	<div class="content col-md-12" ng-show="mailCtlr.viewMail">
-		<div class="col-md-2 well text-center" style="margin-top: 20px;">
-			<a ng-click="mailCtlr.viewMail=null" class="col-md-offset-1 col-md-10 btn btn-danger" style="margin-top: 5px;">Volver</a>
+		<div class="col-md-3 well text-center" style="margin-top: 20px;">
+			<a ng-click="mailCtlr.viewMail=null" class="col-md-offset-2 col-md-8 btn btn-danger" style="margin-top: 5px;">Volver</a>
+			<a ng-click="mailCtlr.answerMail(mailCtlr.viewMail);" class="col-md-offset-2 col-md-8 btn btn-danger" style="margin-top: 5px;">Responder</a>
+			<a ng-click="mailCtlr.answerAllMail(mailCtlr.viewMail, mainController.email);" class="col-md-offset-2 col-md-8 btn btn-danger" style="margin-top: 5px;">Responder a todos</a>
+			<div class="clearfix"></div>
 			<span style="margin-top: 5px;" ng-show="mailCtlr.viewMail.from">
 				De: {{mailCtlr.viewMail.from}}
-			</span>
+			</span><br>
 			<span style="margin-top: 5px;" ng-show="mailCtlr.viewMail.to">
 				Para: {{mailCtlr.viewMail.to}}
-			</span>
+			</span><br>
 			<span style="margin-top: 5px;" ng-show="mailCtlr.viewMail.cc">
 				CC: {{mailCtlr.viewMail.cc}}
-			</span>
+			</span><br>
 			<span style="margin-top: 5px;" ng-show="mailCtlr.viewMail.cco">
 				CCO: {{mailCtlr.viewMail.cco}}
 			</span>
 		</div>
-		<div class="col-md-10 well text-center word-break">
+		<div class="col-md-9 well text-center word-break"  style="margin-top: 20px;">
 			<h3>{{mailCtlr.viewMail.subject}}</h3>
 			<span ng-bind-html="mailCtlr.mailHtml"></span>
 		</div>
