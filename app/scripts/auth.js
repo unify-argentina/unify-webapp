@@ -22,7 +22,8 @@ $authProvider.google({
     });
 
    $authProvider.twitter({
-      url: '/auth/twitter'
+      url: '/auth/twitter',
+      redirectUri: window.location.origin+'/#/profile/edit'
     });
 
     $authProvider.oauth2({

@@ -12,99 +12,148 @@
 			</div>
 			<a class="btn btn-primary" ng-click="profileCtlr.edit();" ng-hide="editProfile">Editar</a>
 		</div>
-		<div class="col-md-12" ng-hide="profileCtlr.editProfile">
-			<div class="col-md-6">
-				<div class="social-add-panel font-thin social-add-panel-left">
-			    	<div class="">
+		<div class="col-xs-12 col-sm-12 col-md-12" ng-hide="profileCtlr.editProfile">
+			<div class="col-xs-12 col-sm-12 col-md-6">
+				<div class="social-add-panel font-thin col-md-6 col-md-offset-6 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1"	ng-class="{'social-add-panel-linked': profileCtlr.user.facebook}">
+			    	<div class="col-md-10 col-md-offset-1 title-media">
 			        	<span class="">{{'profile_facebook' | translate}}</span>
 			      	</div>
-			      	<div class="" ng-if="profileCtlr.user.facebook">
-				        <div class="col-md-12">
+			      	<div class="icon-media">
+			      		<img ng-src="resources/facebook.png" height="20px">
+			      	</div>
+			      	<div class="icon-unify">
+			      		<img ng-src="resources/pulpix.png" height="30px">
+			      	</div>
+			      	<div class="col-md-12 col-sm-12 col-xs-12 social-data text-center" ng-if="profileCtlr.user.facebook">
+				        <div class="col-md-12 col-sm-12 col-xs-12">
 							<img ng-src="{{profileCtlr.user.facebook.picture}}" class="img-circle image-profile">
 						</div>
-						<div class="col-md-12 text-center ">
-							<b>{{profileCtlr.user.facebook.display_name}}</b><br>
-							{{profileCtlr.user.facebook.email}}<br>
-							<a ng-click="profileCtlr.unlink('facebook')" class="btn btn-primary" style="margin-top: 5px;"><span class="fa fa-facebook"></span> {{'profile_unlink' | translate}}</a>
-						</div>
+						<div class="username">
+							{{profileCtlr.user.facebook.display_name}}<br>
+							<b>{{profileCtlr.user.facebook.email}}</b>
+						</div><br>
 			      	</div>
+			      	<div class="btn-unlink-group" ng-if="profileCtlr.user.facebook">
+						<a ng-click="profileCtlr.unlink('facebook')" class="btn-unlink"> {{'profile_unlink' | translate}}</a><i ng-click="profileCtlr.unlink('facebook')" class="fa fa-minus-circle btn-unlink-icon"></i>
+					</div>
 			      	<div class="" ng-if="!profileCtlr.user.facebook">
-						<div class="col-md-12 text-center">
-							<span>{{'profile_notlink' | translate}}</span>
-							<a ng-click="profileCtlr.authenticate('facebook')" class="btn btn-primary"><span class="fa fa-facebook"></span> {{'profile_link' | translate}}</a>
+			      		<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+							<div class="font-18">
+								{{'profile_notlink' | translate}}
+							</div>
+						</div>
+						<div class="btn-link-group" ng-if="!profileCtlr.user.facebook">
+							<a ng-click="profileCtlr.authenticate('facebook')" class="btn-link"> {{'profile_link' | translate}}</a><i ng-click="profileCtlr.authenticate('facebook')" class="fa fa-plus-circle btn-link-icon"></i>
 						</div>
 			  		</div>	
 				</div>
 			</div>
-			<div class="col-md-6" >
-				<div class="social-add-panel font-thin">
-			    	<div class="">
+			<div class="col-xs-12 col-sm-12 col-md-6">
+				<div class="social-add-panel font-thin col-md-6  col-md-offset-0 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1" ng-class="{'social-add-panel-linked': profileCtlr.user.twitter}">
+			    	<div class="col-md-10 col-md-offset-1 title-media">
 			        	<span class="">{{'profile_twitter' | translate}}</span>
 			      	</div>
-			      	<div class="" ng-if="profileCtlr.user.twitter">
-						<div class="col-md-12">
+			      	<div class="icon-media">
+			      		<img ng-src="resources/twitter.png" height="20px">
+			      	</div>
+			      	<div class="icon-unify">
+			      		<img ng-src="resources/pulpix.png" height="30px">
+			      	</div>
+			      	<div class="col-md-12 col-sm-12 col-xs-12 social-data text-center" ng-if="profileCtlr.user.twitter">
+				        <div class="col-md-12 col-sm-12 col-xs-12">
 							<img ng-src="{{profileCtlr.user.twitter.picture}}" class="img-circle image-profile">
 						</div>
-						<div class="col-md-12 text-center">
-							<b>{{profileCtlr.user.twitter.display_name}}</b><br>
-							@{{profileCtlr.user.twitter.username}}<br>
-							<a ng-click="profileCtlr.unlink('twitter')" class="btn btn-info" style="margin-top: 5px;"><span class="fa fa-twitter"></span> {{'profile_unlink' | translate}}</a>
-						</div>
-		  		  	</div>	
+						<div class="username">
+							{{profileCtlr.user.twitter.display_name}}<br>
+							<b>{{profileCtlr.user.twitter.username}}</b>
+						</div><br>
+			      	</div>
+			      	<div class="btn-unlink-group" ng-if="profileCtlr.user.twitter">
+						<a ng-click="profileCtlr.unlink('twitter')" class="btn-unlink"> {{'profile_unlink' | translate}}</a><i ng-click="profileCtlr.unlink('twitter')" class="fa fa-minus-circle btn-unlink-icon"></i>
+					</div>
 			    	<div class="" ng-if="!profileCtlr.user.twitter">
-						<div class="col-md-12 text-center">
-							<span>{{'profile_notlink' | translate}}</span>
-							<a ng-click="profileCtlr.authenticate('twitter')" class="btn btn-info"><span class="fa fa-twitter"></span> {{'profile_link' | translate}}</a>
+						<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+							<div class="font-18">
+								{{'profile_notlink' | translate}}
+							</div>
+						</div>
+						<div class="btn-link-group" ng-if="!profileCtlr.user.twitter">
+							<a ng-click="profileCtlr.authenticate('twitter')" class="btn-link"> {{'profile_link' | translate}}</a><i ng-click="profileCtlr.authenticate('twitter')" class="fa fa-plus-circle btn-link-icon"></i>
 						</div>
 			  		</div>	
 				</div>
 			</div>
-			<div class="col-md-6">
-				<div class="social-add-panel font-thin social-add-panel-left">
-			    	<div class="">
+			<div class="col-xs-12 col-sm-12 col-md-6">
+				<div class="social-add-panel font-thin col-md-6 col-md-offset-6 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1"	ng-class="{'social-add-panel-linked': profileCtlr.user.instagram}">
+			    	<div class="col-md-10 col-md-offset-1 title-media">
 			        	<span class="">{{'profile_instagram' | translate}}</span>
 			      	</div>
-			      	<div class="" ng-if="profileCtlr.user.instagram">
-						<div class="col-md-12">
+			      	<div class="icon-media">
+			      		<img ng-src="resources/instagram.png" height="20px">
+			      	</div>
+			      	<div class="icon-unify">
+			      		<img ng-src="resources/pulpix.png" height="30px">
+			      	</div>
+			      	<div class="col-md-12 col-sm-12 col-xs-12 social-data text-center" ng-if="profileCtlr.user.instagram">
+				        <div class="col-md-12 col-sm-12 col-xs-12">
 							<img ng-src="{{profileCtlr.user.instagram.picture}}" class="img-circle image-profile">
 						</div>
-						<div class="col-md-12 text-center">
-							<b>{{profileCtlr.user.instagram.display_name}}</b><br>
-							{{profileCtlr.user.instagram.username}}<br>
-							<a  ng-click="profileCtlr.unlink('instagram')" class="btn btn-primary" style="margin-top: 5px;"><i class="fa fa-instagram"></i></span> {{'profile_unlink' | translate}}</a>
-						</div>
-			  		</div>	
+						<div class="username">
+							{{profileCtlr.user.instagram.display_name}}<br>
+							<b>{{profileCtlr.user.instagram.username}}</b>
+						</div><br>
+			      	</div>
+			      	<div class="btn-unlink-group" ng-if="profileCtlr.user.instagram">
+						<a ng-click="profileCtlr.unlink('instagram')" class="btn-unlink"> {{'profile_unlink' | translate}}</a><i ng-click="profileCtlr.unlink('instagram')" class="fa fa-minus-circle btn-unlink-icon"></i>
+					</div>
 			      	<div class="" ng-if="!profileCtlr.user.instagram">
-						<div class="col-md-12 text-center">
-							<span>{{'profile_notlink' | translate}}</span>
-							<a  ng-click="profileCtlr.authenticate('instagram')" class="btn btn-primary"><i class="fa fa-instagram"></i></span> {{'profile_link' | translate}}</a>
+			      		<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+							<div class="font-18">
+								{{'profile_notlink' | translate}}
+							</div>
+						</div>
+						<div class="btn-link-group" ng-if="!profileCtlr.user.instagram">
+							<a ng-click="profileCtlr.authenticate('instagram')" class="btn-link"> {{'profile_link' | translate}}</a><i ng-click="profileCtlr.authenticate('instagram')" class="fa fa-plus-circle btn-link-icon"></i>
 						</div>
 			  		</div>	
 				</div>
 			</div>
-			<div class="col-md-6">
-				<div class="social-add-panel font-thin">
-			    	<div class="">
+			<div class="col-xs-12 col-sm-12 col-md-6">
+				<div class="social-add-panel font-thin col-md-6  col-md-offset-0 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1" ng-class="{'social-add-panel-linked': profileCtlr.user.google}">
+			    	<div class="col-md-10 col-md-offset-1 title-media">
 			        	<span class="">{{'profile_google' | translate}}</span>
 			      	</div>
-			      	<div class="" ng-if="profileCtlr.user.google">
-						<div class="col-md-12">
+			      	<div class="icon-media">
+			      		<img ng-src="resources/gmail.png" height="20px">
+			      	</div>
+			      	<div class="icon-unify">
+			      		<img ng-src="resources/pulpix.png" height="30px">
+			      	</div>
+			      	<div class="col-md-12 col-sm-12 col-xs-12 social-data text-center" ng-if="profileCtlr.user.google">
+				        <div class="col-md-12 col-sm-12 col-xs-12">
 							<img ng-src="{{profileCtlr.user.google.picture}}" class="img-circle image-profile">
 						</div>
-						<div class="col-md-12 text-center">
-							<b>{{profileCtlr.user.google.display_name}}</b><br>
-							{{profileCtlr.user.google.email}}<br>
-				            <a ng-click="profileCtlr.unlink('google')" class="btn btn-danger" style="margin-top: 5px;"><i class="fa fa-google"></i></span> {{'profile_unlink' | translate}}</a>
-						</div>
+						<div class="username">
+							{{profileCtlr.user.google.display_name}}<br>
+							<b>{{profileCtlr.user.google.email}}</b>
+						</div><br>
+			      	</div>
+			      	<div class="btn-unlink-group" ng-if="profileCtlr.user.google">
+						<a ng-click="profileCtlr.unlink('google')" class="btn-unlink"> {{'profile_unlink' | translate}}</a><i ng-click="profileCtlr.unlink('google')" class="fa fa-minus-circle btn-unlink-icon"></i>
 					</div>
-			      	<div class="" ng-if="!profileCtlr.user.google">
-						<div class="col-md-12 text-center">
-							<span>{{'profile_notlink' | translate}}</span>
-							<a ng-click="profileCtlr.authenticate('google')" class="btn btn-danger"><i class="fa fa-google"></i></span> {{'profile_link' | translate}}</a>
+			    	<div class="" ng-if="!profileCtlr.user.google">
+						<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+							<div class="font-18">
+								{{'profile_notlink' | translate}}
+							</div>
+						</div>
+						<div class="btn-link-group" ng-if="!profileCtlr.user.google">
+							<a ng-click="profileCtlr.authenticate('google')" class="btn-link"> {{'profile_link' | translate}}</a><i ng-click="profileCtlr.authenticate('google')" class="fa fa-plus-circle btn-link-icon"></i>
 						</div>
 			  		</div>	
 				</div>
 			</div>
+			<div class="clearfix"></div>
 		</div>
 		<div class="clearfix"></div>
 		<div class="row" ng-show="profileCtlr.editProfile">
