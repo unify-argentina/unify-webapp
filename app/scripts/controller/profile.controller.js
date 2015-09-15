@@ -10,6 +10,7 @@ unifyApp.controller("ProfileController", function (ProfileService, Authenticatio
 
 	profileCtlr.authenticate = function(provider) {
 		AuthenticationService.authenticate(provider);
+
 	};
 
 	profileCtlr.unlink = function(provider) {
