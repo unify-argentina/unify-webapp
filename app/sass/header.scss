@@ -46,8 +46,8 @@
     .nav-item {
       /* non-critical appearance styles */
       width: 200px;
-      border-top: 1px solid #eee;
-      border-bottom: 1px solid #335451;
+      border-bottom: 1px solid #eee;
+      border-top: 1px solid #335451;
     }
 
     .nav-item a {
@@ -83,14 +83,14 @@
 label[for="nav-trigger"] {
   /* critical positioning styles */
   position: fixed;
-  left: 15px; top: 15px;
+  left: 15px; top: 10px;
   z-index: 1500;
-  
+  color: white;
   /* non-critical apperance styles */
   height: 30px;
   width: 30px;
   cursor: pointer;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect width='30' height='6'/><rect y='24' width='30' height='6'/><rect y='12' width='30' height='6'/></svg>");
+ // background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect width='30' height='6'/><rect y='24' width='30' height='6'/><rect y='12' width='30' height='6'/></svg>");
   background-size: contain;
 }
 
@@ -111,14 +111,27 @@ label[for="nav-trigger"] {
 /* Site Wrapper - Everything that isn't navigation */
 .site-wrap {
   /* Critical position and size styles */
-  min-height: 100%;
-  min-width: 100%;
-  background-color: white; /* Needs a background or else the nav will show through */
-  position: relative;
-  top: 0;
-  bottom: 100%;
-  left: 0;
-  z-index: 1;
+    min-height: 100%;
+    min-width: 100%;
+    background-color: white; /* Needs a background or else the nav will show through */
+    position: relative;
+    top: 0;
+    bottom: 100%;
+    left: 0;
+    z-index: 1;
+    .icon-unify-mobile{
+        position: fixed;
+        top: 0;
+        z-index: 1030;
+        height: 50px;
+        background-color: #335451;
+        img{
+            margin: 0 auto;
+            position: relative;
+            top: 5px;
+            display: block;
+        }
+    }
 }
 
 
@@ -126,15 +139,15 @@ label[for="nav-trigger"] {
     .menu-desktop{
         display: none!important;
     }
-    body { height: 100%; width: 100%; padding-top: 0px;}
-    .site-wrap {padding-top: 40px;}
+    body { position: absolute; height: 100%; width: 100%; padding-top: 0px;}
+    .site-wrap {padding-top: 50px;}
 }
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
     .menu-desktop{
         display: none!important;
     }
-    body { height: 100%; width: 100%; padding-top: 0px;}
-    .site-wrap {padding-top: 40px;}
+    body { position: absolute; height: 100%; width: 100%; padding-top: 0px;}
+    .site-wrap {padding-top: 50px;}
 }
 @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
     .menu-mobile{

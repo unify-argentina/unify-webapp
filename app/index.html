@@ -97,10 +97,14 @@
         </ul>
         
         <input type="checkbox" id="nav-trigger" class="nav-trigger  menu-mobile" ng-if="mainController.auth"/>
-        <label for="nav-trigger" class="menu-mobile" ng-if="mainController.auth"></label>
-       <!-- <div class="navbar navbar-default navbar-fixed-top menu-mobile" ng-if="mainController.auth">
-        </div>-->
+        <label for="nav-trigger" class="menu-mobile" ng-if="mainController.auth">
+            <i class="fa fa-bars fa-2x"></i>
+        </label>
+       <!-- -->
     <div class="site-wrap">
+        <div class="icon-unify-mobile menu-mobile col-sm-12 col-xs-12" ng-if="mainController.auth">
+           <img src="resources/header-logo.png" height="40">
+        </div>
         <div ui-view></div>
     </div>
 </body>
