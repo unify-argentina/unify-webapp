@@ -49,9 +49,21 @@
     <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon"/>
 </head>
  
-<body ng-class="{'overflow-x-hidden': !mainController.auth}" ng-controller="MainController as mainController">
-    <div ng-include="'views/header.html'" ng-if="mainController.auth"></div>
-    <div>
+<body class="overflow-x-hidden" ng-controller="MainController as mainController">
+        <section ng-include="'views/header.html'" ng-if="mainController.auth"></section>
+
+        <ul class="navigation menu-mobile" ng-if="mainController.auth">
+          <li class="nav-item"><a ui-sref="main"><i class="fa fa-home"></i> Inicio</a></li>
+          <li class="nav-item"><a ui-sref="emails"><i class="fa fa-envelope-o"></i> Mail</a></li>
+          <li class="nav-item"><a ui-sref="profile">{{mainController.user}}</a></li>
+          <li class="nav-item"><a href="" ng-click="mainController.logout();">Cerrar Sesión</a></li>
+        </ul>
+        
+        <input type="checkbox" id="nav-trigger" class="nav-trigger  menu-mobile" ng-if="mainController.auth"/>
+        <label for="nav-trigger" class="menu-mobile" ng-if="mainController.auth"></label>
+       <!-- <div class="navbar navbar-default navbar-fixed-top menu-mobile" ng-if="mainController.auth">
+        </div>-->
+    <div class="site-wrap">
         <div ui-view></div>
     </div>
 </body>
