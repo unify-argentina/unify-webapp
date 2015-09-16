@@ -3,6 +3,9 @@
     min-height: 650px;
     z-index: 5;
     position: relative;
+    .container{
+    	padding: 0;
+    }
 	.whoLink{
   		position:relative;
 	    bottom: -90px;
@@ -60,7 +63,6 @@
 	position:relative;
 	width:100%;
 	min-height: 100px;
-	bottom: 7px;
 	left: 0px;
 	background-image: -webkit-gradient(
 	linear,

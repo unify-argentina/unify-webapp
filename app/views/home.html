@@ -3,12 +3,29 @@
 	<div class="sign-in-up" id="to-top">
 	    <div ng-include="'views/login.html'" ng-show="lgnCtrl.isLogin"></div>
 	    <div ng-include="'views/signUp.html'" ng-show="lgnCtrl.isSignUp"></div>
-		<div class="whoLink text-center" ng-class="{'high-tide-link':lgnCtrl.isSignUp}">
-			<a href="#whoPage" du-smooth-scroll duration="1000">¿Qué es Unify?</a>
+		<div class="ocean"></div>
+
+		<div class="clearfix"></div>
+		<div class="sea">
+			<div class="bubbles">
+				<div id="whoPage" class="whoPage col-md-12">
+					<div class="whoContent">
+						<div class="whoText text-center">
+							<img height="125" src="resources/unifyUnderTheSea.png">
+							<br>
+							<span class="ask">¿Se imagina ver a Facebook, Twitter e Instagram en un solo lugar? ¿Y además chequear los mails sin siquiera cambiar de pestaña del navegador?</span>
+							<br><br>
+							<span class="description">Al utilizar estas plataformas tenemos muchas ventajas, pero también su uso nos enfrenta con muchos desafíos y problemas; recordar distintos usuarios y contraseñas, perdernos contenido importante, tener que acceder a 4 distintas plataformas para poder interactuar con una persona o visualizar contenido duplicado.<br>
+							Estas problemáticas nos hicieron pensar que era necesaria la creación de una solución integral. <b>Unify</b> es la aplicación que se encarga de resolver todos estos problemas y muchos otros más. Además es tan simple de utilizar que hasta sus abuelos la aprovecharán al máximo.</span>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="ocean" ng-class="{'high-tide':lgnCtrl.isSignUp}">
-		</div>
+
 	</div>
+</div>
+
 <!--	<div id="clouds">
 		<div class="cloud x1"></div>
 		<div class="cloud x2"></div>
@@ -17,27 +34,3 @@
 		<div class="cloud x5"></div>
 	</div>
 	-->
-	<div class="clearfix"></div>
-	<div class="sea">
-		<div class="bubbles">
-			<div id="whoPage" class="whoPage col-md-12">
-				<div class="backToSurface text-center row">
-					<a href="" ng-click="lgnCtrl.toTheTop();">Volver a la superficie</a>
-				</div>
-				<div class="clearfix"></div>
-				<div class="whoContent">
-					<div class="whoText text-center">
-						<img height="125" src="resources/unifyUnderTheSea.png">
-						<br>
-						<span class="ask">¿Se imagina ver a Facebook, Twitter e Instagram en un solo lugar? ¿Y además chequear los mails sin siquiera cambiar de pestaña del navegador?</span>
-						<br><br>
-						<span class="description">Al utilizar estas plataformas tenemos muchas ventajas, pero también su uso nos enfrenta con muchos desafíos y problemas; recordar distintos usuarios y contraseñas, perdernos contenido importante, tener que acceder a 4 distintas plataformas para poder interactuar con una persona o visualizar contenido duplicado.<br>
-						Estas problemáticas nos hicieron pensar que era necesaria la creación de una solución integral. <b>Unify</b> es la aplicación que se encarga de resolver todos estos problemas y muchos otros más. Además es tan simple de utilizar que hasta sus abuelos la aprovecharán al máximo.</span>
-		
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
