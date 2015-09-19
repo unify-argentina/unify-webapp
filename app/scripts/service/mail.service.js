@@ -117,6 +117,16 @@ unifyApp.factory('MailService', function($http, ENV) {
 			return promise;
 		};
 
+		var deleteMail = function(user_id, email_id){
+			 var promise = $http.delete(ENV.apiEndPoint + '/api/user/' + user_id + '/email/'+email_id)
+			 .then(function(response) {	
+        		return response.data;
+			}, function(response) {
+	        	console.log("ERROR: "+response.data ? response.data.errors : response);
+				return response.data;
+			});
+			return promise;
+		};
 	return{
 		getInbox		: getInbox,
 		getDraft		: getDraft,
@@ -126,6 +136,7 @@ unifyApp.factory('MailService', function($http, ENV) {
 		markAsSeen		: markAsSeen,
 		markAsUnseen	: markAsUnseen,
 		moveToTrash		: moveToTrash,
-		moveToInbox		: moveToInbox
+		moveToInbox		: moveToInbox,
+		deleteMail		: deleteMail
 	}
 });

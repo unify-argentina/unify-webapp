@@ -82,6 +82,17 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 		});
 	};
 
+	mailCtlr.deleteMail = function(mail_id){
+		MailService.deleteMail(
+			AuthenticationService.getUserId(), mail_id
+		).then(function(data) {
+			_.pull(mailCtlr.email_ids,mail_id);
+			_.remove(mailCtlr.trash.list, function(mail) {
+				return mail_id==mail.id;
+			});
+		});
+	};
+
 	mailCtlr.moveToInbox = function(){
 		MailService.moveToInbox(
 			AuthenticationService.getUserId(), mailCtlr.email_ids
