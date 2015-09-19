@@ -2,56 +2,106 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 
 	var mailCtlr = this;
 	mailCtlr.viewMail=null;
-	
+
 	mailCtlr.getInbox = function(){
-			MailService.getInbox(
-				AuthenticationService.getUserId()
-			).then(function(data) {
-				if(data.errors!={}){
-					mailCtlr.inbox=data.emails;
-				}else{
-					mailCtlr.errors=data.errors;
-				}
-				mailCtlr.viewList="inbox";
-			});
+		mailCtlr.viewList="inbox";
+		MailService.getInbox(
+			AuthenticationService.getUserId()
+		).then(function(data) {
+			mailCtlr.inbox=data.emails;
+			mailCtlr.email_ids=[];
+		});
 	};
 
-	mailCtlr.getDraft = function(){
-			MailService.getDraft(
-				AuthenticationService.getUserId()
-			).then(function(data) {
-				if(data.errors!={}){
-					mailCtlr.draft=data.emails;
-				}else{
-					mailCtlr.errors=data.errors;
-				}
-				mailCtlr.viewList="draft";
-			});
+	mailCtlr.getDraft = function(){	
+		mailCtlr.viewList="draft";
+		MailService.getDraft(
+			AuthenticationService.getUserId()
+		).then(function(data) {
+			mailCtlr.draft=data.emails;
+			mailCtlr.email_ids=[];
+		});
 	};
+
 	mailCtlr.getSent = function(){
-			MailService.getSent(
-				AuthenticationService.getUserId()
-			).then(function(data) {
-				if(data.errors!={}){
-					mailCtlr.sent=data.emails;
-				}else{
-					mailCtlr.errors=data.errors;
-				}
-				mailCtlr.viewList="sent";
-			});
+		mailCtlr.viewList="sent";
+		MailService.getSent(
+			AuthenticationService.getUserId()
+		).then(function(data) {
+			mailCtlr.sent=data.emails;
+			mailCtlr.email_ids=[];
+		});
 	};
+
 	mailCtlr.getTrash = function(){
-			MailService.getTrash(
-				AuthenticationService.getUserId()
-			).then(function(data) {
-				if(data.errors!={}){
-					mailCtlr.trash=data.emails;
-				}else{
-					mailCtlr.errors=data.errors;
-				}
-				mailCtlr.viewList="trash";
-			});
+		mailCtlr.viewList="trash";
+		MailService.getTrash(
+			AuthenticationService.getUserId()
+		).then(function(data) {
+			mailCtlr.trash=data.emails;
+			mailCtlr.email_ids=[];
+		});
 	};
+
+	mailCtlr.markAsSeen = function(){
+		MailService.markAsSeen(
+			AuthenticationService.getUserId(), mailCtlr.email_ids
+		).then(function(data) {
+			_(mailCtlr.inbox.list).forEach(function(mail) {
+				if(_.includes(mailCtlr.email_ids,mail.id)){
+					mail.unread=false;
+				}
+				mail.checked=false;
+			}).value();	
+			mailCtlr.email_ids=[];
+		});
+	};
+
+	mailCtlr.markAsUnseen = function(){
+		MailService.markAsUnseen(
+			AuthenticationService.getUserId(), mailCtlr.email_ids
+		).then(function() {
+			_(mailCtlr.inbox.list).forEach(function(mail) {
+				if(_.includes(mailCtlr.email_ids,mail.id)){
+					mail.unread=true;
+				}
+				mail.checked=false;
+			}).value();	
+			mailCtlr.email_ids=[];
+		});
+	};
+
+	mailCtlr.moveToTrash = function(){
+		MailService.moveToTrash(
+			AuthenticationService.getUserId(), mailCtlr.email_ids
+		).then(function(data) {
+			_.remove(mailCtlr.inbox.list, function(mail) {
+				return _.includes(mailCtlr.email_ids,mail.id);
+			});
+			mailCtlr.email_ids=[];
+		});
+	};
+
+	mailCtlr.moveToInbox = function(){
+		MailService.moveToInbox(
+			AuthenticationService.getUserId(), mailCtlr.email_ids
+		).then(function(data) {
+			_.remove(mailCtlr.trash.list, function(mail) {
+				return _.includes(mailCtlr.email_ids,mail.id);
+			});
+			mailCtlr.email_ids=[];
+		});
+	};
+
+	mailCtlr.check = function(mail){
+		if(mail.checked){
+			mailCtlr.email_ids.push(mail.id);
+		}else{
+			_.pull(mailCtlr.email_ids,mail.id);
+		}
+		console.log(mailCtlr.email_ids);
+	};
+
 	mailCtlr.getMail = function(mail){
 		var html=mail.html;
 	    html = html.replace(/_/g,"/");
@@ -59,7 +109,14 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 		mailCtlr.decodedHtml = base64.decode(html);
 		mailCtlr.mailHtml= $sce.trustAsHtml(mailCtlr.decodedHtml);
 		mailCtlr.viewMail= mail;
-		console.log(html);
+		_(mailCtlr.inbox).forEach(function(mail) {
+			mail.checked=false;
+		}).value();	
+		mailCtlr.email_ids=[];
+		if(mail.unread){
+			mailCtlr.email_ids.push(mail.id);
+			mailCtlr.markAsSeen();
+		}
 	}
 
 	mailCtlr.sendMail = function(mail){
@@ -98,18 +155,15 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 		mailCtlr.writeMail={};
 		
 		var from = mail.from.match(/<(.*?)>/g).map(function(val){
-			console.log("VAL:"+val);
 		   return val.replace(/</g,'').replace(/>/g,'');
 		});
 		mailCtlr.writeMail.to=from.toString();
 		
 		if(mail.cc!=[""]){
 			var cc = mail.cc.toString().match(/<(.*?)>/g).map(function(val){
-				console.log("VAL:"+val);
 			   return val.replace(/</g,'').replace(/>/g,'');
 			});
 			var to = mail.to.toString().match(/<(.*?)>/g).map(function(val){
-				console.log("VAL:"+val);
 			   return val.replace(/</g,'').replace(/>/g,'');
 			});
 			cc=to.concat(cc);

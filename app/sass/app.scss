@@ -17,6 +17,8 @@ body{
     padding-top: 70px;
     background: $primary-color;
     font-family: 'antennaRegular';
+    font-size: 140%;
+
 }
 
 #container{
@@ -121,16 +123,17 @@ body{
   top: 50px;
 }
 
-.spinner {
+.loader {
   margin: 100px auto;
-  width: 75px;
-  height: 30px;
   text-align: center;
   font-size: 10px;
+  img{
+    margin: 0px auto;
+  }
 }
 
 .spinner {
-  margin: 100px auto;
+  margin: 0px auto;
   width: 50px;
   height: 40px;
   text-align: center;
@@ -138,7 +141,7 @@ body{
 }
 
 .spinner > div {
-  background-color: #333;
+  background-color: #579f9b;
   height: 100%;
   width: 6px;
   display: inline-block;

@@ -1,5 +1,5 @@
 <div id="mailDash" class="well col-md-12" style="margin-top: 20px;" ng-controller="MailController as mailCtlr">
- 	<uw-message ng-model="mailCtlr.errors.google.msg" danger></uw-message>
+	<uw-message ng-model="mailCtlr.errors.google.msg" danger></uw-message>
   <div class="content col-md-12" ng-hide="mailCtlr.viewMail || mailCtlr.writeMail">
 		<div class="col-md-2 well text-center word-break" style="margin-top: 20px;">
 			<a ng-click="mailCtlr.writeMail={};" class="col-md-offset-1 col-md-10 btn btn-info" style="margin-top: 5px;">Nuevo Email</a>
@@ -9,31 +9,55 @@
 			<a ng-click="mailCtlr.getTrash();" class="col-md-offset-1 col-md-10 btn btn-info" style="margin-top: 5px;">Papelera</a>
 		</div>
 		<div class="col-md-10 well text-center word-break" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='inbox'">
-			<div class="list-group"  ng-if="mailCtlr.inbox.count > 0">
-					<a ng-click="mailCtlr.getMail(mail)" href="" class="list-group-item" ng-repeat="mail in mailCtlr.inbox.list">
-						{{mail.from}} - {{mail.subject}} - {{mail.date | amCalendar}}
-					</a>
+			<uw-loader ng-if="!mailCtlr.inbox"></uw-loader>
+			<div ng-show="mailCtlr.inbox">
+				<div class="col-md-12 no-padding">
+					<a ng-click="mailCtlr.moveToTrash();" class="col-md-3 btn btn-danger">Enviar a Papelera</a>
+					<a ng-click="mailCtlr.markAsSeen();" class="col-md-3 btn btn-primary" style="margin-left: 10px;">Marcar como leido</a>
+					<a ng-click="mailCtlr.markAsUnseen();" class="col-md-3 btn btn-success" style="margin-left: 10px;">Marcar como no leido</a>
+				</div>
+				<div class="clearfix"></div>
+				<div class="list-group"  ng-if="mailCtlr.inbox.count > 0" style="margin-top: 10px;">
+					<span class="list-group-item" ng-repeat="mail in mailCtlr.inbox.list" ng-class="{'mail-unread': mail.unread}">
+						<input type="checkbox" ng-model="mail.checked" ng-true-value="true" ng-false-value="false" ng-change="mailCtlr.check(mail);"> 
+           				<a href="" ng-click="mailCtlr.getMail(mail)">{{mail.from}} - {{mail.subject}} - {{mail.date | amCalendar}}</a>
+					</span>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-10 well text-center word-break" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='sent'">
-			<div class="list-group"  ng-if="mailCtlr.sent.count > 0">
-					<a ng-click="mailCtlr.getMail(mail)" href="" class="list-group-item" ng-repeat="mail in mailCtlr.sent.list">
-						{{mail.to}} - {{mail.subject}} - {{mail.date | amCalendar}}
-					</a>
+			<uw-loader ng-if="!mailCtlr.sent"></uw-loader>
+			<div ng-show="mailCtlr.sent">
+				<div class="list-group"  ng-if="mailCtlr.sent.count > 0">
+						<a ng-click="mailCtlr.getMail(mail)" href="" class="list-group-item" ng-repeat="mail in mailCtlr.sent.list">
+							{{mail.to.toString()}} - {{mail.subject}} - {{mail.date | amCalendar}}
+						</a>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-10 well text-center word-break" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='draft'">
-			<div class="list-group"  ng-if="mailCtlr.draft.count > 0">
-					<a ng-click="mailCtlr.getMail(mail)" href="" class="list-group-item" ng-repeat="mail in mailCtlr.draft.list">
-						{{mail.to}} - {{mail.subject}} - {{mail.date | amCalendar}}
-					</a>
+			<uw-loader ng-if="!mailCtlr.sent"></uw-loader>
+			<div ng-show="mailCtlr.sent">
+				<div class="list-group"  ng-if="mailCtlr.draft.count > 0">
+						<a ng-click="mailCtlr.getMail(mail)" href="" class="list-group-item" ng-repeat="mail in mailCtlr.draft.list">
+							{{mail.to.toString()}} - {{mail.subject}} - {{mail.date | amCalendar}}
+						</a>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-10 well text-center word-break" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='trash'">
-			<div class="list-group"  ng-if="mailCtlr.trash.count > 0">
-					<a ng-click="mailCtlr.getMail(mail)" href="" class="list-group-item" ng-repeat="mail in mailCtlr.trash.list">
-						{{mail.from}} - {{mail.subject}} - {{mail.date | amCalendar}}
-					</a>
+			<uw-loader ng-if="!mailCtlr.trash"></uw-loader>
+			<div ng-show="mailCtlr.trash">
+				<div class="list-group"  ng-if="mailCtlr.trash.count > 0">
+					<div class="col-md-12 no-padding">
+						<a ng-click="mailCtlr.moveToInbox();" class="col-md-3 btn btn-success" style="margin-left: 10px;">Quitar de la papelera</a>
+					</div>
+					<div class="clearfix"></div>
+					<span class="list-group-item" ng-repeat="mail in mailCtlr.trash.list">
+						<input type="checkbox" ng-model="mail.checked" ng-true-value="true" ng-false-value="false" ng-change="mailCtlr.check(mail);"> 
+           				<a href="" ng-click="mailCtlr.getMail(mail)">{{mail.from}} - {{mail.subject}} - {{mail.date | amCalendar}}</a>
+					</span>
+				</div>
 			</div>
 		</div>
 	</div>

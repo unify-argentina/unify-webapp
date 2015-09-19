@@ -11,7 +11,8 @@
 		<div class="col-md-10 well text-center word-break" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='inbox'">
 			<div class="list-group"  ng-if="mailCtlr.inbox.count > 0">
 					<a ng-click="mailCtlr.getMail(mail)" href="" class="list-group-item" ng-repeat="mail in mailCtlr.inbox.list">
-						{{mail.from}} - {{mail.subject}} - {{mail.date | amCalendar}}
+						<input type="checkbox" ng-model="consolet" ng-true-value="'YES'" ng-false-value="'NO'"> 
+           				{{mail.from}} - {{mail.subject}} - {{mail.date | amCalendar}}
 					</a>
 			</div>
 		</div>
