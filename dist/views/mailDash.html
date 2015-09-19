@@ -55,6 +55,7 @@
 					<div class="clearfix"></div>
 					<span class="list-group-item" ng-repeat="mail in mailCtlr.trash.list">
 						<input type="checkbox" ng-model="mail.checked" ng-true-value="true" ng-false-value="false" ng-change="mailCtlr.check(mail);"> 
+						<a href="" ng-click="mailCtlr.deleteMail(mail.id)" class="fa fa-trash"></a>
            				<a href="" ng-click="mailCtlr.getMail(mail)">{{mail.from}} - {{mail.subject}} - {{mail.date | amCalendar}}</a>
 					</span>
 				</div>
