@@ -16,10 +16,6 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-
-    <script src="cordova.js"></script>
-
     <!-- Compiled and minified CSS 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
@@ -32,7 +28,6 @@
     <script type="text/javascript"  src="lib/angular-utf8-base64/angular-utf8-base64.min.js"></script>
     <script type="text/javascript"  src="lib/angular-resource/angular-resource.min.js"></script>
     <script type="text/javascript"  src="lib/angular-scroll/angular-scroll.min.js"></script>
-    <script type="text/javascript"  src="lib/angular-route/angular-route.min.js"></script>
     <script type="text/javascript"  src="lib/angular-translate/angular-translate.min.js"></script>
     <script src="lib/angular-ui-map/ui-map.min.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -55,7 +50,6 @@
 </head>
  
 <body class="overflow-x-hidden" ng-controller="MainController as mainController">
-<ion-view>
         <section ng-include="'views/header.html'" ng-if="mainController.auth"></section>
 
         <ul class="navigation menu-mobile" ng-if="mainController.auth">
@@ -76,7 +70,6 @@
         </div>
         <div ui-view></div>
     </div>
-</ion-view>
 </body>
  
 </html>
