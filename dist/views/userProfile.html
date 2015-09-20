@@ -29,9 +29,9 @@
 			<div class="clearfix"></div>
 			<a style="margin-top: 20px;" class="btn btn-success col-md-8 col-md-offset-2" ui-sref="editProfile" style="margin-top: 5px;">Editar</a>
 		</div>
-		<div class="col-md-9">
+		<div class="col-md-9" style="margin-top: 10px;">
   			<uw-loader ng-if="!profileCtlr.feed"></uw-loader>
-			<uw-time-line uw-media="profileCtlr.feed" ng-if="profileCtlr.feed"></uw-time-line>
+			<uw-time-line uw-media="profileCtlr.feed" ng-if="profileCtlr.feed" uw-name="profileCtlr.user.name"></uw-time-line>
 		</div>
 	</div>
 </div>
