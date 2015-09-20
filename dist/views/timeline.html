@@ -1,16 +1,25 @@
 <div class="post col-md-12 col-sm-12 col-xs-12 word-break" ng-repeat="post in uwMedia.list">
     <div style="margin-bottom:5px;">
-    	<img ng-src="{{post.contact.picture}}" class="img-circle image-contact-small" ng-if="post.contact.picture">
-    	<img ng-src="{{uwPicture}}" class="img-circle image-contact-small" ng-if="uwPicture">
-    	<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact-small" ng-if="!post.contact.picture && !uwPicture">
-    	<span class="name" ng-if="post.contact.name"><b>{{post.contact.name}}</b></span>
-    	<span class="name" ng-if="uwName"><b>{{uwName}}</b></span>
-    	<i class="fa" ng-class="{'fa-facebook-official': post.provider == 'facebook','fa-twitter': post.provider == 'twitter','fa-instagram': post.provider == 'instagram'}"></i>
-    	<span class="date font-thin">{{post.created_time | amCalendar}}</span>
-    	<a href="" class="like">
-    		Me gusta
-    		<img src="resources/unify-like.png" class="img-circle" height="33px">
-    	</a>
+	    <div class="col-md-9 col-sm-9 col-xs-9 no-padding">
+	    	<img ng-src="{{post.contact.picture}}" class="img-circle image-contact-small" ng-if="post.contact.picture">
+	    	<img ng-src="{{uwPicture}}" class="img-circle image-contact-small" ng-if="uwPicture">
+	    	<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact-small" ng-if="!post.contact.picture && !uwPicture">
+	    	<span class="name" ng-if="post.contact.name">
+	    		<b>{{post.contact.name}}</b><br>
+	    		<span class="date font-thin">{{post.created_time | amCalendar}}</span>
+	    	</span>
+	    	<span class="name" ng-if="uwName">
+	    		<b>{{uwName}}</b><br>
+	    		<span class="date font-thin">{{post.created_time | amCalendar}}</span>
+	    	</span>
+	    </div>
+	    <div class="col-md-3 col-sm-3 col-xs-3 no-padding">
+	    	<i class="fa" ng-class="{'fa-facebook-official': post.provider == 'facebook','fa-twitter': post.provider == 'twitter','fa-instagram': post.provider == 'instagram'}"></i>
+	    	<a href="" class="like">
+	    		<span class="like-text">Me gusta</span>
+	    		<img src="resources/unify-like.png" class="img-circle" height="33px">
+	    	</a>
+	    </div>
 	</div>
 	<div ng-if="post.type=='text'">
 		<span class="col-md-12 col-sm-12 col-xs-12">{{post.text}}</span>
