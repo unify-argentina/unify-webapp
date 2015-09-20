@@ -18,7 +18,16 @@ body{
     background: $primary-color;
     font-family: 'antennaRegular';
     font-size: 140%;
+}
 
+.font-size-sm{
+  font-size: 160%;
+}
+.font-size-lg{
+  font-size: 160%;
+}
+.font-size-xl{
+  font-size: 180%;
 }
 
 #container{
@@ -93,6 +102,19 @@ body{
     background-color: #dc9030;
   }
 }
+
+.btn-unify-primary-invert{
+  border-radius: 20px;
+  background-color: #fff;
+  color: #dc911a;
+  border: 2px solid #dc911a;
+  &:hover, &:focus{
+    background-color: darken(#fff,10%);
+    color: #dc9030;
+    border-color:#dc9030;
+  }
+}
+
 .dark-link{
   color: #64a59f;
   &:focus{
@@ -100,6 +122,11 @@ body{
     text-decoration: none;
   }
 }
+
+.unify-border{
+  border-color: #dc911a;
+}
+
 .unify-color{
   color: #dc911a;
 }
@@ -121,6 +148,34 @@ body{
   position: fixed;
   z-index: 1050;
   top: 50px;
+}
+.unify-link{
+  color: #dc911a;
+  &:hover{
+    text-decoration: none;
+    color: lighten(#dc911a, 10%);
+  }
+}
+.move-link{
+  color: #867563;
+  &:hover{
+    text-decoration: none;
+    color: lighten(#867563, 10%);
+  }
+}
+.edit-link{
+  color: #827761;
+  &:hover{
+    text-decoration: none;
+    color: lighten(#827761, 10%);
+  }
+}
+.delete-link{
+  color: #a21d22;
+  &:hover{
+    text-decoration: none;
+    color: lighten(#a21d22, 10%);
+  }
 }
 
 .loader {

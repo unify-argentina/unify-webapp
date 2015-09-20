@@ -28,12 +28,12 @@ unifyApp.controller("CircleController", function ($scope,  video, CircleService,
 	};
 
 	circleCtrl.deleteCircle = function(){
-		var circle_id = circleCtrl.circle_id;
+		var parent = circleCtrl.circle.parent;
 		CircleService.circle.delete({
 			user_id : AuthenticationService.getUserId(),
 			circle_id : circleCtrl.circle_id
 		},function(response){
-			circleCtrl.goToCircle(circle_id);
+			circleCtrl.goToCircle(parent);
 		});
 	};
 
@@ -44,7 +44,7 @@ unifyApp.controller("CircleController", function ($scope,  video, CircleService,
 
 	circleCtrl.edit = function(){
 		circleCtrl.editingCircle=true;
-		circleCtrl.editCircle = circleCtrl.circle;
+       	circleCtrl.editCircle = angular.copy(circleCtrl.circle);
 	};
 
 	circleCtrl.updateCircle = function(){
