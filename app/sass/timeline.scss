@@ -16,7 +16,10 @@
     	color: #63a5a1;
     }
     .date{
-    	font-size: 0.714em;
+    	position: relative;
+	    font-size: 0.714em;
+	    padding-left: 50px;
+	    top: -20px;
     }
     .fa{
         float: right;
@@ -43,4 +46,10 @@
     		background-color: #64a79e;
     	}
     }
+}
+
+@media (max-width: 768px) {
+	.like-text{
+		display: none;
+	}
 }
