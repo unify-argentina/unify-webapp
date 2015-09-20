@@ -99,6 +99,10 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 			).then(function(data){
 				console.log(data);
 				contactCtrl.friends=data;
+				var pages={};
+				pages.name="---Páginas de Facebook---"
+				contactCtrl.friends.facebook_friends.list.push(pages);
+				contactCtrl.friends.facebook_friends.list=contactCtrl.friends.facebook_friends.list.concat(contactCtrl.friends.facebook_pages.list);
 				if(contactCtrl.contact_id){
 					contactCtrl.getContact(contactCtrl.contact_id);
 				}

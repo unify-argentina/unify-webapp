@@ -4,7 +4,9 @@ unifyApp.directive('uwTimeLine', function() {
         restrict: 'E',
         templateUrl: 'views/timeline.html',
         scope:{
-        	uwMedia: "="
+        	uwMedia: "=",
+        	uwName: "=",
+        	uwPicture: "="
         }
     };
 });

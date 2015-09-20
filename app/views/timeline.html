@@ -1,20 +1,26 @@
-<div class="well col-md-12 col-sm-12 col-xs-12 word-break" style="margin-top: 20px;margin-bottom: 0px;" ng-repeat="post in uwMedia.list">
-    <div ng-if="post.contact.name">
+<div class="post col-md-12 col-sm-12 col-xs-12 word-break" ng-repeat="post in uwMedia.list">
+    <div style="margin-bottom:5px;">
     	<img ng-src="{{post.contact.picture}}" class="img-circle image-contact-small" ng-if="post.contact.picture">
-    	<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact-small" ng-if="!post.contact.picture">
-    	<span><b>{{post.contact.name}}</b></span>
+    	<img ng-src="{{uwPicture}}" class="img-circle image-contact-small" ng-if="uwPicture">
+    	<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact-small" ng-if="!post.contact.picture && !uwPicture">
+    	<span class="name" ng-if="post.contact.name"><b>{{post.contact.name}}</b></span>
+    	<span class="name" ng-if="uwName"><b>{{uwName}}</b></span>
+    	<i class="fa" ng-class="{'fa-facebook-official': post.provider == 'facebook','fa-twitter': post.provider == 'twitter','fa-instagram': post.provider == 'instagram'}"></i>
+    	<span class="date font-thin">{{post.created_time | amCalendar}}</span>
+    	<a href="" class="like">
+    		Me gusta
+    		<img src="resources/unify-like.png" class="img-circle" height="33px">
+    	</a>
 	</div>
-    <i class="fa" ng-class="{'fa-facebook-official': post.provider == 'facebook','fa-twitter': post.provider == 'twitter','fa-instagram': post.provider == 'instagram'}"></i>
-	<div class="col-md-12 col-sm-12 col-xs-12" ng-if="post.type=='text'">
+	<div ng-if="post.type=='text'">
 		<span class="col-md-12 col-sm-12 col-xs-12">{{post.text}}</span>
 	</div>
-	<div class="col-md-12 col-sm-12 col-xs-12" ng-if="post.type=='image' || post.type=='photo' || post.type=='animated_gif'">
+	<div ng-if="post.type=='image' || post.type=='photo' || post.type=='animated_gif'">
 		<span class="col-md-12 col-sm-12 col-xs-12">{{post.text}}</span>
 		<img ng-src="{{post.media_url}}" class="col-md-12 col-sm-12 col-xs-12">
 	</div>
-	<div class="col-md-12 col-sm-12 col-xs-12" ng-if="post.type=='video'">
+	<div ng-if="post.type=='video'">
 		<span class="col-md-12 col-sm-12 col-xs-12">{{post.text}}</span>
-        
         <uw-video video-src="post.media_url" ng-if="post.media_url"></uw-video>
 	</div>
 </div>

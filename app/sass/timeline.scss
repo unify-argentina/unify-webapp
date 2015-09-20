@@ -1,0 +1,42 @@
+.post{
+	border: 2px solid #a2c5c1;
+	border-radius: 25px 0px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    .image-contact-small{
+    	border: 2px solid #a2c5c1;
+    }
+    .name{
+    	font-size: 1.286em;
+    	color: #63a5a1;
+    }
+    .date{
+    	font-size: 0.714em;
+    }
+    .fa{
+        float: right;
+	    border-radius: 100%;
+	    padding: 10px;
+	    color: #fff;
+	    font-size: 1em;
+    }
+    .fa-twitter{
+	    background-color: #c5b9a1;
+    }
+    .fa-facebook-official{
+    	background-color: #286090;
+    }
+    .fa-instagram{
+        background-color: #31b0d5;
+    }
+    .like{
+    	text-decoration: none;
+    	color:#64a79e;
+        float: right;
+    	padding-right: 5px;
+    	img{
+    		background-color: #64a79e;
+    	}
+    }
+}
