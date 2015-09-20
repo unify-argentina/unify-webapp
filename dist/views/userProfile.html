@@ -1,6 +1,6 @@
 <div id="contactProfile" class="container" ng-controller="ProfileController as profileCtlr">
   	<uw-loader ng-if="!profileCtlr.user"></uw-loader>
-	<div class="content col-md-12" ng-if="profileCtlr.user">
+	<div class="content col-md-12 no-padding" ng-if="profileCtlr.user">
 		<div class="col-md-3 well text-center word-break" style="margin-top: 20px;">
 			<div class="col-md-12">
 				<h2>{{profileCtlr.user.name}}</h2>
