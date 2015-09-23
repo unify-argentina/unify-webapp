@@ -1,37 +1,118 @@
-<div id="contactProfile" class="container" ng-controller="ProfileController as profileCtlr">
+<div id="profile" class="container" ng-controller="ProfileController as profileCtlr">
   	<uw-loader ng-if="!profileCtlr.user"></uw-loader>
 	<div class="content col-md-12 no-padding" ng-if="profileCtlr.user">
-		<div class="col-md-3 well text-center word-break" style="margin-top: 20px;">
-			<div class="col-md-12">
-				<h2>{{profileCtlr.user.name}}</h2>
-				<h4>{{profileCtlr.user.email}}</h4>
+		<div class="col-md-3 text-center sidepanel" style="margin-top: 20px;">
+			<img ng-src="{{profileCtlr.user.picture}}" class="img-circle image-contact" ng-if="profileCtlr.user.picture">
+			<img ng-src="{{resources/contact/stormtrooper.jpg}}" class="img-circle image-contact" ng-if="!profileCtlr.user.picture">
+			<span class="profile-name">{{profileCtlr.user.name}}</span>
+			<a href="" class="btn btn-unify-primary btn-block" ng-click="profileCtlr.edit();" style="margin-top: 10px;">Editar perfil</a>
+			<div class="clearfix"></div>
+			<div class="col-md-12 col-sm-12 col-xs-12" style="padding: 15px">
+				<div class="social-network-bullet col-md-12 col-sm-12 col-xs-12">
+					<div class="social-image" ng-class="{'social-image-unlink': !profileCtlr.user.facebook.display_name}">
+						<img ng-src="resources/facebook.png" width="20px">
+					</div>
+					<div class="overflow-x-hidden">
+						<span>
+							{{profileCtlr.user.facebook.display_name ? profileCtlr.user.facebook.display_name : 'Sin Asociar'}}
+						</span>
+					</div>
+				</div>
+				<div class="social-network-bullet col-md-12 col-sm-12 col-xs-12">
+					<div class="social-image" ng-class="{'social-image-unlink': !profileCtlr.user.twitter.username}">
+						<img ng-src="resources/twitter.png" width="20px">
+					</div>
+					<div class="overflow-x-hidden">
+						<span>
+							{{profileCtlr.user.twitter.username ? '@'+profileCtlr.user.twitter.username : 'Sin Asociar'}}
+						</span>
+					</div>
+				</div>
+				<div class="social-network-bullet col-md-12 col-sm-12 col-xs-12">
+					<div class="social-image" ng-class="{'social-image-unlink': !profileCtlr.user.instagram.username }">
+						<img ng-src="resources/instagram.png" width="20px">
+					</div>
+					<div class="overflow-x-hidden">
+						<span>
+							{{profileCtlr.user.instagram.username ? profileCtlr.user.instagram.username : 'Sin Asociar'}}
+						</span>
+					</div>
+				</div>			
+				<div class="social-network-bullet col-md-12 col-sm-12 col-xs-12">
+					<div class="social-image" ng-class="{'social-image-unlink': !profileCtlr.user.google.email}">
+						<img ng-src="resources/gmail.png" width="20px">
+					</div>
+					<div class="overflow-x-hidden">
+						<span>
+							{{profileCtlr.user.google.email ? profileCtlr.user.google.email : 'Sin Asociar'}}
+						</span>
+					</div>
+				</div>
 			</div>
 			<div class="clearfix"></div>
-			<div class="list-group" style="margin-top: 20px;" ng-if="profileCtlr.user.facebook.display_name || profileCtlr.user.twitter.username || profileCtlr.user.instagram.username||profileCtlr.user.google.email">
-				<span class="list-group-item active">Contactos</span>
-				<a class="list-group-item" ng-if="profileCtlr.user.facebook.display_name">
-					<span class="fa fa-facebook"></span> 
-					{{profileCtlr.user.facebook.display_name}}
-				</a>
-				<a class="list-group-item" ng-if="profileCtlr.user.twitter.username">
-					<span class="fa fa-twitter"></span>
-					@{{profileCtlr.user.twitter.username}}
-				</a>
-				<a class="list-group-item" ng-if="profileCtlr.user.instagram.username">
-					<span class="fa fa-instagram"></span> 
-					{{profileCtlr.user.instagram.username}}
-				</a>
-				<a class="list-group-item" ng-if="profileCtlr.user.google.email">
-					<span class="fa fa-google"></span> 
-					{{profileCtlr.user.google.email}}
-				</a>
-			</div>
-			<div class="clearfix"></div>
-			<a style="margin-top: 20px;" class="btn btn-success col-md-8 col-md-offset-2" ui-sref="editProfile" style="margin-top: 5px;">Editar</a>
+			<a class="btn btn-unify-primary btn-block" ui-sref="editProfile">Editar cuentas</a>
 		</div>
-		<div class="col-md-9" style="margin-top: 10px;">
+		<div class="col-md-9" style="margin-top: 10px;" ng-hide="profileCtlr.editProfile">
   			<uw-loader ng-if="!profileCtlr.feed"></uw-loader>
-			<uw-time-line uw-media="profileCtlr.feed" ng-if="profileCtlr.feed" uw-name="profileCtlr.user.name"></uw-time-line>
+			<uw-time-line uw-media="profileCtlr.feed" ng-if="profileCtlr.feed" uw-name="profileCtlr.user.name" uw-picture="profileCtlr.user.picture"></uw-time-line>
+		</div>
+		<div class="col-md-9" ng-show="profileCtlr.editProfile" style="margin-top: 20px;">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+				<span class="title-unify">Editar Perfil</span>
+			</div>
+			<form name="profileForm" ng-submit="profileCtlr.save()" class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-sm-8 form-horizontal" role="form" novalidate>
+					<!--
+					<div class="form-group">
+						 <input type="file" ngf-select ng-model="profileCtlr.newUser.file" name="file"    
+					             accept="image/*" ngf-max-size="2MB" required>
+					      <i ng-show="myForm.file.$error.required">*required</i><br>
+					      <i ng-show="myForm.file.$error.maxSize">File too large 
+					          {{picFile.size / 1000000|number:1}}MB: max {{picFile.$errorParam}}</i> <button ng-click="profileCtlr.newUser.file = null" ng-show="picFile">Remove</button>
+				          <a ng-click="profileCtlr.saveFile()" ng-show="profileCtlr.newUser.file" class="btn btn-unify-primary">Probando</a>
+						<a href="" class="delete-link" ng-click="profileCtlr.newUser.picture=null" ng-if="profileCtlr.newUser.picture"><i class="fa fa-times-circle"></i>Quitar foto</a>
+                    </div>
+					-->
+					<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+						<img ng-src="{{profileCtlr.newUser.picture}}" class="img-circle image-contact" ng-if="profileCtlr.newUser.picture">
+						<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact" ng-if="!profileCtlr.newUser.picture">
+					</div>
+					<div class="profile-pics col-md-12 col-sm-12 col-xs-12 text-center">
+						<div class="row profile-pics-title">
+							Clickéa en la foto que quiears para tu perfil
+						</div>
+						<div class="profile-pics-images col-md-12 col-sm-12 col-xs-12 no-padding text-center">
+							<img ng-src="{{profileCtlr.user.facebook.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.facebook.picture" class="img-circle col-md-3 col-xs-12 col-sm-3">
+							<img ng-src="{{profileCtlr.user.twitter.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.twitter.picture" class="img-circle col-md-3 col-xs-12 col-sm-3">
+							<img ng-src="{{profileCtlr.user.instagram.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.instagram.picture" class="img-circle col-md-3 col-xs-12 col-sm-3">
+							<img ng-src="{{profileCtlr.user.google.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.google.picture" class="img-circle col-md-3 col-xs-12 col-sm-3">
+						</div>
+						<span class="unify-color col-md-12 col-sm-12 col-xs-12">O también podes subir una foto</span>
+						<a href="" class="btn btn-unify-default">Subir</a>
+					</div>
+					<div class="form-group">
+                        <label>{{'logon_name' | translate}}</label>
+                        <input type="text" class="form-control form-input" name="name" ng-model="profileCtlr.newUser.name" required>
+                    </div>
+					<div class="form-group">
+                        <label>{{'logon_email' | translate}}</label>
+                        <input type="email" class="form-control form-input" name="email" ng-model="profileCtlr.newUser.email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'logon_pass' | translate}}</label>
+                        <input type="password" class="form-control form-input" name="password" ng-model="profileCtlr.newUser.password" required>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'logon_confirm_pass' | translate}}</label>
+                        <input type="password" class="form-control form-input" name="password" ng-model="profileCtlr.newUser.confirm_password" required>
+                    </div>
+                    <div class="form-group">
+		                <button type="submit" value="Submit"                                        
+		                        ng-disabled="profileForm.$invalid || profileCtlr.newUser.password!=profileCtlr.newUser.confirm_password"
+		                        ng-click="profileForm.$setPristine()"
+		                        class="btn btn-unify-primary col-md-6 col-sm-6 col-xs-6">Guardar</button>
+		                <a class="btn btn-unify-primary-invert col-md-6 col-sm-6 col-xs-6" ng-click="profileCtlr.editProfile=false;">Cancelar</a>
+	                </div>
+       		</form>
 		</div>
 	</div>
 </div>

@@ -115,6 +115,27 @@ body{
   }
 }
 
+.btn-unify-default{
+  border-radius: 20px;
+  color: #fff;
+  background-color: #00a099;
+  &:hover, &:focus{
+    color: #fff;
+    background-color:lighten(#00a099,10%);
+  }
+}
+
+.btn-unify-default-invert{
+  border-radius: 20px;
+  background-color: #fff;
+  color: #00a099;
+  border: 2px solid #00a099;
+  &:hover, &:focus{
+    background-color: darken(#fff,10%);
+    color: lighten(#00a099,10%);
+    border-color: lighten(#00a099,10%);
+  }
+}
 .dark-link{
   color: #64a59f;
   &:focus{
@@ -151,28 +172,32 @@ body{
 }
 .unify-link{
   color: #dc911a;
-  &:hover{
+  &:hover,
+  &:focus{
     text-decoration: none;
     color: lighten(#dc911a, 10%);
   }
 }
 .move-link{
   color: #867563;
-  &:hover{
+  &:hover,
+  &:focus{
     text-decoration: none;
     color: lighten(#867563, 10%);
   }
 }
 .edit-link{
   color: #827761;
-  &:hover{
+  &:hover,
+  &:focus{
     text-decoration: none;
     color: lighten(#827761, 10%);
   }
 }
 .delete-link{
   color: #a21d22;
-  &:hover{
+  &:hover,
+  &:focus{
     text-decoration: none;
     color: lighten(#a21d22, 10%);
   }

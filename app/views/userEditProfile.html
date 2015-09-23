@@ -1,18 +1,10 @@
 <div id="profile" class="container" ng-controller="ProfileController as profileCtlr">
 	<uw-loader ng-if="!profileCtlr.user"></uw-loader>
 	<div class="content col-md-12" ng-if="profileCtlr.user">
-		<div class="col-md-12 text-center well" style="margin-top: 20px;">
-			<div class="col-md-6">
-				{{'profile_name' | translate}} : 
-				{{profileCtlr.user.name}}
-			</div>
-			<div class="col-md-6">
-				{{'profile_email' | translate}} : 
-				{{profileCtlr.user.email}}
-			</div>
-			<a class="btn btn-primary" ng-click="profileCtlr.edit();" ng-hide="editProfile">Editar</a>
-		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12" ng-hide="profileCtlr.editProfile">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+				<span class="title-unify">Asociar Cuentas</span>
+			</div>
 			<div class="col-xs-12 col-sm-12 col-md-6">
 				<div class="social-add-panel font-thin col-md-6 col-md-offset-6 col-sm-6 col-sm-offset-3 col-xs-12"	ng-class="{'social-add-panel-linked': profileCtlr.user.facebook}">
 			    	<div class="col-md-10 col-md-offset-1 title-media">
@@ -154,34 +146,7 @@
 				</div>
 			</div>
 			<div class="clearfix"></div>
-		</div>
-		<div class="clearfix"></div>
-		<div class="row" ng-show="profileCtlr.editProfile">
-			<form name="profileForm" ng-submit="profileCtlr.save()" class="col-md-6 col-md-offset-3 form-horizontal" role="form" novalidate>
-					<div class="form-group">
-                        <label>{{'logon_name' | translate}}</label>
-                        <input type="text" class="form-control" name="name" ng-model="profileCtlr.newUser.name" required>
-                    </div>
-					<div class="form-group">
-                        <label>{{'logon_mail' | translate}}</label>
-                        <input type="email" class="form-control" name="email" ng-model="profileCtlr.newUser.email" required>
-                    </div>
-                    <div class="form-group">
-                        <label>{{'logon_pass' | translate}}</label>
-                        <input type="password" class="form-control" name="password" ng-model="profileCtlr.newUser.password" required>
-                    </div>
-                    <div class="form-group">
-                        <label>{{'logon_confirm_pass' | translate}}</label>
-                        <input type="password" class="form-control" name="password" ng-model="profileCtlr.newUser.confirm_password" required>
-                    </div>
-                    <div class="form-group">
-		                <button type="submit" value="Submit"                                        
-		                        ng-disabled="commentForm.$invalid"
-		                        ng-click="commentForm.$setPristine()"
-		                        class="btn btn-primary col-md-6">Guardar</button>
-		                <a class="btn btn-danger col-md-6" ng-click="profileCtlr.editProfile=false;">Cancelar</a>
-	                </div>
-       		</form>
+			<a ui-sref="profile" class="btn btn-unify-primary col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3 col-xs-offset-0" style="margin-top:20px;">OK</a>
 		</div>
 	</div>
 </div>

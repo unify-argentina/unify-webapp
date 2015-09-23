@@ -16,7 +16,8 @@ unifyApp.factory('ProfileService', 	function($http, $resource, ENV) {
 					email : user.email, 
 					name : user.name, 
 					password : user.password, 
-					confirm_password : user.confirm_password
+					confirm_password : user.confirm_password,
+					picture : user.picture
 				}
 			).then(function(response) {	
         		return response.data;

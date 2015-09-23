@@ -1,4 +1,4 @@
-unifyApp.controller("ProfileController", function (ProfileService, AuthenticationService) {
+unifyApp.controller("ProfileController", function (ProfileService, FileService, AuthenticationService) {
 
 	var profileCtlr = this;
 
@@ -21,8 +21,17 @@ unifyApp.controller("ProfileController", function (ProfileService, Authenticatio
 		profileCtlr.newUser={};
 		profileCtlr.newUser.name=profileCtlr.user.name;
 		profileCtlr.newUser.email=profileCtlr.user.email;
+		profileCtlr.newUser.picture=profileCtlr.user.picture;
 		profileCtlr.editProfile=true;
 	}
+
+	profileCtlr.saveFile = function(){
+		FileService.saveFile(
+			profileCtlr.newUser.file
+		).then(function(data) {
+			console.log(data);
+		});
+	};
 
 	profileCtlr.save = function(){
 		ProfileService.saveUser(
@@ -31,6 +40,7 @@ unifyApp.controller("ProfileController", function (ProfileService, Authenticatio
 		).then(function(data) {
 			profileCtlr.user.name=profileCtlr.newUser.name;
 			profileCtlr.user.email=profileCtlr.newUser.email;
+			profileCtlr.user.picture=profileCtlr.newUser.picture;
 			profileCtlr.editProfile=false;
 		});
 	};
