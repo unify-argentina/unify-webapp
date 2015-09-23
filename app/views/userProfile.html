@@ -3,7 +3,7 @@
 	<div class="content col-md-12 no-padding" ng-if="profileCtlr.user">
 		<div class="col-md-3 text-center sidepanel" style="margin-top: 20px;">
 			<img ng-src="{{profileCtlr.user.picture}}" class="img-circle image-contact" ng-if="profileCtlr.user.picture">
-			<img ng-src="{{resources/contact/stormtrooper.jpg}}" class="img-circle image-contact" ng-if="!profileCtlr.user.picture">
+			<img ng-src="resources/contact/stormtrooper.jpg" class="img-circle image-contact" ng-if="!profileCtlr.user.picture">
 			<span class="profile-name">{{profileCtlr.user.name}}</span>
 			<a href="" class="btn btn-unify-primary btn-block" ng-click="profileCtlr.edit();" style="margin-top: 10px;">Editar perfil</a>
 			<div class="clearfix"></div>

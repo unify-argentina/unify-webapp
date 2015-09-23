@@ -3,7 +3,7 @@
 	<div class="content col-md-12 no-padding" ng-if="contactProfileCtrl.contact">
 	<div class="col-md-3 text-center sidepanel" style="margin-top: 20px;">
 			<img ng-src="{{contactProfileCtrl.contact.picture}}" class="img-circle image-contact" ng-if="contactProfileCtrl.contact.picture">
-			<img ng-src="{{resources/contact/stormtrooper.jpg}}" class="img-circle image-contact" ng-if="!contactProfileCtrl.contact.picture">
+			<img ng-src="resources/contact/stormtrooper.jpg" class="img-circle image-contact" ng-if="!contactProfileCtrl.contact.picture">
 			<span class="profile-name">{{contactProfileCtrl.contact.name}}</span>
 			<a href="" class="btn btn-unify-primary btn-block" ng-click="contactProfileCtrl.edit();" style="margin-top: 10px;">Editar</a>
 			<div class="clearfix"></div>
