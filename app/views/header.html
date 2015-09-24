@@ -18,8 +18,14 @@
         <li><a ui-sref="emails"><i class="fa fa-envelope-o fa-2x"></i><br>Mail</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a ui-sref="profile">{{mainController.user}}</a></li>
-        <li><a href="" ng-click="mainController.logout();">Cerrar Sesión</a></li>
+        <li>
+         
+          <a ui-sref="profile">
+              <img ng-src="{{mainController.picture}}" class="img-circle image-contact-small" ng-if="mainController.picture">
+              <img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!mainController.picture">
+            <span class="profile">{{mainController.user}}</span></a>
+        </li>
+        <li><a href="" ng-click="mainController.logout();"><i class="fa fa-sign-out fa-2x"></i><br>Cerrar Sesión</a></li>
     </div>
   </div>
 </nav>

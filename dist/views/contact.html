@@ -2,7 +2,7 @@
   	<uw-loader ng-if="!contactCtrl.contact"></uw-loader>
 	<div class="text-center" ng-if="contactCtrl.contact">
 		<img ng-src="{{contactCtrl.contact.picture}}" class="img-circle image-contact" ng-if="contactCtrl.contact.picture">
-		<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact" ng-if="!contactCtrl.contact.picture">
+		<img src="resources/contact/pulpix.png" class="img-circle image-contact" ng-if="!contactCtrl.contact.picture">
 		<input class="form-control" ng-model="contactCtrl.contact.name"/>
 		<div style="margin-top: 10px;">
 			<a class="btn btn-success" ng-click="contactCtrl.saveContact();" ng-if="!uwContactId">Guardar Contacto</a>
@@ -15,7 +15,7 @@
 		<div ng-if="contactCtrl.friends">
 			<div class="col-md-4 form-group" style="margin-top: 20px;" ng-if="contactCtrl.friends.facebook_friends">
 				<img ng-src="{{contactCtrl.contact.facebook.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.facebook.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.facebook.picture;contactCtrl.contact.name=contactCtrl.contact.facebook.name;">
-				<img src="resources/contact/stormtrooper.jpg" class="img-circle image-social" ng-if="!contactCtrl.contact.facebook.picture">
+				<img src="resources/contact/pulpix.png" class="img-circle image-social" ng-if="!contactCtrl.contact.facebook.picture">
 				<label class="form-label">Nombre:</label>
 				<input class="form-control" ng-model="contactCtrl.contact.facebook.name"/ readonly="true">
 	       		<select class="form-control" ng-model="contactCtrl.contact.facebook" ng-options="friend.name for friend in contactCtrl.friends.facebook_friends.list" size="10">
@@ -24,7 +24,7 @@
 	       	</div>
 			<div class="col-md-4 form-group" style="margin-top: 20px;" ng-if="contactCtrl.friends.twitter">
 				<img ng-src="{{contactCtrl.contact.twitter.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.twitter.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.twitter.picture;contactCtrl.contact.name=contactCtrl.contact.twitter.name;">
-				<img src="resources/contact/stormtrooper.jpg" class="img-circle image-social" ng-if="!contactCtrl.contact.twitter.picture">
+				<img src="resources/contact/pulpix.png" class="img-circle image-social" ng-if="!contactCtrl.contact.twitter.picture">
 				<label class="form-label">Nombre:</label>
 				<input class="form-control" ng-model="contactCtrl.contact.twitter.name"/ readonly="true">
 	       		<select class="form-control"  ng-model="contactCtrl.contact.twitter" ng-options="friend.name for friend in contactCtrl.friends.twitter.list" size="10">
@@ -33,7 +33,7 @@
 	      	</div>
 			<div class="col-md-4 form-group" style="margin-top: 20px;" ng-if="contactCtrl.friends.instagram">
 				<img ng-src="{{contactCtrl.contact.instagram.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.instagram.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.instagram.picture;contactCtrl.contact.name=contactCtrl.contact.instagram.name;">
-				<img src="resources/contact/stormtrooper.jpg" class="img-circle image-social" ng-if="!contactCtrl.contact.instagram.picture">
+				<img src="resources/contact/pulpix.png" class="img-circle image-social" ng-if="!contactCtrl.contact.instagram.picture">
 				<label class="form-label">Nombre:</label>
 				<input class="form-control" ng-model="contactCtrl.contact.instagram.username"/ readonly="true">
 	       		<select class="form-control" ng-model="contactCtrl.contact.instagram" ng-options="friend.username for friend in contactCtrl.friends.instagram.list" size="10">

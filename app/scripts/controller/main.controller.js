@@ -14,6 +14,7 @@ unifyApp.controller("MainController", function ($translate, $auth, ENV, ProfileS
 		},function(response){
 			if(response.user.name!=null){
 				mainController.user=response.user.name;
+				mainController.picture=response.user.picture;
 			}else{
 				if(response.user.mail!=null){
 					mainController.user=response.user.mail;
