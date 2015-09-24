@@ -12,8 +12,14 @@
 	    margin-top: -5px;
     }
     .name{
-    	font-size: 1.286em;
-    	color: #63a5a1;
+        a{
+        	font-size: 1.286em;
+        	color: #63a5a1;
+            &:hover,&:focus{
+                color: #63a5a1;
+                text-decoration: none;
+            }
+        }
     }
     .date{
     	position: relative;
