@@ -7,5 +7,9 @@ angular.module('unifyApp').config(function ($stateProvider, $urlRouterProvider) 
     url: '/',
     templateUrl: 'views/main.html'
   });
-  
+
+  $stateProvider.state('privacy', {
+    url: '/privacy',
+    templateUrl: 'views/privacy.html'
+  });
  });
