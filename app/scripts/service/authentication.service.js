@@ -47,7 +47,6 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 		}).then(function(response) {
 			setUserId(response.data.user._id);
 			setMainCircleId(response.data.user.main_circle._id);
-			localStorage.setItem('response', JSON.stringify(response));
 	        console.log('You have successfully logged in: '+response.data.token); 
 			$window.location.href = "/";
 	      })
@@ -64,7 +63,6 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 	    }).then(function(response) {
 			setUserId(response.data.user._id);
 			setMainCircleId(response.data.user.main_circle._id);
-	        localStorage.setItem('response', JSON.stringify(response));
 	        console.log('You have successfully logged in: '+response.data.token); 
 			$window.location.href = "/";
 		})
@@ -79,7 +77,6 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 		.then(function(response) {
 			setUserId(response.data.user._id);
 			setMainCircleId(response.data.user.main_circle._id);
-			localStorage.setItem('response', JSON.stringify(response));
 			console.log('You have successfully logged in: '+response.data.token); 
 			$window.location.href = "/";
 		})
@@ -100,7 +97,6 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 		}
 		$http(req)
 		.then(function(response) {
-	    	localStorage.setItem('response', JSON.stringify(response));
 	    	localStorage.setItem('satellizer_token', response.data.token);
 	        console.log('You have successfully unlogged in: '+response.data.token); 
 			$window.location.href = "/";

@@ -61,7 +61,6 @@
 				<span class="title-unify">Editar Perfil</span>
 			</div>
 			<form name="profileForm" ng-submit="profileCtlr.save()" class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-sm-8 form-horizontal" role="form" novalidate>
-					<!--
 					<div class="form-group">
 						 <input type="file" ngf-select ng-model="profileCtlr.newUser.file" name="file"    
 					             accept="image/*" ngf-max-size="2MB" required>
@@ -71,7 +70,6 @@
 				          <a ng-click="profileCtlr.saveFile()" ng-show="profileCtlr.newUser.file" class="btn btn-unify-primary">Probando</a>
 						<a href="" class="delete-link" ng-click="profileCtlr.newUser.picture=null" ng-if="profileCtlr.newUser.picture"><i class="fa fa-times-circle"></i>Quitar foto</a>
                     </div>
-					-->
 					<div class="col-md-12 col-sm-12 col-xs-12 text-center">
 						<img ng-src="{{profileCtlr.newUser.picture}}" class="img-circle image-contact" ng-if="profileCtlr.newUser.picture">
 						<img src="resources/contact/stormtrooper.jpg" class="img-circle image-contact" ng-if="!profileCtlr.newUser.picture">
