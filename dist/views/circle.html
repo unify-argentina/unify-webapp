@@ -57,6 +57,7 @@
 			</div>
 			<div class="col-md-12 no-padding" ng-show="circleCtrl.createCircle">
 				<form name="newCircleForm" ng-submit="circleCtrl.saveCircle()" class="form-horizontal" role="form" novalidate>
+                    <label>Ingresá en nombre del nuevo grupo:</label>
 					<input type="text" class="form-control form-input unify-border" name="circleCtrl.newCircle" ng-model="circleCtrl.newCircle.name" required>
 					<div style="margin-top: 10px;">
 						 <button type="submit" value="Submit" ng-disabled="newCircleForm.$invalid" ng-click="newCircleForm.$setPristine()" class="btn btn-unify-primary col-md-6">Crear</button>
@@ -66,6 +67,7 @@
 			</div>
 			<div class="col-md-12 no-padding" ng-show="circleCtrl.editingCircle">
 				<form name="updateCircleForm" ng-submit="circleCtrl.updateCircle()" class="form-horizontal" role="form" novalidate>
+                    <label>Ingresá el nombre del grupo:</label>
 					<input type="text" class="form-control form-input unify-border" name="circleCtrl.newCircle" ng-model="circleCtrl.editCircle.name" required>
 					<div style="margin-top: 10px;">
 						<button type="submit" value="Submit" ng-disabled="updateCircleForm.$invalid" ng-click="updateCircleForm.$setPristine()" class="btn btn-unify-primary col-md-6">Guardar</button>

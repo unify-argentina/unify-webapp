@@ -71,14 +71,14 @@
 				          <a ng-click="profileCtlr.saveFile()" ng-show="profileCtlr.newUser.file" class="btn btn-unify-primary">Probando</a>
 						<a href="" class="delete-link" ng-click="profileCtlr.newUser.picture=null" ng-if="profileCtlr.newUser.picture"><i class="fa fa-times-circle"></i>Quitar foto</a>
                     </div>
-					-->
+                    -->
 					<div class="col-md-12 col-sm-12 col-xs-12 text-center">
 						<img ng-src="{{profileCtlr.newUser.picture}}" class="img-circle image-contact" ng-if="profileCtlr.newUser.picture">
 						<img src="resources/contact/pulpix.png" class="img-circle image-contact" ng-if="!profileCtlr.newUser.picture">
 					</div>
 					<div class="profile-pics col-md-12 col-sm-12 col-xs-12 text-center">
 						<div class="row profile-pics-title">
-							Clickéa en la foto que quiears para tu perfil
+							Clickéa en la foto que quieras para tu perfil
 						</div>
 						<div class="profile-pics-images col-md-12 col-sm-12 col-xs-12 no-padding text-center">
 							<img ng-src="{{profileCtlr.user.facebook.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.facebook.picture" class="img-circle col-md-3 col-xs-12 col-sm-3">
