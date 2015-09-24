@@ -110,7 +110,6 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 		}else{
 			_.pull(mailCtlr.email_ids,mail.id);
 		}
-		console.log(mailCtlr.email_ids);
 	};
 
 	mailCtlr.getMail = function(mail){

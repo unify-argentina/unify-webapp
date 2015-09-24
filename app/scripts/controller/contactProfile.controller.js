@@ -1,4 +1,4 @@
-unifyApp.controller("ContactProfileController", function ($scope, $stateParams, ContactService, AuthenticationService) {
+unifyApp.controller("ContactProfileController", function ($scope, $state, $stateParams, ContactService, AuthenticationService) {
 
 	var contactCtrl = this;
 
@@ -32,6 +32,14 @@ unifyApp.controller("ContactProfileController", function ($scope, $stateParams, 
 		contactCtrl.editContact = false;
 	};
 
+	contactCtrl.deleteContact = function(contact_id){
+		ContactService.contact.delete({
+			user_id : AuthenticationService.getUserId(),
+			contact_id : contact_id
+		},function(response){
+			$state.go("dashboard");
+		});
+	};
 
 	contactCtrl.getContactFeed = function(){
 		contactCtrl.feed=null;

@@ -55,6 +55,30 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 			return promise;
 		};
 
+		var getCircleList = function(user_id, circle_id){
+			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/circle/'+circle_id+'/tree')
+			 .then(function(response) {	
+			 	var list=[];
+        		treeToList(response.data.tree[0], list, 0);
+        		return list;
+			});
+			return promise;
+		};
+
+		var treeToList = function(tree, list, level){
+			var group = {};
+			group._id = tree._id;
+			group.name = tree.name;
+			group.level = level;
+			list.push(group);
+			if(tree.subcircles.length > 0){
+				level++;
+				_(tree.subcircles).forEach(function(subcircle) {
+					treeToList(subcircle, list, level);
+				}).value();	
+			}
+		};
+
 		var getCircleFeed = function(user_id, circle_id){
 			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/circle/'+circle_id+'/media')
 			 .then(function(response) {	
@@ -66,11 +90,14 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 			return promise;
 		};
 
+		
+
 	return{
 		circle 			: circle,
 		saveCircle		: saveCircle,
 		updateCircle	: updateCircle,
 		getCircleTree	: getCircleTree,
+		getCircleList	: getCircleList,
 		getCircleFeed	: getCircleFeed
 	}
 });

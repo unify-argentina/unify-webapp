@@ -1,4 +1,4 @@
-unifyApp.controller("ContactController", function ($scope, $state, $interval, ContactService, AuthenticationService) {
+unifyApp.controller("ContactController", function ($scope, $state, $interval, ContactService, CircleService, AuthenticationService) {
 
 	var contactCtrl = this;
 
@@ -40,6 +40,14 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 		}
 	};
 
+	contactCtrl.check = function(circle){
+		if(circle.checked){
+			contactCtrl.contact.circles_ids.push(circle._id);
+		}else{
+			_.pull(contactCtrl.contact.circles_ids,circle._id);
+		}
+	};
+
 	contactCtrl.deleteContact = function(contact_id){
 		ContactService.contact.delete({
 			user_id : AuthenticationService.getUserId(),
@@ -56,8 +64,6 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 
 	contactCtrl.saveContact = function(){
 		contactCtrl.contact.user_id = AuthenticationService.getUserId();
-		contactCtrl.contact.circles_ids=[];
-		contactCtrl.contact.circles_ids.push(contactCtrl.circle_id);
 		ContactService.saveContact(
 			contactCtrl.contact
 		).then(function(data) {
@@ -81,11 +87,26 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 		contactCtrl.editProfile = false;
 	};
 
+	contactCtrl.getCircleList = function(){
+		CircleService.getCircleList(
+			AuthenticationService.getUserId(),
+			AuthenticationService.getMainCircleId()
+		).then(function(data) {
+			contactCtrl.list=data;
+			_(contactCtrl.list).forEach(function(circle) {
+				console.log(circle);
+				circle.checked=_.includes(contactCtrl.contact.circles_ids, circle._id);
+			}).value();
+		});
+	};
+
 	$scope.$watch('contactCtrl.parentController.editContact', function(newValue, oldValue) {
 		if(newValue==true && contactCtrl.contact_id){
-				contactCtrl.getContact(contactCtrl.contact_id);
+			contactCtrl.getContact(contactCtrl.contact_id);
 		}else{
 			contactCtrl.contact = {};
+			contactCtrl.contact.circles_ids = [];
+			contactCtrl.contact.circles_ids.push(contactCtrl.circle_id);
 		}
 	});
 
@@ -97,7 +118,6 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 			AuthenticationService.getUserFriends(
 				AuthenticationService.getUserId()
 			).then(function(data){
-				console.log(data);
 				contactCtrl.friends=data;
 				var pages={};
 				pages.name="---Páginas de Facebook---"
@@ -105,10 +125,18 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 				contactCtrl.friends.facebook_friends.list=contactCtrl.friends.facebook_friends.list.concat(contactCtrl.friends.facebook_pages.list);
 				if(contactCtrl.contact_id){
 					contactCtrl.getContact(contactCtrl.contact_id);
+				}else{
+					contactCtrl.contact.circles_ids = [];
+					contactCtrl.contact.circles_ids.push(contactCtrl.circle_id);
 				}
+				contactCtrl.getCircleList();
 			});
 		}else{
 			contactCtrl.friends=AuthenticationService.getFriends();
+			if(contactCtrl.contact_id){
+				contactCtrl.getContact(contactCtrl.contact_id);
+			}
+			contactCtrl.getCircleList();
 		}
 	};
 

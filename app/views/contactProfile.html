@@ -39,9 +39,12 @@
 					</div>
 				</div>		
 			</div>
+			<div class="col-md-12 no-padding text-center">
+				<a href="" class="delete-link no-padding" ng-click="contactProfileCtrl.deleteContact(contactProfileCtrl.contact._id);"><i class="fa fa-times-circle"></i>Eliminar Contacto</a>
+			</div>
 		</div>
 		<div class="col-md-9">
-		<uw-contact-data uw-contact-id="contactProfileCtrl.contact._id"  uw-circle-id="contactProfileCtrl.contact.parents[0]._id" uw-parent-controller="contactProfileCtrl" ng-show="contactProfileCtrl.editContact"></uw-contact-data>
+		<uw-contact-data uw-contact-id="contactProfileCtrl.contact._id"  uw-parent-controller="contactProfileCtrl" ng-show="contactProfileCtrl.editContact"></uw-contact-data>
 			<div ng-show="!contactProfileCtrl.editContact" style="margin-top: 10px;">
 				<uw-loader ng-if="!contactProfileCtrl.feed"></uw-loader>
 				<uw-time-line uw-media="contactProfileCtrl.feed" ng-if="contactProfileCtrl.feed" uw-name="contactProfileCtrl.contact.name" uw-picture="contactProfileCtrl.contact.picture"></uw-time-line>
