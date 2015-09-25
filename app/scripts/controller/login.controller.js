@@ -30,6 +30,21 @@ unifyApp.controller("LoginController", function ($scope, $auth, $window, $docume
 		});
     };
 
+  	lgnCtrl.recoverPassword = function() {
+  		console.log("1");
+    	AuthenticationService.recoverPassword(lgnCtrl.user.email)
+		.then(function(response) {
+  			console.log("3");
+  			if(!response.errors){
+	  			lgnCtrl.isLogin=true; 
+	  			lgnCtrl.isSignUp=false; 
+	  			lgnCtrl.isRecover=false;
+	  		}else{
+				lgnCtrl.errors=response.errors;
+	  		}
+		});
+    };
+
     lgnCtrl.isLogin=true; lgnCtrl.isSignUp=false;
 
   	var ocean = angular.element(".ocean"),

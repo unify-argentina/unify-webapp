@@ -1,7 +1,7 @@
 <div id="contactProfile" class="container" ng-controller="ContactProfileController as contactProfileCtrl">
   	<uw-loader ng-if="!contactProfileCtrl.contact"></uw-loader>
 	<div class="content col-md-12 no-padding" ng-if="contactProfileCtrl.contact">
-	<div class="col-md-3 text-center sidepanel" style="margin-top: 20px;">
+	<div class="col-md-3 text-center sidepanel  fadeInLeft animated" style="margin-top: 20px;">
 			<img ng-src="{{contactProfileCtrl.contact.picture}}" class="img-circle image-contact" ng-if="contactProfileCtrl.contact.picture">
 			<img ng-src="resources/contact/pulpix.png" class="img-circle image-contact" ng-if="!contactProfileCtrl.contact.picture">
 			<span class="profile-name">{{contactProfileCtrl.contact.name}}</span>

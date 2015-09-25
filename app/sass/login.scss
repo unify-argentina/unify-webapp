@@ -228,3 +228,26 @@ http://thecodeplayer.com/walkthrough/pure-css3-animated-clouds-background */
 	0% {margin-left: 1000px;}
 	100% {margin-left: -1000px;}
 }
+
+@media (max-width: $screen-xs-max) {
+    .ocean{
+        display: none!important;
+    }
+    .sea{
+        display: none!important;
+    }
+}
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    .ocean{
+        display: none!important;
+    }
+    .sea{
+        display: none!important;
+    }
+}
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+
+}
+@media (min-width: $screen-lg-min) {
+
+}

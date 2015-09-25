@@ -118,6 +118,18 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 		return promise;
 	};
 
+	var recoverPassword = function(email){
+		var promise = $http.post(ENV.apiEndPoint + '/auth/recover', 
+			{
+				email : email,
+			}
+		).then(function(response) {	
+			console.log("2");
+    		return response.data;
+		});
+		return promise;
+	};
+
 	var logout = function(){
 		localStorage.clear();
 		$window.location.href = "/";
@@ -132,7 +144,8 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 		getMainCircleId	: getMainCircleId,
 		getFriends		: getFriends,
 		getUserFriends	: getUserFriends,
-		logout			: logout
+		logout			: logout,
+		recoverPassword	: recoverPassword
     };
 
 });

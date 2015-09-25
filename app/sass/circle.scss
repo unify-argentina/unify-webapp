@@ -5,24 +5,24 @@
 
 .image-profile{
     display: block;
-    height:  100px;
-    width:  100px;
+    height:  150px;
+    width:  150px;
     margin: 0 auto;  
     overflow: hidden;
 }
 
 .image-profile-half{
     display: block;
-    height:  100px;
-    width:  100px;
+    height:  150px;
+    width:  150px;
     margin: 0 auto;
     overflow: hidden;
 }
 
 .image-profile-quarter{
     display: block;
-    height:  50px;
-    width:  50px;
+    height:  75px;
+    width:  75px;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -69,3 +69,21 @@
     padding-left: 15px;
 }
 
+.circle-lvl-1{
+    padding-left: 15px;
+}
+.circle-lvl-2{
+    padding-left: 30px;
+}
+.circle-lvl-3{
+    padding-left: 45px;
+}
+.circle-lvl-4{
+    padding-left: 60px;
+}
+.circle-lvl-5{
+    padding-left: 75px;
+}
+.circle-lvl-6{
+    padding-left: 90px;
+}

@@ -1,11 +1,11 @@
 <div class="col-md-12" ng-controller="VideoController as videoController" ng-init="videoController.addSource(videoSrc);"> 
 	<span class="col-md-12">{{post.text}}</span>
-	<button type="button" class="btn btn-default" ng-click="open(videoSrc)">Open me!</button>
+	<button type="button" class="btn btn-unify-primary" ng-click="open(videoSrc)">Ver video</button>
 
-	<div class="probando">
+	<div>
 	    <script type="text/ng-template" id="myModalContent.html">
-	       <div >
-	            <section class="ng-video-container">
+	       <div>
+	            <section class="ng-video-container col-md-12 col-sm-12 col-xs-12">
 				    <section class="video" ng-video>
 				        <video vi-screen></video>
 				        <section vi-controls class="controls">
