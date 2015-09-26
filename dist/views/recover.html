@@ -1,4 +1,4 @@
- <section id="loginForm" class="sign-in-up-section">
+ <section id="recoverForm" class="sign-in-up-section">
   	<div class="container">
         <div class="row">
 			<div class="col-md-12">
@@ -9,29 +9,25 @@
 	            <div class="col-md-12 col-xs-10 col-xs-offset-1 text-center no-padding">
 	            	<img src="resources/unify-logo.png"></img>
 	            	<div class="title-logon">
-						{{'logon_login' | translate}}
-	            	</div>        
-
-	            	<form name="loginForm" ng-submit="lgnCtrl.login()"
+						Recuperar contraseña
+	            	</div>   
+					
+	            	<form name="recoverForm" ng-submit="lgnCtrl.recoverPassword();"
                       class="form-horizontal" role="form" novalidate>
 	               		<div class="form-group">
+	               			<label>Por favor ingresá tu email y te enviaremos una nueva contraseña.</label>
 		                  	<input class="form-control" ng-class="{'form-input':lgnCtrl.user.email, 'form-empty':!lgnCtrl.user.email}" ng-model="lgnCtrl.user.email" id="email" type='email' tabindex="1" placeholder="{{'logon_mail_placeholder' | translate}}" required/>
-						</div>
-		                <div class="form-group">
-		                	<input id="pass" type='password' ng-model="lgnCtrl.user.password" tabindex="2" class="form-control" ng-class="{'form-input':lgnCtrl.user.password, 'form-empty':!lgnCtrl.user.password}" placeholder="{{'logon_pass' | translate}}" required/>
 		                </div>
 			            <div class="row">
                             <button type="submit" value="Submit"                                        
-                                    ng-disabled="loginForm.$invalid"
-                                    ng-click="loginForm.$setPristine()"
-                                    class="btn btn-unify-primary btn-block">{{'logon_ingresar' | translate}}</button>
+                                    ng-disabled="recoverForm.$invalid"
+                                    ng-click="recoverForm.$setPristine()"
+                                    class="btn btn-unify-primary btn-block">Enviar</button>
                         </div>
                     </form>
 
 	                <section class="sign-in-up-links text-center">
-	 	    			<a href="" ng-click="lgnCtrl.isLogin=false; lgnCtrl.isSignUp=false; lgnCtrl.isRecover=true;" class="dark-link">{{'logon_pass_forgot' | translate}}</a> 
-		                  <span class="dark-link">·</span> 
-		                  <a ng-click="lgnCtrl.isLogin=false; lgnCtrl.isRecover=false; lgnCtrl.isSignUp=true;" href="" class="dark-link">{{'logon_signUp' | translate}}</a>
+	 	    			<a ng-click="lgnCtrl.isSignUp=false; lgnCtrl.isRecover=false; lgnCtrl.isLogin=true;" href="" class="dark-link font-18">¿Recordaste tu contraseña? Iniciá sesión</a>
 	                  </p>
 	                </section>
 	                <div class="text-center">

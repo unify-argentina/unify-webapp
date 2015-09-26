@@ -1,7 +1,7 @@
 <div id="profile" class="container" ng-controller="ProfileController as profileCtlr">
   	<uw-loader ng-if="!profileCtlr.user"></uw-loader>
 	<div class="content col-md-12 no-padding" ng-if="profileCtlr.user">
-		<div class="col-md-3 text-center sidepanel" style="margin-top: 20px;">
+		<div class="col-md-3 text-center sidepanel fadeInLeft animated" style="margin-top: 20px;">
 			<img ng-src="{{profileCtlr.user.picture}}" class="img-circle image-contact" ng-if="profileCtlr.user.picture">
 			<img ng-src="resources/contact/pulpix.png" class="img-circle image-contact" ng-if="!profileCtlr.user.picture">
 			<span class="profile-name">{{profileCtlr.user.name}}</span>
@@ -56,7 +56,7 @@
   			<uw-loader ng-if="!profileCtlr.feed"></uw-loader>
 			<uw-time-line uw-media="profileCtlr.feed" ng-if="profileCtlr.feed" uw-name="profileCtlr.user.name" uw-picture="profileCtlr.user.picture"></uw-time-line>
 		</div>
-		<div class="col-md-9" ng-show="profileCtlr.editProfile" style="margin-top: 20px;">
+		<div class="col-md-9 fadeInRight animated" ng-show="profileCtlr.editProfile" style="margin-top: 20px;">
 			<div class="col-md-12 col-sm-12 col-xs-12 text-center">
 				<span class="title-unify">Editar Perfil</span>
 			</div>

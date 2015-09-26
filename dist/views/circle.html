@@ -1,44 +1,44 @@
 <div id="circle" class="container" ng-controller="CircleController as circleCtrl">
   	<uw-loader ng-if="!circleCtrl.circle"></uw-loader>
 	<div class="content col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.circle">
-		<div class="col-md-3 text-center" style="margin-top: 20px;">
+		<div class="col-md-3 text-center fadeInLeft animated" style="margin-top: 20px;">
 			<div ng-show="!circleCtrl.createCircle && !circleCtrl.editingCircle">
 				<a href="" ng-click="circleCtrl.goToParent();" ng-show="circleCtrl.circle.parent" class="unify-link"><i class="fa fa-chevron-circle-up"></i>Subir un nivel</a>
-				<div class="col-md-12 no-padding">
+				<div class="col-md-12 col-sm-12 col-xs-12  no-padding">
 					<img ng-src="{{circleCtrl.circle.picture}}" class="img-circle image-profile" ng-if="circleCtrl.circle.picture">
 
 					<div ng-if="!circleCtrl.circle.picture" class="img-circle image-profile overflow-hidden">
-						<img src="resources/circle/circle.png" class="col-md-12 no-padding" ng-if="circleCtrl.contactSize==0">
+						<img src="resources/circle/circle.png" class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.contactSize==0">
 						
 						<div ng-if="circleCtrl.contactSize==1" class="img-circle image-profile">
-							<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="col-md-12 no-padding" >
+							<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="col-md-12 col-sm-12 col-xs-12 no-padding" >
 						</div>
 
 						<div ng-if="circleCtrl.contactSize==2" class="img-circle image-profile">
-							<div class="col-md-6 no-padding">
+							<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
 								<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="image-profile-half">
 							</div>
-							<div class="col-md-6 no-padding">
+							<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
 								<img ng-src="{{circleCtrl.imagesCircle[1].picture}}" class="image-profile-half">
 							</div>
 						</div>
 						
 						<div ng-if="circleCtrl.contactSize==3" class="img-circle image-profile overflow-hidden">
-							<div class="col-md-6 no-padding">
+							<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
 								<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="image-profile-half">
 							</div>
-							<div class="col-md-6 no-padding">
+							<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
 								<img ng-src="{{circleCtrl.imagesCircle[1].picture}}" class="image-profile-quarter">
 								<img ng-src="{{circleCtrl.imagesCircle[2].picture}}" class="image-profile-quarter">
 							</div>
 						</div>
 						
 						<div ng-if="circleCtrl.contactSize>=4" class="img-circle image-profile overflow-hidden">
-							<div class="col-md-6 no-padding">
+							<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
 								<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="image-profile-quarter">
 								<img ng-src="{{circleCtrl.imagesCircle[1].picture}}" class="image-profile-quarter">
 							</div>
-							<div class="col-md-6 no-padding">
+							<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
 								<img ng-src="{{circleCtrl.imagesCircle[2].picture}}" class="image-profile-quarter">
 								<img ng-src="{{circleCtrl.imagesCircle[3].picture}}" class="image-profile-quarter">
 							</div>
@@ -94,7 +94,7 @@
 			<uw-contact-data uw-circle-id="circleCtrl.circle_id" uw-parent-controller="circleCtrl" ng-if="circleCtrl.editContact"></uw-contact-data>
 			<div ng-show="!circleCtrl.editContact" style="margin-top: 10px;">
   				<uw-loader ng-if="!circleCtrl.feed"></uw-loader>
-				<uw-time-line uw-media="circleCtrl.feed" ng-if="circleCtrl.feed"></uw-time-line>
+				<uw-time-line class="fadeInDown animated" uw-media="circleCtrl.feed" ng-if="circleCtrl.feed"></uw-time-line>
 			</div>
 		</div>
 	</div>
