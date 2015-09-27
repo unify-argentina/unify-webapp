@@ -62,7 +62,15 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 		contactCtrl.contact = {};
 	};
 
-	contactCtrl.saveContact = function(){
+	contactCtrl.saveContact = function(id){
+		if(id){
+			contactCtrl.updateContact();
+		}else{
+			contactCtrl.saveNewContact();
+		}
+	};
+
+	contactCtrl.saveNewContact = function(){
 		contactCtrl.contact.user_id = AuthenticationService.getUserId();
 		ContactService.saveContact(
 			contactCtrl.contact
@@ -97,6 +105,19 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 				console.log(circle);
 				circle.checked=_.includes(contactCtrl.contact.circles_ids, circle._id);
 			}).value();
+		});
+	};
+
+	contactCtrl.refreshFriends = function(){
+		contactCtrl.friends=null;
+		AuthenticationService.getUserFriends(
+			AuthenticationService.getUserId()
+		).then(function(data){
+			contactCtrl.friends=data;
+			var pages={};
+			pages.name="---Páginas de Facebook---"
+			contactCtrl.friends.facebook_friends.list.push(pages);
+			contactCtrl.friends.facebook_friends.list=contactCtrl.friends.facebook_friends.list.concat(contactCtrl.friends.facebook_pages.list);
 		});
 	};
 

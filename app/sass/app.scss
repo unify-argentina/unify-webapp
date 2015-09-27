@@ -138,6 +138,7 @@ body{
 }
 .dark-link{
   color: #64a59f;
+  &:hover,
   &:focus{
     color: #928f8a;
     text-decoration: none;
@@ -150,6 +151,10 @@ body{
 
 .unify-color{
   color: #dc911a;
+}
+
+.gray-color{
+  color: #579f9b;
 }
 
 .no-padding{

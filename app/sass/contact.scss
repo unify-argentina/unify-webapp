@@ -7,7 +7,77 @@
 
 .image-social{
     display: block;
-    height:  75px;
-    width:  75px;
+    height:  125px;
+    width:  125px;
     margin: 0 auto;
+    cursor: pointer;
+}
+
+.name-social{
+	color: #928f8a;
+	font-size: 1.286em;
+}
+
+.social-network{
+    min-height: 205px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-network-name{
+    font-size: 1.714em;
+    font-family: 'antennathin';
+    color: #579f9b;
+}
+
+#contact {
+	.delete-link{
+		font-size: 0.857em;
+	}
+}
+
+.friends-list{
+	box-shadow: none;
+    border: none;
+    padding: 2px;
+    margin-top: 10px;
+    &:focus{
+    	box-shadow: none;
+    	border: none;
+    };
+    option {
+	    background-color: #e9e5e4;
+	    color: #7a7265;
+	    border-radius: 25px;
+	    padding: 5px 10px;
+	    margin: 4px 0px;
+    	overflow: hidden;
+	    &:focus,
+	    &:checked,
+	    &:selected {
+	    	background-color: #579f9b;
+	    	color: #fff;
+	    }
+	}
+}
+
+
+
+/*SCROLLS MULTIPLE*/
+.friends-list::-webkit-scrollbar {
+    width: 6px;
+}
+ 
+/* Track */
+.friends-list::-webkit-scrollbar-track {
+    background: #e6e5e1;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #c9c1b6;  
+}
+/*Handle inactivo*/
+.friends-list::-webkit-scrollbar-thumb:window-inactive {
+	background: #c9c1b6; 
 }
