@@ -1,4 +1,5 @@
 <div id="profile" class="container" ng-controller="ProfileController as profileCtlr">
+ 	<uw-message ng-model="profileCtlr.errors" danger></uw-message>
   	<uw-loader ng-if="!profileCtlr.user"></uw-loader>
 	<div class="content col-md-12 no-padding" ng-if="profileCtlr.user">
 		<div class="col-md-3 text-center sidepanel fadeInLeft animated" style="margin-top: 20px;">
@@ -51,8 +52,9 @@
 			</div>
 			<div class="clearfix"></div>
 			<a class="btn btn-unify-primary btn-block" ui-sref="editProfile">Editar cuentas</a>
+			<a class="btn btn-unify-primary-invert btn-block text-left" ng-click="profileCtlr.editPass();">Editar Password</a>
 		</div>
-		<div class="col-md-9" style="margin-top: 10px;" ng-hide="profileCtlr.editProfile">
+		<div class="col-md-9" style="margin-top: 10px;" ng-hide="profileCtlr.editProfile || profileCtlr.editPassword">
   			<uw-loader ng-if="!profileCtlr.feed"></uw-loader>
 			<uw-time-line uw-media="profileCtlr.feed" ng-if="profileCtlr.feed" uw-name="profileCtlr.user.name" uw-picture="profileCtlr.user.picture"></uw-time-line>
 		</div>
@@ -97,21 +99,40 @@
                         <label>{{'logon_email' | translate}}</label>
                         <input type="email" class="form-control form-input" name="email" ng-model="profileCtlr.newUser.email" required>
                     </div>
-                    <div class="form-group">
-                        <label>{{'logon_pass' | translate}}</label>
-                        <input type="password" class="form-control form-input" name="password" ng-model="profileCtlr.newUser.password" required>
-                    </div>
-                    <div class="form-group">
-                        <label>{{'logon_confirm_pass' | translate}}</label>
-                        <input type="password" class="form-control form-input" name="password" ng-model="profileCtlr.newUser.confirm_password" required>
-                    </div>
+                    <!---->
                     <div class="form-group">
 		                <button type="submit" value="Submit"                                        
-		                        ng-disabled="profileForm.$invalid || profileCtlr.newUser.password!=profileCtlr.newUser.confirm_password"
+		                        ng-disabled="profileForm.$invalid"
 		                        ng-click="profileForm.$setPristine()"
 		                        class="btn btn-unify-primary col-md-6 col-sm-6 col-xs-6">Guardar</button>
 		                <a class="btn btn-unify-primary-invert col-md-6 col-sm-6 col-xs-6" ng-click="profileCtlr.editProfile=false;">Cancelar</a>
 	                </div>
+       		</form>
+		</div>
+		<div class="col-md-9 fadeInRight animated" ng-show="profileCtlr.editPassword" style="margin-top: 20px;">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+				<span class="title-unify">Editar Contraseña</span>
+			</div>
+			<form name="passwordForm" ng-submit="profileCtlr.savePassword()" class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-sm-8 form-horizontal" role="form" novalidate>
+				<div class="form-group" ng-if="profileCtlr.validLocalUser">
+                    <label>Ingresá tu contraseña actual</label>
+                    <input type="password" class="form-control form-input" name="old_password" ng-model="profileCtlr.password.old_password" required>
+                </div>
+				<div class="form-group">
+                    <label>{{'logon_pass' | translate}}</label>
+                    <input type="password" class="form-control form-input" name="password" ng-model="profileCtlr.password.password" required>
+                </div>
+                <div class="form-group">
+                    <label>{{'logon_confirm_pass' | translate}}</label>
+                    <input type="password" class="form-control form-input" name="password" ng-model="profileCtlr.password.confirm_password" required>
+                </div>
+		        <div class="form-group">
+	                <button type="submit" value="Submit"                                        
+	                        ng-disabled="passwordForm.$invalid || profileCtlr.password.password != profileCtlr.password.confirm_password"
+	                        ng-click="passwordForm.$setPristine() "
+	                        class="btn btn-unify-primary col-md-6 col-sm-6 col-xs-6">Guardar</button>
+	                <a class="btn btn-unify-primary-invert col-md-6 col-sm-6 col-xs-6" ng-click="profileCtlr.editProfile=false;">Cancelar</a>
+                </div>
        		</form>
 		</div>
 	</div>
