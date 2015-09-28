@@ -23,12 +23,11 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 					facebook_display_name : (contact.facebook!=null?contact.facebook.name:null),
 					twitter_username : (contact.twitter!=null?contact.twitter.username:null),	
 					instagram_username : (contact.instagram!=null?contact.instagram.username:null),
-					email : contact.google.email
+					email : (contact.google!=null ? contact.google.email : null)
 				}
 			).then(function(response) {	
         		return response.data;
 			}, function(response) {
-	        	console.log(response);
 				return response.data;
 			});
 			return promise;
@@ -49,13 +48,12 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 					facebook_display_name : (contact.facebook!=null?contact.facebook.name:null),
 					twitter_username : (contact.twitter!=null?contact.twitter.username:null),	
 					instagram_username : (contact.instagram!=null?contact.instagram.username:null),
-					email : contact.google.email
+					email : (contact.google!=null ? contact.google.email : null)
 
 				}
 			).then(function(response) {	
         		return response.data;
 			}, function(response) {
-	        	console.log(response);
 				return response.data;
 			});
 			return promise;
@@ -66,7 +64,6 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 			 .then(function(response) {	
         		return response.data;
 			}, function(response) {
-	       		console.log(response);
 				return response.data;
 			});
 			return promise;

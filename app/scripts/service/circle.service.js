@@ -20,7 +20,6 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 			).then(function(response) {	
         		return response.data;
 			}, function(response) {
-		        console.log(response);
 				return response.data;
 			});
 			return promise;
@@ -38,7 +37,6 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 			).then(function(response) {	
         		return response.data;
 			}, function(response) {
-	        	console.log(response);
 				return response.data;
 			});
 			return promise;
@@ -49,7 +47,6 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 			 .then(function(response) {	
         		return response.data;
 			}, function(response) {
-	        	console.log(response);
 				return response.data;
 			});
 			return promise;
@@ -110,7 +107,6 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 			 .then(function(response) {	
         		return response.data;
 			}, function(response) {
-	        	console.log(response);
 				return response.data;
 			});
 			return promise;

@@ -131,6 +131,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 			contactCtrl.contact.circles_ids = [];
 			contactCtrl.contact.circles_ids.push(contactCtrl.circle_id);
 		}
+		contactCtrl.getCircleList();
 	});
 
 	contactCtrl.init = function(circle_id,contact_id, parentController){
