@@ -1,7 +1,6 @@
 <div id="contact" class="col-md-12 fadeInRight animated" style="margin-top: 20px;" ng-controller="ContactController as contactCtrl"  ng-init="contactCtrl.init(uwCircleId,uwContactId, uwParentController);">
   	<uw-loader ng-if="!contactCtrl.contact"></uw-loader>
 	<div class="text-center" ng-if="contactCtrl.contact">
-		<a href="" ng-click="contactCtrl.reloadRoute();">PROBANDO!</a>
 		<form name="contactForm" ng-submit="contactCtrl.saveContact(uwContactId);" class="form-horizontal" role="form" novalidate>
 			<div class="col-md-12">
 				<div class="col-md-4 col-sm-4 col-xs-12">
@@ -17,7 +16,7 @@
 					</div>
 					<div class="form-group">
 						<label>Mail del contacto:</label>
-						<input type="text" class="form-control form-input" name="name" ng-model="contactCtrl.contact.mail" >
+						<input type="text" class="form-control form-input" name="name" ng-model="contactCtrl.contact.google.email" >
 					</div>
 				</div>
 			</div>

@@ -13,7 +13,6 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 		},function(response){
 			response.contact.circles_ids=[];
 			_(response.contact.parents).forEach(function(parent) {
-			  console.log(parent);
 			  response.contact.circles_ids.push(parent.circle);
 			}).value();
 
@@ -106,7 +105,6 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 		).then(function(data) {
 			contactCtrl.list=data;
 			_(contactCtrl.list).forEach(function(circle) {
-				console.log(circle);
 				circle.checked=_.includes(contactCtrl.contact.circles_ids, circle._id);
 			}).value();
 		});

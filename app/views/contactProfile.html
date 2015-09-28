@@ -37,7 +37,17 @@
 							{{contactProfileCtrl.contact.instagram.username ? contactProfileCtrl.contact.instagram.username : 'Sin Asociar'}}
 						</span>
 					</div>
-				</div>		
+				</div>
+				<div class="social-network-bullet col-md-12 col-sm-12 col-xs-12">
+					<div class="social-image" ng-class="{'social-image-unlink': ! contactProfileCtrl.contact.google.email}">
+						<img ng-src="resources/gmail.png" width="20px">
+					</div>
+					<div class="overflow-x-hidden">
+						<span>
+							{{contactProfileCtrl.contact.google.email ? contactProfileCtrl.contact.google.email : 'Sin Mail'}}
+						</span>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-9">

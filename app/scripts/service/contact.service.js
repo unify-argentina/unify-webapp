@@ -10,7 +10,8 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 		});
 
 		var saveContact = function(contact){
-			 var promise = $http.post(ENV.apiEndPoint + '/api/user/' + contact.user_id + '/contact', 
+			console.log(contact.email);
+			var promise = $http.post(ENV.apiEndPoint + '/api/user/' + contact.user_id + '/contact', 
 				{
 					user_id : contact.user_id,
 					name : contact.name,
@@ -21,7 +22,8 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 					instagram_id : (contact.instagram!=null?contact.instagram.id:null),
 					facebook_display_name : (contact.facebook!=null?contact.facebook.name:null),
 					twitter_username : (contact.twitter!=null?contact.twitter.username:null),	
-					instagram_username : (contact.instagram!=null?contact.instagram.username:null)
+					instagram_username : (contact.instagram!=null?contact.instagram.username:null),
+					email : contact.google.email
 				}
 			).then(function(response) {	
         		return response.data;
@@ -33,7 +35,8 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 		};
 
 		var updateContact = function(contact){
-			 var promise = $http.put(ENV.apiEndPoint + '/api/user/' + contact.user_id + '/contact/' + contact._id, 
+			console.log(contact.email);
+			var promise = $http.put(ENV.apiEndPoint + '/api/user/' + contact.user_id + '/contact/' + contact._id, 
 				{
 					user_id : contact.user_id,
 					contact_id : contact._id,
@@ -45,7 +48,9 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 					instagram_id : (contact.instagram!=null?contact.instagram.id:null),
 					facebook_display_name : (contact.facebook!=null?contact.facebook.name:null),
 					twitter_username : (contact.twitter!=null?contact.twitter.username:null),	
-					instagram_username : (contact.instagram!=null?contact.instagram.username:null)
+					instagram_username : (contact.instagram!=null?contact.instagram.username:null),
+					email : contact.google.email
+
 				}
 			).then(function(response) {	
         		return response.data;
