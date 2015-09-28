@@ -1,6 +1,6 @@
 
 
-unifyApp.controller("MainController", function ($translate, $auth, ENV, ProfileService, AuthenticationService) {
+unifyApp.controller("MainController", function ($translate, $auth, $rootScope, ENV, ProfileService, AuthenticationService) {
 	var mainController=this;
 	
 	mainController.logout = function(){
@@ -12,20 +12,22 @@ unifyApp.controller("MainController", function ($translate, $auth, ENV, ProfileS
 		ProfileService.user.get({
 			user_id: AuthenticationService.getUserId()
 		},function(response){
+			console.log(response.user);
 			if(response.user.name!=null){
-				mainController.user=response.user.name;
-				mainController.picture=response.user.picture;
+				$rootScope.user=response.user.name;
+				$rootScope.picture=response.user.picture;
 			}else{
 				if(response.user.mail!=null){
-					mainController.user=response.user.mail;
+					$rootScope.user=response.user.mail;
 				}else{
-					mainController.user="Usuario Unify";
+					$rootScope.user="Usuario Unify";
 				}
 			}
-			mainController.email=(response.user.google!=null?response.user.google.email:null);
+			$rootScope.email=(response.user.google!=null?response.user.google.email:null);
+			AuthenticationService.setValidLocalUser(response.user.valid_local_user);	
 		});
 	}
 
-	mainController.auth=$auth.isAuthenticated();
+	$rootScope.auth=$auth.isAuthenticated();
 	
 });

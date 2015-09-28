@@ -2,6 +2,10 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 
 	var contactCtrl = this;
 
+	contactCtrl.reloadRoute = function() {
+	    $state.reload();
+	};
+
 	contactCtrl.getContact = function(contact_id){
 		ContactService.contact.get({
 			user_id : AuthenticationService.getUserId(),

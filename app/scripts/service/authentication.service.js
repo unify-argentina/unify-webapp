@@ -1,10 +1,11 @@
 
 
-unifyApp.service('AuthenticationService', function ($http, $auth, $state, $window, ENV) {
+unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $state, $window, ENV) {
 
 	var userId;
 	var mainCircleId;
 	var friends;
+	var validLocalUser;
 	
     var getUserId = function() {
     	if(userId==null){
@@ -37,6 +38,28 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 		friends=userFriends;
 	};
 
+	var getValidLocalUser = function() {
+		return validLocalUser;
+	};
+
+	var setValidLocalUser = function(valid) {
+		validLocalUser=valid;
+	};
+
+	var loadDataUser = function(response) {
+		if(response.user.name!=null){
+			$rootScope.user=response.user.name;
+			$rootScope.picture=response.user.picture;
+		}else{
+			if(response.user.mail!=null){
+				$rootScope.user=response.user.mail;
+			}else{
+				$rootScope.user="Usuario Unify";
+			}
+		}
+		$rootScope.email=(response.user.google!=null?response.user.google.email:null);
+		validLocalUser=response.user.valid_local_user;
+	}
     var signup = function(user) {
 		console.log(user.name);
 		var promise = $auth.signup({
@@ -48,7 +71,9 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 			setUserId(response.data.user._id);
 			setMainCircleId(response.data.user.main_circle._id);
 	        console.log('You have successfully logged in: '+response.data.token); 
-			$window.location.href = "/";
+	        loadDataUser(response.data);
+	        $rootScope.auth=true;
+			$state.reload();
 	      })
 		.catch(function(response) {
 			return response.data;
@@ -64,7 +89,9 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 			setUserId(response.data.user._id);
 			setMainCircleId(response.data.user.main_circle._id);
 	        console.log('You have successfully logged in: '+response.data.token); 
-			$window.location.href = "/";
+	        loadDataUser(response.data);
+	        $rootScope.auth=true;
+			$state.reload();
 		})
 		.catch(function(response) {
 			return response.data;
@@ -78,7 +105,9 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 			setUserId(response.data.user._id);
 			setMainCircleId(response.data.user.main_circle._id);
 			console.log('You have successfully logged in: '+response.data.token); 
-			$window.location.href = "/";
+	        loadDataUser(response.data);
+	        $rootScope.auth=true;
+			$state.reload();
 		})
 	    .catch(function(response) {
 	        console.log("ERROR: "+response.data ? response.data.errors : response);
@@ -99,7 +128,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 		.then(function(response) {
 	    	localStorage.setItem('satellizer_token', response.data.token);
 	        console.log('You have successfully unlogged in: '+response.data.token); 
-			$window.location.href = "/";
+			$state.reload();
 	    })
 	    .catch(function(response) {
 	        console.log("ERROR: "+response.data ? response.data.message : response);
@@ -124,7 +153,6 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 				email : email,
 			}
 		).then(function(response) {	
-			console.log("2");
     		return response.data;
 		});
 		return promise;
@@ -132,20 +160,23 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $state, $windo
 
 	var logout = function(){
 		localStorage.clear();
-		$window.location.href = "/";
+		$rootScope.auth=false;
+		$state.go("main");
 	};
 
 	return {
-		signup 			: signup,
-		login 			: login,
-		authenticate 	: authenticate,
-		unlink			: unlink,
-		getUserId 		: getUserId,
-		getMainCircleId	: getMainCircleId,
-		getFriends		: getFriends,
-		getUserFriends	: getUserFriends,
-		logout			: logout,
-		recoverPassword	: recoverPassword
+		signup 				: signup,
+		login 				: login,
+		authenticate 		: authenticate,
+		unlink				: unlink,
+		getUserId 			: getUserId,
+		getMainCircleId		: getMainCircleId,
+		getFriends			: getFriends,
+		getUserFriends		: getUserFriends,
+		logout				: logout,
+		recoverPassword		: recoverPassword,
+		getValidLocalUser	: getValidLocalUser,
+		setValidLocalUser	: setValidLocalUser
     };
 
 });
