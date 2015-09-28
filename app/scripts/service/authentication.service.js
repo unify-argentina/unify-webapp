@@ -161,7 +161,11 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 	var logout = function(){
 		localStorage.clear();
 		$rootScope.auth=false;
-		$state.go("main");
+		if($state.current.name=='main'){
+			$state.reload();
+		}else{
+			$state.go('main');
+		}
 	};
 
 	return {

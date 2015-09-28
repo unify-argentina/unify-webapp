@@ -1,7 +1,17 @@
 
 
-unifyApp.controller("HeaderController", function () {
+unifyApp.controller("HeaderController", function ($state) {
 	
+	var headerCtrl=this;
+
+	headerCtrl.goToMain =function(){
+		if($state.current.name=='main'){
+			$state.reload();
+		}else{
+			$state.go('main');
+		}
+	}
+
 	var canvas = document.getElementById('myCanvas');
 	var context = canvas.getContext('2d');
 
@@ -19,4 +29,5 @@ unifyApp.controller("HeaderController", function () {
 	//context.stroke();
 	context.save()
 
+	
 });
