@@ -20,7 +20,7 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 			).then(function(response) {	
         		return response.data;
 			}, function(response) {
-		        console.log("ERROR: "+response.data ? response.data.errors : response);
+		        console.log(response);
 				return response.data;
 			});
 			return promise;
@@ -38,7 +38,7 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 			).then(function(response) {	
         		return response.data;
 			}, function(response) {
-	        	console.log("ERROR: "+response.data ? response.data.errors : response);
+	        	console.log(response);
 				return response.data;
 			});
 			return promise;
@@ -49,7 +49,7 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 			 .then(function(response) {	
         		return response.data;
 			}, function(response) {
-	        	console.log("ERROR: "+response.data ? response.data.errors : response);
+	        	console.log(response);
 				return response.data;
 			});
 			return promise;
@@ -79,12 +79,38 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 			}
 		};
 
+		var getCircleListExcluding = function(user_id, circle_id, circle_id_exclude){
+			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/circle/'+circle_id+'/tree')
+			 .then(function(response) {	
+			 	var list=[];
+        		treeToListExcluding(response.data.tree[0], list, 0, circle_id_exclude);
+        		return list;
+			});
+			return promise;
+		};
+
+		var treeToListExcluding = function(tree, list, level, circle_id_exclude){
+			var group = {};
+			group._id = tree._id;
+			group.name = tree.name;
+			group.level = level;
+			list.push(group);
+			if(tree.subcircles.length > 0){
+				level++;
+				_(tree.subcircles).forEach(function(subcircle) {
+					if(subcircle._id != circle_id_exclude){
+						treeToListExcluding(subcircle, list, level, circle_id_exclude);
+					}
+				}).value();	
+			}
+		};
+
 		var getCircleFeed = function(user_id, circle_id){
 			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/circle/'+circle_id+'/media')
 			 .then(function(response) {	
         		return response.data;
 			}, function(response) {
-	        	console.log("ERROR: "+response.data ? response.data.errors : response);
+	        	console.log(response);
 				return response.data;
 			});
 			return promise;
@@ -93,11 +119,12 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 		
 
 	return{
-		circle 			: circle,
-		saveCircle		: saveCircle,
-		updateCircle	: updateCircle,
-		getCircleTree	: getCircleTree,
-		getCircleList	: getCircleList,
-		getCircleFeed	: getCircleFeed
+		circle 					: circle,
+		saveCircle				: saveCircle,
+		updateCircle			: updateCircle,
+		getCircleTree			: getCircleTree,
+		getCircleList			: getCircleList,
+		getCircleListExcluding	: getCircleListExcluding,
+		getCircleFeed			: getCircleFeed
 	}
 });

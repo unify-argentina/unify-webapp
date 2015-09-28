@@ -110,7 +110,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 			$state.reload();
 		})
 	    .catch(function(response) {
-	        console.log("ERROR: "+response.data ? response.data.errors : response);
+	        console.log(response);
 			return response.data;
 		});
 		return promise;

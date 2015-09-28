@@ -24,6 +24,8 @@ unifyApp.controller("CircleController", function ($scope, video, CircleService, 
 					circleCtrl.contactSize=0;
 				}
 			}
+			circleCtrl.parent=circleCtrl.circle.parent;
+			circleCtrl.getCircleList();
 		});
 	};
 
@@ -45,6 +47,16 @@ unifyApp.controller("CircleController", function ($scope, video, CircleService, 
 	circleCtrl.edit = function(){
 		circleCtrl.editingCircle=true;
        	circleCtrl.editCircle = angular.copy(circleCtrl.circle);
+	};
+
+	circleCtrl.moveCircle = function(){
+		circleCtrl.circle.user_id = AuthenticationService.getUserId();
+		circleCtrl.circle.parent=circleCtrl.parent;
+		CircleService.updateCircle(
+			circleCtrl.circle
+		).then(function(data) {
+			circleCtrl.movingCircle=false;
+		});
 	};
 
 	circleCtrl.updateCircle = function(){
@@ -81,6 +93,19 @@ unifyApp.controller("CircleController", function ($scope, video, CircleService, 
 			circleCtrl.circle_id
 		).then(function(data) {
 			circleCtrl.tree=data.tree[0];
+		});
+	};
+
+	circleCtrl.getCircleList = function(){
+		CircleService.getCircleListExcluding(
+			AuthenticationService.getUserId(),
+			AuthenticationService.getMainCircleId(),
+			circleCtrl.circle_id
+		).then(function(data) {
+			circleCtrl.list=data;
+			/*_(circleCtrl.list).forEach(function(circle) {
+				circle.checked= (circleCtrl.circle.parent==circle._id);
+			}).value();*/
 		});
 	};
 
@@ -134,7 +159,6 @@ unifyApp.controller("CircleController", function ($scope, video, CircleService, 
 	circleCtrl.getCircleTree();
 	circleCtrl.getCircle();
 	circleCtrl.getCircleFeed();
-	
 
 
 

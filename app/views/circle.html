@@ -46,7 +46,7 @@
 					</div>
 					<div class="clearfix"></div>
 					<div class="col-md-12 no-padding" style="margin-top: 10px;" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id">
-						<a href="" class="move-link col-md-4 no-padding" ng-click="circleCtrl.edit();"><i class="fa fa-arrows-alt"></i></i>Mover</a>
+						<a href="" class="move-link col-md-4 no-padding" ng-click="circleCtrl.movingCircle=true;"><i class="fa fa-arrows-alt"></i></i>Mover</a>
 						<a href="" class="edit-link col-md-4 no-padding" ng-click="circleCtrl.edit();"><i class="fa fa-pencil-square-o"></i>Editar</a>
 						<a href="" class="delete-link col-md-4 no-padding" ng-click="circleCtrl.deleteCircle();"><i class="fa fa-times-circle"></i>Eliminar</a>
 					</div>
@@ -91,8 +91,27 @@
 			</div>
 		</div>
 		<div class="col-md-9">
+			<div ng-hide="!circleCtrl.movingCircle" >
+				<div class="col-md-12 col-sm-12 col-xs-12 text-left unify-color fadeInDown animated" style="margin-top: 20px;" ng-show="circleCtrl.list">
+			      	<label class="font-18">Seleccioná donde que queres mover el grupo</label>
+			      	<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="gray-color" ng-repeat="circle in circleCtrl.list" ng-class="{'circle-lvl-1':circle.level==1,'circle-lvl-2':circle.level==2,'circle-lvl-3':circle.level==3,'circle-lvl-4':circle.level==4,'circle-lvl-5':circle.level==5}">
+							<label>
+								<input type="radio" ng-model="circleCtrl.parent" ng-value="circle._id" >
+								<i class="fa" ng-class="{'fa-check-circle-o': circleCtrl.parent==circle._id,'fa-circle-o': circleCtrl.parent!=circle._id}"></i>
+								{{circle.name}}
+							</label>
+						</div>
+					</div>
+				</div>
+		      	<div class="clearfix"></div>
+				<div class="fadeInUpBig animated" style="margin-top: 10px;">
+				 	<a ng-click="circleCtrl.moveCircle();" class="btn btn-unify-primary">Mover grupo</a>
+					<a class="btn btn-unify-primary-invert" ng-click="circleCtrl.movingCircle=false;">Cancelar</a>
+				</div>
+			</div>
 			<uw-contact-data uw-circle-id="circleCtrl.circle_id" uw-parent-controller="circleCtrl" ng-if="circleCtrl.editContact"></uw-contact-data>
-			<div ng-show="!circleCtrl.editContact" style="margin-top: 10px;">
+			<div ng-show="!circleCtrl.editContact && !circleCtrl.movingCircle" style="margin-top: 10px;">
   				<uw-loader ng-if="!circleCtrl.feed"></uw-loader>
 				<uw-time-line class="fadeInDown animated" uw-media="circleCtrl.feed" ng-if="circleCtrl.feed"></uw-time-line>
 			</div>
