@@ -119,7 +119,7 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 		mailCtlr.decodedHtml = base64.decode(html);
 		mailCtlr.mailHtml= $sce.trustAsHtml(mailCtlr.decodedHtml);
 		mailCtlr.viewMail= mail;
-		_(mailCtlr.inbox).forEach(function(mail) {
+		_(mailCtlr.inbox.list).forEach(function(mail) {
 			mail.checked=false;
 		}).value();	
 		mailCtlr.email_ids=[];

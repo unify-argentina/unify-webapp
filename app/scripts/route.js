@@ -48,4 +48,9 @@ angular.module('unifyApp').config(function ($stateProvider, $urlRouterProvider) 
     url: '/emails',
     templateUrl: 'views/mailDash.html'
   });
+
+  $stateProvider.state('privacy', {
+    url: '/privacy',
+    templateUrl: 'views/privacy.html'
+  });
  });

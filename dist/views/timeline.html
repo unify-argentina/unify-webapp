@@ -33,8 +33,12 @@
 		<span class="col-md-12 col-sm-12 col-xs-12">{{post.text}}</span>
 	</div>
 	<div ng-if="post.type=='image' || post.type=='photo' || post.type=='animated_gif'">
-		<span class="col-md-12 col-sm-12 col-xs-12">{{post.text}}</span>
-		<img ng-src="{{post.media_url}}" class="col-md-12 col-sm-12 col-xs-12">
+		<div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom:10px;">
+			<span >{{post.text}}</span>
+	    </div>
+	    <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+			<img ng-src="{{post.media_url}}" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+		</div>
 	</div>
 	<div ng-if="post.type=='video'">
 		<span class="col-md-12 col-sm-12 col-xs-12">{{post.text}}</span>
