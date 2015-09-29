@@ -134,7 +134,7 @@
 		                        ng-disabled="passwordForm.$invalid || profileCtlr.password.password != profileCtlr.password.confirm_password"
 		                        ng-click="passwordForm.$setPristine() "
 		                        class="btn btn-unify-primary col-md-6 col-sm-6 col-xs-6">Guardar</button>
-		                <a class="btn btn-unify-primary-invert col-md-6 col-sm-6 col-xs-6" ng-click="profileCtlr.editProfile=false;">Cancelar</a>
+		                <a class="btn btn-unify-primary-invert col-md-6 col-sm-6 col-xs-6" ng-click="profileCtlr.editPassword=false;profileCtlr.password={}">Cancelar</a>
 	                </div>
 	       		</form>
 			</div>
