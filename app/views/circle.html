@@ -1,93 +1,100 @@
 <div id="circle" class="container" ng-controller="CircleController as circleCtrl">
   	<uw-loader ng-if="!circleCtrl.circle"></uw-loader>
 	<div class="content col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.circle">
-		<div class="col-md-3 text-center fadeInLeft animated" style="margin-top: 20px;">
-			<div ng-show="!circleCtrl.createCircle && !circleCtrl.editingCircle">
-				<a href="" ng-click="circleCtrl.goToParent();" ng-show="circleCtrl.circle.parent" class="unify-link"><i class="fa fa-chevron-circle-up"></i>Subir un nivel</a>
-				<div class="col-md-12 col-sm-12 col-xs-12  no-padding">
-					<img ng-src="{{circleCtrl.circle.picture}}" class="img-circle image-profile" ng-if="circleCtrl.circle.picture">
+		<div class="col-md-3 text-center" style="margin-top: 20px;" ng-show="!circleCtrl.editContact">
+			<div class="fadeInLeft animated">
+				<div ng-show="!circleCtrl.createCircle && !circleCtrl.editingCircle">
+					<a href="" ng-click="circleCtrl.goToParent();" ng-show="circleCtrl.circle.parent" class="unify-link"><i class="fa fa-chevron-circle-up"></i>Subir un nivel</a>
+					<div class="col-md-12 col-sm-12 col-xs-12  no-padding">
+						<img ng-src="{{circleCtrl.circle.picture}}" class="img-circle image-profile" ng-if="circleCtrl.circle.picture">
 
-					<div ng-if="!circleCtrl.circle.picture" class="img-circle image-profile overflow-hidden">
-						<img src="resources/circle/circle.png" class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.contactSize==0">
-						
-						<div ng-if="circleCtrl.contactSize==1" class="img-circle image-profile">
-							<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="col-md-12 col-sm-12 col-xs-12 no-padding" >
-						</div>
+						<div ng-if="!circleCtrl.circle.picture" class="img-circle image-profile overflow-hidden">
+							<img src="resources/circle/circle.png" class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.contactSize==0">
+							
+							<div ng-if="circleCtrl.contactSize==1" class="img-circle image-profile">
+								<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="col-md-12 col-sm-12 col-xs-12 no-padding" >
+							</div>
 
-						<div ng-if="circleCtrl.contactSize==2" class="img-circle image-profile">
-							<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
-								<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="image-profile-half">
+							<div ng-if="circleCtrl.contactSize==2" class="img-circle image-profile">
+								<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
+									<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="image-profile-half">
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
+									<img ng-src="{{circleCtrl.imagesCircle[1].picture}}" class="image-profile-half">
+								</div>
 							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
-								<img ng-src="{{circleCtrl.imagesCircle[1].picture}}" class="image-profile-half">
+							
+							<div ng-if="circleCtrl.contactSize==3" class="img-circle image-profile overflow-hidden">
+								<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
+									<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="image-profile-half">
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
+									<img ng-src="{{circleCtrl.imagesCircle[1].picture}}" class="image-profile-quarter">
+									<img ng-src="{{circleCtrl.imagesCircle[2].picture}}" class="image-profile-quarter">
+								</div>
+							</div>
+							
+							<div ng-if="circleCtrl.contactSize>=4" class="img-circle image-profile overflow-hidden">
+								<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
+									<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="image-profile-quarter">
+									<img ng-src="{{circleCtrl.imagesCircle[1].picture}}" class="image-profile-quarter">
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
+									<img ng-src="{{circleCtrl.imagesCircle[2].picture}}" class="image-profile-quarter">
+									<img ng-src="{{circleCtrl.imagesCircle[3].picture}}" class="image-profile-quarter">
+								</div>
 							</div>
 						</div>
-						
-						<div ng-if="circleCtrl.contactSize==3" class="img-circle image-profile overflow-hidden">
-							<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
-								<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="image-profile-half">
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
-								<img ng-src="{{circleCtrl.imagesCircle[1].picture}}" class="image-profile-quarter">
-								<img ng-src="{{circleCtrl.imagesCircle[2].picture}}" class="image-profile-quarter">
-							</div>
+						<div class="clearfix"></div>
+						<div class="col-md-12 no-padding" style="margin-top: 10px;" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id">
+							<a href="" class="move-link col-md-4 no-padding" ng-click="circleCtrl.movingCircle=true;"><i class="fa fa-arrows-alt"></i></i>Mover</a>
+							<a href="" class="edit-link col-md-4 no-padding" ng-click="circleCtrl.edit();"><i class="fa fa-pencil-square-o"></i>Editar</a>
+							<a href="" class="delete-link col-md-4 no-padding" ng-click="circleCtrl.deleteCircle();"><i class="fa fa-times-circle"></i>Eliminar</a>
 						</div>
-						
-						<div ng-if="circleCtrl.contactSize>=4" class="img-circle image-profile overflow-hidden">
-							<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
-								<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="image-profile-quarter">
-								<img ng-src="{{circleCtrl.imagesCircle[1].picture}}" class="image-profile-quarter">
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
-								<img ng-src="{{circleCtrl.imagesCircle[2].picture}}" class="image-profile-quarter">
-								<img ng-src="{{circleCtrl.imagesCircle[3].picture}}" class="image-profile-quarter">
-							</div>
-						</div>
+						<div class="clearfix"></div>
+						<a class="circle-name btn-block" ng-click="circleCtrl.cancelContact();">{{circleCtrl.circle.name}}</a>
 					</div>
-					<div class="clearfix"></div>
-					<div class="col-md-12 no-padding" style="margin-top: 10px;" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id">
-						<a href="" class="move-link col-md-4 no-padding" ng-click="circleCtrl.movingCircle=true;"><i class="fa fa-arrows-alt"></i></i>Mover</a>
-						<a href="" class="edit-link col-md-4 no-padding" ng-click="circleCtrl.edit();"><i class="fa fa-pencil-square-o"></i>Editar</a>
-						<a href="" class="delete-link col-md-4 no-padding" ng-click="circleCtrl.deleteCircle();"><i class="fa fa-times-circle"></i>Eliminar</a>
-					</div>
-					<div class="clearfix"></div>
-					<a class="circle-name btn-block" ng-click="circleCtrl.cancelContact();">{{circleCtrl.circle.name}}</a>
 				</div>
-				
-			</div>
-			<div class="col-md-12 no-padding" ng-show="circleCtrl.createCircle">
-				<form name="newCircleForm" ng-submit="circleCtrl.saveCircle()" class="form-horizontal" role="form" novalidate>
-                    <label>Ingresá en nombre del nuevo grupo:</label>
-					<input type="text" class="form-control form-input unify-border" name="circleCtrl.newCircle" ng-model="circleCtrl.newCircle.name" required>
-					<div style="margin-top: 10px;">
-						 <button type="submit" value="Submit" ng-disabled="newCircleForm.$invalid" ng-click="newCircleForm.$setPristine()" class="btn btn-unify-primary col-md-6">Crear</button>
-						<a class="btn btn-unify-primary-invert col-md-6" ng-click="circleCtrl.cancelCircle();">Cancelar</a>
+				<div class="col-md-12 no-padding" ng-show="circleCtrl.createCircle">
+					<div class="fadeInUp animated">
+						<form name="newCircleForm" ng-submit="circleCtrl.saveCircle()" class="form-horizontal" role="form" novalidate>
+		                    <label>Ingresá en nombre del nuevo grupo:</label>
+							<input type="text" class="form-control form-input unify-border" name="circleCtrl.newCircle" ng-model="circleCtrl.newCircle.name" required>
+							<div style="margin-top: 10px;">
+								 <button type="submit" value="Submit" ng-disabled="newCircleForm.$invalid" ng-click="newCircleForm.$setPristine()" class="btn btn-unify-primary col-md-6">Crear</button>
+								<a class="btn btn-unify-primary-invert col-md-6" ng-click="circleCtrl.cancelCircle();">Cancelar</a>
+							</div>
+						</form>
 					</div>
-				</form>
-			</div>
-			<div class="col-md-12 no-padding" ng-show="circleCtrl.editingCircle">
-				<form name="updateCircleForm" ng-submit="circleCtrl.updateCircle()" class="form-horizontal" role="form" novalidate>
-                    <label>Ingresá el nombre del grupo:</label>
-					<input type="text" class="form-control form-input unify-border" name="circleCtrl.newCircle" ng-model="circleCtrl.editCircle.name" required>
-					<div style="margin-top: 10px;">
-						<button type="submit" value="Submit" ng-disabled="updateCircleForm.$invalid" ng-click="updateCircleForm.$setPristine()" class="btn btn-unify-primary col-md-6">Guardar</button>
-						<a class="btn btn-unify-primary-invert col-md-6" ng-click="circleCtrl.cancelCircle();">Cancelar</a>
+				</div>
+				<div class="col-md-12 no-padding" ng-show="circleCtrl.editingCircle">
+					<div class="fadeInUp animated">
+						<form name="updateCircleForm" ng-submit="circleCtrl.updateCircle()" class="form-horizontal" role="form" novalidate>
+		                    <label>Ingresá el nombre del grupo:</label>
+							<input type="text" class="form-control form-input unify-border" name="circleCtrl.newCircle" ng-model="circleCtrl.editCircle.name" required>
+							<div style="margin-top: 10px;">
+								<button type="submit" value="Submit" ng-disabled="updateCircleForm.$invalid" ng-click="updateCircleForm.$setPristine()" class="btn btn-unify-primary col-md-6">Guardar</button>
+								<a class="btn btn-unify-primary-invert col-md-6" ng-click="circleCtrl.cancelCircle();">Cancelar</a>
+							</div>
+						</form>
 					</div>
-				</form>
-			</div>
-			<div class="clearfix"></div>
-			<div class="circle-children" style="margin-top: 20px;">
-				<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.create();" style="margin-bottom: 5px;">Crear Grupo</a>
-				<a href="" ng-click="circleCtrl.goToCircle(subcircle._id);" class="circle-child circle-child-circle" ng-repeat="subcircle in circleCtrl.tree.subcircles">{{subcircle.name}}</a>
-			</div>
-			<div class="clearfix"></div>
-			<div class="circle-children" style="margin-top: 5px;" ng-if="circleCtrl.circle.contacts">
-				<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.createContact();" style="margin-bottom: 5px;">Crear Contacto</a>
-				<a href="#/contact/{{contact._id}}" class="circle-child" ng-repeat="contact in circleCtrl.circle.contacts">
-					<img ng-src="{{contact.picture}}" class="img-circle image-contact-small" ng-if="contact.picture">
-					<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!contact.picture">
-					{{contact.name}}
-				</a>
+				</div>
+				<div class="clearfix"></div>
+				<div ng-hide="circleCtrl.createCircle || circleCtrl.editingCircle">
+					<div class="circle-children" style="margin-top: 20px;">
+						<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.create();" style="margin-bottom: 5px;">Crear Grupo</a>
+						<a href="" ng-click="circleCtrl.goToCircle(subcircle._id);" class="circle-child circle-child-circle" ng-repeat="subcircle in circleCtrl.tree.subcircles">{{subcircle.name}}</a>
+					</div>
+					<div class="clearfix"></div>
+					<div class="circle-children" style="margin-top: 5px;" ng-if="circleCtrl.circle.contacts">
+						<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.createContact();" style="margin-bottom: 5px;">Crear Contacto</a>
+						<a href="#/contact/{{contact._id}}" class="circle-child" ng-repeat="contact in circleCtrl.circle.contacts">
+							<img ng-src="{{contact.picture}}" class="img-circle image-contact-small" ng-if="contact.picture">
+							<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!contact.picture">
+							{{contact.name}}
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-9">
@@ -110,11 +117,13 @@
 					<a class="btn btn-unify-primary-invert" ng-click="circleCtrl.movingCircle=false;">Cancelar</a>
 				</div>
 			</div>
-			<uw-contact-data uw-circle-id="circleCtrl.circle_id" uw-parent-controller="circleCtrl" ng-if="circleCtrl.editContact"></uw-contact-data>
 			<div ng-show="!circleCtrl.editContact && !circleCtrl.movingCircle" style="margin-top: 10px;">
   				<uw-loader ng-if="!circleCtrl.feed"></uw-loader>
 				<uw-time-line class="fadeInDown animated" uw-media="circleCtrl.feed" ng-if="circleCtrl.feed"></uw-time-line>
 			</div>
+		</div>
+		<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
+			<uw-contact-data uw-circle-id="circleCtrl.circle_id" uw-parent-controller="circleCtrl" ng-if="circleCtrl.editContact"></uw-contact-data>
 		</div>
 	</div>
 

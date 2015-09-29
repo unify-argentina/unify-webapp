@@ -136,6 +136,29 @@ body{
     border-color: lighten(#00a099,10%);
   }
 }
+
+.btn-unify-grey{
+  border-radius: 20px;
+  color: #fff;
+  background-color: #e2eceb;
+  &:hover, &:focus{
+    color: #fff;
+    background-color:lighten(#e2eceb,10%);
+  }
+}
+
+.btn-unify-grey-invert{
+  border-radius: 20px;
+  background-color: #fff;
+  color: #e2eceb;
+  border: 2px solid #e2eceb;
+  &:hover, &:focus{
+    background-color: darken(#fff,10%);
+    color: lighten(#e2eceb,10%);
+    border-color: lighten(#e2eceb,10%);
+  }
+}
+
 .dark-link{
   color: #64a59f;
   &:hover,
