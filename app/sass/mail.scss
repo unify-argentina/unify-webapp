@@ -9,3 +9,23 @@
 		}
 	}
 }
+
+.btn-unify-mail{
+  border-radius: 20px;
+  color: #85765f;
+  background-color: #e2eceb;
+  &:hover, &:focus{
+    color: lighten(#85765f,10%);
+    background-color:lighten(#e2eceb,10%);
+  }
+}
+
+.btn-unify-mail-active{
+  border-radius: 20px;
+  color: #fff;
+  background-color: #a1c5c1;
+  &:hover, &:focus{
+    color: #fff;
+    background-color:lighten(#a1c5c1,10%);
+  }
+}
