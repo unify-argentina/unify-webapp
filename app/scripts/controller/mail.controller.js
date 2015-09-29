@@ -9,6 +9,13 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 			AuthenticationService.getUserId()
 		).then(function(data) {
 			mailCtlr.inbox=data.emails;
+			_(mailCtlr.inbox.list).forEach(function(mail) {
+				if(moment.unix(mail.date) > moment().subtract(1, 'days')){
+					mail.date=moment.unix(mail.date).format("hh:mm");
+				}else{
+					mail.date=moment.unix(mail.date).format("MMM DD YY");
+				}
+			}).value();	
 			mailCtlr.email_ids=[];
 		});
 	};

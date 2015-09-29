@@ -51,6 +51,22 @@
     		background-color: #64a79e;
     	}
     }
+    .hashtag, .mention{
+        color: #63a5a1;
+        &:hover,&:focus{
+            color: #63a5a1;
+            text-decoration: none;
+        }
+    }
+    .text-post{
+        a{
+            color: #63a5a1;
+            &:hover,&:focus{
+                color: #63a5a1;
+                text-decoration: none;
+            } 
+        }
+    }
 }
 
 @media (max-width: 768px) {

@@ -52,7 +52,7 @@
 							<a href="" class="delete-link col-md-4 no-padding" ng-click="circleCtrl.deleteCircle();"><i class="fa fa-times-circle"></i>Eliminar</a>
 						</div>
 						<div class="clearfix"></div>
-						<a class="circle-name btn-block" ng-click="circleCtrl.cancelContact();">{{circleCtrl.circle.name}}</a>
+						<span class="circle-name btn-block">{{circleCtrl.circle.name}}</span>
 					</div>
 				</div>
 				<div class="col-md-12 no-padding" ng-show="circleCtrl.createCircle">
@@ -82,13 +82,17 @@
 				<div class="clearfix"></div>
 				<div ng-hide="circleCtrl.createCircle || circleCtrl.editingCircle">
 					<div class="circle-children" style="margin-top: 20px;">
+						<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Grupos</span>
 						<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.create();" style="margin-bottom: 5px;">Crear Grupo</a>
 						<a href="" ng-click="circleCtrl.goToCircle(subcircle._id);" class="circle-child circle-child-circle" ng-repeat="subcircle in circleCtrl.tree.subcircles">{{subcircle.name}}</a>
+						
 					</div>
 					<div class="clearfix"></div>
-					<div class="circle-children" style="margin-top: 5px;" ng-if="circleCtrl.circle.contacts">
+					<div class="circle-children" style="margin-top: 25px;" ng-if="circleCtrl.circle.contacts">
+						<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Contactos</span>
+						
 						<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.createContact();" style="margin-bottom: 5px;">Crear Contacto</a>
-						<a href="#/contact/{{contact._id}}" class="circle-child" ng-repeat="contact in circleCtrl.circle.contacts">
+						<a href="#/contact/{{contact._id}}" class="circle-child" ng-repeat="contact in circleCtrl.circle.contacts" >
 							<img ng-src="{{contact.picture}}" class="img-circle image-contact-small" ng-if="contact.picture">
 							<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!contact.picture">
 							{{contact.name}}
