@@ -74,3 +74,47 @@
 		}
 	}
 }
+
+.eliminar-mail{
+	float: left;
+	padding: 2px 10px;
+	cursor: pointer;
+}
+
+.btn-action-group{
+    float: left;
+    position: relative;
+}
+.btn-action{
+    background-color: white;
+    padding: 2px 30px 2px 10px;
+    font-family: 'antennaRegular';
+    color: #dc911a;
+    border: 2px solid #dc911a;
+    border-radius: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover, &:focus{
+		background-color: darken(#fff,10%);
+		color: #dc9030;
+		border-color:#dc9030;
+   		text-decoration: none;
+	}
+}
+
+.btn-action-icon{
+    margin-left: -35px;
+    color: #dc911a;
+    position: relative;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-action-delete{
+	color: #a21d22;
+    border-color: #a21d22;
+	&:hover, &:focus{
+   		color: lighten(#a21d22, 10%);
+		border-color: lighten(#a21d22, 10%);
+	}
+}

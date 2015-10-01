@@ -11,10 +11,28 @@
 		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='inbox'">
 			<uw-loader ng-if="!mailCtlr.inbox"></uw-loader>
 			<div ng-show="mailCtlr.inbox">
-				<div class="col-md-12 no-padding">
-					<a ng-click="mailCtlr.moveToTrash();" class="col-md-3 btn btn-danger">Enviar a Papelera</a>
-					<a ng-click="mailCtlr.markAsSeen();" class="col-md-3 btn btn-primary" style="margin-left: 10px;">Marcar como leido</a>
-					<a ng-click="mailCtlr.markAsUnseen();" class="col-md-3 btn btn-success" style="margin-left: 10px;">Marcar como no leido</a>
+				<div class="col-md-12 no-padding" ng-if="mailCtlr.inbox.count > 0">
+					<div class="btn-action-group">
+						<a ng-click="mailCtlr.moveToTrash();" class="btn btn-action btn-action-delete">Enviar a Papelera</a>
+						<span ng-click="mailCtlr.moveToTrash();" class="fa-stack fa-lg btn-action-icon delete-link">
+						  <i class="fa fa-circle fa-stack-2x delete-link"></i>
+						  <i class="fa fa-trash fa-stack-1x fa-inverse"></i>
+						</span>
+					</div>
+					<div class="btn-action-group">
+						<a ng-click="mailCtlr.markAsSeen();" class="btn btn-action">Marcar como leido</a>
+						<span ng-click="mailCtlr.markAsSeen();" class="fa-stack fa-lg btn-action-icon">
+						  <i class="fa fa-circle fa-stack-2x"></i>
+						  <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
+						</span>
+					</div>
+					<div class="btn-action-group">
+						<a ng-click="mailCtlr.markAsUnseen();" class="btn btn-action">Marcar como no leido</a>
+						<span ng-click="mailCtlr.markAsUnseen();" class="fa-stack fa-lg btn-action-icon">
+						  <i class="fa fa-circle fa-stack-2x"></i>
+						  <i class="fa fa-eye-slash fa-stack-1x fa-inverse"></i>
+						</span>
+					</div>
 				</div>
 				<div class="clearfix"></div>
 				<div class=""  ng-if="mailCtlr.inbox.count > 0" style="margin-top: 10px;">
@@ -27,7 +45,7 @@
 		   					<a href="" ng-click="mailCtlr.getMail(mail)">
 		   					<div class="col-md-3 col-sm-3 col-xs-4">
 			   					<div class="overflow-x-hidden">
-			   						<span>{{mail.from}}</span>
+			   						<span>{{mail.from.toString()}}</span>
 			   					</div>
 		   					</div>
 		   					<div class="col-md-6 col-sm-6 col-xs-7 overflow-x-hidden">
@@ -47,7 +65,17 @@
 			<div ng-show="mailCtlr.sent">
 				<div class=""  ng-if="mailCtlr.sent.count > 0">
 						<a ng-click="mailCtlr.getMail(mail)" href="" class="mail-list col-md-12 col-sm-12 col-xs-12" ng-repeat="mail in mailCtlr.sent.list">
-							{{mail.to.toString()}} - {{mail.subject}} - {{mail.date | amCalendar}}
+							<div class="col-md-3 col-sm-3 col-xs-4">
+			   					<div class="overflow-x-hidden">
+			   						<span>{{mail.to.toString()}}</span>
+			   					</div>
+		   					</div>
+		   					<div class="col-md-7 col-sm-7 col-xs-8 overflow-x-hidden">
+		   						<span>{{mail.subject}}</span>
+		   					</div>
+		   					<div class="col-md-2 col-sm-2 col-xs-0 overflow-x-hidden text-right pull-right">
+		   						<span>{{mail.date}}</span>
+		   					</div>
 						</a>
 				</div>
 			</div>
@@ -57,7 +85,17 @@
 			<div ng-show="mailCtlr.draft">
 				<div class=""  ng-if="mailCtlr.draft.count > 0">
 						<a ng-click="mailCtlr.getMail(mail)" href="" class="mail-list col-md-12 col-sm-12 col-xs-12" ng-repeat="mail in mailCtlr.draft.list">
-							{{mail.to.toString()}} - {{mail.subject}} - {{mail.date | amCalendar}}
+							<div class="col-md-3 col-sm-3 col-xs-4">
+			   					<div class="overflow-x-hidden">
+			   						<span>{{mail.to.toString()}}</span>
+			   					</div>
+		   					</div>
+		   					<div class="col-md-7 col-sm-7 col-xs-8 overflow-x-hidden">
+		   						<span>{{mail.subject}}</span>
+		   					</div>
+		   					<div class="col-md-2 col-sm-2 col-xs-0 overflow-x-hidden text-right pull-right">
+		   						<span>{{mail.date}}</span>
+		   					</div>
 						</a>
 				</div>
 			</div>
@@ -67,14 +105,39 @@
 			<div ng-show="mailCtlr.trash">
 				<div class=""  ng-if="mailCtlr.trash.count > 0">
 					<div class="col-md-12 no-padding">
-						<a ng-click="mailCtlr.moveToInbox();" class="col-md-3 btn btn-success" style="margin-left: 10px;">Quitar de la papelera</a>
+						<div class="btn-action-group">
+							<a ng-click="mailCtlr.moveToInbox();" class="btn btn-action">Quitar de la Papelera</a>
+							<span ng-click="mailCtlr.moveToTrash();" class="fa-stack fa-lg btn-action-icon">
+							  <i class="fa fa-circle fa-stack-2x"></i>
+							  <i class="fa fa-trash fa-stack-1x fa-inverse"></i>
+							</span>
+						</div>
 					</div>
 					<div class="clearfix"></div>
-					<span class="mail-list col-md-12 col-sm-12 col-xs-12" ng-repeat="mail in mailCtlr.trash.list">
-						<input type="checkbox" ng-model="mail.checked" ng-true-value="true" ng-false-value="false" ng-change="mailCtlr.check(mail);"> 
-						<a href="" ng-click="mailCtlr.deleteMail(mail.id)" class="fa fa-trash"></a>
-           				<a href="" ng-click="mailCtlr.getMail(mail)">{{mail.from}} - {{mail.subject}} - {{mail.date | amCalendar}}</a>
-					</span>
+					<div class=""  ng-if="mailCtlr.trash.count > 0" style="margin-top: 10px;">
+						<span class="mail-list col-md-12 col-sm-12 col-xs-12" ng-repeat="mail in mailCtlr.trash.list">
+							<label class="pull-left">
+								<input type="checkbox" ng-model="mail.checked" ng-true-value="true" ng-false-value="false" ng-change="mailCtlr.check(mail);" style="display: none;"> 
+								<i class="fa" ng-class="{'fa-check-square-o': mail.checked,'fa-square-o': !mail.checked}"></i>
+				            </label>
+							<span ng-click="mailCtlr.deleteMail(mail.id)" class="fa fa-trash eliminar-mail delete-link"></span>
+							<div>
+			   					<a href="" ng-click="mailCtlr.getMail(mail)">
+			   					<div class="col-md-3 col-sm-3 col-xs-4">
+				   					<div class="overflow-x-hidden">
+				   						<span>{{mail.from.toString()}}</span>
+				   					</div>
+			   					</div>
+			   					<div class="col-md-6 col-sm-6 col-xs-7 overflow-x-hidden">
+			   						<span>{{mail.subject}}</span>
+			   					</div>
+			   					<div class="col-md-2 col-sm-2 col-xs-0 overflow-x-hidden text-right pull-right">
+			   						<span>{{mail.date}}</span>
+			   					</div>
+			   					</a>
+		   					</div>
+						</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -86,16 +149,16 @@
 			<a ng-click="mailCtlr.answerAllMail(mailCtlr.viewMail, mainController.email);" class="col-md-offset-2 col-md-8 btn btn-danger" style="margin-top: 5px;">Responder a todos</a>
 			<div class="clearfix"></div>
 			<span style="margin-top: 5px;" ng-show="mailCtlr.viewMail.from">
-				De: {{mailCtlr.viewMail.from}}
+				De: {{mailCtlr.viewMail.from.toString()}}
 			</span><br>
 			<span style="margin-top: 5px;" ng-show="mailCtlr.viewMail.to">
-				Para: {{mailCtlr.viewMail.to}}
+				Para: {{mailCtlr.viewMail.to.toString()}}
 			</span><br>
 			<span style="margin-top: 5px;" ng-show="mailCtlr.viewMail.cc">
-				CC: {{mailCtlr.viewMail.cc}}
+				CC: {{mailCtlr.viewMail.cc.toString()}}
 			</span><br>
 			<span style="margin-top: 5px;" ng-show="mailCtlr.viewMail.cco">
-				CCO: {{mailCtlr.viewMail.cco}}
+				CCO: {{mailCtlr.viewMail.cco.toString()}}
 			</span>
 		</div>
 		<div class="col-md-9 text-center "  style="margin-top: 20px;">

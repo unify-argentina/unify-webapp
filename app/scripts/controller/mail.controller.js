@@ -26,6 +26,13 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 			AuthenticationService.getUserId()
 		).then(function(data) {
 			mailCtlr.draft=data.emails;
+			_(mailCtlr.draft.list).forEach(function(mail) {
+				if(moment.unix(mail.date) > moment().subtract(1, 'days')){
+					mail.date=moment.unix(mail.date).format("hh:mm");
+				}else{
+					mail.date=moment.unix(mail.date).format("MMM DD YY");
+				}
+			}).value();	
 			mailCtlr.email_ids=[];
 		});
 	};
@@ -36,6 +43,13 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 			AuthenticationService.getUserId()
 		).then(function(data) {
 			mailCtlr.sent=data.emails;
+			_(mailCtlr.sent.list).forEach(function(mail) {
+				if(moment.unix(mail.date) > moment().subtract(1, 'days')){
+					mail.date=moment.unix(mail.date).format("hh:mm");
+				}else{
+					mail.date=moment.unix(mail.date).format("MMM DD YY");
+				}
+			}).value();	
 			mailCtlr.email_ids=[];
 		});
 	};
@@ -46,6 +60,13 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 			AuthenticationService.getUserId()
 		).then(function(data) {
 			mailCtlr.trash=data.emails;
+			_(mailCtlr.trash.list).forEach(function(mail) {
+				if(moment.unix(mail.date) > moment().subtract(1, 'days')){
+					mail.date=moment.unix(mail.date).format("hh:mm");
+				}else{
+					mail.date=moment.unix(mail.date).format("MMM DD YY");
+				}
+			}).value();	
 			mailCtlr.email_ids=[];
 		});
 	};
@@ -124,6 +145,7 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 	    html = html.replace(/_/g,"/");
 		html = html.replace(/-/g,"+");
 		mailCtlr.decodedHtml = base64.decode(html);
+		mailCtlr.decodedHtml=mailCtlr.decodedHtml.replace(/class=['"].*["']/, '')
 		mailCtlr.mailHtml= $sce.trustAsHtml(mailCtlr.decodedHtml);
 		mailCtlr.viewMail= mail;
 		_(mailCtlr.inbox.list).forEach(function(mail) {
