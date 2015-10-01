@@ -1,12 +1,12 @@
-<div id="mailDash" class="col-md-12" style="margin-top: 20px;" ng-controller="MailController as mailCtlr">
+<div id="mailDash" class="container" class="col-md-12" style="margin-top: 20px;" ng-controller="MailController as mailCtlr">
 	<uw-message ng-model="mailCtlr.errors.google.msg" danger></uw-message>
-  <div class="content col-md-12" ng-hide="mailCtlr.viewMail || mailCtlr.writeMail">
+  <div class="content col-md-12 col-sm-12 col-xs-12 no-padding" ng-hide="mailCtlr.viewMail || mailCtlr.writeMail">
 		<div class="col-md-3 text-center  fadeInLeft animated" style="margin-top: 20px;">
-			<a ng-click="mailCtlr.writeMail={};" class="col-md-offset-1 col-md-10 btn btn-unify-primary" style="margin-top: 5px;"><i class="fa fa-pencil"></i> Redactar</a>
-			<a ng-click="mailCtlr.getInbox();" class="col-md-offset-1 col-md-10 btn" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='inbox', 'btn-unify-mail-active' :mailCtlr.viewList=='inbox'}" style="margin-top: 5px;"><i class="fa fa-envelope"></i> Recibidos</a>
-			<a ng-click="mailCtlr.getSent();" class="col-md-offset-1 col-md-10 btn" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='sent', 'btn-unify-mail-active' : mailCtlr.viewList=='sent'}" style="margin-top: 5px;"><i class="fa fa-external-link"></i> Enviados</a>
-			<a ng-click="mailCtlr.getDraft();" class="col-md-offset-1 col-md-10 btn" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='draft', 'btn-unify-mail-active' : mailCtlr.viewList=='draft'}" style="margin-top: 5px;"><i class="fa fa-list"></i> Borradores</a>
-			<a ng-click="mailCtlr.getTrash();" class="col-md-offset-1 col-md-10 btn" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='trash', 'btn-unify-mail-active' : mailCtlr.viewList=='trash'}" style="margin-top: 5px;"><i class="fa fa-trash"></i> Papelera</a>
+			<a ng-click="mailCtlr.writeMail={};" class="btn btn-unify-primary btn-block" style="margin-top: 5px;"><i class="fa fa-pencil"></i> Redactar</a>
+			<a ng-click="mailCtlr.getInbox();" class="btn btn-block" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='inbox', 'btn-unify-mail-active' :mailCtlr.viewList=='inbox'}" style="margin-top: 5px;"><i class="fa fa-envelope"></i> Recibidos</a>
+			<a ng-click="mailCtlr.getSent();" class="btn btn-block" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='sent', 'btn-unify-mail-active' : mailCtlr.viewList=='sent'}" style="margin-top: 5px;"><i class="fa fa-external-link"></i> Enviados</a>
+			<a ng-click="mailCtlr.getDraft();" class="btn btn-block" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='draft', 'btn-unify-mail-active' : mailCtlr.viewList=='draft'}" style="margin-top: 5px;"><i class="fa fa-list"></i> Borradores</a>
+			<a ng-click="mailCtlr.getTrash();" class="btn btn-block" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='trash', 'btn-unify-mail-active' : mailCtlr.viewList=='trash'}" style="margin-top: 5px;"><i class="fa fa-trash"></i> Papelera</a>
 		</div>
 		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='inbox'">
 			<uw-loader ng-if="!mailCtlr.inbox"></uw-loader>
