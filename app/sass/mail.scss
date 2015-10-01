@@ -118,3 +118,35 @@
 		border-color: lighten(#a21d22, 10%);
 	}
 }
+
+.mail-label{
+	font-size: 1.429em;
+	font-family: 'antennaThin';
+}
+
+.mail-text{
+	font-size: 0.857em;
+}
+
+.mail-view{
+	margin-top: 20px;
+    border: 2px solid #a2c5c1;
+    border-radius: 25px 0px;
+    padding: 10px;
+}
+
+.mail-subject{
+	font-size: 1.571em;
+	font-family: 'antennaThin';
+}
+
+.mail-date{
+	font-size: 0.857em;
+    float: right;
+}
+
+.mail-body{
+	border-top: 1px solid #a2c5c1;
+    margin-top: 10px;
+    padding: 10px 15px;
+}

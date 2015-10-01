@@ -11,9 +11,9 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 			mailCtlr.inbox=data.emails;
 			_(mailCtlr.inbox.list).forEach(function(mail) {
 				if(moment.unix(mail.date) > moment().subtract(1, 'days')){
-					mail.date=moment.unix(mail.date).format("hh:mm");
+					mail.dateFormated=moment.unix(mail.date).format("hh:mm");
 				}else{
-					mail.date=moment.unix(mail.date).format("MMM DD YY");
+					mail.dateFormated=moment.unix(mail.date).format("MMM DD YY");
 				}
 			}).value();	
 			mailCtlr.email_ids=[];
@@ -28,9 +28,9 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 			mailCtlr.draft=data.emails;
 			_(mailCtlr.draft.list).forEach(function(mail) {
 				if(moment.unix(mail.date) > moment().subtract(1, 'days')){
-					mail.date=moment.unix(mail.date).format("hh:mm");
+					mail.dateFormated=moment.unix(mail.date).format("hh:mm");
 				}else{
-					mail.date=moment.unix(mail.date).format("MMM DD YY");
+					mail.dateFormated=moment.unix(mail.date).format("MMM DD YY");
 				}
 			}).value();	
 			mailCtlr.email_ids=[];
@@ -45,9 +45,9 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 			mailCtlr.sent=data.emails;
 			_(mailCtlr.sent.list).forEach(function(mail) {
 				if(moment.unix(mail.date) > moment().subtract(1, 'days')){
-					mail.date=moment.unix(mail.date).format("hh:mm");
+					mail.dateFormated=moment.unix(mail.date).format("hh:mm");
 				}else{
-					mail.date=moment.unix(mail.date).format("MMM DD YY");
+					mail.dateFormated=moment.unix(mail.date).format("MMM DD YY");
 				}
 			}).value();	
 			mailCtlr.email_ids=[];
@@ -62,9 +62,9 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 			mailCtlr.trash=data.emails;
 			_(mailCtlr.trash.list).forEach(function(mail) {
 				if(moment.unix(mail.date) > moment().subtract(1, 'days')){
-					mail.date=moment.unix(mail.date).format("hh:mm");
+					mail.dateFormated=moment.unix(mail.date).format("hh:mm");
 				}else{
-					mail.date=moment.unix(mail.date).format("MMM DD YY");
+					mail.dateFormated=moment.unix(mail.date).format("MMM DD YY");
 				}
 			}).value();	
 			mailCtlr.email_ids=[];
@@ -97,6 +97,12 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 			}).value();	
 			mailCtlr.email_ids=[];
 		});
+	};
+	
+	mailCtlr.moveToTrashMail = function(mail){
+		mailCtlr.email_ids=[];
+		mailCtlr.email_ids.push(mail.id);
+		mailCtlr.moveToTrash();
 	};
 
 	mailCtlr.moveToTrash = function(){
@@ -145,7 +151,7 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 	    html = html.replace(/_/g,"/");
 		html = html.replace(/-/g,"+");
 		mailCtlr.decodedHtml = base64.decode(html);
-		mailCtlr.decodedHtml=mailCtlr.decodedHtml.replace(/class=['"].*["']/, '')
+		//mailCtlr.decodedHtml=mailCtlr.decodedHtml.replace(/class=['"].*["']/, '')
 		mailCtlr.mailHtml= $sce.trustAsHtml(mailCtlr.decodedHtml);
 		mailCtlr.viewMail= mail;
 		_(mailCtlr.inbox.list).forEach(function(mail) {
