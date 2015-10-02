@@ -60,4 +60,5 @@ unifyApp.controller("ContactProfileController", function ($scope, $state, $state
 		contactCtrl.getContactFeed();
 	}
 
+	contactCtrl.comeBack=$stateParams.circle_id;
 });

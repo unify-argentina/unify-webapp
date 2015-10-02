@@ -1,8 +1,11 @@
-unifyApp.controller("CircleController", function ($scope, video, CircleService, AuthenticationService) {
+unifyApp.controller("CircleController", function ($scope, video, $stateParams, CircleService, AuthenticationService) {
 
 	var circleCtrl = this;
-	
-	circleCtrl.circle_id = AuthenticationService.getMainCircleId();
+	if(!$stateParams.circle_id){
+		circleCtrl.circle_id = AuthenticationService.getMainCircleId();
+	}else{
+		circleCtrl.circle_id = $stateParams.circle_id;
+	}
 	circleCtrl.mainCircle_id = AuthenticationService.getMainCircleId();
 	
 	circleCtrl.getCircle = function(){

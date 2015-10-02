@@ -2,15 +2,15 @@
     <div style="margin-bottom:5px;">
 	    <div class="col-md-9 col-sm-9 col-xs-8 no-padding">
 		    <div style="float: left; padding-right: 5px;">
-		    	<a href="#/contact/{{post.contact.id}}">
-	    			<img ng-src="{{post.contact.picture}}" class="img-circle image-contact-small" ng-if="post.contact.picture" "$location.path( '#/contact/'post.contact._id);" >
+		    	<a href="#/contact/{{uwCircleId}}/{{post.contact.id}}">
+	    			<img ng-src="{{post.contact.picture}}" class="img-circle image-contact-small" ng-if="post.contact.picture">
 	    		</a>
 		    	<img ng-src="{{uwPicture}}" class="img-circle image-contact-small" ng-if="uwPicture">
 		    	<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!post.contact.picture && !uwPicture">
 		    </div>
 		    <div>
 	    	   	<span class="name" ng-if="post.contact.name">
-			    	<a href="#/contact/{{post.contact.id}}">
+			    	<a href="#/contact/{{uwCircleId}}/{{post.contact.id}}">
 			    		<b>{{post.contact.name}}</b><br>
 		    		</a>
 		    		<span class="date font-thin">{{post.created_time | amCalendar}}</span>

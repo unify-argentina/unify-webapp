@@ -35,8 +35,13 @@ angular.module('unifyApp').config(function ($stateProvider, $urlRouterProvider) 
   });
 
   $stateProvider.state('contact', {
-    url: '/contact/:contact_id',
+    url: '/contact/:circle_id/:contact_id',
     templateUrl: 'views/contactProfile.html'
+  });
+
+  $stateProvider.state('circle', {
+    url: '/circle/:circle_id',
+    templateUrl: 'views/circle.html'
   });
 
   $stateProvider.state('waiting', {

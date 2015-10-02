@@ -33,6 +33,7 @@ unifyApp.directive('uwTimeLine', function($sce, $filter) {
         scope:{
         	uwMedia: "=",
         	uwName: "=",
+            uwCircleId: "=",
         	uwPicture: "="
         }
     };
