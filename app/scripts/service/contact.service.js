@@ -17,13 +17,13 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 					name : contact.name,
 					picture : contact.picture,
 					circles_ids : contact.circles_ids,
-					facebook_id : (contact.facebook!=null?contact.facebook.id:null),
-					twitter_id : (contact.twitter!=null?contact.twitter.id:null),
-					instagram_id : (contact.instagram!=null?contact.instagram.id:null),
-					facebook_display_name : (contact.facebook!=null?contact.facebook.name:null),
-					twitter_username : (contact.twitter!=null?contact.twitter.username:null),	
-					instagram_username : (contact.instagram!=null?contact.instagram.username:null),
-					email : (contact.google!=null ? contact.google.email : null)
+					facebook_id : (contact.facebook!=null?contact.facebook.id:undefined),
+					twitter_id : (contact.twitter!=null?contact.twitter.id:undefined),
+					instagram_id : (contact.instagram!=null?contact.instagram.id:undefined),
+					facebook_display_name : (contact.facebook!=null?contact.facebook.name:undefined),
+					twitter_username : (contact.twitter!=null?contact.twitter.username:undefined),	
+					instagram_username : (contact.instagram!=null?contact.instagram.username:undefined),
+					email : (contact.google!=null ? contact.google.email : undefined)
 				}
 			).then(function(response) {	
         		return response.data;
@@ -42,13 +42,13 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 					name : contact.name,
 					picture : contact.picture,
 					circles_ids : contact.circles_ids,
-					facebook_id : (contact.facebook!=null?contact.facebook.id:null),
-					twitter_id : (contact.twitter!=null?contact.twitter.id:null),
-					instagram_id : (contact.instagram!=null?contact.instagram.id:null),
-					facebook_display_name : (contact.facebook!=null?contact.facebook.name:null),
-					twitter_username : (contact.twitter!=null?contact.twitter.username:null),	
-					instagram_username : (contact.instagram!=null?contact.instagram.username:null),
-					email : (contact.google!=null ? contact.google.email : null)
+					facebook_id : (contact.facebook!=null?contact.facebook.id:undefined),
+					twitter_id : (contact.twitter!=null?contact.twitter.id:undefined),
+					instagram_id : (contact.instagram!=null?contact.instagram.id:undefined),
+					facebook_display_name : (contact.facebook!=null?contact.facebook.name:undefined),
+					twitter_username : (contact.twitter!=null?contact.twitter.username:undefined),	
+					instagram_username : (contact.instagram!=null?contact.instagram.username:undefined),
+					email : (contact.google!=null ? contact.google.email : undefined)
 
 				}
 			).then(function(response) {	
