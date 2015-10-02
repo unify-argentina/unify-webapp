@@ -96,7 +96,7 @@
 	      	<div class="col-md-12 col-sm-12 col-xs-12 text-left unify-color fadeInDown animated" style="margin-top: 20px;" ng-show="contactCtrl.list">
 		      	<label class="font-18">Seleccioná los grupos de tu contacto</label>
 		      	<div class="col-md-12 col-sm-12 col-xs-12">
-					<div class="gray-color" ng-repeat="circle in contactCtrl.list" ng-class="{'circle-lvl-1':circle.level==1,'circle-lvl-2':circle.level==2,'circle-lvl-3':circle.level==3,'circle-lvl-4':circle.level==4,'circle-lvl-5':circle.level==5}">
+					<div class="gray-color" ng-style="circle.style" ng-repeat="circle in contactCtrl.list">
 						<label>
 							<input type="checkbox" ng-model="circle.checked" ng-change="contactCtrl.check(circle);" style="display: none;">
 							<i class="fa" ng-class="{'fa-check-circle-o': circle.checked,'fa-circle-o': !circle.checked}"></i>

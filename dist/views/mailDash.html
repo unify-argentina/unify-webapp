@@ -11,46 +11,51 @@
 			<uw-loader ng-if="!mailCtlr.inbox"></uw-loader>
 			<div ng-show="mailCtlr.inbox">
 				<div class="col-md-12 no-padding" ng-if="mailCtlr.inbox.count > 0">
-					<div class="btn-action-group">
+					<div class="btn-action-group fadeInDownBig animated">
 						<a ng-click="mailCtlr.moveToTrash();" class="btn btn-action btn-action-delete">Enviar a Papelera</a>
 						<span ng-click="mailCtlr.moveToTrash();" class="fa-stack fa-lg btn-action-icon delete-link">
 						  <i class="fa fa-circle fa-stack-2x delete-link"></i>
 						  <i class="fa fa-times fa-stack-1x fa-inverse"></i>
 						</span>
 					</div>
-					<div class="btn-action-group">
+					<div class="btn-action-group fadeInDownBig animated">
 						<a ng-click="mailCtlr.markAsSeen();" class="btn btn-action" style="margin-left: 10px;">Marcar como leido</a>
 						<span ng-click="mailCtlr.markAsSeen();" class="fa-stack fa-lg btn-action-icon">
 						  <i class="fa fa-circle fa-stack-2x"></i>
 						  <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
 						</span>
 					</div>
-					<div class="btn-action-group">
+					<div class="btn-action-group fadeInDownBig animated">
 						<a ng-click="mailCtlr.markAsUnseen();" class="btn btn-action" style="margin-left: 10px;">Marcar como no leido</a>
 						<span ng-click="mailCtlr.markAsUnseen();" class="fa-stack fa-lg btn-action-icon">
 						  <i class="fa fa-circle fa-stack-2x"></i>
 						  <i class="fa fa-eye-slash fa-stack-1x fa-inverse"></i>
 						</span>
 					</div>
+					<div class="fadeInDownBig animated">
+						<dir-pagination-controls boundary-links="false" class="pull-right" pagination-id="inbox" ></dir-pagination-controls>
+					</div>
 				</div>
 				<div class="clearfix"></div>
 				<div class=""  ng-if="mailCtlr.inbox.count > 0" style="margin-top: 10px;">
-					<span class="mail-list col-md-12 col-sm-12 col-xs-12" ng-repeat="mail in mailCtlr.inbox.list" ng-class="{'mail-unread': mail.unread}">
+				   <!-- <li dir-paginate="mail in mailCtlr.inbox.list | itemsPerPage: 25" current-page="currentPage">{{ meal }}</li>
+					<span class="mail-list col-md-12 col-sm-12 col-xs-12 fadeInRight animated" ng-repeat="mail in mailCtlr.inbox.list" ng-class="{'mail-unread': mail.unread}">-->
+					<span class="mail-list col-md-12 col-sm-12 col-xs-12" dir-paginate="mail in mailCtlr.inbox.list | itemsPerPage: mailCtlr.pageSize" pagination-id="inbox" current-page="mailCtlr.currentPage" ng-class="{'mail-unread': mail.unread}">
 	   					<label class="pull-left" >
 							<input type="checkbox" ng-model="mail.checked" ng-true-value="true" ng-false-value="false" ng-change="mailCtlr.check(mail);" style="display: none;"> 
 							<i class="fa" ng-class="{'fa-check-square-o': mail.checked,'fa-square-o': !mail.checked}"></i>
 			            </label>
 			            <div>
 		   					<a href="" ng-click="mailCtlr.getMail(mail)">
-		   					<div class="col-md-3 col-sm-3 col-xs-4">
+		   					<div class="col-md-3 col-sm-3 col-xs-3">
 			   					<div class="overflow-x-hidden">
 			   						<span>{{mail.from.toString()}}</span>
 			   					</div>
 		   					</div>
-		   					<div class="col-md-6 col-sm-6 col-xs-7 overflow-x-hidden">
+		   					<div class="col-md-6 col-sm-6 col-xs-6 overflow-x-hidden">
 		   						<span>{{mail.subject}}</span>
 		   					</div>
-		   					<div class="col-md-2 col-sm-2 col-xs-0 overflow-x-hidden text-right pull-right">
+		   					<div class="col-md-2 col-sm-2 col-xs-2 overflow-x-hidden text-right pull-right">
 		   						<span>{{mail.dateFormated}}</span>
 		   					</div>
 		   					</a>
@@ -63,39 +68,49 @@
 			<uw-loader ng-if="!mailCtlr.sent"></uw-loader>
 			<div ng-show="mailCtlr.sent">
 				<div class=""  ng-if="mailCtlr.sent.count > 0">
-						<a ng-click="mailCtlr.getMail(mail)" href="" class="mail-list col-md-12 col-sm-12 col-xs-12" ng-repeat="mail in mailCtlr.sent.list">
-							<div class="col-md-3 col-sm-3 col-xs-4">
+					<div class="fadeInDownBig animated">
+						<dir-pagination-controls boundary-links="false" class="pull-right" pagination-id="sent"></dir-pagination-controls>
+					</div>
+					<div class="fadeInRight animated">
+						<a ng-click="mailCtlr.getMail(mail)" href="" class="mail-list col-md-12 col-sm-12 col-xs-12" dir-paginate="mail in mailCtlr.sent.list | itemsPerPage: mailCtlr.pageSize" current-page="mailCtlr.currentPage" pagination-id="sent">
+							<div class="col-md-3 col-sm-3 col-xs-3">
 			   					<div class="overflow-x-hidden">
 			   						<span>{{mail.to.toString()}}</span>
 			   					</div>
 		   					</div>
-		   					<div class="col-md-7 col-sm-7 col-xs-8 overflow-x-hidden">
+		   					<div class="col-md-7 col-sm-7 col-xs-7 overflow-x-hidden">
 		   						<span>{{mail.subject}}</span>
 		   					</div>
-		   					<div class="col-md-2 col-sm-2 col-xs-0 overflow-x-hidden text-right pull-right">
+		   					<div class="col-md-2 col-sm-2 col-xs-2 overflow-x-hidden text-right pull-right">
 		   						<span>{{mail.dateFormated}}</span>
 		   					</div>
 						</a>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='draft'">
 			<uw-loader ng-if="!mailCtlr.draft"></uw-loader>
 			<div ng-show="mailCtlr.draft">
-				<div class=""  ng-if="mailCtlr.draft.count > 0">
-						<a ng-click="mailCtlr.getMail(mail)" href="" class="mail-list col-md-12 col-sm-12 col-xs-12" ng-repeat="mail in mailCtlr.draft.list">
-							<div class="col-md-3 col-sm-3 col-xs-4">
+				<div class="" style="margin-top: 20px;" ng-if="mailCtlr.draft.count > 0">
+					<div class="fadeInDownBig animated">
+						<dir-pagination-controls boundary-links="false" class="pull-right" pagination-id="draft"></dir-pagination-controls>
+					</div>
+					<div class="fadeInRight animated">
+						<a ng-click="mailCtlr.getMail(mail)" href="" class="mail-list col-md-12 col-sm-12 col-xs-12 fadeInRight animated" dir-paginate="mail in mailCtlr.draft.list | itemsPerPage: mailCtlr.pageSize" current-page="mailCtlr.currentPage" pagination-id="draft">
+							<div class="col-md-3 col-sm-3 col-xs-3">
 			   					<div class="overflow-x-hidden">
 			   						<span>{{mail.to.toString()}}</span>
 			   					</div>
 		   					</div>
-		   					<div class="col-md-7 col-sm-7 col-xs-8 overflow-x-hidden">
+		   					<div class="col-md-7 col-sm-7 col-xs-7 overflow-x-hidden">
 		   						<span>{{mail.subject}}</span>
 		   					</div>
-		   					<div class="col-md-2 col-sm-2 col-xs-0 overflow-x-hidden text-right pull-right">
+		   					<div class="col-md-2 col-sm-2 col-xs-2 overflow-x-hidden text-right pull-right">
 		   						<span>{{mail.dateFormated}}</span>
 		   					</div>
 						</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -103,7 +118,7 @@
 			<uw-loader ng-if="!mailCtlr.trash"></uw-loader>
 			<div ng-show="mailCtlr.trash">
 				<div class=""  ng-if="mailCtlr.trash.count > 0">
-					<div class="col-md-12 no-padding">
+					<div class="col-md-12 no-padding fadeInDownBig animated">
 						<div class="btn-action-group">
 							<a ng-click="mailCtlr.moveToInbox();" class="btn btn-action">Quitar de la Papelera</a>
 							<span ng-click="mailCtlr.moveToTrash();" class="fa-stack fa-lg btn-action-icon">
@@ -111,38 +126,41 @@
 							  <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
 							</span>
 						</div>
+						<dir-pagination-controls boundary-links="false" class="pull-right" pagination-id="trash"></dir-pagination-controls>
 					</div>
 					<div class="clearfix"></div>
 					<div class=""  ng-if="mailCtlr.trash.count > 0" style="margin-top: 10px;">
-						<span class="mail-list col-md-12 col-sm-12 col-xs-12" ng-repeat="mail in mailCtlr.trash.list">
-							<label class="pull-left">
-								<input type="checkbox" ng-model="mail.checked" ng-true-value="true" ng-false-value="false" ng-change="mailCtlr.check(mail);" style="display: none;"> 
-								<i class="fa" ng-class="{'fa-check-square-o': mail.checked,'fa-square-o': !mail.checked}"></i>
-				            </label>
-							<span ng-click="mailCtlr.deleteMail(mail.id)" class="fa fa-trash eliminar-mail delete-link"></span>
-							<div>
-			   					<a href="" ng-click="mailCtlr.getMail(mail)">
-			   					<div class="col-md-3 col-sm-3 col-xs-4">
-				   					<div class="overflow-x-hidden">
-				   						<span>{{mail.from.toString()}}</span>
+						<div class="fadeInRight animated">
+							<span class="mail-list col-md-12 col-sm-12 col-xs-12" dir-paginate="mail in mailCtlr.trash.list | itemsPerPage: mailCtlr.pageSize" current-page="mailCtlr.currentPage" pagination-id="trash">
+								<label class="pull-left">
+									<input type="checkbox" ng-model="mail.checked" ng-true-value="true" ng-false-value="false" ng-change="mailCtlr.check(mail);" style="display: none;"> 
+									<i class="fa" ng-class="{'fa-check-square-o': mail.checked,'fa-square-o': !mail.checked}"></i>
+					            </label>
+								<span ng-click="mailCtlr.deleteMail(mail.id)" class="fa fa-trash eliminar-mail delete-link"></span>
+								<div>
+				   					<a href="" ng-click="mailCtlr.getMail(mail)">
+				   					<div class="col-md-3 col-sm-3 col-xs-3">
+					   					<div class="overflow-x-hidden">
+					   						<span>{{mail.from.toString()}}</span>
+					   					</div>
 				   					</div>
+				   					<div class="col-md-6 col-sm-6 col-xs-6 overflow-x-hidden">
+				   						<span>{{mail.subject}}</span>
+				   					</div>
+				   					<div class="col-md-2 col-sm-2 col-xs-2 overflow-x-hidden text-right pull-right">
+				   						<span>{{mail.dateFormated}}</span>
+				   					</div>
+				   					</a>
 			   					</div>
-			   					<div class="col-md-6 col-sm-6 col-xs-7 overflow-x-hidden">
-			   						<span>{{mail.subject}}</span>
-			   					</div>
-			   					<div class="col-md-2 col-sm-2 col-xs-0 overflow-x-hidden text-right pull-right">
-			   						<span>{{mail.dateFormated}}</span>
-			   					</div>
-			   					</a>
-		   					</div>
-						</span>
+							</span>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="content col-md-12" ng-show="mailCtlr.viewMail">
-		<div class="col-md-12" style="padding-right:0px;">
+		<div class="col-md-12 fadeInDownBig animated" style="padding-right:0px;">
 			<div class="btn-action-group">
 				<a ng-click="mailCtlr.viewMail=null" class="btn btn-action">Volver</a>
 				<span ng-click="mailCtlr.viewMail=null" class="fa-stack fa-lg btn-action-icon">
@@ -172,7 +190,7 @@
 				</span>
 			</div>
 		</div>
-		<div class="col-md-3 word-break" style="margin-top: 20px;">
+		<div class="col-md-3 word-break fadeInLeft animated" style="margin-top: 20px;">
 			<div ng-show="mailCtlr.viewMail.from.toString()">
 				<span class="mail-label">De:</span>
 				<br>
@@ -194,7 +212,7 @@
 				<span class="mail-text">{{mailCtlr.viewMail.cco.toString()}}</span>
 			</div>
 		</div>
-		<div class="col-md-9 mail-view"  style="margin-top: 20px;">
+		<div class="col-md-9 mail-view fadeInRight animated"  style="margin-top: 20px;">
 			<span class="mail-subject">{{mailCtlr.viewMail.subject}}</span>
 			<span class="mail-date">{{mailCtlr.viewMail.date | amCalendar}}</span>
 			<div class="mail-body col-md-12" ng-bind-html="mailCtlr.mailHtml"></div>
@@ -203,31 +221,48 @@
 	<div class="content col-md-12" ng-show="mailCtlr.writeMail">
 		<form name="newMailForm" ng-submit="mailCtlr.sendMail()"
           	class="form-horizontal" role="form" novalidate>
-       		<div class="col-md-3 text-center" style="margin-top: 20px;">
-				<a ng-click="mailCtlr.writeMail=null" class="col-md-offset-1 col-md-10 btn btn-danger" style="margin-top: 5px;">Volver</a>
-				<div class="form-group">
-	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.to, 'form-empty':!mailCtlr.writeMail.to}" ng-model="mailCtlr.writeMail.to" id="to" type='text' tabindex="1" placeholder="Ingresá a quien le vas a escribir" style="margin-top: 5px;" required/>
+       		<div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 20px;">
+       			<div class="col-md-12 col-sm-12 col-xs-12 text-center" >
+					<span class="title-unify">Enviar Email</span>
 				</div>
-				<div class="form-group">
-	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.cc, 'form-empty':!mailCtlr.writeMail.cc}" ng-model="mailCtlr.writeMail.cc" id="cc" type='text' tabindex="1" placeholder="Ingresá a quien queres copiar"/>
+				<div class="btn-action-group pull-left">
+					<a ng-click="mailCtlr.writeMail=null" class="btn btn-action">Volver</a>
+					<span ng-click="mailCtlr.writeMail=null" class="fa-stack fa-lg btn-action-icon">
+					  <i class="fa fa-circle fa-stack-2x"></i>
+					  <i class="fa fa-arrow-left fa-stack-1x fa-inverse"></i>
+					</span>
 				</div>
-				<div class="form-group">
-	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.cco, 'form-empty':!mailCtlr.writeMail.cco}" ng-model="mailCtlr.writeMail.cco" id="cco" type='text' tabindex="1" placeholder="Ingresá a quien queres copiar de forma oculta"/>
-				</div>
-			</div>
-			<div class="col-md-9 text-center "  style="margin-top: 20px;">
-				<div class="form-group">
-	              	<input class="form-control" ng-class="{'form-input':mailCtlr.writeMail.subject, 'form-empty':!mailCtlr.writeMail.subject}" ng-model="mailCtlr.writeMail.subject" id="subject" type='text' tabindex="1" placeholder="Escribí el asunto del mail" required/>
-				</div>
-				<div class="form-group">
-	              	<textarea class="form-control form-input" ng-model="mailCtlr.writeMail.text" id="text" type='text' tabindex="1" placeholder="Escribí el tu mail aquí" form="newMailForm" required/>
-	              	</textarea>
-				</div>
-				 <div class="row">
-	                <button type="submit" value="Submit"                                        
-	                        ng-disabled="newMailForm.$invalid"
-	                        ng-click="newMailForm.$setPristine()"
-	                        class="btn btn-unify-primary btn-block">Enviar Mail</button>
+				<div class="col-md-12">
+					<div class="form-group">
+						<div class="no-padding" ng-class="{'col-md-8' : !mailCtlr.writeMail.hasCCO && !mailCtlr.writeMail.hasCC,'col-md-10' : (mailCtlr.writeMail.hasCCO && !mailCtlr.writeMail.hasCC)||(!mailCtlr.writeMail.hasCCO && mailCtlr.writeMail.hasCC), 'col-md-12' : mailCtlr.writeMail.hasCCO && mailCtlr.writeMail.hasCC}">
+			              	<input class="form-control form-input"  ng-model="mailCtlr.writeMail.to" id="to" type='text' tabindex="1" placeholder="Ingresá a quien le vas a escribir" style="margin-top: 5px;" required/>
+						</div>
+						<div ng-show="!mailCtlr.writeMail.hasCC" class="col-md-2 no-padding" style="padding-top: 4px;">
+							<a ng-click="mailCtlr.writeMail.hasCC=true;" class="btn btn-unify-primary-invert btn-block">Agregar CC</a>
+						</div>
+						<div ng-show="!mailCtlr.writeMail.hasCCO" class="col-md-2 no-padding" style="padding-top: 4px;">
+							<a ng-click="mailCtlr.writeMail.hasCCO=true;" class="btn btn-unify-primary-invert btn-block">Agregar CCO</a>
+						</div>
+					</div>
+					<div class="form-group" ng-show="mailCtlr.writeMail.hasCC">
+		              	<input class="form-control form-input" ng-model="mailCtlr.writeMail.cc" id="cc" type='text' placeholder="Ingresá a quien queres copiar"/>
+					</div>
+					<div class="form-group" ng-show="mailCtlr.writeMail.hasCCO">
+		              	<input class="form-control form-input" ng-model="mailCtlr.writeMail.cco" id="cco" type='text' placeholder="Ingresá a quien queres copiar de forma oculta"/>
+					</div>
+					<div class="form-group">
+		              	<input class="form-control form-input" ng-model="mailCtlr.writeMail.subject" id="subject" type='text' placeholder="Escribí el asunto de tu email"/>
+					</div>
+					<div class="form-group">
+		              	<textarea class="form-control form-input" ng-model="mailCtlr.writeMail.text" id="text" type='text' placeholder="Escribí tu email aquí" form="newMailForm" rows="15" required/>
+		              	</textarea>
+					</div>
+					 <div class="row">
+		                <button type="submit" value="Submit"                                        
+		                        ng-disabled="newMailForm.$invalid"
+		                        ng-click="newMailForm.$setPristine()"
+		                        class="btn btn-unify-primary btn-block">Enviar Mail</button>
+		            </div>
 	            </div>
 			</div>
         </form>

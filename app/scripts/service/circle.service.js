@@ -67,6 +67,7 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 			group._id = tree._id;
 			group.name = tree.name;
 			group.level = level;
+			group.style = {'padding-left': (level * 15) +'px'};
 			list.push(group);
 			if(tree.subcircles.length > 0){
 				level++;
@@ -91,6 +92,7 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 			group._id = tree._id;
 			group.name = tree.name;
 			group.level = level;
+			group.style = {'padding-left': (level * 15) +'px'};
 			list.push(group);
 			if(tree.subcircles.length > 0){
 				level++;
