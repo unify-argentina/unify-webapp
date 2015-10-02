@@ -1,0 +1,15 @@
+<ul class="pagination" ng-if="1 < pages.length || !autoHide">
+    <span class="pagination-number pull-left">{{range.lower}}-{{range.upper}} de {{range.total}} </span>
+    <li ng-if="boundaryLinks" ng-class="{ disabled : pagination.current == 1 }">
+        <a href="" ng-click="setCurrent(1)">&laquo;</a>
+    </li>
+    <li ng-if="directionLinks" ng-class="{ disabled : pagination.current == 1 }">
+        <a href="" ng-click="setCurrent(pagination.current - 1)" class="pagination-back"><i class="fa fa-chevron-left"></i></a>
+    </li>
+    <li ng-if="directionLinks" ng-class="{ disabled : pagination.current == pagination.last }">
+        <a href="" ng-click="setCurrent(pagination.current + 1)" class="pagination-forward"><i class="fa fa-chevron-right"></i></a>
+    </li>
+    <li ng-if="boundaryLinks"  ng-class="{ disabled : pagination.current == pagination.last }">
+        <a href="" ng-click="setCurrent(pagination.last)">&raquo;</a>
+    </li>
+</ul>

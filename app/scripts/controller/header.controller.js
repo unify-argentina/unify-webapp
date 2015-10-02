@@ -12,6 +12,14 @@ unifyApp.controller("HeaderController", function ($state) {
 		}
 	}
 
+	headerCtrl.goToMails =function(){
+		if($state.current.name=='emails'){
+			$state.reload();
+		}else{
+			$state.go('emails');
+		}
+	}
+	
 	var canvas = document.getElementById('myCanvas');
 	var context = canvas.getContext('2d');
 

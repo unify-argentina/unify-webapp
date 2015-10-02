@@ -3,15 +3,20 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 	var mailCtlr = this;
 	mailCtlr.viewMail=null;
 
+	mailCtlr.currentPage = 1;
+	mailCtlr.pageSize = 25;
+
+
 	mailCtlr.getInbox = function(){
 		mailCtlr.viewList="inbox";
+		mailCtlr.currentPage = 1;
 		MailService.getInbox(
 			AuthenticationService.getUserId()
 		).then(function(data) {
 			mailCtlr.inbox=data.emails;
 			_(mailCtlr.inbox.list).forEach(function(mail) {
 				if(moment.unix(mail.date) > moment().subtract(1, 'days')){
-					mail.dateFormated=moment.unix(mail.date).format("hh:mm");
+					mail.dateFormated=moment.unix(mail.date).format("hh:mm a");
 				}else{
 					mail.dateFormated=moment.unix(mail.date).format("MMM DD YY");
 				}
@@ -22,13 +27,14 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 
 	mailCtlr.getDraft = function(){	
 		mailCtlr.viewList="draft";
+		mailCtlr.currentPage = 1;
 		MailService.getDraft(
 			AuthenticationService.getUserId()
 		).then(function(data) {
 			mailCtlr.draft=data.emails;
 			_(mailCtlr.draft.list).forEach(function(mail) {
 				if(moment.unix(mail.date) > moment().subtract(1, 'days')){
-					mail.dateFormated=moment.unix(mail.date).format("hh:mm");
+					mail.dateFormated=moment.unix(mail.date).format("hh:mm a");
 				}else{
 					mail.dateFormated=moment.unix(mail.date).format("MMM DD YY");
 				}
@@ -39,13 +45,14 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 
 	mailCtlr.getSent = function(){
 		mailCtlr.viewList="sent";
+		mailCtlr.currentPage = 1;
 		MailService.getSent(
 			AuthenticationService.getUserId()
 		).then(function(data) {
 			mailCtlr.sent=data.emails;
 			_(mailCtlr.sent.list).forEach(function(mail) {
 				if(moment.unix(mail.date) > moment().subtract(1, 'days')){
-					mail.dateFormated=moment.unix(mail.date).format("hh:mm");
+					mail.dateFormated=moment.unix(mail.date).format("hh:mm a");
 				}else{
 					mail.dateFormated=moment.unix(mail.date).format("MMM DD YY");
 				}
@@ -56,13 +63,14 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 
 	mailCtlr.getTrash = function(){
 		mailCtlr.viewList="trash";
+		mailCtlr.currentPage = 1;
 		MailService.getTrash(
 			AuthenticationService.getUserId()
 		).then(function(data) {
 			mailCtlr.trash=data.emails;
 			_(mailCtlr.trash.list).forEach(function(mail) {
 				if(moment.unix(mail.date) > moment().subtract(1, 'days')){
-					mail.dateFormated=moment.unix(mail.date).format("hh:mm");
+					mail.dateFormated=moment.unix(mail.date).format("hh:mm a");
 				}else{
 					mail.dateFormated=moment.unix(mail.date).format("MMM DD YY");
 				}
@@ -147,6 +155,7 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 	};
 
 	mailCtlr.getMail = function(mail){
+		mailCtlr.currentPage = 1;
 		var html=mail.html;
 	    html = html.replace(/_/g,"/");
 		html = html.replace(/-/g,"+");
@@ -176,6 +185,9 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 			mailCtlr.writeMail.cco = mailCtlr.writeMail.cco.split(",");
 		}else{
 			mailCtlr.writeMail.cco =[];
+		}
+		if(!mailCtlr.writeMail.subject){
+			mailCtlr.writeMail.subject="Sin Asunto";
 		}
 		MailService.sendMail(
 			mailCtlr.writeMail
