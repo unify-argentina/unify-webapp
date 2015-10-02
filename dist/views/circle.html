@@ -9,7 +9,7 @@
 						<img ng-src="{{circleCtrl.circle.picture}}" class="img-circle image-profile" ng-if="circleCtrl.circle.picture">
 
 						<div ng-if="!circleCtrl.circle.picture" class="img-circle image-profile overflow-hidden">
-							<img src="resources/circle/circle.png" class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.contactSize==0">
+							<img src="resources/contact/pulpix.png" class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.contactSize==0">
 							
 							<div ng-if="circleCtrl.contactSize==1" class="img-circle image-profile">
 								<img ng-src="{{circleCtrl.imagesCircle[0].picture}}" class="col-md-12 col-sm-12 col-xs-12 no-padding" >
@@ -92,7 +92,7 @@
 						<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Contactos</span>
 						
 						<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.createContact();" style="margin-bottom: 5px;">Crear Contacto</a>
-						<a href="#/contact/{{contact._id}}" class="circle-child" ng-repeat="contact in circleCtrl.circle.contacts" >
+						<a href="#/contact/{{circleCtrl.circle_id}}/{{contact._id}}" class="circle-child" ng-repeat="contact in circleCtrl.circle.contacts" >
 							<img ng-src="{{contact.picture}}" class="img-circle image-contact-small" ng-if="contact.picture">
 							<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!contact.picture">
 							{{contact.name}}
@@ -123,7 +123,7 @@
 			</div>
 			<div ng-show="!circleCtrl.editContact && !circleCtrl.movingCircle" style="margin-top: 10px;">
   				<uw-loader ng-if="!circleCtrl.feed"></uw-loader>
-				<uw-time-line class="fadeInDown animated" uw-media="circleCtrl.feed" ng-if="circleCtrl.feed"></uw-time-line>
+				<uw-time-line class="fadeInDown animated" uw-circle-id="circleCtrl.circle_id" uw-media="circleCtrl.feed" ng-if="circleCtrl.feed"></uw-time-line>
 			</div>
 		</div>
 		<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
