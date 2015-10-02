@@ -122,8 +122,15 @@
 				</div>
 			</div>
 			<div ng-show="!circleCtrl.editContact && !circleCtrl.movingCircle" style="margin-top: 10px;">
-  				<uw-loader ng-if="!circleCtrl.feed"></uw-loader>
-				<uw-time-line class="fadeInDown animated" uw-circle-id="circleCtrl.circle_id" uw-media="circleCtrl.feed" ng-if="circleCtrl.feed"></uw-time-line>
+  				<div ng-if="!circleCtrl.circle.empty_circle">
+	  				<uw-loader ng-if="!circleCtrl.feed"></uw-loader>
+					<uw-time-line class="fadeInDown animated" uw-circle-id="circleCtrl.circle_id" uw-media="circleCtrl.feed" ng-if="circleCtrl.feed"></uw-time-line>
+				</div>
+				<div ng-if="circleCtrl.circle.empty_circle" class="text-center message-empty">
+					<img src="resources/pulpix.png" height="100px" class="centered">
+					<br>
+					<span class="font-18">Este grupo esta vacio!<br>Agregá contactos poder para ver contenido aquí!</span>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">

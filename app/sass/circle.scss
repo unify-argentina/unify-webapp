@@ -3,6 +3,17 @@
     width:  40px;
 }
 
+.message-empty{
+    opacity: 0.6;
+    padding-top: 150px;
+}
+
+.centered{
+    display: block;
+    margin: 0 auto;  
+    overflow: hidden;
+}
+
 .image-profile{
     display: block;
     height:  150px;
@@ -13,6 +24,7 @@
 
 .image-profile-half{
     display: block;
+    margin-left: -37px;
     height:  150px;
     width:  150px;
     margin: 0 auto;

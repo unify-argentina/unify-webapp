@@ -38,8 +38,6 @@
 				</div>
 				<div class="clearfix"></div>
 				<div class=""  ng-if="mailCtlr.inbox.count > 0" style="margin-top: 10px;">
-				   <!-- <li dir-paginate="mail in mailCtlr.inbox.list | itemsPerPage: 25" current-page="currentPage">{{ meal }}</li>
-					<span class="mail-list col-md-12 col-sm-12 col-xs-12 fadeInRight animated" ng-repeat="mail in mailCtlr.inbox.list" ng-class="{'mail-unread': mail.unread}">-->
 					<span class="mail-list col-md-12 col-sm-12 col-xs-12" dir-paginate="mail in mailCtlr.inbox.list | itemsPerPage: mailCtlr.pageSize" pagination-id="inbox" current-page="mailCtlr.currentPage" ng-class="{'mail-unread': mail.unread}">
 	   					<label class="pull-left" >
 							<input type="checkbox" ng-model="mail.checked" ng-true-value="true" ng-false-value="false" ng-change="mailCtlr.check(mail);" style="display: none;"> 
@@ -61,6 +59,11 @@
 		   					</a>
 	   					</div>
 					</span>
+				</div>
+				<div ng-if="mailCtlr.inbox.count == 0" class="text-center message-empty">
+					<img src="resources/pulpix.png" height="100px" class="centered">
+					<br>
+					<span class="font-18">No tenes mails para ver, esta bandeja está vacia.</span>
 				</div>
 			</div>
 		</div>
@@ -87,6 +90,11 @@
 						</a>
 					</div>
 				</div>
+				<div ng-if="mailCtlr.sent.count == 0" class="text-center message-empty">
+					<img src="resources/pulpix.png" height="100px" class="centered">
+					<br>
+					<span class="font-18">No tenes mails para ver, esta bandeja está vacia.</span>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='draft'">
@@ -111,6 +119,11 @@
 		   					</div>
 						</a>
 					</div>
+				</div>
+				<div ng-if="mailCtlr.draft.count == 0" class="text-center message-empty">
+					<img src="resources/pulpix.png" height="100px" class="centered">
+					<br>
+					<span class="font-18">No tenes mails para ver, esta bandeja está vacia.</span>
 				</div>
 			</div>
 		</div>
@@ -155,6 +168,12 @@
 							</span>
 						</div>
 					</div>
+				</div>
+
+				<div ng-if="mailCtlr.trash.count == 0" class="text-center message-empty">
+					<img src="resources/pulpix.png" height="100px" class="centered">
+					<br>
+					<span class="font-18">No tenes mails para ver, esta bandeja está vacia.</span>
 				</div>
 			</div>
 		</div>
