@@ -21,13 +21,13 @@
 		    	</span>
 		    </div>
 	    </div>
-	    <div class="col-md-3 col-sm-3 col-xs-4 no-padding" ng-show="post.provider != 'instagram'">
+	    <div class="col-md-3 col-sm-3 col-xs-4 no-padding" >
 	    	<i class="fa" ng-class="{'fa-facebook-official': post.provider == 'facebook','fa-twitter': post.provider == 'twitter','fa-instagram': post.provider == 'instagram'}"></i>
-	    	<a href="" class="like" ng-show="!post.user_has_liked" ng-click="like(post);">
+	    	<a href="" class="like" ng-show="!post.user_has_liked" ng-click="like(post);" ng-show="post.provider != 'instagram'">
 	    		<span class="like-text">Me gusta</span>
 	    		<img src="resources/unify-like.png" class="img-circle" height="33px" >
 	    	</a>
-	    	<a href="" class="liked" ng-show="post.user_has_liked" ng-click="unlike(post);">
+	    	<a href="" class="liked" ng-show="post.user_has_liked" ng-click="unlike(post);" ng-show="post.provider != 'instagram'">
 	    		<span class="liked-text">No me gusta más</span>
 	    		<img src="resources/unify-liked.png" class="img-circle" height="33px">
 	    	</a>
