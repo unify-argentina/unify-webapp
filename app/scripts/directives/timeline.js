@@ -1,8 +1,7 @@
-unifyApp.directive('uwTimeLine', function($sce, $filter) {
+unifyApp.directive('uwTimeLine', function($sce, $filter, ContactService, AuthenticationService) {
   
   	var link = function(scope, elm, attrs, ctrl) {
         scope.boldHashtags = function(text, provider){
-
             var target = "_blank";
             var replacedText = $filter('linky')(text, target);
             var targetAttr = "";
@@ -25,6 +24,42 @@ unifyApp.directive('uwTimeLine', function($sce, $filter) {
             }
             return replacedText;
         }
+       scope.like = function(post){
+            var facebook_id; 
+            var twitter_id;
+            if(post.provider=='facebook'){
+                facebook_id=post.id;
+                twitter_id=null;
+            }else if(post.provider=='twitter'){
+                facebook_id=null;
+                twitter_id=post.id;
+            }
+            ContactService.like(
+                AuthenticationService.getUserId(),
+                facebook_id,
+                twitter_id
+            ).then(function(data) {
+                post.user_has_liked=true;
+            });
+        };
+        scope.unlike = function(post){
+            var facebook_id; 
+            var twitter_id;
+            if(post.provider=='facebook'){
+                facebook_id=post.id;
+                twitter_id=null;
+            }else if(post.provider=='twitter'){
+                facebook_id=null;
+                twitter_id=post.id;
+            }
+            ContactService.unlike(
+                AuthenticationService.getUserId(),
+                facebook_id,
+                twitter_id
+            ).then(function(data) {
+                post.user_has_liked=false;
+            });
+        };
     };
     return {
         restrict: 'E',

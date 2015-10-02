@@ -10,7 +10,6 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 		});
 
 		var saveContact = function(contact){
-			console.log(contact.email);
 			var promise = $http.post(ENV.apiEndPoint + '/api/user/' + contact.user_id + '/contact', 
 				{
 					user_id : contact.user_id,
@@ -34,7 +33,6 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 		};
 
 		var updateContact = function(contact){
-			console.log(contact.email);
 			var promise = $http.put(ENV.apiEndPoint + '/api/user/' + contact.user_id + '/contact/' + contact._id, 
 				{
 					user_id : contact.user_id,
@@ -69,10 +67,44 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 			return promise;
 		};
 
+		var like = function(user_id, facebook_id, twitter_id){
+			var promise = $http.post(ENV.apiEndPoint + '/api/user/' + user_id + '/media/like', 
+				{
+					user_id : user_id,
+					facebook_media_id : (facebook_id!=null?facebook_id:undefined),
+					twitter_media_id : (twitter_id!=null?twitter_id:undefined)
+
+				}
+			).then(function(response) {	
+        		return response.data;
+			}, function(response) {
+				return response.data;
+			});
+			return promise;
+		};
+
+		var unlike = function(user_id, facebook_id, twitter_id){
+			var promise = $http.post(ENV.apiEndPoint + '/api/user/' + user_id + '/media/unlike', 
+				{
+					user_id : user_id,
+					facebook_media_id : (facebook_id!=null?facebook_id:undefined),
+					twitter_media_id : (twitter_id!=null?twitter_id:undefined)
+
+				}
+			).then(function(response) {	
+        		return response.data;
+			}, function(response) {
+				return response.data;
+			});
+			return promise;
+		};
+
 	return{
 		contact 		: contact,
 		saveContact		: saveContact,
 		updateContact	: updateContact,
-		getContactFeed	: getContactFeed 
+		getContactFeed	: getContactFeed,
+		like			: like,
+		unlike			: unlike
 	}
 });
