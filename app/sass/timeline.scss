@@ -51,6 +51,16 @@
     		background-color: #64a79e;
     	}
     }
+    .liked{
+        text-decoration: none;
+        color:#64a79e;
+        float: right;
+        padding-right: 5px;
+        img{
+            background-color: #fff;
+            border: 2px solid #64a79e;
+        }
+    }
     .hashtag, .mention{
         color: #63a5a1;
         &:hover,&:focus{

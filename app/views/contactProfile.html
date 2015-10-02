@@ -49,6 +49,12 @@
 						</span>
 					</div>
 				</div>
+				<div class="clearfix"></div>
+				<div class="circle-children" style="margin-top: 20px;">
+					<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Grupos a los que pertenece</span>
+					<a href="#/circle/{{parent.circle}}" class="circle-child circle-child-circle" ng-repeat="parent in contactProfileCtrl.contact.parents">{{parent.circle}}</a>
+					
+				</div>
 			</div>
 		</div>
 		<div class="col-md-9">
