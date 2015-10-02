@@ -8,7 +8,7 @@
 		    	<img ng-src="{{uwPicture}}" class="img-circle image-contact-small" ng-if="uwPicture">
 		    	<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!post.contact.picture && !uwPicture">
 		    </div>
-		    <div ng-show="post.provider != 'instagram'">
+		    <div>
 	    	   	<span class="name" ng-if="post.contact.name">
 			    	<a href="#/contact/{{uwCircleId}}/{{post.contact.id}}">
 			    		<b>{{post.contact.name}}</b><br>
@@ -21,7 +21,7 @@
 		    	</span>
 		    </div>
 	    </div>
-	    <div class="col-md-3 col-sm-3 col-xs-4 no-padding">
+	    <div class="col-md-3 col-sm-3 col-xs-4 no-padding" ng-show="post.provider != 'instagram'">
 	    	<i class="fa" ng-class="{'fa-facebook-official': post.provider == 'facebook','fa-twitter': post.provider == 'twitter','fa-instagram': post.provider == 'instagram'}"></i>
 	    	<a href="" class="like" ng-show="!post.user_has_liked" ng-click="like(post);">
 	    		<span class="like-text">Me gusta</span>
