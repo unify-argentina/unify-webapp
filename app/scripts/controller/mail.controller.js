@@ -160,7 +160,7 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 	    html = html.replace(/_/g,"/");
 		html = html.replace(/-/g,"+");
 		mailCtlr.decodedHtml = base64.decode(html);
-		//mailCtlr.decodedHtml=mailCtlr.decodedHtml.replace(/class=['"].*["']/, '')
+		mailCtlr.decodedHtml=mailCtlr.decodedHtml.replace(/class=['"]*["']/, '');
 		mailCtlr.mailHtml= $sce.trustAsHtml(mailCtlr.decodedHtml);
 		mailCtlr.viewMail= mail;
 		_(mailCtlr.inbox.list).forEach(function(mail) {
