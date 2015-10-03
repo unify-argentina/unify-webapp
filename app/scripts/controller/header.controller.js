@@ -1,6 +1,6 @@
 
 
-unifyApp.controller("HeaderController", function ($state) {
+unifyApp.controller("HeaderController", function ($state, $rootScope) {
 	
 	var headerCtrl=this;
 
@@ -13,10 +13,14 @@ unifyApp.controller("HeaderController", function ($state) {
 	}
 
 	headerCtrl.goToMails =function(){
-		if($state.current.name=='emails'){
-			$state.reload();
+		if(!$rootScope.email){
+			if($state.current.name=='emails'){
+				$state.reload();
+			}else{
+				$state.go('emails');
+			}
 		}else{
-			$state.go('emails');
+			$state.go('editProfile');
 		}
 	}
 	
