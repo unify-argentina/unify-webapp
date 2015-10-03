@@ -13,7 +13,7 @@ unifyApp.controller("HeaderController", function ($state, $rootScope) {
 	}
 
 	headerCtrl.goToMails =function(){
-		if(!$rootScope.email){
+		if($rootScope.email){
 			if($state.current.name=='emails'){
 				$state.reload();
 			}else{
