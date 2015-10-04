@@ -24,7 +24,9 @@
 				    </div>
 			    </div>
 			    <div class="col-md-3 col-sm-3 col-xs-4 no-padding" >
-			    	<i class="fa" ng-class="{'fa-facebook-official': post.provider == 'facebook','fa-twitter': post.provider == 'twitter','fa-instagram': post.provider == 'instagram'}"></i>
+			    	<a href="{{post.link}}" target="_blank">
+			    		<i class="fa" ng-class="{'fa-facebook-official': post.provider == 'facebook','fa-twitter': post.provider == 'twitter','fa-instagram': post.provider == 'instagram'}"></i>
+			    	</a>
 			    	<a href="" class="like" ng-show="!post.user_has_liked && post.provider != 'instagram'" ng-click="like(post);" >
 			    		<span class="like-text">Me gusta</span>
 			    		<img src="resources/unify-like.png" class="img-circle" height="33px" >

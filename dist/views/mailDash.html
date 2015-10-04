@@ -38,7 +38,7 @@
 				</div>
 				<div class="clearfix"></div>
 				<div class=""  ng-if="mailCtlr.inbox.count > 0" style="margin-top: 10px;">
-					<span class="mail-list col-md-12 col-sm-12 col-xs-12" dir-paginate="mail in mailCtlr.inbox.list | itemsPerPage: mailCtlr.pageSize" pagination-id="inbox" current-page="mailCtlr.currentPage" ng-class="{'mail-unread': mail.unread}">
+					<span class="mail-list col-md-12 col-sm-12 col-xs-12 fadeInRight animated" dir-paginate="mail in mailCtlr.inbox.list | itemsPerPage: mailCtlr.pageSize" pagination-id="inbox" current-page="mailCtlr.currentPage" ng-class="{'mail-unread': mail.unread}">
 	   					<label class="pull-left" >
 							<input type="checkbox" ng-model="mail.checked" ng-true-value="true" ng-false-value="false" ng-change="mailCtlr.check(mail);" style="display: none;"> 
 							<i class="fa" ng-class="{'fa-check-square-o': mail.checked,'fa-square-o': !mail.checked}"></i>

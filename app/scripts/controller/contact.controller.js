@@ -13,7 +13,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 		},function(response){
 			response.contact.circles_ids=[];
 			_(response.contact.parents).forEach(function(parent) {
-			  response.contact.circles_ids.push(parent.circle);
+			  response.contact.circles_ids.push(parent.circle._id);
 			}).value();
 
 			contactCtrl.contact=response.contact;
@@ -117,7 +117,8 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 		).then(function(data){
 			contactCtrl.friends=data;
 			var pages={};
-			pages.name="---Páginas de Facebook---"
+			pages._id="facebookPages";
+			pages.name="---Páginas de Facebook---";
 			contactCtrl.friends.facebook_friends.list.push(pages);
 			contactCtrl.friends.facebook_friends.list=contactCtrl.friends.facebook_friends.list.concat(contactCtrl.friends.facebook_pages.list);
 		});
@@ -134,6 +135,12 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 		contactCtrl.getCircleList();
 	});
 
+	$scope.$watch('contactCtrl.contact.facebook._id', function(newValue, oldValue) {
+		if(newValue=="facebookPages"){
+			contactCtrl.contact.facebook=null;
+		}
+	});
+
 	contactCtrl.init = function(circle_id,contact_id, parentController){
 		contactCtrl.circle_id=circle_id;
 		contactCtrl.parentController=parentController;
@@ -144,7 +151,8 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 			).then(function(data){
 				contactCtrl.friends=data;
 				var pages={};
-				pages.name="---Páginas de Facebook---"
+				pages._id="facebookPages";
+				pages.name="---Páginas de Facebook---";
 				contactCtrl.friends.facebook_friends.list.push(pages);
 				contactCtrl.friends.facebook_friends.list=contactCtrl.friends.facebook_friends.list.concat(contactCtrl.friends.facebook_pages.list);
 				if(contactCtrl.contact_id){
