@@ -1,4 +1,4 @@
-unifyApp.controller("ProfileController", function (ProfileService, $rootScope, FileService, AuthenticationService) {
+unifyApp.controller("ProfileController", function (ProfileService, $scope, $rootScope, FileService, AuthenticationService) {
 
 	var profileCtlr = this;
 
@@ -6,6 +6,31 @@ unifyApp.controller("ProfileController", function (ProfileService, $rootScope, F
 		user_id: AuthenticationService.getUserId()
 	},function(response){
 		profileCtlr.user=response.user;
+		profileCtlr.checkPic();
+	});
+
+	profileCtlr.checkPic = function() {
+		if(	profileCtlr.user.picture != profileCtlr.user.facebook.picture &&
+			profileCtlr.user.picture != profileCtlr.user.twitter.picture &&
+			profileCtlr.user.picture != profileCtlr.user.instagram.picture &&
+			profileCtlr.user.picture != profileCtlr.user.google.picture){
+			profileCtlr.user.pictureUploaded=profileCtlr.user.picture;
+		}
+	};
+
+	profileCtlr.uploadFile = function() {
+        document.getElementById('fileUploadInput').click();
+    };
+
+    $scope.$watch('profileCtlr.newUser.uploadingFile', function(newValue, oldValue) {
+		if(newValue!=null){
+			profileCtlr.newUser.file=profileCtlr.newUser.uploadingFile;
+			profileCtlr.newUser.pictureFromFile=true;
+		}else{
+			if(profileCtlr.newUser){
+				profileCtlr.newUser.pictureFromFile=(profileCtlr.newUser.file!=null);
+			}
+		}
 	});
 
 	profileCtlr.authenticate = function(provider) {
@@ -32,14 +57,6 @@ unifyApp.controller("ProfileController", function (ProfileService, $rootScope, F
 		profileCtlr.editProfile=false;
 	}
 
-	profileCtlr.saveFile = function(){
-		FileService.saveFile(
-			profileCtlr.newUser.file
-		).then(function(data) {
-			console.log(data);
-		});
-	};
-
 	profileCtlr.savePassword = function(){
 		ProfileService.savePassword(
 			AuthenticationService.getUserId(),
@@ -55,6 +72,14 @@ unifyApp.controller("ProfileController", function (ProfileService, $rootScope, F
 	};
 
 	profileCtlr.save = function(){
+		if(profileCtlr.newUser.pictureFromFile){
+			profileCtlr.saveFile();
+		}else{
+			profileCtlr.saveUser();
+		}
+	};
+
+	profileCtlr.saveUser = function(){
 		ProfileService.saveUser(
 			AuthenticationService.getUserId(),
 			profileCtlr.newUser
@@ -62,10 +87,22 @@ unifyApp.controller("ProfileController", function (ProfileService, $rootScope, F
 			profileCtlr.user.name=profileCtlr.newUser.name;
 			profileCtlr.user.email=profileCtlr.newUser.email;
 			profileCtlr.user.picture=profileCtlr.newUser.picture;
+			profileCtlr.checkPic();
 			$rootScope.user=profileCtlr.newUser.name;
 			$rootScope.picture=profileCtlr.newUser.picture;
 			$rootScope.email=profileCtlr.newUser.email;
 			profileCtlr.editProfile=false;
+		});
+	};
+
+
+	profileCtlr.saveFile = function(){
+		FileService.saveFile(
+			profileCtlr.newUser.file
+		).then(function(data) {
+			console.log(data.url);
+			profileCtlr.newUser.picture=data.url;
+			profileCtlr.saveUser();
 		});
 	};
 

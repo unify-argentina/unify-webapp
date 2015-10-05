@@ -64,19 +64,15 @@
 					<span class="title-unify">Editar Perfil</span>
 				</div>
 				<form name="profileForm" ng-submit="profileCtlr.save()" class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-sm-8 form-horizontal" role="form" novalidate>
-						<!--
 						<div class="form-group">
-							 <input type="file" ngf-select ng-model="profileCtlr.newUser.file" name="file"    
-						             accept="image/*" ngf-max-size="2MB" required>
-						      <i ng-show="myForm.file.$error.required">*required</i><br>
-						      <i ng-show="myForm.file.$error.maxSize">File too large 
-						          {{picFile.size / 1000000|number:1}}MB: max {{picFile.$errorParam}}</i> <button ng-click="profileCtlr.newUser.file = null" ng-show="picFile">Remove</button>
-					          <a ng-click="profileCtlr.saveFile()" ng-show="profileCtlr.newUser.file" class="btn btn-unify-primary">Probando</a>
-							<a href="" class="delete-link" ng-click="profileCtlr.newUser.picture=null" ng-if="profileCtlr.newUser.picture"><i class="fa fa-times-circle"></i>Quitar foto</a>
+							<input id="fileUploadInput" type="file" ngf-select ng-model="profileCtlr.newUser.uploadingFile" name="file" accept="image/*" ngf-max-size="2MB" style="display:none;">
+							<!--<button ng-click="profileCtlr.newUser.file = null" ng-show="picFile">Remove</button>
+							<a ng-click="profileCtlr.saveFile()" ng-show="profileCtlr.newUser.file" class="btn btn-unify-primary">Probando</a>
+							<a href="" class="delete-link" ng-click="profileCtlr.newUser.file = null" ng-if="profileCtlr.newUser.picture"><i class="fa fa-times-circle"></i>Borrar foto</a>-->
 	                    </div>
-	                    -->
 						<div class="col-md-12 col-sm-12 col-xs-12 text-center">
-							<img ng-src="{{profileCtlr.newUser.picture}}" class="img-circle image-contact" ng-if="profileCtlr.newUser.picture">
+							<img ng-src="{{profileCtlr.newUser.picture}}" class="img-circle image-contact" ng-show="!profileCtlr.newUser.pictureFromFile" ng-if="profileCtlr.newUser.picture">
+							<img ngf-src="profileCtlr.newUser.file" class="img-circle image-contact" ng-show="profileCtlr.newUser.pictureFromFile">
 							<img src="resources/contact/pulpix.png" class="img-circle image-contact" ng-if="!profileCtlr.newUser.picture">
 						</div>
 						<div class="profile-pics col-md-12 col-sm-12 col-xs-12 text-center">
@@ -84,13 +80,28 @@
 								Clickéa en la foto que quieras para tu perfil
 							</div>
 							<div class="profile-pics-images col-md-12 col-sm-12 col-xs-12 no-padding text-center">
-								<img ng-src="{{profileCtlr.user.facebook.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.facebook.picture" class="img-circle col-md-3 col-xs-12 col-sm-3">
-								<img ng-src="{{profileCtlr.user.twitter.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.twitter.picture" class="img-circle col-md-3 col-xs-12 col-sm-3">
-								<img ng-src="{{profileCtlr.user.instagram.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.instagram.picture" class="img-circle col-md-3 col-xs-12 col-sm-3">
-								<img ng-src="{{profileCtlr.user.google.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.google.picture" class="img-circle col-md-3 col-xs-12 col-sm-3">
+									<img ng-src="{{profileCtlr.user.facebook.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.facebook.picture; profileCtlr.newUser.pictureFromFile=false;" class="img-circle col-md-3 col-sm-3 col-xs-6">
+									<img ng-src="{{profileCtlr.user.twitter.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.twitter.picture; profileCtlr.newUser.pictureFromFile=false;" class="img-circle col-md-3 col-sm-3 col-xs-6">
+									<img ng-src="{{profileCtlr.user.instagram.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.instagram.picture; profileCtlr.newUser.pictureFromFile=false;" class="img-circle col-md-3 col-sm-3 col-xs-6">
+									<img ng-src="{{profileCtlr.user.google.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.google.picture; profileCtlr.newUser.pictureFromFile=false;" class="img-circle col-md-3 col-sm-3 col-xs-6">
 							</div>
+
 							<span class="unify-color col-md-12 col-sm-12 col-xs-12">O también podes subir una foto</span>
-							<a href="" class="btn btn-unify-default">Subir</a>
+							
+							<div class="profile-pics-images col-md-12 col-sm-12 col-xs-12 no-padding text-center">
+								<div class="centered">
+									<img ngf-src="profileCtlr.newUser.file" ng-click="profileCtlr.newUser.pictureFromFile=true;" class="img-circle image-edit centered">
+
+									<img ng-src="{{profileCtlr.user.pictureUploaded}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.pictureUploaded; profileCtlr.newUser.pictureFromFile=false;" class="img-circle image-edit centered" ng-show="profileCtlr.user.pictureUploaded && !profileCtlr.newUser.pictureFromFile">
+								</div>
+							</div>
+
+							<i ng-show="profileForm.file.$error.maxSize">Archivo demasiado grande {{profileCtlr.newUser.file.size / 1000000|number:1}}MB: max {{profileCtlr.newUser.file.$errorParam}}</i> 
+							<div>
+							<a href="" ng-click="profileCtlr.uploadFile();" class="btn btn-unify-default" style="margin-top:10px;">{{!profileCtlr.newUser.file ? 'Subir' : 'Subir otra'}}</a>
+							</div>
+							
+							<!--<a href="" class="delete-link" ng-click="profileCtlr.newUser.file = null" ng-if="profileCtlr.newUser.picture"><i class="fa fa-times-circle"></i>Borrar foto</a>-->
 						</div>
 						<div class="form-group">
 	                        <label>{{'logon_name' | translate}}</label>
