@@ -8,16 +8,6 @@ angular.module('unifyApp').config(function ($stateProvider, $urlRouterProvider) 
     templateUrl: 'views/main.html'
   });
 
-  $stateProvider.state('login', {
-    url: '/login',
-    templateUrl: 'views/login.html'
-  });
-
-  $stateProvider.state('signUp', {
-    url: '/signUp',
-    templateUrl: 'views/signUp.html'
-  });
-
  $stateProvider.state('profile', {
     url: '/profile',
     templateUrl: 'views/userProfile.html'
