@@ -1,4 +1,4 @@
-unifyApp.controller("ContactController", function ($scope, $state, $interval, ContactService, CircleService, AuthenticationService) {
+unifyApp.controller("ContactController", function ($scope, $state, $interval, $modal, ContactService, CircleService, AuthenticationService) {
 
 	var contactCtrl = this;
 
@@ -51,10 +51,10 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 		}
 	};
 
-	contactCtrl.deleteContact = function(contact_id){
+	contactCtrl.deleteContact = function(){
 		ContactService.contact.delete({
 			user_id : AuthenticationService.getUserId(),
-			contact_id : contact_id
+			contact_id : contactCtrl.contact_id
 		},function(response){
 			$state.go("dashboard");
 		});
@@ -141,7 +141,43 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 		}
 	});
 
-	contactCtrl.init = function(circle_id,contact_id, parentController){
+	$scope.$watch('contactCtrl.contact.facebook', function(newValue, oldValue) {
+		if(contactCtrl.contact.facebook){
+			if(contactCtrl.contact.picture==null){
+				contactCtrl.contact.picture=contactCtrl.contact.facebook.picture;
+			}
+
+			if(contactCtrl.contact.name==null){
+				contactCtrl.contact.name=contactCtrl.contact.facebook.name;
+			}
+		}
+	});
+
+	$scope.$watch('contactCtrl.contact.twitter', function(newValue, oldValue) {
+		if(contactCtrl.contact.twitter){
+			if(contactCtrl.contact.picture==null){
+				contactCtrl.contact.picture=contactCtrl.contact.twitter.picture;
+			}
+
+			if(contactCtrl.contact.name==null){
+				contactCtrl.contact.name=contactCtrl.contact.twitter.username;
+			}
+		}
+	});
+
+	$scope.$watch('contactCtrl.contact.instagram', function(newValue, oldValue) {
+		if(contactCtrl.contact.instagram){
+			if(contactCtrl.contact.picture==null){
+				contactCtrl.contact.picture=contactCtrl.contact.instagram.picture;
+			}
+
+			if(contactCtrl.contact.name==null){
+				contactCtrl.contact.name=contactCtrl.contact.instagram.username;
+			}
+		}
+	});
+
+	contactCtrl.init = function(circle_id, contact_id, parentController){
 		contactCtrl.circle_id=circle_id;
 		contactCtrl.parentController=parentController;
 		contactCtrl.contact_id=contact_id;
@@ -172,4 +208,27 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, Co
 		}
 	};
 
+	contactCtrl.askDeleteConfirmation = function () {
+	    var modalInstance = $modal.open({
+			animation: $scope.animationsEnabled,
+			templateUrl: 'myModalContactDelete.html',
+			controller: 'ModalContactDeleteCtrl',
+			resolve: {
+				contactCtrl: function () {
+					return contactCtrl;
+				}
+			}
+	    });
+	};
+});
+
+unifyApp.controller('ModalContactDeleteCtrl', function ($scope, $modalInstance, contactCtrl) {
+	$scope.deleteContact = function () {
+		contactCtrl.deleteContact();
+        $modalInstance.close();
+	};
+
+	$scope.cancel = function () {
+		$modalInstance.dismiss('cancel');
+	};
 });

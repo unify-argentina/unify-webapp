@@ -218,6 +218,25 @@ textarea {
   }
 }
 
+.modal-content {
+  border-radius: 15px;
+  border: none;
+}
+
+.modal-header{
+    background-color: #a1c037;
+    color: #fff;
+    text-align: center;
+    border-radius: 15px 15px 0px 0px;
+    border: 2px solid #a1c037;
+    font-size: 1.286em;
+}
+
+.modal-body {
+    border-radius: 0px 0px 15px 15px;
+    border: 2px solid #a1c037;
+}
+
 .loader {
   margin: 100px auto;
   text-align: center;

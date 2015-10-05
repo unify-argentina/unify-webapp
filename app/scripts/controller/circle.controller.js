@@ -1,4 +1,4 @@
-unifyApp.controller("CircleController", function ($scope, video, $stateParams, CircleService, AuthenticationService) {
+unifyApp.controller("CircleController", function ($scope, video, $modal, $stateParams, CircleService, AuthenticationService) {
 
 	var circleCtrl = this;
 	if(!$stateParams.circle_id){
@@ -159,12 +159,31 @@ unifyApp.controller("CircleController", function ($scope, video, $stateParams, C
 		circleCtrl.editContact = false;
 	};
 
+	circleCtrl.askDeleteConfirmation = function () {
+	    var modalInstance = $modal.open({
+			animation: $scope.animationsEnabled,
+			templateUrl: 'myModalCircleDelete.html',
+			controller: 'ModalCircleDeleteCtrl',
+			resolve: {
+				circleCtrl: function () {
+					return circleCtrl;
+				}
+			}
+	    });
+	};
+
 	circleCtrl.getCircleTree();
 	circleCtrl.getCircle();
 	circleCtrl.getCircleFeed();
-
-
-
-
 });
 
+unifyApp.controller('ModalCircleDeleteCtrl', function ($scope, $modalInstance, circleCtrl) {
+	$scope.deleteCircle = function () {
+		circleCtrl.deleteCircle();
+        $modalInstance.close();
+	};
+
+	$scope.cancel = function () {
+		$modalInstance.dismiss('cancel');
+	};
+});
