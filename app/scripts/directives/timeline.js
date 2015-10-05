@@ -8,7 +8,6 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, ContactService, Authent
             if (angular.isDefined(target)) {
                 targetAttr = ' target="' + target + '"';
             }
-            console.log(replacedText);
             replacedText = replacedText.replace("&#10;", '<br/> ');
             if(provider=='twitter'){
                 var replacePattern1 = /(^|\s)#((\w*[\.\-a-zA-Z_]+\w*)?(&#(19?[2-9]|2?[0-4][0-9]|25[0-5]);)?(\w*[\.\-a-zA-Z_]+\w*)?)/igm;
