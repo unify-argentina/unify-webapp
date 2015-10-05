@@ -12,7 +12,6 @@ unifyApp.controller("MainController", function ($translate, $auth, $rootScope, E
 		ProfileService.user.get({
 			user_id: AuthenticationService.getUserId()
 		},function(response){
-			console.log(response.user);
 			if(response.user.name!=null){
 				$rootScope.user=response.user.name;
 				$rootScope.picture=response.user.picture;

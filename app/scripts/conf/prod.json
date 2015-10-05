@@ -3,6 +3,7 @@
 	"name"					:	"production",
     "storageUserId"			:	"unifyUserId",
     "storageMainCircleId"	:	"unifyMainCircleId",
+    "storageSocial"			:	"unifyHasSocial",
     "unlinkMethod"			:	"delete",
 	"unlinkUrl"				:	"/auth/"
 }

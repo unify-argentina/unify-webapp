@@ -6,6 +6,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 	var mainCircleId;
 	var friends;
 	var validLocalUser;
+	var hasSocialNetworks;
 	
     var getUserId = function() {
     	if(userId==null){
@@ -46,6 +47,18 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 		validLocalUser=valid;
 	};
 
+	var hasSocial = function() {
+		if(hasSocialNetworks==null){
+    	setSocial(JSON.parse(localStorage.getItem(ENV.storageSocial)));
+    	}
+    	return hasSocialNetworks; 
+	};
+
+	var setSocial = function(value) { 
+    	localStorage.setItem(ENV.storageSocial, JSON.stringify(value));
+    	hasSocialNetworks=value; 
+    };
+
 	var loadDataUser = function(response) {
 		if(response.user.name!=null){
 			$rootScope.user=response.user.name;
@@ -60,6 +73,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 		$rootScope.email=(response.user.google!=null?response.user.google.email:null);
 		validLocalUser=response.user.valid_local_user;
 	}
+
     var signup = function(user) {
 		console.log(user.name);
 		var promise = $auth.signup({
@@ -73,6 +87,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 	        console.log('You have successfully logged in: '+response.data.token); 
 	        loadDataUser(response.data);
 	        $rootScope.auth=true;
+	        setSocial(false);
 			$state.reload();
 	      })
 		.catch(function(response) {
@@ -91,6 +106,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 	        console.log('You have successfully logged in: '+response.data.token); 
 	        loadDataUser(response.data);
 	        $rootScope.auth=true;
+	        setSocial(response.data.user.facebook!=null || response.data.user.twitter!=null || response.data.user.instagram!=null || response.data.user.google!=null);
 			$state.reload();
 		})
 		.catch(function(response) {
@@ -107,6 +123,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 			console.log('You have successfully logged in: '+response.data.token); 
 	        loadDataUser(response.data);
 	        $rootScope.auth=true;
+	        setSocial(response.data.user.facebook!=null || response.data.user.twitter!=null || response.data.user.instagram!=null || response.data.user.google!=null);
 			$state.reload();
 		})
 	    .catch(function(response) {
@@ -127,6 +144,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 		.then(function(response) {
 	    	localStorage.setItem('satellizer_token', response.data.token);
 	        console.log('You have successfully unlogged in: '+response.data.token); 
+			setSocial(response.data.user.facebook!=null || response.data.user.twitter!=null || response.data.user.instagram!=null || response.data.user.google!=null);
 			$state.reload();
 	    })
 	    .catch(function(response) {
@@ -179,7 +197,9 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 		logout				: logout,
 		recoverPassword		: recoverPassword,
 		getValidLocalUser	: getValidLocalUser,
-		setValidLocalUser	: setValidLocalUser
+		setValidLocalUser	: setValidLocalUser,
+		setSocial 			: setSocial,
+		hasSocial 			: hasSocial 
     };
 
 });

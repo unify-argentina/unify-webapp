@@ -10,14 +10,23 @@ unifyApp.controller("ProfileController", function (ProfileService, $scope, $root
 	});
 
 	profileCtlr.checkPic = function() {
-		if(	profileCtlr.user.picture != profileCtlr.user.facebook.picture &&
-			profileCtlr.user.picture != profileCtlr.user.twitter.picture &&
-			profileCtlr.user.picture != profileCtlr.user.instagram.picture &&
-			profileCtlr.user.picture != profileCtlr.user.google.picture){
-			profileCtlr.user.pictureUploaded=profileCtlr.user.picture;
-		}else{
+		if(profileCtlr.user.facebook !=null && profileCtlr.user.picture == profileCtlr.user.facebook.picture){
 			profileCtlr.user.pictureUploaded=null;
+			return;
 		}
+		if(profileCtlr.user.twitter !=null && profileCtlr.user.picture == profileCtlr.user.twitter.picture){
+			profileCtlr.user.pictureUploaded=null;
+			return;
+		}
+		if(profileCtlr.user.instagram !=null && profileCtlr.user.picture == profileCtlr.user.instagram.picture){
+			profileCtlr.user.pictureUploaded=null;
+			return;
+		}
+		if(profileCtlr.user.google !=null && profileCtlr.user.picture == profileCtlr.user.google.picture){
+			profileCtlr.user.pictureUploaded=null;
+			return;
+		}
+		profileCtlr.user.pictureUploaded=profileCtlr.user.picture;
 	};
 
 	profileCtlr.uploadFile = function() {
