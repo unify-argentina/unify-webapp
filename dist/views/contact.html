@@ -1,4 +1,4 @@
-<div id="contact" class="col-md-12 fadeInRight animated" style="margin-top: 20px;" ng-controller="ContactController as contactCtrl"  ng-init="contactCtrl.init(uwCircleId,uwContactId, uwParentController);">
+<div id="contact" class="col-md-12 fadeInRight animated" style="margin-top: 20px;" ng-controller="ContactController as contactCtrl"  ng-init="contactCtrl.init(uwCircleId, uwContactId, uwParentController);">
   	<uw-loader ng-if="!contactCtrl.contact"></uw-loader>
 	<div class="text-center" ng-if="contactCtrl.contact">
 		<form name="contactForm" ng-submit="contactCtrl.saveContact(uwContactId);" class="form-horizontal" role="form" novalidate>
@@ -110,8 +110,22 @@
 			 	<button type="submit" value="Submit" ng-disabled="contactForm.$invalid || (!contactCtrl.contact.facebook && !contactCtrl.contact.twitter && !contactCtrl.contact.instagram) || !contactCtrl.contact.circles_ids || contactCtrl.contact.circles_ids.length==0" ng-click="contactForm.$setPristine()" class="btn btn-unify-primary">Guardar Contacto</button>
 				<a class="btn btn-unify-primary-invert" ng-click="uwParentController.cancelContact();">Cancelar</a>
 				<br><br>
-				<a href="" class="delete-link no-padding" ng-click="contactCtrl.deleteContact(uwContactId);" ng-if="uwContactId"><i class="fa fa-times-circle"></i>Eliminar Contacto</a>
+				<a href="" class="delete-link no-padding" ng-click="contactCtrl.askDeleteConfirmation();" ng-if="contactCtrl.contact_id"><i class="fa fa-times-circle"></i>Eliminar Contacto</a>
 			</div>
 		</form>
+	</div>
+
+	<div>
+	    <script type="text/ng-template" id="myModalContactDelete.html">
+	        <div class="modal-header">
+            	<span class="modal-title">¿Estás seguro que queres eliminar este contacto?</span>
+	        </div>
+	        <div class="modal-body text-center">
+	        	<span class="font-thin">Si eliminas un contacto perderas su información y no veras mas el contenido que genera.</span>
+	        	<br><br>
+	            <a class="btn btn-unify-primary" type="button" ng-click="deleteContact();">Eliminar</a>
+	            <a class="btn btn-unify-primary-invert" type="button" ng-click="cancel()">Cancelar</a>
+	        </div>
+	    </script>
 	</div>
 </div>

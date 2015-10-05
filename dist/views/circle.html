@@ -49,7 +49,7 @@
 						<div class="col-md-12 no-padding" style="margin-top: 10px;" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id">
 							<a href="" class="move-link col-md-4 no-padding" ng-click="circleCtrl.movingCircle=true;"><i class="fa fa-arrows-alt"></i></i>Mover</a>
 							<a href="" class="edit-link col-md-4 no-padding" ng-click="circleCtrl.edit();"><i class="fa fa-pencil-square-o"></i>Editar</a>
-							<a href="" class="delete-link col-md-4 no-padding" ng-click="circleCtrl.deleteCircle();"><i class="fa fa-times-circle"></i>Eliminar</a>
+							<a href="" class="delete-link col-md-4 no-padding" ng-click="circleCtrl.askDeleteConfirmation();"><i class="fa fa-times-circle"></i>Eliminar</a>
 						</div>
 						<div class="clearfix"></div>
 						<span class="circle-name btn-block">{{circleCtrl.circle.name}}</span>
@@ -138,5 +138,17 @@
 		</div>
 	</div>
 
-
+	<div>
+	    <script type="text/ng-template" id="myModalCircleDelete.html">
+	        <div class="modal-header">
+            	<span class="modal-title">¿Estás seguro que queres eliminar este grupo?</span>
+	        </div>
+	        <div class="modal-body text-center">
+	        	Si tenes contactos que no pertenezcan a otros grupos estos seran eliminados cuando elimines el grupo.
+	        	<br><br>
+	            <a class="btn btn-unify-primary" type="button" ng-click="deleteCircle();">Eliminar</a>
+	            <a class="btn btn-unify-primary-invert" type="button" ng-click="cancel()">Cancelar</a>
+	        </div>
+	    </script>
+	</div>
 </div>
