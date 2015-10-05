@@ -15,6 +15,8 @@ unifyApp.controller("ProfileController", function (ProfileService, $scope, $root
 			profileCtlr.user.picture != profileCtlr.user.instagram.picture &&
 			profileCtlr.user.picture != profileCtlr.user.google.picture){
 			profileCtlr.user.pictureUploaded=profileCtlr.user.picture;
+		}else{
+			profileCtlr.user.pictureUploaded=null;
 		}
 	};
 

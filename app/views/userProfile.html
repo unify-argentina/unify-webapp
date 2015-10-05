@@ -98,7 +98,7 @@
 
 							<i ng-show="profileForm.file.$error.maxSize">Archivo demasiado grande {{profileCtlr.newUser.file.size / 1000000|number:1}}MB: max {{profileCtlr.newUser.file.$errorParam}}</i> 
 							<div>
-							<a href="" ng-click="profileCtlr.uploadFile();" class="btn btn-unify-default" style="margin-top:10px;">{{!profileCtlr.newUser.file ? 'Subir' : 'Subir otra'}}</a>
+							<a href="" ng-click="profileCtlr.uploadFile();" class="btn btn-unify-default">{{!profileCtlr.newUser.file ? 'Subir' : 'Subir otra'}}</a>
 							</div>
 							
 							<!--<a href="" class="delete-link" ng-click="profileCtlr.newUser.file = null" ng-if="profileCtlr.newUser.picture"><i class="fa fa-times-circle"></i>Borrar foto</a>-->
