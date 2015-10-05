@@ -8,6 +8,7 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, ContactService, Authent
             if (angular.isDefined(target)) {
                 targetAttr = ' target="' + target + '"';
             }
+            replacedText = replacedText.replace("&#10;", '<br/> ');
             if(provider=='twitter'){
                 var replacePattern1 = /(^|\s)#(\w*[ñÑáÁäÄâÂàÀéÉëËêÊèÈíÍïÏîÎìÌóÓöÖôÔòÒúÚüÜûÛùÙ\.\-a-zA-Z_]+\w*)/igm;
                 replacedText = replacedText.replace(replacePattern1, '$1<a class="hashtag" href="https://twitter.com/search?q=%23$2"' + targetAttr + '>#$2</a>');
