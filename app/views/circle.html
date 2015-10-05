@@ -84,7 +84,7 @@
 					<div class="circle-children" style="margin-top: 20px;">
 						<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Grupos</span>
 						<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.create();" style="margin-bottom: 5px;">Crear Grupo</a>
-						<a href="" ng-click="circleCtrl.goToCircle(subcircle._id);" class="circle-child circle-child-circle" ng-repeat="subcircle in circleCtrl.tree.subcircles">{{subcircle.name}}</a>
+						<a href="" ng-click="circleCtrl.goToCircle(subcircle._id);" class="circle-child circle-child-circle" ng-repeat="subcircle in circleCtrl.tree.subcircles | orderBy: 'name'">{{subcircle.name}}</a>
 						
 					</div>
 					<div class="clearfix"></div>
@@ -92,7 +92,7 @@
 						<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Contactos</span>
 						
 						<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.createContact();" style="margin-bottom: 5px;">Crear Contacto</a>
-						<a href="#/contact/{{circleCtrl.circle_id}}/{{contact._id}}" class="circle-child" ng-repeat="contact in circleCtrl.circle.contacts" >
+						<a href="#/contact/{{circleCtrl.circle_id}}/{{contact._id}}" class="circle-child" ng-repeat="contact in circleCtrl.circle.contacts | orderBy: 'name'" >
 							<img ng-src="{{contact.picture}}" class="img-circle image-contact-small" ng-if="contact.picture">
 							<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!contact.picture">
 							{{contact.name}}
