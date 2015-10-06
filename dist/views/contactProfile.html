@@ -52,7 +52,7 @@
 				<div class="clearfix"></div>
 				<div class="circle-children" style="margin-top: 20px;">
 					<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Grupos a los que pertenece</span>
-					<a href="#/circle/{{parent.circle}}" class="circle-child circle-child-circle" ng-repeat="parent in contactProfileCtrl.contact.parents  | orderBy: 'circle.name'">{{parent.circle.name}}</a>
+					<a href="#/circle/{{parent.circle._id}}" class="circle-child circle-child-circle" ng-repeat="parent in contactProfileCtrl.contact.parents  | orderBy: 'circle.name'">{{parent.circle.name}}</a>
 					
 				</div>
 			</div>
