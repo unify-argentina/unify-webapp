@@ -8,7 +8,7 @@ angular.module('unifyApp').config(function ($stateProvider, $urlRouterProvider) 
     templateUrl: 'views/main.html'
   });
 
- $stateProvider.state('profile', {
+  $stateProvider.state('profile', {
     url: '/profile',
     templateUrl: 'views/userProfile.html'
   });
@@ -17,7 +17,6 @@ angular.module('unifyApp').config(function ($stateProvider, $urlRouterProvider) 
     url: '/profile/edit',
     templateUrl: 'views/userEditProfile.html'
   });
- 
 
   $stateProvider.state('dashboard', {
     url: '/circles',
@@ -48,4 +47,10 @@ angular.module('unifyApp').config(function ($stateProvider, $urlRouterProvider) 
     url: '/privacy',
     templateUrl: 'views/privacy.html'
   });
+
+  $stateProvider.state('verify', {
+    url: '/auth/verify/:token',
+    templateUrl: 'views/verify.html'
+  });
+
  });

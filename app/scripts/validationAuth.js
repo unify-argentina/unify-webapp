@@ -6,7 +6,7 @@ unifyApp.run(function ($rootScope, $state, $location, $auth, AuthenticationServi
       
       var isAuthenticated = $auth.isAuthenticated();
       
-      if(!isAuthenticated && toState.name != "main" && toState.name != "validate")
+      if(!isAuthenticated && toState.name != "main" && toState.name != "verify")
       {
         $state.go('main');
         event.preventDefault();

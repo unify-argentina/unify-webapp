@@ -185,6 +185,16 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 		}
 	};
 
+	var verifyAccount = function(token){
+		 var promise = $http.get(ENV.apiEndPoint + '/auth/verify/'+token)
+		 .then(function(response) {
+    		return response.data;
+		}, function(response) {
+			return response.data;
+		});	
+		return promise;
+	};
+
 	return {
 		signup 				: signup,
 		login 				: login,
@@ -199,7 +209,8 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 		getValidLocalUser	: getValidLocalUser,
 		setValidLocalUser	: setValidLocalUser,
 		setSocial 			: setSocial,
-		hasSocial 			: hasSocial 
+		hasSocial 			: hasSocial,
+		verifyAccount		: verifyAccount
     };
 
 });
