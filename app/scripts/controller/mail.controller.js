@@ -8,6 +8,7 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 
 
 	mailCtlr.getInbox = function(){
+		mailCtlr.viewMail=null;
 		mailCtlr.viewList="inbox";
 		mailCtlr.currentPage = 1;
 		MailService.getInbox(
@@ -26,6 +27,7 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 	};
 
 	mailCtlr.getDraft = function(){	
+		mailCtlr.viewMail=null;
 		mailCtlr.viewList="draft";
 		mailCtlr.currentPage = 1;
 		MailService.getDraft(
@@ -44,6 +46,7 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 	};
 
 	mailCtlr.getSent = function(){
+		mailCtlr.viewMail=null;
 		mailCtlr.viewList="sent";
 		mailCtlr.currentPage = 1;
 		MailService.getSent(
@@ -62,6 +65,7 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 	};
 
 	mailCtlr.getTrash = function(){
+		mailCtlr.viewMail=null;
 		mailCtlr.viewList="trash";
 		mailCtlr.currentPage = 1;
 		MailService.getTrash(
@@ -229,6 +233,7 @@ unifyApp.controller("MailController", function (base64, $sce, MailService, Authe
 				return mail == myAddress;
 			});
 			mailCtlr.writeMail.cc=cc.toString();
+			mailCtlr.writeMail.hasCC=true;
 		}
 		mailCtlr.writeMail.subject="RE: "+mail.subject;
 	}

@@ -1,5 +1,5 @@
 <div id="mailDash" class="container" class="col-md-12" style="margin-top: 20px;" ng-controller="MailController as mailCtlr">
-  <div class="content col-md-12 col-sm-12 col-xs-12 no-padding" ng-hide="mailCtlr.viewMail || mailCtlr.writeMail">
+  <div class="content col-md-12 col-sm-12 col-xs-12 no-padding" ng-hide="mailCtlr.viewMail">
 		<div class="col-md-3 text-center  fadeInLeft animated" style="margin-top: 20px;">
 			<a ng-click="mailCtlr.writeMail={};" class="btn btn-unify-primary btn-block" style="margin-top: 5px;"><i class="fa fa-pencil"></i> Redactar</a>
 			<a ng-click="mailCtlr.getInbox();" class="btn btn-block" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='inbox', 'btn-unify-mail-active' :mailCtlr.viewList=='inbox'}" style="margin-top: 5px;"><i class="fa fa-envelope"></i> Recibidos</a>
@@ -7,7 +7,7 @@
 			<a ng-click="mailCtlr.getDraft();" class="btn btn-block" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='draft', 'btn-unify-mail-active' : mailCtlr.viewList=='draft'}" style="margin-top: 5px;"><i class="fa fa-list"></i> Borradores</a>
 			<a ng-click="mailCtlr.getTrash();" class="btn btn-block" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='trash', 'btn-unify-mail-active' : mailCtlr.viewList=='trash'}" style="margin-top: 5px;"><i class="fa fa-trash"></i> Papelera</a>
 		</div>
-		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='inbox'">
+		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='inbox' && !mailCtlr.writeMail">
 			<uw-loader ng-if="!mailCtlr.inbox"></uw-loader>
 			<div ng-show="mailCtlr.inbox">
 				<div class="col-md-12 no-padding" ng-if="mailCtlr.inbox.count > 0">
@@ -67,7 +67,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='sent'">
+		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='sent' && !mailCtlr.writeMail">
 			<uw-loader ng-if="!mailCtlr.sent"></uw-loader>
 			<div ng-show="mailCtlr.sent">
 				<div class=""  ng-if="mailCtlr.sent.count > 0">
@@ -97,7 +97,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='draft'">
+		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='draft'  && !mailCtlr.writeMail">
 			<uw-loader ng-if="!mailCtlr.draft"></uw-loader>
 			<div ng-show="mailCtlr.draft">
 				<div class="" style="margin-top: 20px;" ng-if="mailCtlr.draft.count > 0">
@@ -127,7 +127,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='trash'">
+		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='trash' && !mailCtlr.writeMail">
 			<uw-loader ng-if="!mailCtlr.trash"></uw-loader>
 			<div ng-show="mailCtlr.trash">
 				<div class=""  ng-if="mailCtlr.trash.count > 0">
@@ -176,6 +176,52 @@
 					<span class="font-18">No tenes mails para ver, esta bandeja está vacia.</span>
 				</div>
 			</div>
+		</div>
+		<div class="col-md-9" ng-show="mailCtlr.writeMail">
+			<form name="newMailForm" ng-submit="mailCtlr.sendMail()"
+	          	class="form-horizontal fadeInRight animated" role="form" novalidate>
+	       		<div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 20px;">
+					<div class="btn-action-group pull-left fadeInDownBig animated">
+						<a ng-click="mailCtlr.writeMail=null" class="btn btn-action">Volver</a>
+						<span ng-click="mailCtlr.writeMail=null" class="fa-stack fa-lg btn-action-icon">
+						  <i class="fa fa-circle fa-stack-2x"></i>
+						  <i class="fa fa-arrow-left fa-stack-1x fa-inverse"></i>
+						</span>
+					</div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<div class="no-padding" ng-class="{'col-md-8' : !mailCtlr.writeMail.hasCCO && !mailCtlr.writeMail.hasCC,'col-md-10' : (mailCtlr.writeMail.hasCCO && !mailCtlr.writeMail.hasCC)||(!mailCtlr.writeMail.hasCCO && mailCtlr.writeMail.hasCC), 'col-md-12' : mailCtlr.writeMail.hasCCO && mailCtlr.writeMail.hasCC}">
+				              	<input class="form-control form-input"  ng-model="mailCtlr.writeMail.to" id="to" type='text' tabindex="1" placeholder="Ingresá a quien le vas a escribir" style="margin-top: 5px;" required/>
+							</div>
+							<div ng-show="!mailCtlr.writeMail.hasCC" class="col-md-2 no-padding" style="padding-top: 4px;">
+								<a ng-click="mailCtlr.writeMail.hasCC=true;" class="btn btn-unify-primary-invert btn-block">Agregar CC</a>
+							</div>
+							<div ng-show="!mailCtlr.writeMail.hasCCO" class="col-md-2 no-padding" style="padding-top: 4px;">
+								<a ng-click="mailCtlr.writeMail.hasCCO=true;" class="btn btn-unify-primary-invert btn-block">Agregar CCO</a>
+							</div>
+						</div>
+						<div class="form-group" ng-show="mailCtlr.writeMail.hasCC">
+			              	<input class="form-control form-input" ng-model="mailCtlr.writeMail.cc" id="cc" type='text' placeholder="Ingresá a quien queres copiar"/>
+						</div>
+						<div class="form-group" ng-show="mailCtlr.writeMail.hasCCO">
+			              	<input class="form-control form-input" ng-model="mailCtlr.writeMail.cco" id="cco" type='text' placeholder="Ingresá a quien queres copiar de forma oculta"/>
+						</div>
+						<div class="form-group">
+			              	<input class="form-control form-input" ng-model="mailCtlr.writeMail.subject" id="subject" type='text' placeholder="Escribí el asunto de tu email"/>
+						</div>
+						<div class="form-group">
+			              	<textarea class="form-control form-input" ng-model="mailCtlr.writeMail.text" id="text" type='text' placeholder="Escribí tu email aquí" form="newMailForm" rows="15" required/>
+			              	</textarea>
+						</div>
+						 <div class="row">
+			                <button type="submit" value="Submit"                                        
+			                        ng-disabled="newMailForm.$invalid"
+			                        ng-click="newMailForm.$setPristine()"
+			                        class="btn btn-unify-primary btn-block">Enviar Mail</button>
+			            </div>
+		            </div>
+				</div>
+	        </form>
 		</div>
 	</div>
 	<div class="content col-md-12" ng-show="mailCtlr.viewMail">
@@ -237,54 +283,5 @@
 			<div class="mail-body col-md-12" ng-bind-html="mailCtlr.mailHtml"></div>
 		</div>
 	</div>
-	<div class="content col-md-12" ng-show="mailCtlr.writeMail">
-		<form name="newMailForm" ng-submit="mailCtlr.sendMail()"
-          	class="form-horizontal" role="form" novalidate>
-       		<div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 20px;">
-       			<div class="col-md-12 col-sm-12 col-xs-12 text-center" >
-					<span class="title-unify">Enviar Email</span>
-				</div>
-				<div class="btn-action-group pull-left">
-					<a ng-click="mailCtlr.writeMail=null" class="btn btn-action">Volver</a>
-					<span ng-click="mailCtlr.writeMail=null" class="fa-stack fa-lg btn-action-icon">
-					  <i class="fa fa-circle fa-stack-2x"></i>
-					  <i class="fa fa-arrow-left fa-stack-1x fa-inverse"></i>
-					</span>
-				</div>
-				<div class="col-md-12">
-					<div class="form-group">
-						<div class="no-padding" ng-class="{'col-md-8' : !mailCtlr.writeMail.hasCCO && !mailCtlr.writeMail.hasCC,'col-md-10' : (mailCtlr.writeMail.hasCCO && !mailCtlr.writeMail.hasCC)||(!mailCtlr.writeMail.hasCCO && mailCtlr.writeMail.hasCC), 'col-md-12' : mailCtlr.writeMail.hasCCO && mailCtlr.writeMail.hasCC}">
-			              	<input class="form-control form-input"  ng-model="mailCtlr.writeMail.to" id="to" type='text' tabindex="1" placeholder="Ingresá a quien le vas a escribir" style="margin-top: 5px;" required/>
-						</div>
-						<div ng-show="!mailCtlr.writeMail.hasCC" class="col-md-2 no-padding" style="padding-top: 4px;">
-							<a ng-click="mailCtlr.writeMail.hasCC=true;" class="btn btn-unify-primary-invert btn-block">Agregar CC</a>
-						</div>
-						<div ng-show="!mailCtlr.writeMail.hasCCO" class="col-md-2 no-padding" style="padding-top: 4px;">
-							<a ng-click="mailCtlr.writeMail.hasCCO=true;" class="btn btn-unify-primary-invert btn-block">Agregar CCO</a>
-						</div>
-					</div>
-					<div class="form-group" ng-show="mailCtlr.writeMail.hasCC">
-		              	<input class="form-control form-input" ng-model="mailCtlr.writeMail.cc" id="cc" type='text' placeholder="Ingresá a quien queres copiar"/>
-					</div>
-					<div class="form-group" ng-show="mailCtlr.writeMail.hasCCO">
-		              	<input class="form-control form-input" ng-model="mailCtlr.writeMail.cco" id="cco" type='text' placeholder="Ingresá a quien queres copiar de forma oculta"/>
-					</div>
-					<div class="form-group">
-		              	<input class="form-control form-input" ng-model="mailCtlr.writeMail.subject" id="subject" type='text' placeholder="Escribí el asunto de tu email"/>
-					</div>
-					<div class="form-group">
-		              	<textarea class="form-control form-input" ng-model="mailCtlr.writeMail.text" id="text" type='text' placeholder="Escribí tu email aquí" form="newMailForm" rows="15" required/>
-		              	</textarea>
-					</div>
-					 <div class="row">
-		                <button type="submit" value="Submit"                                        
-		                        ng-disabled="newMailForm.$invalid"
-		                        ng-click="newMailForm.$setPristine()"
-		                        class="btn btn-unify-primary btn-block">Enviar Mail</button>
-		            </div>
-	            </div>
-			</div>
-        </form>
-		
-	</div>
+
 </div>
