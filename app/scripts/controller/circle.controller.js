@@ -1,4 +1,4 @@
-unifyApp.controller("CircleController", function ($scope, video, $modal, $stateParams, CircleService, AuthenticationService) {
+unifyApp.controller("CircleController", function ($scope, video, $modal, $stateParams, CircleService, FileService, AuthenticationService) {
 
 	var circleCtrl = this;
 	if(!$stateParams.circle_id){
@@ -15,22 +15,26 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 			circle_id : circleCtrl.circle_id
 		},function(response){
 			circleCtrl.circle=response.circle;
-			if(!circleCtrl.circle.picture){
-				if(circleCtrl.circle.contacts){
-					circleCtrl.contactSize=_.size(circleCtrl.circle.contacts);
-					circleCtrl.imagesCircle={}
-					if(circleCtrl.contactSize > 0){
-						var limit= (circleCtrl.contactSize < 4 ? circleCtrl.contactSize : 4);
-						circleCtrl.imagesCircle=_.sample(circleCtrl.circle.contacts, 4);
-					}
-				}else{
-					circleCtrl.contactSize=0;
-				}
-			}
+			circleCtrl.getImageCircle();
 			circleCtrl.parent=circleCtrl.circle.parent;
 			circleCtrl.getCircleList();
 		});
 	};
+	
+	circleCtrl.getImageCircle = function(){
+		if(!circleCtrl.circle.picture){
+			if(circleCtrl.circle.contacts){
+				circleCtrl.contactSize=_.size(circleCtrl.circle.contacts);
+				circleCtrl.imagesCircle={}
+				if(circleCtrl.contactSize > 0){
+					var limit= (circleCtrl.contactSize < 4 ? circleCtrl.contactSize : 4);
+					circleCtrl.imagesCircle=_.sample(circleCtrl.circle.contacts, 4);
+				}
+			}else{
+				circleCtrl.contactSize=0;
+			}
+		}
+	}
 
 	circleCtrl.deleteCircle = function(){
 		var parent = circleCtrl.circle.parent;
@@ -62,14 +66,64 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 		});
 	};
 
+	circleCtrl.uploadNewFile = function() {
+        document.getElementById('fileNewUploadInput').click();
+    };
+    
+    circleCtrl.uploadFile = function() {
+        document.getElementById('fileUploadInput').click();
+    };
+
+    $scope.$watch('circleCtrl.newCircle.uploadingFile', function(newValue, oldValue) {
+		if(newValue!=null){
+			circleCtrl.newCircle.file=circleCtrl.newCircle.uploadingFile;
+			circleCtrl.newCircle.pictureFromFile=true;
+		}else{
+			if(circleCtrl.newCircle){
+				circleCtrl.newCircle.pictureFromFile=(circleCtrl.newCircle.file!=null);
+			}
+		}
+	});
+
+    $scope.$watch('circleCtrl.editCircle.uploadingFile', function(newValue, oldValue) {
+    	console.log(newValue);
+		if(newValue!=null){
+			circleCtrl.editCircle.file=circleCtrl.editCircle.uploadingFile;
+			circleCtrl.editCircle.pictureFromFile=true;
+		}else{
+			if(circleCtrl.editCircle){
+				circleCtrl.editCircle.pictureFromFile=(circleCtrl.editCircle.file!=null);
+			}
+		}
+	});
+
+	circleCtrl.update = function(){
+		if(circleCtrl.editCircle.pictureFromFile){
+			circleCtrl.saveFile(circleCtrl.editCircle.file, false);
+		}else{
+			circleCtrl.updateCircle();
+		}
+	};
+
 	circleCtrl.updateCircle = function(){
 		circleCtrl.editCircle.user_id = AuthenticationService.getUserId();
 		CircleService.updateCircle(
 			circleCtrl.editCircle
 		).then(function(data) {
-			circleCtrl.circle=circleCtrl.editCircle;
+			circleCtrl.circle.name=circleCtrl.editCircle.name;
+			circleCtrl.circle.picture=circleCtrl.editCircle.picture;
+			circleCtrl.editCircle = null;
+			circleCtrl.getImageCircle();
 			circleCtrl.editingCircle=false;
 		});
+	};
+
+	circleCtrl.save = function(){
+		if(circleCtrl.newCircle.pictureFromFile){
+			circleCtrl.saveFile(circleCtrl.newCircle.file, true);
+		}else{
+			circleCtrl.saveCircle();
+		}
 	};
 
 	circleCtrl.saveCircle = function(){
@@ -80,6 +134,20 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 		).then(function(data) {
 			circleCtrl.getCircleTree();
 			circleCtrl.createCircle=false;
+		});
+	};
+
+	circleCtrl.saveFile = function(file, save){
+		FileService.saveFile(
+			file
+		).then(function(data) {
+			if(save){
+				circleCtrl.newCircle.picture=data.url;
+				circleCtrl.saveCircle();
+			}else{
+				circleCtrl.editCircle.picture=data.url;
+				circleCtrl.updateCircle();
+			}
 		});
 	};
 

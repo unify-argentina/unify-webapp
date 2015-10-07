@@ -15,7 +15,7 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 					user_id : circle.user_id,
 					name : circle.name,
 					parent_id : circle.parent,
-					picture : circle.picture
+					picture : ( circle.picture !=null ? circle.picture:undefined )
 				}
 			).then(function(response) {	
         		return response.data;
@@ -32,7 +32,7 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 					circle_id : circle._id,
 					name : circle.name,
 					parent_id : circle.parent,
-					picture : circle.picture
+					picture : ( circle.picture !=null ? circle.picture:undefined )
 				}
 			).then(function(response) {	
         		return response.data;
