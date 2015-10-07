@@ -95,9 +95,7 @@
 									<img ng-src="{{profileCtlr.user.pictureUploaded}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.pictureUploaded; profileCtlr.newUser.pictureFromFile=false;" class="img-circle image-edit centered" ng-show="profileCtlr.user.pictureUploaded && !profileCtlr.newUser.pictureFromFile">
 								</div>
 							</div>
-
-							<i ng-show="profileForm.file.$error.maxSize">Archivo demasiado grande {{profileCtlr.newUser.file.size / 1000000|number:1}}MB: max {{profileCtlr.newUser.file.$errorParam}}</i> 
-							<div>
+							<span class="delete-link col-md-12" ng-show="profileForm.file.$error.maxSize">La imagen es demasiado grande, se pueden subir hasta imagenes de 2MB</span> 
 							<a href="" ng-click="profileCtlr.uploadFile();" class="btn btn-unify-default">{{!profileCtlr.newUser.file ? 'Subir' : 'Subir otra'}}</a>
 							</div>
 							
