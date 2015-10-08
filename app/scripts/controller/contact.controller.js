@@ -1,4 +1,4 @@
-unifyApp.controller("ContactController", function ($scope, $state, $interval, $modal, ContactService, CircleService, AuthenticationService) {
+unifyApp.controller("ContactController", function ($scope, $state, $interval, $modal, ContactService, FileService, CircleService, AuthenticationService) {
 
 	var contactCtrl = this;
 
@@ -63,6 +63,38 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, $m
 	contactCtrl.edit = function(){
 		contactCtrl.editProfile=true;
 		contactCtrl.contact = {};
+	};
+
+	contactCtrl.uploadFile = function() {
+        document.getElementById('fileUploadInputContact').click();
+    };
+
+   $scope.$watch('contactCtrl.contact.uploadingFile', function(newValue, oldValue) {
+		if(newValue!=null){
+			contactCtrl.contact.file=contactCtrl.contact.uploadingFile;
+			contactCtrl.contact.pictureFromFile=true;
+		}else{
+			if(contactCtrl.contact){
+				contactCtrl.contact.pictureFromFile=(contactCtrl.contact.file!=null);
+			}
+		}
+	});
+
+	contactCtrl.save = function(id){
+		if(contactCtrl.contact.pictureFromFile){
+			contactCtrl.saveFile(id);
+		}else{
+			contactCtrl.saveContact(id);
+		}
+	};
+
+	contactCtrl.saveFile = function(id){
+		FileService.saveFile(
+			contactCtrl.contact.file
+		).then(function(data) {
+			contactCtrl.contact.picture=data.url;
+			contactCtrl.saveContact(id);
+		});
 	};
 
 	contactCtrl.saveContact = function(id){
@@ -143,7 +175,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, $m
 
 	$scope.$watch('contactCtrl.contact.facebook', function(newValue, oldValue) {
 		if(contactCtrl.contact.facebook){
-			if(contactCtrl.contact.picture==null){
+			if(contactCtrl.contact.picture==null && !contactCtrl.contact.pictureFromFile){
 				contactCtrl.contact.picture=contactCtrl.contact.facebook.picture;
 			}
 
@@ -155,7 +187,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, $m
 
 	$scope.$watch('contactCtrl.contact.twitter', function(newValue, oldValue) {
 		if(contactCtrl.contact.twitter){
-			if(contactCtrl.contact.picture==null){
+			if(contactCtrl.contact.picture==null && !contactCtrl.contact.pictureFromFile){
 				contactCtrl.contact.picture=contactCtrl.contact.twitter.picture;
 			}
 
@@ -167,7 +199,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, $m
 
 	$scope.$watch('contactCtrl.contact.instagram', function(newValue, oldValue) {
 		if(contactCtrl.contact.instagram){
-			if(contactCtrl.contact.picture==null){
+			if(contactCtrl.contact.picture==null && !contactCtrl.contact.pictureFromFile){
 				contactCtrl.contact.picture=contactCtrl.contact.instagram.picture;
 			}
 
