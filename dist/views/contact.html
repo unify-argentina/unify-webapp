@@ -1,13 +1,24 @@
 <div id="contact" class="col-md-12 fadeInRight animated" style="margin-top: 20px;" ng-controller="ContactController as contactCtrl"  ng-init="contactCtrl.init(uwCircleId, uwContactId, uwParentController);">
   	<uw-loader ng-if="!contactCtrl.contact"></uw-loader>
 	<div class="text-center" ng-if="contactCtrl.contact">
-		<form name="contactForm" ng-submit="contactCtrl.saveContact(uwContactId);" class="form-horizontal" role="form" novalidate>
+		<form name="contactForm" ng-submit="contactCtrl.save(uwContactId);" class="form-horizontal" role="form" novalidate>
 			<div class="col-md-12">
 				<div class="col-md-4 col-sm-4 col-xs-12">
-					<img ng-src="{{contactCtrl.contact.picture}}" class="img-circle image-contact" ng-if="contactCtrl.contact.picture">
-					<input type="hidden" name="picture" ng-model="contactCtrl.contact.picture" required>
-					<img src="resources/contact/pulpix.png" class="img-circle image-contact" ng-if="!contactCtrl.contact.picture">
-					<a href="" class="delete-link" ng-click="contactCtrl.contact.picture=null;" ng-if="contactCtrl.contact.picture"><i class="fa fa-times-circle"></i>Eliminar foto</a>
+
+					<a href="" class="delete-link" ng-click="contactCtrl.contact.picture=null;contactCtrl.contact.pictureFromFile=false;" ng-show="contactCtrl.contact.picture || contactCtrl.contact.pictureFromFile"><i class="fa fa-times-circle"></i>Eliminar foto</a>
+
+					<img ngf-src="contactCtrl.contact.file" class="img-circle image-contact" ng-show="contactCtrl.contact.pictureFromFile">
+					<img ng-src="{{contactCtrl.contact.picture}}" class="img-circle image-contact" ng-show="contactCtrl.contact.picture && !contactCtrl.contact.pictureFromFile">
+					<img src="resources/contact/pulpix.png" class="img-circle image-contact" ng-hide="contactCtrl.contact.picture || contactCtrl.contact.pictureFromFile">
+
+					<input id="fileUploadInputContact" type="file" ngf-select ng-model="contactCtrl.contact.uploadingFile" name="uploadingFile" accept="image/*" ngf-max-size="2MB" style="display:none;">
+														
+					<input id="fileToUpload" type="file" ngf-select ng-model="contactCtrl.contact.file" name="file" accept="image/*" ngf-max-size="2MB" style="display:none;">
+
+					<a href="" ng-click="contactCtrl.uploadFile();" class="btn btn-unify-default">{{!contactCtrl.contact.file ? 'Subir una foto' : 'Subir otra'}}</a>
+
+					<i ng-show="contactForm.file.$error.maxSize">Archivo demasiado grande {{contactCtrl.contact.file.size / 1000000|number:1}}MB: max {{profileCtlr.newUser.file.$errorParam}}</i> 
+
 				</div>
 				<div class="col-md-8 text-left">
 					<div class="form-group">
@@ -33,7 +44,7 @@
 					<div class="social-network" ng-if="contactCtrl.contact.facebook">
 						<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
 							<a href="" class="delete-link" ng-click="contactCtrl.contact.facebook=null;"><i class="fa fa-times-circle"></i>Desvincular</a>
-							<img ng-src="{{contactCtrl.contact.facebook.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.facebook.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.facebook.picture;contactCtrl.contact.name=contactCtrl.contact.facebook.name;">
+							<img ng-src="{{contactCtrl.contact.facebook.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.facebook.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.facebook.picture;contactCtrl.contact.name=contactCtrl.contact.facebook.name;contactCtrl.contact.pictureFromFile=false;">
 							<img src="resources/contact/pulpix.png" class="img-circle image-social" ng-if="!contactCtrl.contact.facebook.picture">
 							<span class="name-social">{{contactCtrl.contact.facebook.name}}</span>
 						</div>
@@ -54,7 +65,7 @@
 					<div class="social-network" ng-if="contactCtrl.contact.twitter">
 						<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
 							<a href="" class="delete-link" ng-click="contactCtrl.contact.twitter=null;"><i class="fa fa-times-circle"></i>Desvincular</a>
-							<img ng-src="{{contactCtrl.contact.twitter.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.twitter.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.twitter.picture;contactCtrl.contact.name=contactCtrl.contact.twitter.username;">
+							<img ng-src="{{contactCtrl.contact.twitter.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.twitter.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.twitter.picture;contactCtrl.contact.name=contactCtrl.contact.twitter.username;contactCtrl.contact.pictureFromFile=false;">
 							<img src="resources/contact/pulpix.png" class="img-circle image-social" ng-if="!contactCtrl.contact.twitter.picture">
 							<span class="name-social">{{contactCtrl.contact.twitter.username}}</span>
 						</div>
@@ -75,7 +86,7 @@
 					<div class="social-network" ng-if="contactCtrl.contact.instagram">
 						<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
 							<a href="" class="delete-link" ng-click="contactCtrl.contact.instagram=null;"><i class="fa fa-times-circle"></i>Desvincular</a>
-							<img ng-src="{{contactCtrl.contact.instagram.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.instagram.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.instagram.picture;contactCtrl.contact.name=contactCtrl.contact.instagram.username;">
+							<img ng-src="{{contactCtrl.contact.instagram.picture}}" class="img-circle image-social" ng-if="contactCtrl.contact.instagram.picture" ng-click="contactCtrl.contact.picture=contactCtrl.contact.instagram.picture;contactCtrl.contact.name=contactCtrl.contact.instagram.username;contactCtrl.contact.pictureFromFile=false;">
 							<img src="resources/contact/pulpix.png" class="img-circle image-social" ng-if="!contactCtrl.contact.instagram.picture">
 							<span class="name-social">{{contactCtrl.contact.instagram.username}}</span>
 						</div>
@@ -107,7 +118,7 @@
 			</div>
 	      	<div class="clearfix"></div>
 			<div class="fadeInUpBig animated" style="margin-top: 10px;">
-			 	<button type="submit" value="Submit" ng-disabled="contactForm.$invalid || (!contactCtrl.contact.facebook && !contactCtrl.contact.twitter && !contactCtrl.contact.instagram) || !contactCtrl.contact.circles_ids || contactCtrl.contact.circles_ids.length==0" ng-click="contactForm.$setPristine()" class="btn btn-unify-primary">Guardar Contacto</button>
+			 	<button type="submit" value="Submit" ng-disabled="contactForm.$invalid || (!contactCtrl.contact.facebook && !contactCtrl.contact.twitter && !contactCtrl.contact.instagram) || !contactCtrl.contact.circles_ids || contactCtrl.contact.circles_ids.length==0 || (!contactCtrl.contact.picture && !contactCtrl.contact.pictureFromFile) " ng-click="contactForm.$setPristine()" class="btn btn-unify-primary">Guardar Contacto</button>
 				<a class="btn btn-unify-primary-invert" ng-click="uwParentController.cancelContact();">Cancelar</a>
 				<br><br>
 				<a href="" class="delete-link no-padding" ng-click="contactCtrl.askDeleteConfirmation();" ng-if="contactCtrl.contact_id"><i class="fa fa-times-circle"></i>Eliminar Contacto</a>
