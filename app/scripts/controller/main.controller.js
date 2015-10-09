@@ -1,12 +1,32 @@
 
 
-unifyApp.controller("MainController", function ($translate, $auth, $rootScope, ENV, ProfileService, AuthenticationService) {
+unifyApp.controller("MainController", function ($scope, $modal, $translate, $state, $auth, $rootScope, ENV, ProfileService, AuthenticationService) {
 	var mainController=this;
 	
 	mainController.logout = function(){
 		AuthenticationService.logout();
 	}
 	
+	mainController.goToMain =function(){
+		if($state.current.name=='main'){
+			$state.reload();
+		}else{
+			$state.go('main');
+		}
+	}
+
+	mainController.goToMails =function(){
+		if($rootScope.email){
+			if($state.current.name=='emails'){
+				$state.reload();
+			}else{
+				$state.go('emails');
+			}
+		}else{
+			$state.go('editProfile');
+		}
+	}
+
 	if($auth.isAuthenticated()){
 		AuthenticationService.getFriends();
 		ProfileService.user.get({
@@ -29,4 +49,10 @@ unifyApp.controller("MainController", function ($translate, $auth, $rootScope, E
 
 	$rootScope.auth=$auth.isAuthenticated();
 	
+});
+
+unifyApp.controller('ModalPhotoCtrl', function ($scope, $modalInstance, source) {
+    console.log(source);
+    modalPhotoCtrl = this;
+    modalPhotoCtrl.source=source;
 });

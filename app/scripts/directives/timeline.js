@@ -1,4 +1,4 @@
-unifyApp.directive('uwTimeLine', function($sce, $filter, ContactService, AuthenticationService) {
+unifyApp.directive('uwTimeLine', function($sce, $filter, $modal, ContactService, AuthenticationService) {
   
   	var link = function(scope, elm, attrs, ctrl) {
         scope.boldHashtags = function(text, provider){
@@ -61,6 +61,21 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, ContactService, Authent
                 post.user_has_liked=false;
             });
         };
+
+        scope.openPhoto = function (source) {
+            var modalInstance = $modal.open({
+                animation: scope.animationsEnabled,
+                templateUrl: 'myModalPhoto.html',
+                controller: 'ModalPhotoCtrl',
+                size: 'lg',
+                resolve: {
+                    source: function () {
+                      return source;
+                    }
+                }
+            });
+        };
+        
     };
     return {
         restrict: 'E',
@@ -73,4 +88,8 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, ContactService, Authent
         	uwPicture: "="
         }
     };
+});
+
+unifyApp.controller('ModalPhotoCtrl', function ($scope, $modalInstance, source) {
+    $scope.source=source;
 });
