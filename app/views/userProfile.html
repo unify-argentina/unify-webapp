@@ -56,6 +56,7 @@
 		</div>
 		<div class="col-md-9" style="margin-top: 10px;" ng-hide="profileCtlr.editProfile || profileCtlr.editPassword">
   			<uw-loader ng-if="!profileCtlr.feed"></uw-loader>
+  			<uw-public-input ng-if="profileCtlr.feed"></uw-public-input>
 			<uw-time-line uw-media="profileCtlr.feed" ng-if="profileCtlr.feed" uw-name="profileCtlr.user.name" uw-picture="profileCtlr.user.picture"></uw-time-line>
 		</div>
 		<div class="col-md-9" ng-show="profileCtlr.editProfile" style="margin-top: 20px;">
