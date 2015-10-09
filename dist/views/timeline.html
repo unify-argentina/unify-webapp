@@ -45,7 +45,7 @@
 					<span class="text-post" ng-bind-html="boldHashtags(post.text, post.provider)"></span>
 			    </div>
 			    <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
-					<img ng-src="{{post.media_url}}" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+					<img ng-src="{{post.media_url}}" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0" ng-click="openPhoto(post.media_url);">
 				</div>
 			</div>
 			<div class="col-md-12 col-sm-12 col-xs-12"  ng-if="post.type=='video'">
@@ -61,4 +61,10 @@
 			<span class="font-18">No hay contenido para ver!</span>
 		</div>
 	</div>
+
+	<div>
+        <script type="text/ng-template" id="myModalPhoto.html">
+            <img ng-src="{{source}}" class="col-md-12 col-sm-12 col-xs-12">
+        </script>
+    </div>
 </div>
