@@ -1,6 +1,9 @@
 <div id="contact" class="col-md-12 fadeInRight animated" style="margin-top: 20px;" ng-controller="ContactController as contactCtrl"  ng-init="contactCtrl.init(uwCircleId, uwContactId, uwParentController);">
   	<uw-loader ng-if="!contactCtrl.contact"></uw-loader>
 	<div class="text-center" ng-if="contactCtrl.contact">
+		<div class="col-md-12 col-sm-12 col-xs-12 text-center fadeInDownBig animated" style="padding-bottom:10px;">
+			<span class="title-unify">{{uwContactId ? 'Editar Contacto' : 'Crear Contacto'}}</span>
+		</div>
 		<form name="contactForm" ng-submit="contactCtrl.save(uwContactId);" class="form-horizontal" role="form" novalidate>
 			<div class="col-md-12">
 				<div class="col-md-4 col-sm-4 col-xs-12">
@@ -40,6 +43,7 @@
 				<span class="unify-color font-18">Seleccioná las redes sociales de tu contacto</span>
 			</div>
 				<div class="col-md-4 col-sm-4 col-xs-12" ng-if="contactCtrl.friends.facebook_friends">
+                    <img src="resources/facebook.png" height="25px" style="margin-bottom: 10px;">
 					<span class="social-network-name">Facebook</span>
 					<div class="social-network" ng-if="contactCtrl.contact.facebook">
 						<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
@@ -58,9 +62,9 @@
 				       		</select>
 				       	</div>
                     </div>
-                    <img src="resources/facebook.png" height="30px" style="margin-top: 10px;">
 	       		</div>
 				<div class="col-md-4 col-sm-4 col-xs-12" ng-if="contactCtrl.friends.twitter">
+		      		<img src="resources/twitter.png" height="25px" style="margin-bottom: 10px;">
 					<span class="social-network-name">Twitter</span>
 					<div class="social-network" ng-if="contactCtrl.contact.twitter">
 						<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
@@ -79,9 +83,9 @@
 				      		</select>
 				      	</div>
 		      		</div>
-		      		<img src="resources/twitter.png" height="30px" style="margin-top: 10px;">
 		      	</div>
 				<div class="col-md-4 col-sm-4 col-xs-12" ng-if="contactCtrl.friends.instagram">
+		      		<img src="resources/instagram.png" height="25px" style="margin-bottom: 10px;">
 					<span class="social-network-name">Instagram</span>
 					<div class="social-network" ng-if="contactCtrl.contact.instagram">
 						<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
@@ -100,7 +104,6 @@
 				      		</select>
 			      		</div>
 		      		</div>
-		      		<img src="resources/instagram.png" height="30px" style="margin-top: 10px;">
 		      	</div>
 	      	</div>
 	      	<div class="clearfix"></div>

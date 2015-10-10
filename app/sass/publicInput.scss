@@ -3,7 +3,7 @@
     margin: 20px 0px;
     border-radius: 25px 0px;
     overflow: hidden;
-    .fa{
+    .fa-social{
         border-radius: 100%;
         padding: 10px;
         font-size: 1em;
@@ -51,9 +51,59 @@
 
 .publication-type{
     color: #8d775e;
+    .fa{
+        border-radius: 100%;
+        padding: 10px;
+        color: #8d775e;
+        float: left;  
+    }
+    .publication-type-text{
+        &:hover,
+        &:focus{
+             color: #8d775e;
+        }
+    }
+    &:hover,
+    &:focus{
+         color: #8d775e;
+    }
 }
 
 .publication-type-active{
     background-color: #fff;
     color: #00a099;
+    border-radius: 20px;
+    .fa{
+        border-radius: 100%;
+        padding: 10px;
+        background-color: #fff;
+        color: #00a099;
+        float: left; 
+    }
+    .publication-type-text{
+        &:hover,
+        &:focus{
+             color: #00a099;
+        }
+    }
+    &:hover,
+    &:focus{
+         color: #00a099;
+    }
+}
+
+.publication-type-container{
+    margin-right: 5px;
+    float: left;
+    .publication-type-text{
+        float: left;
+        padding-top: 6px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .publication-type-text{
+        display: none;
+    }
 }

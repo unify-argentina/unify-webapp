@@ -193,3 +193,8 @@ a.pagination-forward{
     border-radius: 0px 0px 15px 0px !important;
 }
 
+@media (max-width: 768px) {
+	.btn-action-icon{
+		margin: 0px;
+	}
+}

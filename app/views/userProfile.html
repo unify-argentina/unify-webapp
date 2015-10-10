@@ -6,17 +6,21 @@
 			<img ng-src="{{profileCtlr.user.picture}}" class="img-circle image-contact" ng-if="profileCtlr.user.picture">
 			<img ng-src="resources/contact/pulpix.png" class="img-circle image-contact" ng-if="!profileCtlr.user.picture">
 			<span class="profile-name">{{profileCtlr.user.name}}</span>
-			<a href="" class="btn btn-unify-primary btn-block" ng-click="profileCtlr.edit();" style="margin-top: 10px;">Editar perfil</a>
 			<div class="clearfix"></div>
-			<div class="col-md-12 col-sm-12 col-xs-12" style="padding: 15px">
-				<div class="social-network-bullet col-md-12 col-sm-12 col-xs-12">
+			<a href="" class="btn btn-unify-primary col-md-12 col-sm-4 col-xs-4" ng-click="profileCtlr.edit();" style="margin-top: 10px;">Editar perfil</a>
+			<div class="col-md-12 hidden-sm hidden-xs" style="padding: 15px 15px 5px 15px">
+				<div class="clearfix"></div>
+				<div class="social-network-bullet col-md-12 hidden-sm hidden-xs">
 					<div class="social-image" ng-class="{'social-image-unlink': !profileCtlr.user.facebook.display_name}">
 						<img ng-src="resources/facebook.png" width="20px">
 					</div>
 					<div class="overflow-x-hidden">
-						<span>
-							{{profileCtlr.user.facebook.display_name ? profileCtlr.user.facebook.display_name : 'Sin Asociar'}}
+						<span ng-show="profileCtlr.user.facebook.display_name">
+							{{profileCtlr.user.facebook.display_name}}
 						</span>
+						<a href="" ng-hide="profileCtlr.user.facebook.display_name" ui-sref="editProfile" >
+							Asociá esta cuenta
+						</a>
 					</div>
 				</div>
 				<div class="social-network-bullet col-md-12 col-sm-12 col-xs-12">
@@ -24,9 +28,12 @@
 						<img ng-src="resources/twitter.png" width="20px">
 					</div>
 					<div class="overflow-x-hidden">
-						<span>
-							{{profileCtlr.user.twitter.username ? '@'+profileCtlr.user.twitter.username : 'Sin Asociar'}}
+						<span ng-show="profileCtlr.user.twitter.username">
+							{{'@'+profileCtlr.user.twitter.username}}
 						</span>
+						<a href="" ng-hide="profileCtlr.user.twitter.username" ui-sref="editProfile" >
+							Asociá esta cuenta
+						</a>
 					</div>
 				</div>
 				<div class="social-network-bullet col-md-12 col-sm-12 col-xs-12">
@@ -34,9 +41,12 @@
 						<img ng-src="resources/instagram.png" width="20px">
 					</div>
 					<div class="overflow-x-hidden">
-						<span>
-							{{profileCtlr.user.instagram.username ? profileCtlr.user.instagram.username : 'Sin Asociar'}}
+						<span ng-show="profileCtlr.user.instagram.username">
+							{{profileCtlr.user.instagram.username}}
 						</span>
+						<a href="" ng-hide="profileCtlr.user.instagram.username" ui-sref="editProfile" >
+							Asociá esta cuenta
+						</a>
 					</div>
 				</div>			
 				<div class="social-network-bullet col-md-12 col-sm-12 col-xs-12">
@@ -44,22 +54,30 @@
 						<img ng-src="resources/gmail.png" width="20px">
 					</div>
 					<div class="overflow-x-hidden">
-						<span>
-							{{profileCtlr.user.google.email ? profileCtlr.user.google.email : 'Sin Asociar'}}
+						<span ng-show="profileCtlr.user.google.email">
+							{{profileCtlr.user.google.email}}
 						</span>
+						<a href="" ng-hide="profileCtlr.user.google.email" ui-sref="editProfile" >
+							Asociá esta cuenta
+						</a>
 					</div>
 				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="col-md-12 col-sm-4 col-xs-4 no-padding">
+				<a class="btn btn-unify-primary btn-block" ui-sref="editProfile" style="margin-top: 10px;">Editar cuentas</a>
+			</div>
+			<div class="col-md-12 col-sm-4 col-xs-4 no-padding">
+			<a class="btn btn-unify-primary-invert btn-block text-left" ng-click="profileCtlr.editPass();" style="margin-top: 10px;">Editar Password</a>
 			</div>
 			<div class="clearfix"></div>
-			<a class="btn btn-unify-primary btn-block" ui-sref="editProfile">Editar cuentas</a>
-			<a class="btn btn-unify-primary-invert btn-block text-left" ng-click="profileCtlr.editPass();">Editar Password</a>
 		</div>
-		<div class="col-md-9" style="margin-top: 10px;" ng-hide="profileCtlr.editProfile || profileCtlr.editPassword">
+		<div class="col-md-9 col-sm-12 col-xs-12" style="margin-top: 10px;" ng-hide="profileCtlr.editProfile || profileCtlr.editPassword">
   			<uw-loader ng-if="!profileCtlr.feed"></uw-loader>
   			<uw-public-input ng-if="profileCtlr.feed"></uw-public-input>
 			<uw-time-line uw-media="profileCtlr.feed" ng-if="profileCtlr.feed" uw-name="profileCtlr.user.name" uw-picture="profileCtlr.user.picture"></uw-time-line>
 		</div>
-		<div class="col-md-9" ng-show="profileCtlr.editProfile" style="margin-top: 20px;">
+		<div class="col-md-9 col-sm-12 col-xs-12" ng-show="profileCtlr.editProfile" style="margin-top: 20px;">
 			<div class="fadeInRight animated">
 				<div class="col-md-12 col-sm-12 col-xs-12 text-center">
 					<span class="title-unify">Editar Perfil</span>
@@ -103,16 +121,16 @@
 							<!--<a href="" class="delete-link" ng-click="profileCtlr.newUser.file = null" ng-if="profileCtlr.newUser.picture"><i class="fa fa-times-circle"></i>Borrar foto</a>-->
 						</div>
 						<div class="clearfix"></div>
-						<div class="form-group">
+						<div class="form-group fadeInRight animated">
 	                        <label>{{'logon_name' | translate}}</label>
 	                        <input type="text" class="form-control form-input" name="name" ng-model="profileCtlr.newUser.name" required>
 	                    </div>
-						<div class="form-group">
+						<div class="form-group fadeInRight animated">
 	                        <label>{{'logon_email' | translate}}</label>
 	                        <input type="email" class="form-control form-input" name="email" ng-model="profileCtlr.newUser.email" required>
 	                    </div>
 	                    <!---->
-	                    <div class="form-group">
+	                    <div class="form-group fadeInUp animated">
 			                <button type="submit" value="Submit"                                        
 			                        ng-disabled="profileForm.$invalid"
 			                        ng-click="profileForm.$setPristine()"
@@ -122,7 +140,7 @@
 	       		</form>
        		</div>
 		</div>
-		<div class="col-md-9" ng-show="profileCtlr.editPassword" style="margin-top: 20px;">
+		<div class="col-md-9 col-sm-12 col-xs-12" ng-show="profileCtlr.editPassword" style="margin-top: 20px;">
 			<div class="fadeInRight animated">
 				<div class="col-md-12 col-sm-12 col-xs-12 text-center">
 					<span class="title-unify">Editar Contraseña</span>
