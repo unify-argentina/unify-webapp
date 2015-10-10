@@ -4,19 +4,20 @@
     border-radius: 25px 0px;
     overflow: hidden;
     .fa{
-        float: right;
         border-radius: 100%;
         padding: 10px;
-        color: #fff;
         font-size: 1em;
     }
     .fa-twitter{
+        color: #fff;
         background-color: #61AADF;
     }
     .fa-facebook-official{
+        color: #fff;
         background-color: #3765A3;
     }
     .fa-instagram{
+        color: #fff;
         background-color: #305C85;
     }
 }
@@ -24,12 +25,19 @@
 .public-input-header{
     background-color: #e4e0db;
     color: #fff;
-    padding: 5px 0px;
+    padding: 5px 15px;
+    a{
+        text-decoration: none;
+        &hover,
+        &focus{
+            text-decoration: none;
+        }
+    }
 }
 
 .public-input-text{
     border: none;
-    box-shadow: none;
+    box-shadow: none !important;
 }
 
 .public-input-footer{
@@ -39,4 +47,13 @@
     .btn-unify-default{
         padding: 3px 15px;
     }
+}
+
+.publication-type{
+    color: #8d775e;
+}
+
+.publication-type-active{
+    background-color: #fff;
+    color: #00a099;
 }

@@ -79,6 +79,16 @@
     }
 }
 
+.modal-lg{
+    .modal-content{
+        background:none; 
+        box-shadow: none;
+    }
+    img{
+        max-height: 90vh;
+        max-width: 100%;
+    }
+}
 @media (max-width: 768px) {
 	.like-text{
 		display: none;
