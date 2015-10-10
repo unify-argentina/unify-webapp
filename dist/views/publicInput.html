@@ -1,5 +1,16 @@
-<div class="public-input-container col-md-12 col-sm-12 col-xs-12 text-center">
+<div class="public-input-container col-md-12 col-sm-12 col-xs-12">
 	<div class="row public-input-header">		
+		<a href="" ng-click="publication.type='text';">
+			<i class="fa fa-pencil-square-o" ng-class="{'publication-type-active':publication.type=='text','publication-type':publication.type!='text'}"></i>
+		</a>
+		<a href="" ng-click="publication.type='photo';">
+			<i class="fa fa-camera" ng-class="{'publication-type-active':publication.type=='photo','publication-type':publication.type!='photo'}"></i>
+			Foto
+		</a>
+		<a href="" ng-click="publication.type='video';">
+			<i class="fa fa-film" ng-class="{'publication-type-active':publication.type=='video','publication-type':publication.type!='video'}"></i>
+			Video
+		</a>
 		<a href=""><i class="fa fa-facebook-official pull-right"></i></a>
 		<a href=""><i class="fa fa-twitter pull-right"></i></a>
 	</div>

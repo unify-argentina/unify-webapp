@@ -32,7 +32,7 @@
 			    		<img src="resources/unify-liked.png" class="img-circle" height="33px" >
 			    	</a>
 			    	<a href="" class="liked" ng-show="post.user_has_liked  && post.provider != 'instagram'" ng-click="unlike(post);">
-			    		<span class="liked-text">No me gusta más</span>
+			    		<span class="like-text">No me gusta más</span>
 			    		<img src="resources/unify-like.png" class="img-circle" height="33px">
 			    	</a>
 			    </div>
@@ -64,7 +64,7 @@
 
 	<div>
         <script type="text/ng-template" id="myModalPhoto.html">
-            <img ng-src="{{source}}" class="col-md-12 col-sm-12 col-xs-12">
+            <img ng-src="{{source}}" class="centered">
         </script>
     </div>
 </div>
