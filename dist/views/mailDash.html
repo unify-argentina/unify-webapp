@@ -1,32 +1,32 @@
 <div id="mailDash" class="container" class="col-md-12" style="margin-top: 20px;" ng-controller="MailController as mailCtlr">
   <div class="content col-md-12 col-sm-12 col-xs-12 no-padding" ng-hide="mailCtlr.viewMail">
-		<div class="col-md-3 text-center  fadeInLeft animated" style="margin-top: 20px;">
+		<div class="col-md-3 col-sm-12 col-xs-12 text-center  fadeInLeft animated" style="margin-top: 20px;">
 			<a ng-click="mailCtlr.writeMail={};" class="btn btn-unify-primary btn-block" style="margin-top: 5px;"><i class="fa fa-pencil"></i> Redactar</a>
 			<a ng-click="mailCtlr.getInbox();" class="btn btn-block" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='inbox', 'btn-unify-mail-active' :mailCtlr.viewList=='inbox'}" style="margin-top: 5px;"><i class="fa fa-envelope"></i> Recibidos</a>
 			<a ng-click="mailCtlr.getSent();" class="btn btn-block" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='sent', 'btn-unify-mail-active' : mailCtlr.viewList=='sent'}" style="margin-top: 5px;"><i class="fa fa-external-link"></i> Enviados</a>
 			<a ng-click="mailCtlr.getDraft();" class="btn btn-block" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='draft', 'btn-unify-mail-active' : mailCtlr.viewList=='draft'}" style="margin-top: 5px;"><i class="fa fa-list"></i> Borradores</a>
 			<a ng-click="mailCtlr.getTrash();" class="btn btn-block" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='trash', 'btn-unify-mail-active' : mailCtlr.viewList=='trash'}" style="margin-top: 5px;"><i class="fa fa-trash"></i> Papelera</a>
 		</div>
-		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='inbox' && !mailCtlr.writeMail">
+		<div class="col-md-9 col-sm-12 col-xs-12 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='inbox' && !mailCtlr.writeMail">
 			<uw-loader ng-if="!mailCtlr.inbox"></uw-loader>
 			<div ng-show="mailCtlr.inbox">
 				<div class="col-md-12 no-padding" ng-if="mailCtlr.inbox.count > 0">
 					<div class="btn-action-group fadeInDownBig animated">
-						<a ng-click="mailCtlr.moveToTrash();" class="btn btn-action btn-action-delete">Enviar a Papelera</a>
+						<a ng-click="mailCtlr.moveToTrash();" class="btn btn-action btn-action-delete hidden-sm hidden-xs">Enviar a Papelera</a>
 						<span ng-click="mailCtlr.moveToTrash();" class="fa-stack fa-lg btn-action-icon delete-link">
 						  <i class="fa fa-circle fa-stack-2x delete-link"></i>
 						  <i class="fa fa-times fa-stack-1x fa-inverse"></i>
 						</span>
 					</div>
 					<div class="btn-action-group fadeInDownBig animated">
-						<a ng-click="mailCtlr.markAsSeen();" class="btn btn-action" style="margin-left: 10px;">Marcar como leido</a>
+						<a ng-click="mailCtlr.markAsSeen();" class="btn btn-action hidden-sm hidden-xs" style="margin-left: 10px;">Marcar como leido</a>
 						<span ng-click="mailCtlr.markAsSeen();" class="fa-stack fa-lg btn-action-icon">
 						  <i class="fa fa-circle fa-stack-2x"></i>
 						  <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
 						</span>
 					</div>
 					<div class="btn-action-group fadeInDownBig animated">
-						<a ng-click="mailCtlr.markAsUnseen();" class="btn btn-action" style="margin-left: 10px;">Marcar como no leido</a>
+						<a ng-click="mailCtlr.markAsUnseen();" class="btn btn-action hidden-sm hidden-xs" style="margin-left: 10px;">Marcar como no leido</a>
 						<span ng-click="mailCtlr.markAsUnseen();" class="fa-stack fa-lg btn-action-icon">
 						  <i class="fa fa-circle fa-stack-2x"></i>
 						  <i class="fa fa-eye-slash fa-stack-1x fa-inverse"></i>
@@ -67,7 +67,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='sent' && !mailCtlr.writeMail">
+		<div class="col-md-9 col-sm-12 col-xs-12 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='sent' && !mailCtlr.writeMail">
 			<uw-loader ng-if="!mailCtlr.sent"></uw-loader>
 			<div ng-show="mailCtlr.sent">
 				<div class=""  ng-if="mailCtlr.sent.count > 0">
@@ -97,7 +97,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='draft'  && !mailCtlr.writeMail">
+		<div class="col-md-9 col-sm-12 col-xs-12 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='draft'  && !mailCtlr.writeMail">
 			<uw-loader ng-if="!mailCtlr.draft"></uw-loader>
 			<div ng-show="mailCtlr.draft">
 				<div class="" style="margin-top: 20px;" ng-if="mailCtlr.draft.count > 0">
@@ -127,13 +127,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-9 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='trash' && !mailCtlr.writeMail">
+		<div class="col-md-9 col-sm-12 col-xs-12 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='trash' && !mailCtlr.writeMail">
 			<uw-loader ng-if="!mailCtlr.trash"></uw-loader>
 			<div ng-show="mailCtlr.trash">
 				<div class=""  ng-if="mailCtlr.trash.count > 0">
-					<div class="col-md-12 no-padding fadeInDownBig animated">
+					<div class="col-md-12 col-sm-12 col-xs-12 no-padding fadeInDownBig animated">
 						<div class="btn-action-group">
-							<a ng-click="mailCtlr.moveToInbox();" class="btn btn-action">Quitar de la Papelera</a>
+							<a ng-click="mailCtlr.moveToInbox();" class="btn btn-action hidden-sm hidden-xs">Quitar de la Papelera</a>
 							<span ng-click="mailCtlr.moveToTrash();" class="fa-stack fa-lg btn-action-icon">
 							  <i class="fa fa-circle fa-stack-2x"></i>
 							  <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
@@ -177,26 +177,26 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-9" ng-show="mailCtlr.writeMail">
+		<div class="col-md-9 col-sm-12 col-xs-12" ng-show="mailCtlr.writeMail">
 			<form name="newMailForm" ng-submit="mailCtlr.sendMail()"
 	          	class="form-horizontal fadeInRight animated" role="form" novalidate>
-	       		<div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 20px;">
+	       		<div class="col-md-12 col-sm-12 col-xs-12 no-padding" style="margin-top: 20px;">
 					<div class="btn-action-group pull-left fadeInDownBig animated">
-						<a ng-click="mailCtlr.writeMail=null" class="btn btn-action">Volver</a>
+						<a ng-click="mailCtlr.writeMail=null" class="btn btn-action hidden-sm hidden-xs">Volver</a>
 						<span ng-click="mailCtlr.writeMail=null" class="fa-stack fa-lg btn-action-icon">
 						  <i class="fa fa-circle fa-stack-2x"></i>
 						  <i class="fa fa-arrow-left fa-stack-1x fa-inverse"></i>
 						</span>
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="form-group">
-							<div class="no-padding" ng-class="{'col-md-8' : !mailCtlr.writeMail.hasCCO && !mailCtlr.writeMail.hasCC,'col-md-10' : (mailCtlr.writeMail.hasCCO && !mailCtlr.writeMail.hasCC)||(!mailCtlr.writeMail.hasCCO && mailCtlr.writeMail.hasCC), 'col-md-12' : mailCtlr.writeMail.hasCCO && mailCtlr.writeMail.hasCC}">
+							<div class="no-padding col-sm-12 col-xs-12" ng-class="{'col-md-8' : !mailCtlr.writeMail.hasCCO && !mailCtlr.writeMail.hasCC,'col-md-10' : (mailCtlr.writeMail.hasCCO && !mailCtlr.writeMail.hasCC)||(!mailCtlr.writeMail.hasCCO && mailCtlr.writeMail.hasCC), 'col-md-12' : mailCtlr.writeMail.hasCCO && mailCtlr.writeMail.hasCC}">
 				              	<input class="form-control form-input"  ng-model="mailCtlr.writeMail.to" id="to" type='text' tabindex="1" placeholder="Ingresá a quien le vas a escribir" style="margin-top: 5px;" required/>
 							</div>
-							<div ng-show="!mailCtlr.writeMail.hasCC" class="col-md-2 no-padding" style="padding-top: 4px;">
+							<div ng-show="!mailCtlr.writeMail.hasCC" class="col-md-2 col-sm-6 col-xs-6 no-padding" style="padding-top: 4px;">
 								<a ng-click="mailCtlr.writeMail.hasCC=true;" class="btn btn-unify-primary-invert btn-block">Agregar CC</a>
 							</div>
-							<div ng-show="!mailCtlr.writeMail.hasCCO" class="col-md-2 no-padding" style="padding-top: 4px;">
+							<div ng-show="!mailCtlr.writeMail.hasCCO" class="col-md-2 col-sm-6 col-xs-6 no-padding" style="padding-top: 4px;">
 								<a ng-click="mailCtlr.writeMail.hasCCO=true;" class="btn btn-unify-primary-invert btn-block">Agregar CCO</a>
 							</div>
 						</div>
@@ -224,38 +224,38 @@
 	        </form>
 		</div>
 	</div>
-	<div class="content col-md-12" ng-show="mailCtlr.viewMail">
-		<div class="col-md-12 fadeInDownBig animated" style="padding-right:0px;">
+	<div class="content col-md-12 col-sm-12 col-xs-12" ng-show="mailCtlr.viewMail">
+		<div class="col-md-12 col-sm-12 col-xs-12 fadeInDownBig animated" style="padding-right:0px;">
 			<div class="btn-action-group">
-				<a ng-click="mailCtlr.viewMail=null" class="btn btn-action">Volver</a>
+				<a ng-click="mailCtlr.viewMail=null" class="btn btn-action hidden-sm hidden-xs">Volver</a>
 				<span ng-click="mailCtlr.viewMail=null" class="fa-stack fa-lg btn-action-icon">
 				  <i class="fa fa-circle fa-stack-2x"></i>
 				  <i class="fa fa-arrow-left fa-stack-1x fa-inverse"></i>
 				</span>
 			</div>
 			<div class="btn-action-group pull-right">
-				<a ng-click="mailCtlr.moveToTrashMail(mailCtlr.viewMail); mailCtlr.viewMail=null;" class="btn btn-action btn-action-delete" style="margin-left: 5px;">Eliminar mail</a>
+				<a ng-click="mailCtlr.moveToTrashMail(mailCtlr.viewMail); mailCtlr.viewMail=null;" class="btn btn-action btn-action-delete hidden-sm hidden-xs" style="margin-left: 5px;">Eliminar mail</a>
 				<span ng-click="mailCtlr.moveToTrashMail(mailCtlr.viewMail); mailCtlr.viewMail=null;" class="fa-stack fa-lg btn-action-icon delete-link">
 				  <i class="fa fa-circle fa-stack-2x delete-link"></i>
 				  <i class="fa fa-times fa-stack-1x fa-inverse"></i>
 				</span>
 			</div>
 			<div class="btn-action-group pull-right">
-				<a ng-click="mailCtlr.answerAllMail(mailCtlr.viewMail, mainController.email);" class="btn btn-action" style="margin-left: 5px;">Responder a todos</a>
+				<a ng-click="mailCtlr.answerAllMail(mailCtlr.viewMail, mainController.email);" class="btn btn-action hidden-sm hidden-xs" style="margin-left: 5px;">Responder a todos</a>
 				<span ng-click="mailCtlr.answerAllMail(mailCtlr.viewMail, mainController.email);" class="fa-stack fa-lg btn-action-icon">
 				  <i class="fa fa-circle fa-stack-2x"></i>
 				  <i class="fa fa-reply-all fa-stack-1x fa-inverse"></i>
 				</span>
 			</div>
 			<div class="btn-action-group pull-right">
-				<a ng-click="mailCtlr.answerMail(mailCtlr.viewMail);" class="btn btn-action" >Responder</a>
+				<a ng-click="mailCtlr.answerMail(mailCtlr.viewMail);" class="btn btn-action hidden-sm hidden-xs" >Responder</a>
 				<span ng-click="mailCtlr.answerMail(mailCtlr.viewMail);" class="fa-stack fa-lg btn-action-icon">
 				  <i class="fa fa-circle fa-stack-2x"></i>
 				  <i class="fa fa-reply fa-stack-1x fa-inverse"></i>
 				</span>
 			</div>
 		</div>
-		<div class="col-md-3 word-break fadeInLeft animated" style="margin-top: 20px;">
+		<div class="col-md-3 col-sm-12 col-xs-12 word-break fadeInLeft animated" style="margin-top: 20px;">
 			<div ng-show="mailCtlr.viewMail.from.toString()">
 				<span class="mail-label">De:</span>
 				<br>
@@ -277,10 +277,10 @@
 				<span class="mail-text">{{mailCtlr.viewMail.cco.toString()}}</span>
 			</div>
 		</div>
-		<div class="col-md-9 mail-view fadeInRight animated"  style="margin-top: 20px;">
+		<div class="col-md-9 col-sm-12 col-xs-12 mail-view fadeInRight animated"  style="margin-top: 20px;">
 			<span class="mail-subject">{{mailCtlr.viewMail.subject}}</span>
 			<span class="mail-date">{{mailCtlr.viewMail.date | amCalendar}}</span>
-			<div class="mail-body col-md-12" ng-bind-html="mailCtlr.mailHtml"></div>
+			<div class="mail-body col-md-12 col-sm-12 col-xs-12" ng-bind-html="mailCtlr.mailHtml"></div>
 		</div>
 	</div>
 

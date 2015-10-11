@@ -1,7 +1,7 @@
 <div id="circle" class="container" ng-controller="CircleController as circleCtrl">
   	<uw-loader ng-if="!circleCtrl.circle"></uw-loader>
 	<div class="content col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.circle">
-		<div class="col-md-3 text-center" style="margin-top: 20px;" ng-show="!circleCtrl.editContact">
+		<div class="col-md-3 col-sm-12 col-xs-12 text-center" style="margin-top: 20px;" ng-show="!circleCtrl.editContact">
 			<div class="fadeInLeft animated">
 				<div ng-show="!circleCtrl.createCircle && !circleCtrl.editingCircle">
 					<a href="" ng-click="circleCtrl.goToParent();" ng-show="circleCtrl.circle.parent" class="unify-link"><i class="fa fa-chevron-circle-up"></i>Subir un nivel</a>
@@ -55,7 +55,7 @@
 						<span class="circle-name btn-block">{{circleCtrl.circle.name}}</span>
 					</div>
 				</div>
-				<div class="col-md-12 no-padding" ng-show="circleCtrl.createCircle">
+				<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-show="circleCtrl.createCircle">
 					<div class="fadeInUp animated">
 						<form name="newCircleForm" ng-submit="circleCtrl.save()" class="form-horizontal" role="form" novalidate>
 							
@@ -73,7 +73,8 @@
 
 							<i ng-show="newCircleForm.file.$error.maxSize">Archivo demasiado grande {{profileCtlr.newUser.file.size / 1000000|number:1}}MB: max {{profileCtlr.newUser.file.$errorParam}}</i> 
 							
-
+							<div class="clearfix"></div>
+							
 		                    <label>Ingresá en nombre del nuevo grupo:</label>
 		                    
 							<input type="text" class="form-control form-input unify-border" name="circleCtrl.newCircle" ng-model="circleCtrl.newCircle.name" required>
@@ -84,7 +85,7 @@
 						</form>
 					</div>
 				</div>
-				<div class="col-md-12 no-padding" ng-show="circleCtrl.editingCircle">
+				<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-show="circleCtrl.editingCircle">
 					<div class="fadeInUp animated">
 						<form name="updateCircleForm" ng-submit="circleCtrl.update()" class="form-horizontal" role="form" novalidate>
 
@@ -103,7 +104,9 @@
 							<a href="" ng-click="circleCtrl.uploadFile();" class="btn btn-unify-default">{{!circleCtrl.editCircle.file ? 'Subir una foto' : 'Subir otra'}}</a>
 							
 							<span class="delete-link col-md-12" ng-show="updateCircleForm.file.$error.maxSize">La imagen es demasiado grande, se pueden subir hasta imagenes de 2MB</span> 
-							
+
+							<div class="clearfix"></div>
+
 		                    <label>Ingresá el nombre del grupo:</label>
 							<input type="text" class="form-control form-input unify-border" name="circleCtrl.editCircle" ng-model="circleCtrl.editCircle.name" required>
 							<div style="margin-top: 10px;">
@@ -135,7 +138,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-9">
+		<div class="col-md-9 col-sm-12 col-xs-12">
 			<div ng-hide="!circleCtrl.movingCircle" >
 				<div class="col-md-12 col-sm-12 col-xs-12 text-left unify-color fadeInDown animated" style="margin-top: 20px;" ng-show="circleCtrl.list">
 			      	<label class="font-18">Seleccioná donde que queres mover el grupo</label>
