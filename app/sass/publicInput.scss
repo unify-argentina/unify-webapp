@@ -12,13 +12,31 @@
         color: #fff;
         background-color: #61AADF;
     }
+    .fa-twitter.unselected{
+        color: #61AADF;
+        background-color: #fff;
+        border: 2px solid #61AADF;
+        padding: 8px;
+    }
     .fa-facebook-official{
         color: #fff;
         background-color: #3765A3;
     }
+    .fa-facebook-official.unselected{
+        color: #3765A3;
+        background-color: #fff;
+        border: 2px solid #3765A3;
+        padding: 8px;
+    }
     .fa-instagram{
         color: #fff;
         background-color: #305C85;
+    }
+    .fa-instagram.unselected{
+        color: #305C85;
+        background-color: #fff;
+        border: 2px solid #305C85;
+        padding: 8px;
     }
 }
 
