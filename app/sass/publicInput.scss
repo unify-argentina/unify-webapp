@@ -14,9 +14,9 @@
         background-color: #61AADF;
     }
     .fa-twitter.unselected{
-        color: #61AADF;
-        background-color: #fff;
-        border: 2px solid #61AADF;
+        color: #928f8a;
+        background-color: #e4e0db;
+        border: 2px solid #928f8a;
         padding: 8px;
     }
     .fa-facebook-official{
@@ -24,9 +24,9 @@
         background-color: #3765A3;
     }
     .fa-facebook-official.unselected{
-        color: #3765A3;
-        background-color: #fff;
-        border: 2px solid #3765A3;
+        color: #928f8a;
+        background-color: #e4e0db;
+        border: 2px solid #928f8a;
         padding: 8px;
     }
     .fa-instagram{
@@ -34,9 +34,9 @@
         background-color: #305C85;
     }
     .fa-instagram.unselected{
-        color: #305C85;
-        background-color: #fff;
-        border: 2px solid #305C85;
+        color: #928f8a;
+        background-color: #e4e0db;
+        border: 2px solid #928f8a;
         padding: 8px;
     }
 }
@@ -51,6 +51,11 @@
         &focus{
             text-decoration: none;
         }
+    }
+    .select-social{
+        padding-top: 7px;
+        margin-right: 5px;
+        color: #9e9e9e;
     }
 }
 
