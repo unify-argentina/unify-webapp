@@ -1,8 +1,14 @@
-<div class="centered">
-	<a ng-click="showDescription=true;">
-		<i class="fa fa-question-circle fa-2x"></i>
+<div class="centered question-container">
+	<a href="" class="pulse-button" ng-click="showTutorialText();" ng-hide="$root.hideQuestionMarks">
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-question fa-stack-1x fa-inverse"></i>
+		</span>
 	</a>
-	<span ng-show="showDescription">
-		{{uwDescription}}
-	</span>
+	<div class="text-question" ng-show="showDescription">
+		<span>{{uwDescription}}</span>
+	</div>
+	<div>
+    	<img src="resources/buzo.png" ng-show="showDescription" height="75px">
+    </div>
 </div>
