@@ -18,11 +18,13 @@
         <li><a href="" ng-click="mainController.goToMails();"><i class="fa fa-envelope-o fa-2x"></i><br>Mail</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <!--<li>
+          <a href="" ng-click="$root.showQuestions=true;" class="unify-font"><i class="fa fa-question-circle fa-2x"></i><br>Ayuda</a>
+        </li>-->
         <li>
-         
           <a ui-sref="profile">
-              <img ng-src="{{$root.picture}}" class="img-circle image-contact-small" ng-if="$root.picture">
-              <img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!$root.picture">
+            <img ng-src="{{$root.picture}}" class="img-circle image-contact-small" ng-if="$root.picture">
+            <img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!$root.picture">
             <span class="profile">{{$root.user}}</span></a>
         </li>
         <li><a href="" ng-click="mainController.logout();"><i class="fa fa-sign-out fa-2x"></i><br>Cerrar Sesión</a></li>

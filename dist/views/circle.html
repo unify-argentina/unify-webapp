@@ -46,10 +46,17 @@
 							</div>
 						</div>
 						<div class="clearfix"></div>
-						<div class="col-md-12 no-padding text-center" style="margin-top: 10px;" >
-							<a href="" class="move-link col-md-4 no-padding" ng-click="circleCtrl.movingCircle=true;" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id"><i class="fa fa-arrows-alt"></i></i>Mover</a>
-							<a href="" class="edit-link col-md-4 no-padding" ng-click="circleCtrl.edit();" ng-class="{'col-md-offset-4' : circleCtrl.circle_id == circleCtrl.mainCircle_id}"><i class="fa fa-pencil-square-o"></i>Editar</a>
-							<a href="" class="delete-link col-md-4 no-padding" ng-click="circleCtrl.askDeleteConfirmation();" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id"><i class="fa fa-times-circle"></i>Eliminar</a>
+						<div class="col-md-12 col-sm-12 col-xs-12  no-padding text-center" style="margin-top: 10px;" >
+							<div class="col-md-4 col-sm-12 col-xs-12  no-padding">
+								<a href="" class="move-link centered" ng-click="circleCtrl.movingCircle=true;" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id"><i class="fa fa-arrows-alt"></i></i>Mover</a>
+							</div>
+							<div class="col-md-4 col-sm-12 col-xs-12  no-padding">
+								<a href="" class="edit-link centered" ng-click="circleCtrl.edit();" ng-class="{'col-md-offset-4' : circleCtrl.circle_id == circleCtrl.mainCircle_id}"><i class="fa fa-pencil-square-o"></i>Editar</a>
+								<uw-question uw-description="'Clickeá aquí para editar el circulo'" ng-show="$root.showQuestions"></uw-question>
+							</div>
+  							<div class="col-md-4 col-sm-12 col-xs-12  no-padding">
+								<a href="" class="delete-link centered" ng-click="circleCtrl.askDeleteConfirmation();" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id"><i class="fa fa-times-circle"></i>Eliminar</a>
+							</div>
 						</div>
 						<div class="clearfix"></div>
 						<span class="circle-name btn-block">{{circleCtrl.circle.name}}</span>
