@@ -19,16 +19,18 @@ unifyApp.factory('PublicationService', function($http, $resource, Upload, $auth,
 	};
 
 	var publicFile = function(user_id,publication){
+
 		var promise = Upload.upload({
 		        url: ENV.apiEndPoint + '/api/user/' + user_id + '/media', 
 		        method: 'POST',
+		 		file: publication.file,
 		        data: {
-		         	user_id		: user_id,
+				 	user_id		: user_id,
 					facebook	: publication.facebook,	
 					twitter		: publication.twitter,
-					text		: publication.text,
-		         	file 		: publication.file
+					text		: publication.text
 				}
+				
 		    }).then(function(response) {
 		    	return response.data;
 		   	});

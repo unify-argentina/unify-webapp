@@ -23,7 +23,7 @@
     "angular-scroll": "~0.7.2",
     "angular-utf8-base64": "~0.0.5",
     "angular-moment": "~0.10.3",
-    "ng-file-upload": "~7.3.8",
+    "ng-file-upload": "~9.0.9",
     "angular-utils-pagination": "~0.9.0"
   },
   "devDependencies": {
