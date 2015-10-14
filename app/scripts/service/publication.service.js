@@ -30,10 +30,11 @@ unifyApp.factory('PublicationService', function($http, $resource, Upload, $auth,
 					twitter		: publication.twitter,
 					text		: publication.text
 				}
-				
-		    }).then(function(response) {
-		    	return response.data;
-		   	});
+		    }).then(function(response) {	
+	    		return response.data;
+			}, function(response) {
+				return response.data;
+			});
 		return promise;
 	};
 

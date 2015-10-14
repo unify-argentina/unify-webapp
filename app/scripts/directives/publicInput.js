@@ -1,4 +1,4 @@
-unifyApp.directive('uwPublicInput', function(PublicationService, AuthenticationService) {
+unifyApp.directive('uwPublicInput', function($rootScope, PublicationService, AuthenticationService) {
   	var link = function(scope, elm, attrs, ctrl) {
        	scope.publicate = function(parent){
             
@@ -10,6 +10,8 @@ unifyApp.directive('uwPublicInput', function(PublicationService, AuthenticationS
                     console.log(data);
                     parent.getFeed();
                     scope.init();
+                }).then(function(data) {
+                    console.log(data);
                 });
             }else{
                 if(scope.publication.image!=null){
@@ -19,9 +21,14 @@ unifyApp.directive('uwPublicInput', function(PublicationService, AuthenticationS
                     AuthenticationService.getUserId(),
                     scope.publication
                 ).then(function(data) {
-                    console.log(data);
-                    parent.getFeed();
-                    scope.init();
+                    if(data.errors==null){
+                        console.log(data);
+                        parent.getFeed();
+                        scope.init();
+                    }else{
+                        console.log(data);
+                       $rootScope.errorMsg = data.errors[0].msg;
+                    }
                 });
             }
             
