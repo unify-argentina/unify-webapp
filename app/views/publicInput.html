@@ -1,19 +1,19 @@
 <div class="public-input-container col-md-12 col-sm-12 col-xs-12 fadeInDown animated">
-	<form name="publicForm" ng-submit="publicate();" class="form-horizontal" role="form" novalidate>
+	<form name="publicForm" ng-submit="publicate(uwParent);" class="form-horizontal" role="form" novalidate>
 		<div class="row public-input-header">		
-			<a href="" ng-click="publication.type='text'; like();" class="publication-type-container" ng-class="{'publication-type-active':publication.type=='text','publication-type':publication.type!='text'}">
+			<a href="" ng-click="publication.type='text';publication.image=null;publication.video=null;" class="publication-type-container" ng-class="{'publication-type-active':publication.type=='text','publication-type':publication.type!='text'}">
 				<i class="fa fa-pencil-square-o"></i>
 				<div class="publication-type-text">
 					<span>Estado</span>
 				</div>
 			</a>
-			<a href="" ng-click="publication.type='photo';" class="publication-type-container" ng-class="{'publication-type-active':publication.type=='photo','publication-type':publication.type!='photo'}">
+			<a href="" ng-click="publication.type='photo';publication.video=null;" class="publication-type-container" ng-class="{'publication-type-active':publication.type=='photo','publication-type':publication.type!='photo'}">
 				<i class="fa fa-camera"></i>
 				<div class="publication-type-text">
 					<span>Foto</span>
 				</div>
 			</a>
-			<a href="" ng-click="publication.type='video';" class="publication-type-container" ng-class="{'publication-type-active':publication.type=='video','publication-type':publication.type!='video'}">
+			<a href="" ng-click="publication.type='video';publication.image=null;" class="publication-type-container" ng-class="{'publication-type-active':publication.type=='video','publication-type':publication.type!='video'}">
 				<i class="fa fa-film"></i>
 				<div class="publication-type-text">
 					<span>Video</span>
@@ -33,7 +33,23 @@
 		</div>
 		<div class=" col-md-12 col-sm-12 col-xs-12 no-padding text-center">
 			<textarea class="form-control public-input-text" type='text' name="text"  rows="4" ng-model="publication.text" required/>
-			<div></div>
+			<div class="image-load-section" ng-show="publication.type=='photo'">
+				<a href="" class="delete-link no-padding" ng-click="publication.image=null;" ng-show="publication.image"><i class="fa fa-times-circle"></i>Eliminar Foto</a>
+							
+				<input id="imageUploadInput" type="file" ngf-select ng-model="publication.uploadingImage" name="uploadingImage" accept="image/*" ngf-max-size="2MB" style="display:none;">
+				
+				<input id="imageToUpload" type="file" ngf-select ng-model="publication.image" name="image" accept="image/*" ngf-max-size="2MB" style="display:none;">
+
+
+				<a href="" ng-click="uploadImage();" class="public-link-file col-md-12 col-sm-12 col-xs-12" ng-show="!publication.image">
+					<i class="fa fa-picture-o fa-4x"></i>
+					<span><b>Hacé click aquí para subir una foto</b></span>
+				</a>
+
+				<img ngf-src="publication.image" class="centered public-image" ng-show="publication.image">
+				
+				<span class="delete-link col-md-12" ng-show="updateCircleForm.file.$error.maxSize">La imagen es demasiado grande. Se pueden subir hasta imagenes de 2MB</span> 
+			</div>
 		</div>
 		<div class="clearfix"></div>
 		<div class="row public-input-footer">

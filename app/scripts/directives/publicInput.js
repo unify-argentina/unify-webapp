@@ -1,21 +1,26 @@
 unifyApp.directive('uwPublicInput', function(PublicationService, AuthenticationService) {
   	var link = function(scope, elm, attrs, ctrl) {
-       	scope.publicate = function(){
-            console.log(AuthenticationService.getUserId() +" - "+ scope.publication.toString());
-            if(scope.publication.file==null){
+       	scope.publicate = function(parent){
+            
+            if(scope.publication.image==null){
                 PublicationService.publicState(
                     AuthenticationService.getUserId(),
                     scope.publication
                 ).then(function(data) {
                     console.log(data);
+                    parent.getFeed();
                     scope.init();
                 });
             }else{
+                if(scope.publication.image!=null){
+                    scope.publication.file=scope.publication.image;
+                }
                 PublicationService.publicFile(
                     AuthenticationService.getUserId(),
                     scope.publication
                 ).then(function(data) {
                     console.log(data);
+                    parent.getFeed();
                     scope.init();
                 });
             }
@@ -29,11 +34,24 @@ unifyApp.directive('uwPublicInput', function(PublicationService, AuthenticationS
             scope.publication.twitter=true;
         };
 
+       scope.uploadImage = function() {
+            document.getElementById('imageUploadInput').click();
+        };
+
+        scope.$watch('publication.uploadingImage', function(newValue, oldValue) {
+            if(newValue!=null){
+                scope.publication.image=scope.publication.uploadingImage;
+            }
+        });
+
         scope.init();
     };
     return {
         restrict: 'E',
         link: link,
-        templateUrl: 'views/publicInput.html'
+        templateUrl: 'views/publicInput.html',
+        scope:{
+            uwParent: "="
+        }
     };
 });

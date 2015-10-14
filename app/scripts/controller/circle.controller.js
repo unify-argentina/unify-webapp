@@ -180,9 +180,9 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 		});
 	};
 
-	circleCtrl.getCircleFeed = function(){
+	circleCtrl.getFeed = function(){
 		circleCtrl.feed=null;
-		CircleService.getCircleFeed(
+		CircleService.getFeed(
 			AuthenticationService.getUserId(),
 			circleCtrl.circle_id
 		).then(function(data) {
@@ -199,7 +199,7 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 		circleCtrl.cancelCircle();
 		circleCtrl.getCircle();
 		circleCtrl.getCircleTree();
-		circleCtrl.getCircleFeed();
+		circleCtrl.getFeed();
 	}
 
 	circleCtrl.goToParent = function(){
@@ -208,7 +208,7 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 		circleCtrl.cancelCircle();
 		circleCtrl.getCircle();
 		circleCtrl.getCircleTree();
-		circleCtrl.getCircleFeed();
+		circleCtrl.getFeed();
 	}
 	
 	circleCtrl.createContact = function(){
@@ -220,7 +220,7 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 		circleCtrl.editContact = false;
 		circleCtrl.getCircle();
 		circleCtrl.getCircleTree();
-		circleCtrl.getCircleFeed();
+		circleCtrl.getFeed();
 	};
 
 	circleCtrl.cancelContact = function(){
@@ -242,7 +242,7 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 
 	circleCtrl.getCircleTree();
 	circleCtrl.getCircle();
-	circleCtrl.getCircleFeed();
+	circleCtrl.getFeed();
 });
 
 unifyApp.controller('ModalCircleDeleteCtrl', function ($scope, $modalInstance, circleCtrl) {
