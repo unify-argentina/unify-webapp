@@ -7,11 +7,12 @@ unifyApp.directive('uwPublicInput', function($rootScope, PublicationService, Aut
                     AuthenticationService.getUserId(),
                     scope.publication
                 ).then(function(data) {
-                    console.log(data);
-                    parent.getFeed();
-                    scope.init();
-                }).then(function(data) {
-                    console.log(data);
+                    if(data.errors==null){
+                        parent.getFeed();
+                        scope.init();
+                    }else{
+                       $rootScope.errorMsg = data.errors[0].msg;
+                    }
                 });
             }else{
                 if(scope.publication.image!=null){
@@ -22,11 +23,9 @@ unifyApp.directive('uwPublicInput', function($rootScope, PublicationService, Aut
                     scope.publication
                 ).then(function(data) {
                     if(data.errors==null){
-                        console.log(data);
                         parent.getFeed();
                         scope.init();
                     }else{
-                        console.log(data);
                        $rootScope.errorMsg = data.errors[0].msg;
                     }
                 });
