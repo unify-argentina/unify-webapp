@@ -1,7 +1,7 @@
 <div id="circle" class="container" ng-controller="CircleController as circleCtrl">
   	<uw-loader ng-if="!circleCtrl.circle"></uw-loader>
 	<div class="content col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.circle">
-		<div class="col-md-3 col-sm-12 col-xs-12 text-center" style="margin-top: 20px;" ng-show="!circleCtrl.editContact">
+		<div class="col-md-3 col-sm-12 col-xs-12 text-center z-index-10" style="margin-top: 20px;" ng-show="!circleCtrl.editContact">
 			<div class="fadeInLeft animated">
 				<div ng-show="!circleCtrl.createCircle && !circleCtrl.editingCircle">
 					<a href="" ng-click="circleCtrl.goToParent();" ng-show="circleCtrl.circle.parent" class="unify-link"><i class="fa fa-chevron-circle-up"></i>Subir un nivel</a>
@@ -49,15 +49,15 @@
 						<div class="col-md-12 col-sm-12 col-xs-12  no-padding text-center" style="margin-top: 10px;" >
 							<div class="col-md-4 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id">
 								<a href="" class="move-link centered" ng-click="circleCtrl.movingCircle=true;" ><i class="fa fa-arrows-alt"></i></i>Mover</a>
-								<uw-question uw-description="'Clickeá aquí para mover este grupo dentro de otro grupo'" ng-show="$root.showQuestions" style="left: -30px; position: relative;"></uw-question>
+								<uw-question uw-description="'Clickeá aquí para mover este grupo dentro de otro grupo'" class="z-index-10" ng-show="$root.showQuestions" style="left: -30px; position: relative;"></uw-question>
 							</div>
 							<div class="col-md-4 col-sm-12 col-xs-12 no-padding" ng-class="{'col-md-offset-4' : circleCtrl.circle_id == circleCtrl.mainCircle_id}">
 								<a href="" class="edit-link centered" ng-click="circleCtrl.edit();" ><i class="fa fa-pencil-square-o"></i>Editar</a>
-								<uw-question uw-description="'Clickeá aquí editar este grupo'" ng-show="$root.showQuestions" style="left: -30px; position: relative;"></uw-question>
+								<uw-question uw-description="'Clickeá aquí editar este grupo'" class="z-index-10" ng-show="$root.showQuestions" style="left: -30px; position: relative;"></uw-question>
 							</div>
   							<div class="col-md-4 col-sm-12 col-xs-12  no-padding" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id">
 								<a href="" class="delete-link centered" ng-click="circleCtrl.askDeleteConfirmation();" ><i class="fa fa-times-circle"></i>Eliminar</a>
-								<uw-question uw-description="'Clickeá aquí para eliminar este grupo'" ng-show="$root.showQuestions" style="left: -30px; position: relative;"></uw-question>
+								<uw-question uw-description="'Clickeá aquí para eliminar este grupo'" class="z-index-10" ng-show="$root.showQuestions" style="left: -30px; position: relative;"></uw-question>
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -131,7 +131,7 @@
 						<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Grupos</span>
 						<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
 							<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.create();" style="margin-bottom: 5px;">Crear Grupo</a>
-							<uw-question uw-description="'Clickeá aquí editar este grupo'" class="col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -15px; left: 35px;"></uw-question>
+							<uw-question uw-description="'Clickeá aquí editar este grupo'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -15px; left: 35px;"></uw-question>
 						</div>
 						<div class="clear"></div>
 						<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
