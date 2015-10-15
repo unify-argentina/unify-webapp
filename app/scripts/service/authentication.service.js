@@ -175,9 +175,11 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 			{
 				email : email,
 			}
-		).then(function(response) {	
+		).then(function(response) {
     		return response.data;
-		});
+		}, function(response) {
+    		return response.data;
+		});	
 		return promise;
 	};
 

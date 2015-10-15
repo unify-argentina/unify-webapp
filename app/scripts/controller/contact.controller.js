@@ -1,4 +1,4 @@
-unifyApp.controller("ContactController", function ($scope, $state, $interval, $modal, ContactService, FileService, CircleService, AuthenticationService) {
+unifyApp.controller("ContactController", function ($scope, $state, $rootScope, $interval, $modal, ContactService, FileService, CircleService, AuthenticationService) {
 
 	var contactCtrl = this;
 
@@ -11,14 +11,18 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, $m
 			user_id : AuthenticationService.getUserId(),
 			contact_id : contact_id
 		},function(response){
-			response.contact.circles_ids=[];
-			_(response.contact.parents).forEach(function(parent) {
-			  response.contact.circles_ids.push(parent.circle._id);
-			}).value();
+			if(response.errors==null){
+				response.contact.circles_ids=[];
+				_(response.contact.parents).forEach(function(parent) {
+				  response.contact.circles_ids.push(parent.circle._id);
+				}).value();
 
-			contactCtrl.contact=response.contact;
-			if(contactCtrl.friends){
-				contactCtrl.getFriends();
+				contactCtrl.contact=response.contact;
+				if(contactCtrl.friends){
+					contactCtrl.getFriends();
+				}
+            }else{
+               $rootScope.errorMsg = response.errors[0].msg;
 			}
 		});
 	};
@@ -56,7 +60,11 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, $m
 			user_id : AuthenticationService.getUserId(),
 			contact_id : contactCtrl.contact_id
 		},function(response){
-			$state.go("dashboard");
+			if(response.errors==null){
+				$state.go("dashboard");
+            }else{
+               $rootScope.errorMsg = response.errors[0].msg;
+			}
 		});
 	};
 
@@ -92,8 +100,12 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, $m
 		FileService.saveFile(
 			contactCtrl.contact.file
 		).then(function(data) {
-			contactCtrl.contact.picture=data.url;
-			contactCtrl.saveContact(id);
+			if(data.errors==null){
+				contactCtrl.contact.picture=data.url;
+				contactCtrl.saveContact(id);
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
+			}
 		});
 	};
 
@@ -110,7 +122,11 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, $m
 		ContactService.saveContact(
 			contactCtrl.contact
 		).then(function(data) {
-			contactCtrl.parentController.closeContact();
+			if(data.errors==null){
+				contactCtrl.parentController.closeContact();
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
+			}
 		});
 	};
 
@@ -119,7 +135,11 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, $m
 		ContactService.updateContact(
 			contactCtrl.contact
 		).then(function(data) {
-			contactCtrl.parentController.closeContact();
+			if(data.errors==null){
+				contactCtrl.parentController.closeContact();
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
+			}
 		});
 	};
 
@@ -135,10 +155,14 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, $m
 			AuthenticationService.getUserId(),
 			AuthenticationService.getMainCircleId()
 		).then(function(data) {
-			contactCtrl.list=data;
-			_(contactCtrl.list).forEach(function(circle) {
-				circle.checked=_.includes(contactCtrl.contact.circles_ids, circle._id);
-			}).value();
+			if(data.errors==null){
+				contactCtrl.list=data;
+				_(contactCtrl.list).forEach(function(circle) {
+					circle.checked=_.includes(contactCtrl.contact.circles_ids, circle._id);
+				}).value();
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
+			}
 		});
 	};
 
@@ -147,12 +171,16 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, $m
 		AuthenticationService.getUserFriends(
 			AuthenticationService.getUserId()
 		).then(function(data){
-			contactCtrl.friends=data;
-			var pages={};
-			pages._id="facebookPages";
-			pages.name="---Páginas de Facebook---";
-			contactCtrl.friends.facebook_friends.list.push(pages);
-			contactCtrl.friends.facebook_friends.list=contactCtrl.friends.facebook_friends.list.concat(contactCtrl.friends.facebook_pages.list);
+			if(data.errors==null){
+				contactCtrl.friends=data;
+				var pages={};
+				pages._id="facebookPages";
+				pages.name="---Páginas de Facebook---";
+				contactCtrl.friends.facebook_friends.list.push(pages);
+				contactCtrl.friends.facebook_friends.list=contactCtrl.friends.facebook_friends.list.concat(contactCtrl.friends.facebook_pages.list);
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
+			}
 		});
 	};
 
@@ -217,19 +245,23 @@ unifyApp.controller("ContactController", function ($scope, $state, $interval, $m
 			AuthenticationService.getUserFriends(
 				AuthenticationService.getUserId()
 			).then(function(data){
-				contactCtrl.friends=data;
-				var pages={};
-				pages._id="facebookPages";
-				pages.name="---Páginas de Facebook---";
-				contactCtrl.friends.facebook_friends.list.push(pages);
-				contactCtrl.friends.facebook_friends.list=contactCtrl.friends.facebook_friends.list.concat(contactCtrl.friends.facebook_pages.list);
-				if(contactCtrl.contact_id){
-					contactCtrl.getContact(contactCtrl.contact_id);
-				}else{
-					contactCtrl.contact.circles_ids = [];
-					contactCtrl.contact.circles_ids.push(contactCtrl.circle_id);
+				if(data.errors==null){
+					contactCtrl.friends=data;
+					var pages={};
+					pages._id="facebookPages";
+					pages.name="---Páginas de Facebook---";
+					contactCtrl.friends.facebook_friends.list.push(pages);
+					contactCtrl.friends.facebook_friends.list=contactCtrl.friends.facebook_friends.list.concat(contactCtrl.friends.facebook_pages.list);
+					if(contactCtrl.contact_id){
+						contactCtrl.getContact(contactCtrl.contact_id);
+					}else{
+						contactCtrl.contact.circles_ids = [];
+						contactCtrl.contact.circles_ids.push(contactCtrl.circle_id);
+					}
+					contactCtrl.getCircleList();
+	            }else{
+	               $rootScope.errorMsg = data.errors[0].msg;
 				}
-				contactCtrl.getCircleList();
 			});
 		}else{
 			contactCtrl.friends=AuthenticationService.getFriends();

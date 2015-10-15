@@ -1,4 +1,4 @@
-unifyApp.controller("CircleController", function ($scope, video, $modal, $stateParams, CircleService, FileService, AuthenticationService) {
+unifyApp.controller("CircleController", function ($scope, video, $modal, $rootScope, $stateParams, CircleService, FileService, AuthenticationService) {
 
 	var circleCtrl = this;
 	if(!$stateParams.circle_id){
@@ -14,10 +14,14 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 			user_id : AuthenticationService.getUserId(),
 			circle_id : circleCtrl.circle_id
 		},function(response){
-			circleCtrl.circle=response.circle;
-			circleCtrl.getImageCircle();
-			circleCtrl.parent=circleCtrl.circle.parent;
-			circleCtrl.getCircleList();
+			if(response.errors==null){
+				circleCtrl.circle=response.circle;
+				circleCtrl.getImageCircle();
+				circleCtrl.parent=circleCtrl.circle.parent;
+				circleCtrl.getCircleList();
+            }else{
+               $rootScope.errorMsg = response.errors[0].msg;
+			}
 		});
 	};
 	
@@ -42,7 +46,11 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 			user_id : AuthenticationService.getUserId(),
 			circle_id : circleCtrl.circle_id
 		},function(response){
-			circleCtrl.goToCircle(parent);
+			if(response.errors==null){
+				circleCtrl.goToCircle(parent);
+            }else{
+               $rootScope.errorMsg = response.errors[0].msg;
+			}
 		});
 	};
 
@@ -62,7 +70,11 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 		CircleService.updateCircle(
 			circleCtrl.circle
 		).then(function(data) {
-			circleCtrl.movingCircle=false;
+			if(data.errors==null){
+				circleCtrl.movingCircle=false;
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
+			}
 		});
 	};
 
@@ -86,7 +98,6 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 	});
 
     $scope.$watch('circleCtrl.editCircle.uploadingFile', function(newValue, oldValue) {
-    	console.log(newValue);
 		if(newValue!=null){
 			circleCtrl.editCircle.file=circleCtrl.editCircle.uploadingFile;
 			circleCtrl.editCircle.pictureFromFile=true;
@@ -110,11 +121,15 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 		CircleService.updateCircle(
 			circleCtrl.editCircle
 		).then(function(data) {
-			circleCtrl.circle.name=circleCtrl.editCircle.name;
-			circleCtrl.circle.picture=circleCtrl.editCircle.picture;
-			circleCtrl.editCircle = null;
-			circleCtrl.getImageCircle();
-			circleCtrl.editingCircle=false;
+			if(data.errors==null){
+				circleCtrl.circle.name=circleCtrl.editCircle.name;
+				circleCtrl.circle.picture=circleCtrl.editCircle.picture;
+				circleCtrl.editCircle = null;
+				circleCtrl.getImageCircle();
+				circleCtrl.editingCircle=false;
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
+			}
 		});
 	};
 
@@ -132,8 +147,12 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 		CircleService.saveCircle(
 			circleCtrl.newCircle
 		).then(function(data) {
-			circleCtrl.getCircleTree();
-			circleCtrl.createCircle=false;
+			if(data.errors==null){
+				circleCtrl.getCircleTree();
+				circleCtrl.createCircle=false;
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
+			}
 		});
 	};
 
@@ -163,7 +182,11 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 			AuthenticationService.getUserId(),
 			circleCtrl.circle_id
 		).then(function(data) {
-			circleCtrl.tree=data.tree[0];
+			if(data.errors==null){
+				circleCtrl.tree=data.tree[0];
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
+			}
 		});
 	};
 
@@ -173,10 +196,11 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 			AuthenticationService.getMainCircleId(),
 			circleCtrl.circle_id
 		).then(function(data) {
-			circleCtrl.list=data;
-			/*_(circleCtrl.list).forEach(function(circle) {
-				circle.checked= (circleCtrl.circle.parent==circle._id);
-			}).value();*/
+			if(data.errors==null){
+				circleCtrl.list=data;
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
+			}
 		});
 	};
 
@@ -186,10 +210,15 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $stateP
 			AuthenticationService.getUserId(),
 			circleCtrl.circle_id
 		).then(function(data) {
-			if(data.circle_id==circleCtrl.circle_id)
-			{
-				circleCtrl.feed=data.media;
+			if(data.errors==null){
+				if(data.circle_id==circleCtrl.circle_id)
+				{
+					circleCtrl.feed=data.media;
+				}
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
 			}
+			
 		});
 	};
 	

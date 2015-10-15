@@ -29,7 +29,6 @@ unifyApp.directive('uwPublicInput', function($rootScope, PublicationService, Aut
                         parent.getFeed();
                         scope.init();
                     }else{
-                       $rootScope.errorMsg = data.errors[0].msg;
                     }
                 });
             }

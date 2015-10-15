@@ -1,11 +1,11 @@
-unifyApp.controller("VerifyController", function ($state, $timeout, $stateParams, AuthenticationService) {
+unifyApp.controller("VerifyController", function ($state, $timeout, $rootScope, $stateParams, AuthenticationService) {
 	var vrfCrtl=this;
 
 	AuthenticationService.verifyAccount(
 		$stateParams.token
 	).then(function(data){
 		if(data!=null && data.errors!=null){
-			vrfCrtl.errors=data.errors[0].msg	
+           $rootScope.errorMsg = response.errors[0].msg;
 		}
 		vrfCrtl.response=true;
 		$timeout(function() {

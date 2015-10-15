@@ -1,4 +1,4 @@
-unifyApp.controller("ContactProfileController", function ($scope, $state, $stateParams, ContactService, AuthenticationService) {
+unifyApp.controller("ContactProfileController", function ($scope, $state, $rootScope, $stateParams, ContactService, AuthenticationService) {
 
 	var contactCtrl = this;
 
@@ -7,8 +7,11 @@ unifyApp.controller("ContactProfileController", function ($scope, $state, $state
 			user_id : AuthenticationService.getUserId(),
 			contact_id : contact_id
 		},function(response){
-			contactCtrl.contact=response.contact;
-			localStorage.setItem('response', JSON.stringify(response));
+			if(response.errors==null){
+				contactCtrl.contact=response.contact;
+            }else{
+               $rootScope.errorMsg = response.errors[0].msg;
+			}
 		});
 	};
 
@@ -37,7 +40,11 @@ unifyApp.controller("ContactProfileController", function ($scope, $state, $state
 			user_id : AuthenticationService.getUserId(),
 			contact_id : contact_id
 		},function(response){
-			$state.go("dashboard");
+			if(response.errors==null){
+				$state.go("dashboard");
+            }else{
+               $rootScope.errorMsg = response.errors[0].msg;
+			}
 		});
 	};
 
@@ -47,9 +54,13 @@ unifyApp.controller("ContactProfileController", function ($scope, $state, $state
 			AuthenticationService.getUserId(),
 			contactCtrl.contact_id
 		).then(function(data) {
-			if(data.contact_id==contactCtrl.contact_id)
-			{
-				contactCtrl.feed=data.media;
+			if(data.errors==null){
+				if(data.contact_id==contactCtrl.contact_id)
+				{
+					contactCtrl.feed=data.media;
+				}
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
 			}
 		});
 	};

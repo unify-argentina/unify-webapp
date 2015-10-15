@@ -1,6 +1,6 @@
 
 
-unifyApp.controller("LoginController", function ($scope, $auth, $window, $document, AuthenticationService) {
+unifyApp.controller("LoginController", function ($scope, $auth, $rootScope, $window, $document, AuthenticationService) {
   	
   	var lgnCtrl = this;
 
@@ -8,7 +8,9 @@ unifyApp.controller("LoginController", function ($scope, $auth, $window, $docume
 		AuthenticationService.login(lgnCtrl.user)
 		.then(function(response) {
 			if(response!=null){
-				lgnCtrl.errors=response.errors;
+				if(response.errors!=null){
+	               $rootScope.errorMsg = response.errors[0].msg;
+				}
 			}
 		});
 	};
@@ -17,7 +19,9 @@ unifyApp.controller("LoginController", function ($scope, $auth, $window, $docume
 		AuthenticationService.authenticate(provider)
 		.then(function(response) {
 			if(response!=null){
-				lgnCtrl.errors=response.errors;
+				if(response.errors!=null){
+	               $rootScope.errorMsg = response.errors[0].msg;
+				}
 			}
 		});
 	};
@@ -31,23 +35,25 @@ unifyApp.controller("LoginController", function ($scope, $auth, $window, $docume
     	AuthenticationService.signup(lgnCtrl.newuser)
 		.then(function(response) {
 			if(response!=null){
-				lgnCtrl.errors=response.errors;
+				if(response.errors!=null){
+	               $rootScope.errorMsg = response.errors[0].msg;
+				}
 			}
 		});
     };
 
   	lgnCtrl.recoverPassword = function() {
-  		console.log("1");
     	AuthenticationService.recoverPassword(lgnCtrl.user.email)
 		.then(function(response) {
-  			console.log("3");
-  			if(!response.errors){
-	  			lgnCtrl.isLogin=true; 
-	  			lgnCtrl.isSignUp=false; 
-	  			lgnCtrl.isRecover=false;
-	  		}else{
-				lgnCtrl.errors=response.errors;
-	  		}
+			if(response!=null){
+				if(response.errors==null){
+		  			lgnCtrl.isLogin=true; 
+		  			lgnCtrl.isSignUp=false; 
+		  			lgnCtrl.isRecover=false;
+		  		}else{
+	               $rootScope.errorMsg = response.errors[0].msg;
+		  		}
+		  	}
 		});
     };
 

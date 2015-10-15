@@ -73,11 +73,10 @@ unifyApp.controller("ProfileController", function (ProfileService, $scope, $root
 			AuthenticationService.getUserId(),
 			profileCtlr.password
 		).then(function(data) {
-			console.log(data);
-			if(data.errors){
-				profileCtlr.errors=data.errors[0].msg;
-			}else{
+			if(data.errors==null){
 				profileCtlr.editPassword=false;
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
 			}
 		});
 	};
@@ -95,14 +94,18 @@ unifyApp.controller("ProfileController", function (ProfileService, $scope, $root
 			AuthenticationService.getUserId(),
 			profileCtlr.newUser
 		).then(function(data) {
-			profileCtlr.user.name=profileCtlr.newUser.name;
-			profileCtlr.user.email=profileCtlr.newUser.email;
-			profileCtlr.user.picture=profileCtlr.newUser.picture;
-			profileCtlr.checkPic();
-			$rootScope.user=profileCtlr.newUser.name;
-			$rootScope.picture=profileCtlr.newUser.picture;
-			$rootScope.email=profileCtlr.newUser.email;
-			profileCtlr.editProfile=false;
+			if(data.errors==null){
+				profileCtlr.user.name=profileCtlr.newUser.name;
+				profileCtlr.user.email=profileCtlr.newUser.email;
+				profileCtlr.user.picture=profileCtlr.newUser.picture;
+				profileCtlr.checkPic();
+				$rootScope.user=profileCtlr.newUser.name;
+				$rootScope.picture=profileCtlr.newUser.picture;
+				$rootScope.email=profileCtlr.newUser.email;
+				profileCtlr.editProfile=false;
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
+			}
 		});
 	};
 
@@ -111,9 +114,12 @@ unifyApp.controller("ProfileController", function (ProfileService, $scope, $root
 		FileService.saveFile(
 			profileCtlr.newUser.file
 		).then(function(data) {
-			console.log(data.url);
-			profileCtlr.newUser.picture=data.url;
-			profileCtlr.saveUser();
+			if(data.errors==null){
+				profileCtlr.newUser.picture=data.url;
+				profileCtlr.saveUser()
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
+			}
 		});
 	};
 
@@ -122,9 +128,13 @@ unifyApp.controller("ProfileController", function (ProfileService, $scope, $root
 		ProfileService.getFeed(
 			AuthenticationService.getUserId()
 		).then(function(data) {
-			if(data.user_id==AuthenticationService.getUserId())
-			{
-				profileCtlr.feed=data.media;
+			if(data.errors==null){
+				if(data.user_id==AuthenticationService.getUserId())
+				{
+					profileCtlr.feed=data.media;
+				}
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
 			}
 		});
 	};

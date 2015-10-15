@@ -32,20 +32,24 @@ unifyApp.controller("MainController", function ($scope, $modal, $translate, $sta
 		ProfileService.user.get({
 			user_id: AuthenticationService.getUserId()
 		},function(response){
-			if(response.user.name!=null){
-				$rootScope.user=response.user.name;
-				$rootScope.picture=response.user.picture;
-			}else{
-				if(response.user.mail!=null){
-					$rootScope.user=response.user.mail;
+			if(response.errors==null){
+				if(response.user.name!=null){
+					$rootScope.user=response.user.name;
+					$rootScope.picture=response.user.picture;
 				}else{
-					$rootScope.user="Usuario Unify";
+					if(response.user.mail!=null){
+						$rootScope.user=response.user.mail;
+					}else{
+						$rootScope.user="Usuario Unify";
+					}
 				}
+				$rootScope.email=(response.user.google!=null?response.user.google.email:null);
+				$rootScope.hasFacebook=response.user.facebook != null;
+				$rootScope.hasTwitter=response.user.twitter != null;
+				AuthenticationService.setValidLocalUser(response.user.valid_local_user);	
+			}else{
+				$rootScope.errorMsg = response.errors[0].msg;
 			}
-			$rootScope.email=(response.user.google!=null?response.user.google.email:null);
-			$rootScope.hasFacebook=response.user.facebook != null;
-			$rootScope.hasTwitter=response.user.twitter != null;
-			AuthenticationService.setValidLocalUser(response.user.valid_local_user);	
 		});
 	}
 
