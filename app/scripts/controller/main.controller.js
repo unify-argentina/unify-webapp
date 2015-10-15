@@ -43,6 +43,8 @@ unifyApp.controller("MainController", function ($scope, $modal, $translate, $sta
 				}
 			}
 			$rootScope.email=(response.user.google!=null?response.user.google.email:null);
+			$rootScope.hasFacebook=response.user.facebook != null;
+			$rootScope.hasTwitter=response.user.twitter != null;
 			AuthenticationService.setValidLocalUser(response.user.valid_local_user);	
 		});
 	}

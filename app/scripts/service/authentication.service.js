@@ -106,6 +106,8 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 	        console.log('You have successfully logged in: '+response.data.token); 
 	        loadDataUser(response.data);
 	        $rootScope.auth=true;
+	        $rootScope.hasFacebook=response.data.user.facebook != null;
+			$rootScope.hasTwitter=response.data.user.twitter != null;
 	        setSocial(response.data.user.facebook!=null || response.data.user.twitter!=null || response.data.user.instagram!=null || response.data.user.google!=null);
 			$state.reload();
 		})
@@ -122,7 +124,9 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 			setMainCircleId(response.data.user.main_circle._id);
 			console.log('You have successfully logged in: '+response.data.token); 
 	        loadDataUser(response.data);
-	        $rootScope.auth=true;
+	        $rootScope.auth=true;	        
+			$rootScope.hasFacebook=response.data.user.facebook != null;
+			$rootScope.hasTwitter=response.data.user.twitter != null;
 	        setSocial(response.data.user.facebook!=null || response.data.user.twitter!=null || response.data.user.instagram!=null || response.data.user.google!=null);
 			$state.reload();
 		})
@@ -144,6 +148,8 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 		.then(function(response) {
 	    	localStorage.setItem('satellizer_token', response.data.token);
 	        console.log('You have successfully unlogged in: '+response.data.token); 
+			$rootScope.hasFacebook=response.data.user.facebook != null;
+			$rootScope.hasTwitter=response.data.user.twitter != null;
 			setSocial(response.data.user.facebook!=null || response.data.user.twitter!=null || response.data.user.instagram!=null || response.data.user.google!=null);
 			$state.reload();
 	    })

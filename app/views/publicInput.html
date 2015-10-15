@@ -1,4 +1,4 @@
-<div class="public-input-container col-md-12 col-sm-12 col-xs-12 fadeInDown animated">
+<div class="public-input-container col-md-12 col-sm-12 col-xs-12 fadeInDown animated" ng-show="$root.hasTwitter || $root.hasFacebook">
 	<form name="publicForm" ng-submit="publicate(uwParent);" class="form-horizontal" role="form" novalidate>
 		<div class="row public-input-header">		
 			<a href="" ng-click="publication.type='text';publication.image=null;publication.video=null;" class="publication-type-container" ng-class="{'publication-type-active':publication.type=='text','publication-type':publication.type!='text'}">
@@ -19,11 +19,11 @@
 					<span>Video</span>
 				</div>
 			</a>
-			<label class="pull-right" >
+			<label class="pull-right" ng-show="$root.hasTwitter">
 				<input type="checkbox" ng-model="publication.twitter" style="display: none;">
 				<i class="fa fa-twitter fa-social" ng-class="{'unselected':!publication.twitter}"></i>
 			</label>
-			<label class="pull-right" style="margin-right: 5px;">
+			<label class="pull-right" style="margin-right: 5px;" ng-show="$root.hasFacebook">
 				<input type="checkbox" ng-model="publication.facebook" style="display: none;">
 				<i class="fa fa-facebook-official fa-social" ng-class="{'unselected':!publication.facebook}"></i>
 			</label>
