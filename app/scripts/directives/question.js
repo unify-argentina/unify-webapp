@@ -1,13 +1,24 @@
-unifyApp.directive('uwQuestion', function($rootScope, $timeout) {
+unifyApp.directive('uwQuestion', function($rootScope, $document, $timeout) {
 
 	var link = function(scope, elm, attrs, ctrl) {
         scope.showTutorialText = function(){
-            scope.showDescription=true; 
+
             $rootScope.hideQuestionMarks=true;
-            $timeout(function() {
+            scope.showDescription=true; 
+            timmer =$timeout(function() {
                 scope.showDescription=false; 
                 $rootScope.showQuestions=false;
+                $document.unbind('click');
             }, 10000);
+            $document.bind('click', function(event) {
+                if(event.toElement.id!='questionMark'){
+                    console.log(event);
+                    scope.showDescription=false; 
+                    $rootScope.showQuestions=false;
+                    $document.unbind('click');
+                    $timeout.cancel(timmer);
+                }
+            });
         };
 
         $rootScope.$watch('showQuestions', function(newValue, oldValue) {
@@ -17,7 +28,6 @@ unifyApp.directive('uwQuestion', function($rootScope, $timeout) {
                         $rootScope.showQuestions=false;
                     }
                 }, 6000);
-               
             }
         });
     };

@@ -6,12 +6,21 @@
     height: 100px;
 	margin: -50px auto 0px auto;
 	a{
-		color: #579f9b;
+		color: #dc911a;
+    .fa-question{
+    border-radius: 100%;
+    font-size: 1.25em;
+    cursor: pointer;
+    background-color: #fff;
+    border: 2px solid #dc911a;
+    padding: 5px 9px;
+    }
 		&:hover, &:focus{
-	      color: lighten(#579f9b,10%);
+	      color: lighten(#dc911a,10%);
 	      text-decoration: none;
 	    }
 	}
+  
 }
 
 .text-question{
@@ -20,6 +29,21 @@
     color: #dc911a;
     background: #fff;
     border: 2px solid #dc911a;
+    border-radius: 0px 20px;
+    padding: 5px;
+    margin: 25px 0px 0px 50px;
+    width: 150px;
+}
+
+.nemo-question-container{
+    position: fixed;
+    z-index: 1000;
+}
+
+.nemo-question{
+  position: relative;
+  right: -105px;
+  top: 50px;
 }
 
 .container-pulse {
