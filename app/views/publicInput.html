@@ -19,15 +19,21 @@
 					<span>Video</span>
 				</div>
 			</a>
-			<label class="pull-right" ng-show="$root.hasTwitter">
+			<label class="pull-right" ng-show="$root.hasTwitter && !$root.hasFacebook">
+				<i class="fa fa-twitter fa-social" ng-class="{'unselected':!publication.twitter}"></i>
+			</label>
+			<label class="pull-right" style="margin-right: 5px;" ng-show="$root.hasFacebook && !$root.hasTwitter">
+				<i class="fa fa-facebook-official fa-social" ng-class="{'unselected':!publication.facebook}"></i>
+			</label>
+			<label class="pull-right" ng-show="$root.hasTwitter && $root.hasFacebook">
 				<input type="checkbox" ng-model="publication.twitter" style="display: none;">
 				<i class="fa fa-twitter fa-social" ng-class="{'unselected':!publication.twitter}"></i>
 			</label>
-			<label class="pull-right" style="margin-right: 5px;" ng-show="$root.hasFacebook">
+			<label class="pull-right" style="margin-right: 5px;" ng-show="$root.hasFacebook && $root.hasTwitter">
 				<input type="checkbox" ng-model="publication.facebook" style="display: none;">
 				<i class="fa fa-facebook-official fa-social" ng-class="{'unselected':!publication.facebook}"></i>
 			</label>
-			<label class="select-social pull-right hidden-xs">
+			<label class="select-social pull-right hidden-xs" ng-show="$root.hasTwitter && $root.hasFacebook">
 				Seleccioná donde queres compartirlo:
 			</label>
 		</div>
@@ -48,7 +54,26 @@
 
 				<img ngf-src="publication.image" class="centered public-image" ng-show="publication.image">
 				
-				<span class="delete-link col-md-12" ng-show="updateCircleForm.file.$error.maxSize">La imagen es demasiado grande. Se pueden subir hasta imagenes de 2MB</span> 
+				<span class="delete-link col-md-12 col-sm-12 col-xs-12" ng-show="updateCircleForm.uploadingImage.$error.maxSize">La imagen es demasiado grande. Se pueden subir imagenes de hasta 2MB</span> 
+			</div>
+			<div class="video-load-section" ng-show="publication.type=='video'">
+
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<a href="" class="delete-link no-padding" ng-click="publication.video=null;" ng-show="publication.video"><i class="fa fa-times-circle"></i>Eliminar Video</a>
+				</div>
+				<input id="videoUploadInput" type="file" ngf-select ng-model="publication.uploadingVideo" name="uploadingVideo" accept="video/*" ngf-max-size="20MB" style="display:none;">
+				
+				<input id="videoToUpload" type="file" ngf-select ng-model="publication.video" name="video" accept="video/*" ngf-max-size="20MB" style="display:none;">
+
+
+				<a href="" ng-click="uploadVideo();" class="public-link-file col-md-12 col-sm-12 col-xs-12" ng-show="!publication.video">
+					<i class="fa fa-film fa-4x"></i>
+					<span><b>Hacé click aquí para subir un video</b></span>
+				</a>
+
+				<img ngf-src="publication.video" class="centered public-video" ng-show="publication.video">
+        		<video class="public-video" controls ngf-src="publication.video"></video>
+				<span class="delete-link col-md-12 col-sm-12 col-xs-12" ng-show="updateCircleForm.uploadingVideo.$error.maxSize">El video es demasiado grande. Se pueden subir videos de hasta 20MB</span> 
 			</div>
 		</div>
 		<div class="clearfix"></div>

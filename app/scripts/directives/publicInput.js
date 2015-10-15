@@ -18,6 +18,9 @@ unifyApp.directive('uwPublicInput', function($rootScope, PublicationService, Aut
                 if(scope.publication.image!=null){
                     scope.publication.file=scope.publication.image;
                 }
+                if(scope.publication.video!=null){
+                    scope.publication.file=scope.publication.video;
+                }
                 PublicationService.publicFile(
                     AuthenticationService.getUserId(),
                     scope.publication
@@ -50,6 +53,17 @@ unifyApp.directive('uwPublicInput', function($rootScope, PublicationService, Aut
             }
         });
 
+        scope.uploadVideo = function() {
+            console.log("uploadVideo");
+            document.getElementById('videoUploadInput').click();
+        };
+
+        scope.$watch('publication.uploadingVideo', function(newValue, oldValue) {
+            console.log(newValue);
+            if(newValue!=null){
+                scope.publication.video=scope.publication.uploadingVideo;
+            }
+        });
         scope.init();
     };
     return {

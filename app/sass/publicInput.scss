@@ -64,7 +64,8 @@
     box-shadow: none !important;
 }
 
-.image-load-section{
+.image-load-section,
+.video-load-section{
     height: 200px;
     border-top: 1px solid #00a099;
 }
@@ -83,7 +84,9 @@
         text-decoration: none;
     }
 }
-.public-image{
+
+.public-image,
+.public-video{
     max-height: 80%;
     max-width: 100%;
     margin-top: 5px;

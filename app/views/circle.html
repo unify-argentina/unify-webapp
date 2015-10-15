@@ -144,6 +144,7 @@
 						<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Contactos</span>
 						
 						<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.createContact();" style="margin-bottom: 5px;">Crear Contacto</a>
+						<uw-question uw-description="'Clickeá aquí para crear un contacto dentro de este grupo'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -15px; left: 35px;"></uw-question>
 						<a href="#/contact/{{circleCtrl.circle_id}}/{{contact._id}}" class="circle-child" ng-repeat="contact in circleCtrl.circle.contacts | orderBy: 'name'" >
 							<img ng-src="{{contact.picture}}" class="img-circle image-contact-small" ng-if="contact.picture">
 							<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!contact.picture">
