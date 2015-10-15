@@ -5,7 +5,7 @@ unifyApp.directive('uwQuestion', function($rootScope, $document, $timeout) {
 
             $rootScope.hideQuestionMarks=true;
             scope.showDescription=true; 
-            timmer = $timeout(function() {
+            var timmer = $timeout(function() {
                 scope.showDescription=false; 
                 $rootScope.showQuestions=false;
                 $document.unbind('click');
