@@ -9,6 +9,7 @@ unifyApp.directive('uwQuestion', function($rootScope, $document, $timeout) {
                 scope.showDescription=false; 
                 $rootScope.showQuestions=false;
                 $document.unbind('click');
+                $rootScope.$apply();
             }, 10000);
             $document.bind('click', function(event) {
                 if(event.toElement.id!='questionMark'){
@@ -17,8 +18,10 @@ unifyApp.directive('uwQuestion', function($rootScope, $document, $timeout) {
                     $rootScope.showQuestions=false;
                     $document.unbind('click');
                     $timeout.cancel(timmer);
+                    $rootScope.$apply();
                 }
             });
+            $rootScope.$apply();
         };
 
         $rootScope.$watch('showQuestions', function(newValue, oldValue) {
@@ -26,6 +29,7 @@ unifyApp.directive('uwQuestion', function($rootScope, $document, $timeout) {
                 $timeout(function() {
                     if(!$rootScope.hideQuestionMarks){
                         $rootScope.showQuestions=false;
+                        $rootScope.$apply();
                     }
                 }, 6000);
             }
