@@ -3,6 +3,9 @@ unifyApp.factory('httpRequestInterceptor', function ($q, $location) {
         'responseError': function(rejection) {
             // do something on error
             console.log(rejection);
+            if(rejection.status === 500){
+                $location.path('/internalError');       
+            }
             if(rejection.status === 404){
 				$location.path('/notFound');          
             }

@@ -61,4 +61,9 @@ angular.module('unifyApp').config(function ($httpProvider, $interpolateProvider,
     templateUrl: 'views/notFound.html'
   });
 
+  $stateProvider.state('internalError', {
+    url: '/internalError',
+    templateUrl: 'views/internalError.html'
+  });
+
  });

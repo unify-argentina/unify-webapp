@@ -20,7 +20,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
           -->
-          
+    
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <script src="cordova.js"></script>
+
     <link rel='stylesheet' href='lib/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
 
     <script type="text/javascript"  src="lib/angular/angular.min.js"></script>
@@ -54,6 +58,7 @@
  
 <body class="overflow-x-hidden" ng-controller="MainController as mainController" 
         ng-class="{'font-size-sm': mainController.fontSize==0,'font-size-md': mainController.fontSize==1,'font-size-lg': mainController.fontSize==2,'font-size-xl': mainController.fontSize==3}">
+    <ion-view class="overflow-x-hidden">
         <section ng-include="'views/header.html'" ng-if="$root.auth"></section>
 
         <ul class="navigation menu-mobile" ng-if="$root.auth">
@@ -67,15 +72,16 @@
         <label for="nav-trigger" class="menu-mobile" ng-if="$root.auth">
             <i class="fa fa-bars fa-2x"></i>
         </label>
-    <div class="site-wrap">
-        <div class="icon-unify-mobile menu-mobile col-sm-12 col-xs-12" ng-if="$root.auth">
-           <img src="resources/header-logo.png" height="40">
+        <div class="site-wrap">
+            <div class="icon-unify-mobile menu-mobile col-sm-12 col-xs-12" ng-if="$root.auth">
+               <img src="resources/header-logo.png" height="40">
+            </div>
+            <uw-message ng-model="$root.errorMsg" danger></uw-message>
+            <div ui-view></div>
+           
+            
         </div>
-        <uw-message ng-model="$root.errorMsg" danger></uw-message>
-        <div ui-view></div>
-       
-        
-    </div>
+    </ion-view>
 
 </body>
  
