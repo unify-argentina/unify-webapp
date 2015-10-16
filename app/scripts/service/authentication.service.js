@@ -7,7 +7,38 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 	var friends;
 	var validLocalUser;
 	var hasSocialNetworks;
+	var fontSize;
 	
+	var getFontSize = function() {
+    	if(fontSize==null){
+    		var size = parseInt(localStorage.getItem(ENV.storageFontSize));
+    		if(size!=null){
+    			setFontSize(size);
+    		}else{
+    			setFontSize(1);
+    		}
+    	}
+    	return fontSize; 
+	};
+
+	var setFontSize = function(value) { 
+    	localStorage.setItem(ENV.storageFontSize, value);
+    	fontSize=value; 
+    };
+
+	var fontSizeBig = function() {
+		if(getFontSize()<3){ 
+    		setFontSize(getFontSize() + 1);
+    	}
+    	return getFontSize();
+    };
+    var fontSizeSmall = function() { 
+    	if(getFontSize()>0){ 
+    		setFontSize(getFontSize() - 1);
+    	} 
+    	return getFontSize(); 
+    };
+
     var getUserId = function() {
     	if(userId==null){
     		setUserId(localStorage.getItem(ENV.storageUserId));
@@ -49,7 +80,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 
 	var hasSocial = function() {
 		if(hasSocialNetworks==null){
-    	setSocial(JSON.parse(localStorage.getItem(ENV.storageSocial)));
+    		setSocial(JSON.parse(localStorage.getItem(ENV.storageSocial)));
     	}
     	return hasSocialNetworks; 
 	};
@@ -108,6 +139,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 	        $rootScope.auth=true;
 	        $rootScope.hasFacebook=response.data.user.facebook != null;
 			$rootScope.hasTwitter=response.data.user.twitter != null;
+			$rootScope.hasInstagram=response.data.user.instagram != null;
 	        setSocial(response.data.user.facebook!=null || response.data.user.twitter!=null || response.data.user.instagram!=null || response.data.user.google!=null);
 			$state.reload();
 		})
@@ -127,6 +159,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 	        $rootScope.auth=true;	        
 			$rootScope.hasFacebook=response.data.user.facebook != null;
 			$rootScope.hasTwitter=response.data.user.twitter != null;
+			$rootScope.hasInstagram=response.data.user.instagram != null;
 	        setSocial(response.data.user.facebook!=null || response.data.user.twitter!=null || response.data.user.instagram!=null || response.data.user.google!=null);
 			$state.reload();
 		})
@@ -150,6 +183,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 	        console.log('You have successfully unlogged in: '+response.data.token); 
 			$rootScope.hasFacebook=response.data.user.facebook != null;
 			$rootScope.hasTwitter=response.data.user.twitter != null;
+			$rootScope.hasInstagram=response.data.user.instagram != null;
 			setSocial(response.data.user.facebook!=null || response.data.user.twitter!=null || response.data.user.instagram!=null || response.data.user.google!=null);
 			$state.reload();
 	    })
@@ -218,7 +252,10 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 		setValidLocalUser	: setValidLocalUser,
 		setSocial 			: setSocial,
 		hasSocial 			: hasSocial,
-		verifyAccount		: verifyAccount
+		verifyAccount		: verifyAccount,
+		getFontSize			: getFontSize,
+		fontSizeBig 		: fontSizeBig, 
+		fontSizeSmall		: fontSizeSmall
     };
 
 });

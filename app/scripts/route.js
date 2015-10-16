@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('unifyApp').config(function ($stateProvider, $urlRouterProvider) {
+angular.module('unifyApp').config(function ($httpProvider, $interpolateProvider, $stateProvider, $urlRouterProvider) {
+  
+  $httpProvider.interceptors.push('httpRequestInterceptor');
+
   $urlRouterProvider.otherwise('/');
 
   $stateProvider.state('main', {
@@ -51,6 +54,11 @@ angular.module('unifyApp').config(function ($stateProvider, $urlRouterProvider) 
   $stateProvider.state('verify', {
     url: '/auth/verify/:token',
     templateUrl: 'views/verify.html'
+  });
+
+  $stateProvider.state('notFound', {
+    url: '/notFound',
+    templateUrl: 'views/notFound.html'
   });
 
  });

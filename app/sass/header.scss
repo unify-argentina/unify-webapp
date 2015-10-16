@@ -22,18 +22,40 @@
         padding: 0;
     }
 }
+
 .navbar-default .navbar-nav>li>a{
 	line-height: initial;
-  .profile{
-    color: #dc911a;
-    font-size: 1.143em;
+}
+.navbar-default .navbar-nav>li>.profile{
+  color: #dc911a;
+  font-size: 1.143em;
+  &:hover, &:focus{
+    color: #dc9030;
+    text-decoration: none;
+  }
+  img{
+    height: 28px;
+    width: 28px;
+  }
+}
+
+.navbar-default .navbar-nav>li.change-font-container{
+  padding-top: 20px;
+  color: #777;
+  div>a{
+    color: #777;
+    padding:0px;
     &:hover, &:focus{
-      color: #dc9030;
+      color: darken(#777, 15%);
       text-decoration: none;
     }
   }
 }
-
+.change-font{
+  border: 1px solid #777;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
 
 /* Navigation Menu - Background */
 .navigation {

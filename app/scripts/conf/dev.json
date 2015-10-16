@@ -4,6 +4,7 @@
     "storageUserId"			:	"unifyUserId",
     "storageMainCircleId"	:	"unifyMainCircleId",
     "storageSocial"			:	"unifyHasSocial",
+    "storageFontSize"		:	"unifyFontSize",
     "unlinkMethod"			:	"delete",
 	"unlinkUrl"				:	"/auth/"
 }

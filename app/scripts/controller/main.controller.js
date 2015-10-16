@@ -27,6 +27,16 @@ unifyApp.controller("MainController", function ($scope, $modal, $translate, $sta
 		}
 	}
 
+	mainController.fontSize=AuthenticationService.getFontSize();
+
+	mainController.fontSizeBig =function(){
+		mainController.fontSize=AuthenticationService.fontSizeBig();
+	}
+
+	mainController.fontSizeSmall =function(){
+		mainController.fontSize=AuthenticationService.fontSizeSmall();
+	}
+
 	if($auth.isAuthenticated()){
 		AuthenticationService.getFriends();
 		ProfileService.user.get({
@@ -46,6 +56,7 @@ unifyApp.controller("MainController", function ($scope, $modal, $translate, $sta
 				$rootScope.email=(response.user.google!=null?response.user.google.email:null);
 				$rootScope.hasFacebook=response.user.facebook != null;
 				$rootScope.hasTwitter=response.user.twitter != null;
+				$rootScope.hasInstagram=response.user.instagram != null;
 				AuthenticationService.setValidLocalUser(response.user.valid_local_user);	
 			}else{
 				$rootScope.errorMsg = response.errors[0].msg;

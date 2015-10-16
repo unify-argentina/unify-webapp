@@ -4,26 +4,6 @@ unifyApp.controller("HeaderController", function ($state, $rootScope) {
 	
 	var headerCtrl=this;
 
-	headerCtrl.goToMain =function(){
-		if($state.current.name=='main'){
-			$state.reload();
-		}else{
-			$state.go('main');
-		}
-	}
-
-	headerCtrl.goToMails =function(){
-		if($rootScope.email){
-			if($state.current.name=='emails'){
-				$state.reload();
-			}else{
-				$state.go('emails');
-			}
-		}else{
-			$state.go('editProfile');
-		}
-	}
-	
 	var canvas = document.getElementById('myCanvas');
 	var context = canvas.getContext('2d');
 

@@ -53,6 +53,7 @@
         <script type="text/javascript" src="scripts/translate.js"></script>
         <script type="text/javascript" src="scripts/auth.js"></script>
         <script type="text/javascript" src="scripts/validationAuth.js"></script>
+        <script type="text/javascript" src="scripts/errorInterceptor.js"></script>
 
         <!-- Controllers -->
         <script type="text/javascript" src="scripts/controller/login.controller.js"></script>
@@ -94,7 +95,8 @@
     <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon"/>
 </head>
  
-<body class="overflow-x-hidden" ng-controller="MainController as mainController">
+<body class="overflow-x-hidden" ng-controller="MainController as mainController" 
+        ng-class="{'font-size-sm': mainController.fontSize==0,'font-size-md': mainController.fontSize==1,'font-size-lg': mainController.fontSize==2,'font-size-xl': mainController.fontSize==3}">
         <section ng-include="'views/header.html'" ng-if="$root.auth"></section>
 
         <ul class="navigation menu-mobile" ng-if="$root.auth">
