@@ -11,14 +11,14 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 	
 	var getFontSize = function() {
     	if(fontSize==null){
-    		var size = parseInt(localStorage.getItem(ENV.storageFontSize));
-    		if(size!=null){
+    		var size = localStorage.getItem(ENV.storageFontSize);
+    		if(size){
     			setFontSize(size);
     		}else{
     			setFontSize(1);
     		}
     	}
-    	return fontSize; 
+    	return parseInt(fontSize); 
 	};
 
 	var setFontSize = function(value) { 
