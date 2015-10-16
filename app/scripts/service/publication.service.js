@@ -7,7 +7,7 @@ unifyApp.factory('PublicationService', function($http, $resource, Upload, $auth,
 				user_id		: user_id,
 				facebook	: publication.facebook,	
 				twitter		: publication.twitter,
-				text		: publication.text,
+				text		: (publication.text!=null?publication.text:undefined),
 				file 		: undefined
 			}
 		).then(function(response) {	
@@ -19,7 +19,6 @@ unifyApp.factory('PublicationService', function($http, $resource, Upload, $auth,
 	};
 
 	var publicFile = function(user_id,publication){
-
 		var promise = Upload.upload({
 		        url: ENV.apiEndPoint + '/api/user/' + user_id + '/media', 
 		        method: 'POST',
@@ -28,7 +27,7 @@ unifyApp.factory('PublicationService', function($http, $resource, Upload, $auth,
 				 	user_id		: user_id,
 					facebook	: publication.facebook,	
 					twitter		: publication.twitter,
-					text		: publication.text
+					text		: (publication.text!=null?publication.text:undefined)
 				}
 		    }).then(function(response) {	
 	    		return response.data;
