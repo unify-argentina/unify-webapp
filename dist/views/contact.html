@@ -39,7 +39,7 @@
 			<div class="clearfix"></div>
 			<uw-loader ng-if="!contactCtrl.friends"></uw-loader>
 			<div class="col-md-12 fadeInDown animated" ng-if="contactCtrl.friends" style="margin-top: 10px;">
-			<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+			<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="contactCtrl.friends.facebook_friends || contactCtrl.friends.twitter || contactCtrl.friends.instagram">
 				<span class="unify-color font-18">Seleccioná las redes sociales de tu contacto</span>
 			</div>
 				<div class="col-md-4 col-sm-4 col-xs-12" ng-if="contactCtrl.friends.facebook_friends">

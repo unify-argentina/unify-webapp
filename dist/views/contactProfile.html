@@ -10,7 +10,7 @@
 				<a href="" class="btn btn-unify-primary btn-block" ng-click="contactProfileCtrl.edit();" style="margin-top: 10px;">Editar</a>
 				<div class="col-md-12 hidden-sm hidden-xs" style="padding: 15px">
 					<div class="clearfix"></div>
-					<div class="social-network-bullet col-md-12">
+					<div class="social-network-bullet col-md-12" ng-show="$root.hasFacebook">
 						<div class="social-image" ng-class="{'social-image-unlink': !contactProfileCtrl.contact.facebook.display_name}">
 							<img ng-src="resources/facebook.png" width="20px">
 						</div>
@@ -20,7 +20,7 @@
 							</span>
 						</div>
 					</div>
-					<div class="social-network-bullet col-md-12">
+					<div class="social-network-bullet col-md-12" ng-show="$root.hasTwitter">
 						<div class="social-image" ng-class="{'social-image-unlink': !contactProfileCtrl.contact.twitter.username}">
 							<img ng-src="resources/twitter.png" width="20px">
 						</div>
@@ -30,7 +30,7 @@
 							</span>
 						</div>
 					</div>
-					<div class="social-network-bullet col-md-12">
+					<div class="social-network-bullet col-md-12" ng-show="$root.hasInstagram">
 						<div class="social-image" ng-class="{'social-image-unlink': !contactProfileCtrl.contact.instagram.username }">
 							<img ng-src="resources/instagram.png" width="20px">
 						</div>
@@ -40,7 +40,7 @@
 							</span>
 						</div>
 					</div>
-					<div class="social-network-bullet col-md-12">
+					<div class="social-network-bullet col-md-12" ng-show="$root.email">
 						<div class="social-image" ng-class="{'social-image-unlink': ! contactProfileCtrl.contact.google.email}">
 							<img ng-src="resources/gmail.png" width="20px">
 						</div>

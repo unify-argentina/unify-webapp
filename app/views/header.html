@@ -19,8 +19,8 @@
 
         <li class="change-font-container">
           <div>
-            <a href="" ng-click="mainController.fontSizeBig();"><span class="change-font">A+</span></a>
-            <a href="" ng-click="mainController.fontSizeSmall();"><span class="change-font font-12">A-</span></a>
+            <a href="" ng-click="mainController.fontSizeBig();" ng-class="{'cursor-default': mainController.fontSize==3}"> <span class="change-font">A+</span></a>
+            <a href="" ng-click="mainController.fontSizeSmall();" ng-class="{'cursor-default': mainController.fontSize==0}"><span class="change-font font-12">A-</span></a>
           </div>
           Tamaño de letra
         </li>
