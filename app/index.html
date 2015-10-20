@@ -112,7 +112,7 @@
         </label>
     <div class="site-wrap">
         <div class="icon-unify-mobile menu-mobile col-sm-12 col-xs-12" ng-if="$root.auth">
-           <img src="resources/header-logo.png" height="40">
+           <img src="resources/header-logo.png" height="40" ng-click="mainController.reload();" style="cursor: pointer;">
         </div>
         <uw-message ng-model="$root.errorMsg" danger></uw-message>
         <div ui-view></div>
