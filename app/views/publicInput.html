@@ -1,24 +1,6 @@
-<div class="public-input-container col-md-12 col-sm-12 col-xs-12 fadeInDown animated" ng-show="$root.hasTwitter || $root.hasFacebook">
+<div class="public-input-container col-md-12 col-sm-12 col-xs-12 fadeInDown animated z-index-10" ng-show="$root.hasTwitter || $root.hasFacebook">
 	<form name="publicForm" ng-submit="publicate(uwParent);" class="form-horizontal" role="form" novalidate>
-		<div class="row public-input-header">		
-			<a href="" ng-click="publication.type='text';publication.image=null;publication.video=null;" class="publication-type-container" ng-class="{'publication-type-active':publication.type=='text','publication-type':publication.type!='text'}">
-				<i class="fa fa-pencil-square-o"></i>
-				<div class="publication-type-text">
-					<span>Estado</span>
-				</div>
-			</a>
-			<a href="" ng-click="publication.type='photo';publication.video=null;" class="publication-type-container" ng-class="{'publication-type-active':publication.type=='photo','publication-type':publication.type!='photo'}">
-				<i class="fa fa-camera"></i>
-				<div class="publication-type-text">
-					<span>Foto</span>
-				</div>
-			</a>
-			<!--<a href="" ng-click="publication.type='video';publication.image=null;" class="publication-type-container" ng-class="{'publication-type-active':publication.type=='video','publication-type':publication.type!='video'}">
-				<i class="fa fa-film"></i>
-				<div class="publication-type-text">
-					<span>Video</span>
-				</div>
-			</a>-->
+		<div class="row public-input-header">
 			<label class="pull-right" ng-show="$root.hasTwitter && !$root.hasFacebook">
 				<i class="fa fa-twitter fa-social" ng-class="{'unselected':!publication.twitter}"></i>
 			</label>
@@ -35,10 +17,32 @@
 			</label>
 			<label class="select-social pull-right hidden-xs" ng-show="$root.hasTwitter && $root.hasFacebook">
 				Seleccioná donde queres compartirlo:
-			</label>
+			</label>		
+			<div>
+				<a href="" ng-click="publication.type='text';publication.image=null;publication.video=null;" class="publication-type-container" ng-class="{'publication-type-active':publication.type=='text','publication-type':publication.type!='text'}">
+					<i class="fa fa-pencil-square-o"></i>
+					<div class="publication-type-text">
+						<span>Estado</span>
+					</div>
+				</a>
+				<a href="" ng-click="publication.type='photo';publication.video=null;" class="publication-type-container" ng-class="{'publication-type-active':publication.type=='photo','publication-type':publication.type!='photo'}">
+					<i class="fa fa-camera"></i>
+					<div class="publication-type-text">
+						<span>Foto</span>
+					</div>
+				</a>
+				<!--<a href="" ng-click="publication.type='video';publication.image=null;" class="publication-type-container" ng-class="{'publication-type-active':publication.type=='video','publication-type':publication.type!='video'}">
+					<i class="fa fa-film"></i>
+					<div class="publication-type-text">
+						<span>Video</span>
+					</div>
+				</a>-->
+				<uw-question uw-description="'Elegí el tipo de contenido que querés publicar desde acá.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px; left: 0px; line-height: initial;"></uw-question>
+			</div>
+			
 		</div>
 		<div class=" col-md-12 col-sm-12 col-xs-12 no-padding text-center">
-			<textarea class="form-control public-input-text" type='text' name="text"  rows="4" ng-model="publication.text"/>
+			<textarea class="form-control public-input-text" type='text' name="text" placeholder="Escribí lo que quieras compartir con los demas..." rows="4" ng-model="publication.text"/>
 			<div class="image-load-section" ng-show="publication.type=='photo'">
 				<a href="" class="delete-link no-padding" ng-click="publication.image=null;" ng-show="publication.image"><i class="fa fa-times-circle"></i>Eliminar Foto</a>
 							
@@ -78,7 +82,10 @@
 		</div>
 		<div class="clearfix"></div>
 		<div class="row public-input-footer">
-			<button type="submit" value="Submit" ng-disabled="publicForm.$invalid || (!publication.facebook && !publication.twitter) " class="btn btn-unify-default pull-right">Publicar</button>
+			<div class="pull-right no-padding">
+				<button type="submit" value="Submit" ng-disabled="publicForm.$invalid || (!publication.facebook && !publication.twitter) || (!publication.text && !publication.image)" class="btn btn-unify-default pull-right">Publicar</button>
+				<uw-question uw-description="'Publicá el contenido usando este botón.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12 text-center" ng-show="$root.showQuestions" style="position: relative; left: -30px; margin-top: -5px;"></uw-question>
+			</div>
 		</div>
 	</form>
 </div>

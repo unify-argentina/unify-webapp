@@ -2,12 +2,15 @@
  	<uw-message ng-model="profileCtlr.errors" danger></uw-message>
   	<uw-loader ng-if="!profileCtlr.user"></uw-loader>
 	<div class="content col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="profileCtlr.user">
-		<div class="col-md-3 col-sm-12 col-xs-12 text-center sidepanel fadeInLeft animated" style="margin-top: 20px;">
+		<div class="col-md-3 col-sm-12 col-xs-12 text-center sidepanel fadeInLeft animated z-index-10" style="margin-top: 20px;">
 			<img ng-src="{{profileCtlr.user.picture}}" class="img-circle image-contact" ng-if="profileCtlr.user.picture">
 			<img ng-src="resources/contact/pulpix.png" class="img-circle image-contact" ng-if="!profileCtlr.user.picture">
 			<span class="profile-name">{{profileCtlr.user.name}}</span>
 			<div class="clearfix"></div>
-			<a href="" class="btn btn-unify-primary col-md-12 col-sm-12 col-xs-12" ng-click="profileCtlr.edit();" style="margin-top: 10px;">Editar perfil</a>
+			<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+				<a href="" class="btn btn-unify-primary btn-block" ng-click="profileCtlr.edit();" style="margin-top: 10px;">Editar perfil</a>
+				<uw-question uw-description="'Desde acá podés editar tu perfil de Unify.'" class="z-index-10 col-md-10 col-md-offset-2  text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px; line-height: initial;"></uw-question>
+			</div>
 			<div class="col-md-12 hidden-sm hidden-xs" style="padding: 15px 15px 5px 15px">
 				<div class="clearfix"></div>
 				<div class="social-network-bullet col-md-12 hidden-sm hidden-xs">
@@ -18,9 +21,12 @@
 						<span ng-show="profileCtlr.user.facebook.display_name">
 							{{profileCtlr.user.facebook.display_name}}
 						</span>
-						<a href="" ng-hide="profileCtlr.user.facebook.display_name" ui-sref="editProfile" >
-							Asociá esta cuenta
-						</a>
+						<div ng-hide="profileCtlr.user.facebook.display_name">
+							<a href="" ui-sref="editProfile" >
+								Asociá esta cuenta
+							</a>
+							<uw-question uw-description="'Vinculá la cuenta que te falta desde este botón.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px; left: -30px; line-height: initial;"></uw-question>
+						</div>
 					</div>
 				</div>
 				<div class="social-network-bullet col-md-12 col-sm-12 col-xs-12">
@@ -31,9 +37,12 @@
 						<span ng-show="profileCtlr.user.twitter.username">
 							{{'@'+profileCtlr.user.twitter.username}}
 						</span>
-						<a href="" ng-hide="profileCtlr.user.twitter.username" ui-sref="editProfile" >
-							Asociá esta cuenta
-						</a>
+						<div ng-hide="profileCtlr.user.twitter.username">
+							<a href="" ui-sref="editProfile" >
+								Asociá esta cuenta
+							</a>
+							<uw-question uw-description="'Vinculá la cuenta que te falta desde este botón.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px; left: -30px; line-height: initial;"></uw-question>
+						</div>
 					</div>
 				</div>
 				<div class="social-network-bullet col-md-12 col-sm-12 col-xs-12">
@@ -44,9 +53,12 @@
 						<span ng-show="profileCtlr.user.instagram.username">
 							{{profileCtlr.user.instagram.username}}
 						</span>
-						<a href="" ng-hide="profileCtlr.user.instagram.username" ui-sref="editProfile" >
-							Asociá esta cuenta
-						</a>
+						<div ng-hide="profileCtlr.user.instagram.username">
+							<a href="" ui-sref="editProfile" >
+								Asociá esta cuenta
+							</a>
+							<uw-question uw-description="'Vinculá la cuenta que te falta desde este botón.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px; left: -30px; line-height: initial;"></uw-question>
+						</div>
 					</div>
 				</div>			
 				<div class="social-network-bullet col-md-12 col-sm-12 col-xs-12">
@@ -57,18 +69,23 @@
 						<span ng-show="profileCtlr.user.google.email">
 							{{profileCtlr.user.google.email}}
 						</span>
-						<a href="" ng-hide="profileCtlr.user.google.email" ui-sref="editProfile" >
-							Asociá esta cuenta
-						</a>
+						<div ng-hide="profileCtlr.user.google.email">
+							<a href="" ui-sref="editProfile" >
+								Asociá esta cuenta
+							</a>
+							<uw-question uw-description="'Vinculá la cuenta que te falta desde este botón.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px; left: -30px; line-height: initial;"></uw-question>
+						</div>
 					</div>
 				</div>
 				<div class="clearfix"></div>
 			</div>
 			<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
 				<a class="btn btn-unify-primary btn-block" ui-sref="editProfile" style="margin-top: 10px;">Editar cuentas</a>
+				<uw-question uw-description="'Clic acá para editar las cuentas que tenés vinculadas.'" class="z-index-10 col-md-10 col-md-offset-2 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px; line-height: initial;"></uw-question>
 			</div>
 			<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
-			<a class="btn btn-unify-primary-invert btn-block text-left" ng-click="profileCtlr.editPass();" style="margin-top: 10px;">Editar Password</a>
+				<a class="btn btn-unify-primary-invert btn-block text-left" ng-click="profileCtlr.editPass();" style="margin-top: 10px;">Editar Password</a>
+				<uw-question uw-description="'Para cambiar tu contraseña, clic acá.'" class="z-index-10 col-md-10 col-md-offset-2 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px; line-height: initial;"></uw-question>
 			</div>
 		</div>
 		<div class="col-md-9 col-sm-12 col-xs-12" style="margin-top: 10px;" ng-hide="profileCtlr.editProfile || profileCtlr.editPassword">
@@ -90,7 +107,7 @@
 						<img ngf-src="profileCtlr.newUser.file" class="img-circle image-contact" ng-show="profileCtlr.newUser.pictureFromFile">
 						<img src="resources/contact/pulpix.png" class="img-circle image-contact" ng-if="!profileCtlr.newUser.picture">
 					</div>
-					<div class="profile-pics col-md-12 col-sm-12 col-xs-12 text-center">
+					<div class="profile-pics col-md-12 col-sm-12 col-xs-12 text-center z-index-10">
 						<div class="row profile-pics-title">
 							Clickéa en la foto que quieras para tu perfil
 						</div>
@@ -99,6 +116,7 @@
 								<img ng-src="{{profileCtlr.user.twitter.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.twitter.picture; profileCtlr.newUser.pictureFromFile=false;" class="img-circle col-md-3 col-sm-3 col-xs-6">
 								<img ng-src="{{profileCtlr.user.instagram.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.instagram.picture; profileCtlr.newUser.pictureFromFile=false;" class="img-circle col-md-3 col-sm-3 col-xs-6">
 								<img ng-src="{{profileCtlr.user.google.picture}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.google.picture; profileCtlr.newUser.pictureFromFile=false;" class="img-circle col-md-3 col-sm-3 col-xs-6">
+								<uw-question uw-description="'Elegí cualquiera de las fotos de perfil de tus cuentas vinculadas como foto de perfil de Unify.'" class="z-index-10 col-md-6 col-md-offset-3 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -35px; left: 30px; line-height: initial;"></uw-question>
 						</div>
 
 						<span class="unify-color col-md-12 col-sm-12 col-xs-12">O también podes subir una foto</span>
@@ -111,19 +129,25 @@
 							</div>
 						</div>
 						<span class="delete-link col-md-12" ng-show="profileForm.file.$error.maxSize">La imagen es demasiado grande, se pueden subir hasta imagenes de 5MB</span> 
-						<a href="" ng-click="profileCtlr.uploadFile();" class="btn btn-unify-default">{{!profileCtlr.newUser.file ? 'Subir' : 'Subir otra'}}</a>
+						<div class="col-md-12 col-sm-12 col-xs-12 centered">
+							<a href="" ng-click="profileCtlr.uploadFile();" class="btn btn-unify-default">{{!profileCtlr.newUser.file ? 'Subir' : 'Subir otra'}}</a>
+							<uw-question uw-description="'Clic acá para subir una foto desde tu dispositivo como foto de perfil.'" class="z-index-10 col-md-8 col-md-offset-4 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px; line-height: initial;left: -13px;"></uw-question>
+						</div>
 						
 					</div>
 					<div class="clearfix"></div>
-					<div class="form-group fadeInRight animated">
-                        <label>{{'logon_name' | translate}}</label>
-                        <input type="text" class="form-control form-input" name="name" ng-model="profileCtlr.newUser.name" required>
-                    </div>
-					<div class="form-group fadeInRight animated">
-                        <label>{{'logon_email' | translate}}</label>
-                        <input type="email" class="form-control form-input" name="email" ng-model="profileCtlr.newUser.email" required>
-                    </div>
-                    <div class="form-group fadeInUp animated">
+					<div class="fadeInRight animated z-index-15">
+						<div class="form-group">
+	                        <label>{{'logon_name' | translate}}</label>
+	                        <input type="text" class="form-control form-input" name="name" ng-model="profileCtlr.newUser.name" required>
+                        </div>
+                        <uw-question uw-description="'Cargá el nombre para mostrar de tu usuario.'" class="z-index-10 col-md-8 col-md-offset-4 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -18px; line-height: initial;left: -13px;"></uw-question>
+                    	<div class="form-group">
+	                        <label>{{'logon_email' | translate}}</label>
+	                        <input type="email" class="form-control form-input" name="email" ng-model="profileCtlr.newUser.email" required>
+	                    </div>
+                        <uw-question uw-description="'Indicá tu dirección de correo electrónico.'" class="z-index-10 col-md-8 col-md-offset-4 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -18px; line-height: initial;left: -13px;"></uw-question>
+                        <br>
 		                <button type="submit" value="Submit"        
 		                         ng-disabled="profileForm.$invalid"
 		                         ng-click="profileForm.$setPristine()"
