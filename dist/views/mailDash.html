@@ -1,36 +1,41 @@
 <div id="mailDash" class="container" class="col-md-12" style="margin-top: 20px;" ng-controller="MailController as mailCtlr">
   <div class="content col-md-12 col-sm-12 col-xs-12 no-padding" ng-hide="mailCtlr.viewMail">
-		<div class="col-md-3 col-sm-12 col-xs-12 text-center  fadeInLeft animated" style="margin-top: 20px;">
+		<div class="col-md-3 col-sm-12 col-xs-12 text-center fadeInLeft animated z-index-10" style="margin-top: 20px;">
 			<a ng-click="mailCtlr.writeMail={};" class="btn btn-unify-primary btn-block" style="margin-top: 5px;"><i class="fa fa-pencil"></i> Redactar</a>
+			<uw-question uw-description="'Desde acá vas a poder redactar un nuevo correo electrónico.'" class="z-index-10 col-md-11 col-md-offset-1 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px; left: 20px;"></uw-question>
 			<a ng-click="mailCtlr.getInbox();" class="btn btn-block" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='inbox', 'btn-unify-mail-active' :mailCtlr.viewList=='inbox'}" style="margin-top: 5px;"><i class="fa fa-envelope"></i> Recibidos</a>
 			<a ng-click="mailCtlr.getSent();" class="btn btn-block" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='sent', 'btn-unify-mail-active' : mailCtlr.viewList=='sent'}" style="margin-top: 5px;"><i class="fa fa-external-link"></i> Enviados</a>
+			<uw-question uw-description="'Podés navegar entre cualquiera de tus bandejas seleccionando la que quieras.'" class="z-index-10 col-md-11 col-md-offset-1 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px; left: 20px;"></uw-question>
 			<a ng-click="mailCtlr.getDraft();" class="btn btn-block" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='draft', 'btn-unify-mail-active' : mailCtlr.viewList=='draft'}" style="margin-top: 5px;"><i class="fa fa-list"></i> Borradores</a>
 			<a ng-click="mailCtlr.getTrash();" class="btn btn-block" ng-class="{'btn-unify-mail' : mailCtlr.viewList!='trash', 'btn-unify-mail-active' : mailCtlr.viewList=='trash'}" style="margin-top: 5px;"><i class="fa fa-trash"></i> Papelera</a>
 		</div>
 		<div class="col-md-9 col-sm-12 col-xs-12 text-center" style="margin-top: 20px;" ng-show="mailCtlr.viewList=='inbox' && !mailCtlr.writeMail">
 			<uw-loader ng-if="!mailCtlr.inbox"></uw-loader>
 			<div ng-show="mailCtlr.inbox">
-				<div class="col-md-12 no-padding" ng-if="mailCtlr.inbox.count > 0">
-					<div class="btn-action-group fadeInDownBig animated">
+				<div class="col-md-12 no-padding" ng-if="mailCtlr.inbox.count > 0" >
+					<div class="btn-action-group fadeInDownBig animated z-index-10" ng-class="{'margin-half-left-question': $root.showQuestions}">
 						<a ng-click="mailCtlr.moveToTrash();" class="btn btn-action btn-action-delete hidden-sm hidden-xs">Enviar a Papelera</a>
 						<span ng-click="mailCtlr.moveToTrash();" class="fa-stack fa-lg btn-action-icon delete-link">
 						  <i class="fa fa-circle fa-stack-2x delete-link"></i>
 						  <i class="fa fa-times fa-stack-1x fa-inverse"></i>
 						</span>
+						<uw-question uw-description="'Clickea acá para eliminar los mails seleccionados.'" class="z-index-10 col-md-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px;"></uw-question>
 					</div>
-					<div class="btn-action-group fadeInDownBig animated">
+					<div class="btn-action-group fadeInDownBig animated z-index-10" ng-class="{'margin-left-question': $root.showQuestions}">
 						<a ng-click="mailCtlr.markAsSeen();" class="btn btn-action hidden-sm hidden-xs" style="margin-left: 10px;">Marcar como leido</a>
 						<span ng-click="mailCtlr.markAsSeen();" class="fa-stack fa-lg btn-action-icon">
 						  <i class="fa fa-circle fa-stack-2x"></i>
 						  <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
 						</span>
+						<uw-question uw-description="'Clickea acá para marcar los mails seleccionados como leídos.'" class="z-index-10 col-md-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px;"></uw-question>
 					</div>
-					<div class="btn-action-group fadeInDownBig animated">
+					<div class="btn-action-group fadeInDownBig animated z-index-10" ng-class="{'margin-left-question': $root.showQuestions}">
 						<a ng-click="mailCtlr.markAsUnseen();" class="btn btn-action hidden-sm hidden-xs" style="margin-left: 10px;">Marcar como no leido</a>
 						<span ng-click="mailCtlr.markAsUnseen();" class="fa-stack fa-lg btn-action-icon">
 						  <i class="fa fa-circle fa-stack-2x"></i>
 						  <i class="fa fa-eye-slash fa-stack-1x fa-inverse"></i>
 						</span>
+						<uw-question uw-description="'Clickea acá para marcar los mails seleccionados como no leídos.'" class="z-index-10 col-md-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px;"></uw-question>
 					</div>
 					<div class="fadeInDownBig animated">
 						<dir-pagination-controls boundary-links="false" class="pull-right" pagination-id="inbox" ></dir-pagination-controls>
@@ -38,7 +43,7 @@
 				</div>
 				<div class="clearfix"></div>
 				<div class=""  ng-if="mailCtlr.inbox.count > 0" style="margin-top: 10px;">
-					<span class="mail-list col-md-12 col-sm-12 col-xs-12 fadeInRight animated" dir-paginate="mail in mailCtlr.inbox.list | itemsPerPage: mailCtlr.pageSize" pagination-id="inbox" current-page="mailCtlr.currentPage" ng-class="{'mail-unread': mail.unread}">
+					<span class="mail-list col-md-12 col-sm-12 col-xs-12 fadeInRight animated" dir-paginate="mail in mailCtlr.inbox.list | itemsPerPage: mailCtlr.pageSize" pagination-id="inbox" current-page="mailCtlr.currentPage" ng-class="{'mail-unread': mail.unread, 'z-index-10':$first}">
 	   					<label class="pull-left" >
 							<input type="checkbox" ng-model="mail.checked" ng-true-value="true" ng-false-value="false" ng-change="mailCtlr.check(mail);" style="display: none;"> 
 							<i class="fa" ng-class="{'fa-check-square-o': mail.checked,'fa-square-o': !mail.checked}"></i>
@@ -131,13 +136,14 @@
 			<uw-loader ng-if="!mailCtlr.trash"></uw-loader>
 			<div ng-show="mailCtlr.trash">
 				<div class=""  ng-if="mailCtlr.trash.count > 0">
-					<div class="col-md-12 col-sm-12 col-xs-12 no-padding fadeInDownBig animated">
-						<div class="btn-action-group">
+					<div class="col-md-12 col-sm-12 col-xs-12 no-padding fadeInDownBig animated z-index-10">
+						<div class="btn-action-group" ng-class="{'margin-half-left-question': $root.showQuestions}">
 							<a ng-click="mailCtlr.moveToInbox();" class="btn btn-action hidden-sm hidden-xs">Quitar de la Papelera</a>
 							<span ng-click="mailCtlr.moveToTrash();" class="fa-stack fa-lg btn-action-icon">
 							  <i class="fa fa-circle fa-stack-2x"></i>
 							  <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
 							</span>
+							<uw-question uw-description="'Selecciona los mails que desees enviar a la bandeja de entrada y despues hace click acá.'" class="z-index-10 col-md-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px;"></uw-question>
 						</div>
 						<dir-pagination-controls boundary-links="false" class="pull-right" pagination-id="trash"></dir-pagination-controls>
 					</div>
@@ -232,27 +238,31 @@
 				  <i class="fa fa-circle fa-stack-2x"></i>
 				  <i class="fa fa-arrow-left fa-stack-1x fa-inverse"></i>
 				</span>
+				<uw-question uw-description="'Clic acá para volver al menú principal de correo electrónico.'" class="z-index-10 col-md-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px; left: -40px;"></uw-question>
 			</div>
-			<div class="btn-action-group pull-right">
+			<div class="btn-action-group pull-right" ng-class="{'margin-right-question': $root.showQuestions}">
 				<a ng-click="mailCtlr.moveToTrashMail(mailCtlr.viewMail); mailCtlr.viewMail=null;" class="btn btn-action btn-action-delete hidden-sm hidden-xs" style="margin-left: 5px;">Eliminar mail</a>
 				<span ng-click="mailCtlr.moveToTrashMail(mailCtlr.viewMail); mailCtlr.viewMail=null;" class="fa-stack fa-lg btn-action-icon delete-link">
 				  <i class="fa fa-circle fa-stack-2x delete-link"></i>
 				  <i class="fa fa-times fa-stack-1x fa-inverse"></i>
 				</span>
+				<uw-question uw-description="'Con este botón podés eliminar este correo.'" class="z-index-10 col-md-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px;"></uw-question>
 			</div>
-			<div class="btn-action-group pull-right">
+			<div class="btn-action-group pull-right" ng-class="{'margin-right-question': $root.showQuestions}">
 				<a ng-click="mailCtlr.answerAllMail(mailCtlr.viewMail, mainController.email);" class="btn btn-action hidden-sm hidden-xs" style="margin-left: 5px;">Responder a todos</a>
 				<span ng-click="mailCtlr.answerAllMail(mailCtlr.viewMail, mainController.email);" class="fa-stack fa-lg btn-action-icon">
 				  <i class="fa fa-circle fa-stack-2x"></i>
 				  <i class="fa fa-reply-all fa-stack-1x fa-inverse"></i>
 				</span>
+				<uw-question uw-description="'Podés responder a todos los involucrados en este mail desde acá.'" class="z-index-10 col-md-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px;"></uw-question>
 			</div>
-			<div class="btn-action-group pull-right">
+			<div class="btn-action-group pull-right" ng-class="{'margin-right-question': $root.showQuestions}">
 				<a ng-click="mailCtlr.answerMail(mailCtlr.viewMail);" class="btn btn-action hidden-sm hidden-xs" >Responder</a>
 				<span ng-click="mailCtlr.answerMail(mailCtlr.viewMail);" class="fa-stack fa-lg btn-action-icon">
 				  <i class="fa fa-circle fa-stack-2x"></i>
 				  <i class="fa fa-reply fa-stack-1x fa-inverse"></i>
 				</span>
+				<uw-question uw-description="'Usando este botón podés responder este mail.'" class="z-index-10 col-md-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px;"></uw-question>
 			</div>
 		</div>
 		<div class="col-md-3 col-sm-12 col-xs-12 word-break fadeInLeft animated" style="margin-top: 20px;">
@@ -260,11 +270,13 @@
 				<span class="mail-label">De:</span>
 				<br>
 				<span class="mail-text">{{mailCtlr.viewMail.from.toString()}}</span>
+				<uw-question uw-description="'Acá se indica el remitente del correo electrónico que estás viendo.'" class="z-index-10 col-md-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px;"></uw-question>
 			</div>
 			<div style="margin-top: 10px;" ng-show="mailCtlr.viewMail.to.toString()">
 				<span class="mail-label">Para:</span>
 				<br>
 				<span class="mail-text">{{mailCtlr.viewMail.to.toString()}}</span>
+				<uw-question uw-description="'Acá se indica el, o los, destinatarios del correo electrónico que estás viendo.'" class="z-index-10 col-md-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px;"></uw-question>
 			</div>
 			<div style="margin-top: 10px;" ng-show="mailCtlr.viewMail.cc.toString()">
 				<span class="mail-label">CC:</span>
@@ -279,8 +291,10 @@
 		</div>
 		<div class="col-md-9 col-sm-12 col-xs-12 mail-view fadeInRight animated"  style="margin-top: 20px;">
 			<span class="mail-subject">{{mailCtlr.viewMail.subject}}</span>
+			<uw-question uw-description="'Acá se indica el asunto del correo electrónico que estás viendo.'" class="z-index-10 col-md-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px;"></uw-question>
 			<span class="mail-date">{{mailCtlr.viewMail.date | amCalendar}}</span>
-			<div class="mail-body col-md-12 col-sm-12 col-xs-12" ng-bind-html="mailCtlr.mailHtml"></div>
+			<uw-question uw-description="'Aquí se indica el contenido del correo electrónico que estás viendo.'" class="z-index-10 col-md-8 col-md-offset-4 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: 32px;"></uw-question>
+			<div class="mail-body col-md-12 col-sm-12 col-xs-12" ng-bind-html="mailCtlr.mailHtml" ng-class="{'margin-top-question': $root.showQuestions}"></div>
 		</div>
 	</div>
 

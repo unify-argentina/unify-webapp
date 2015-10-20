@@ -3,7 +3,7 @@
     <div class="navbar-header">
       <div class="navbar-brand unifyLogo">
         <canvas id="myCanvas" width="400" height="70"></canvas>
-        <img src="resources/header-logo.png" height="40">
+        <img src="resources/header-logo.png" height="40" ng-click="mainController.reload();" style="cursor: pointer;">
       </div>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -14,21 +14,25 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse text-center">
       <ul class="nav navbar-nav">
-        <li><a href="" ng-click="mainController.goToMain();"><i class="fa fa-home fa-2x"></i><br>Inicio</a></li>
-        <li><a href="" ng-click="mainController.goToMails();"><i class="fa fa-envelope-o fa-2x"></i><br>Mail</a></li>
+        <li>
+            <a href="" ng-click="mainController.goToMain();"><i class="fa fa-home fa-2x"></i><br>Inicio</a>
+        </li>
+        <li>
+            <a href="" ng-click="mainController.goToMails();"><i class="fa fa-envelope-o fa-2x"></i><br>Mail</a>
+        </li>
 
         <li class="change-font-container">
           <div>
             <a href="" ng-click="mainController.fontSizeBig();" ng-class="{'cursor-default': mainController.fontSize==3}"> <span class="change-font">A+</span></a>
             <a href="" ng-click="mainController.fontSizeSmall();" ng-class="{'cursor-default': mainController.fontSize==0}"><span class="change-font font-12">A-</span></a>
           </div>
-          Tamaño de letra
+            <span>Tamaño de letra</span>
         </li>
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a ui-sref="profile" class="profile">
+        <li style="cursor: pointer;">
+          <a ng-click="mainController.goToProfile();" class="profile">
             <img ng-src="{{$root.picture}}" class="img-circle" ng-if="$root.picture">
             <img src="resources/contact/pulpix.png" class="img-circle" ng-if="!$root.picture">
             <br>
