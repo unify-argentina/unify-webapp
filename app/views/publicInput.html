@@ -13,12 +13,12 @@
 					<span>Foto</span>
 				</div>
 			</a>
-			<a href="" ng-click="publication.type='video';publication.image=null;" class="publication-type-container" ng-class="{'publication-type-active':publication.type=='video','publication-type':publication.type!='video'}">
+			<!--<a href="" ng-click="publication.type='video';publication.image=null;" class="publication-type-container" ng-class="{'publication-type-active':publication.type=='video','publication-type':publication.type!='video'}">
 				<i class="fa fa-film"></i>
 				<div class="publication-type-text">
 					<span>Video</span>
 				</div>
-			</a>
+			</a>-->
 			<label class="pull-right" ng-show="$root.hasTwitter && !$root.hasFacebook">
 				<i class="fa fa-twitter fa-social" ng-class="{'unselected':!publication.twitter}"></i>
 			</label>
@@ -42,9 +42,9 @@
 			<div class="image-load-section" ng-show="publication.type=='photo'">
 				<a href="" class="delete-link no-padding" ng-click="publication.image=null;" ng-show="publication.image"><i class="fa fa-times-circle"></i>Eliminar Foto</a>
 							
-				<input id="imageUploadInput" type="file" ngf-select ng-model="publication.uploadingImage" name="uploadingImage" accept="image/*" ngf-max-size="2MB" style="display:none;">
+				<input id="imageUploadInput" type="file" ngf-select ng-model="publication.uploadingImage" name="uploadingImage" accept="image/*" style="display:none;">
 				
-				<input id="imageToUpload" type="file" ngf-select ng-model="publication.image" name="image" accept="image/*" ngf-max-size="2MB" style="display:none;">
+				<input id="imageToUpload" type="file" ngf-select ng-model="publication.image" name="image" accept="image/*" ngf-max-size="5MB" style="display:none;">
 
 
 				<a href="" ng-click="uploadImage();" class="public-link-file col-md-12 col-sm-12 col-xs-12" ng-show="!publication.image">
@@ -54,7 +54,7 @@
 
 				<img ngf-src="publication.image" class="centered public-image" ng-show="publication.image">
 				
-				<span class="delete-link col-md-12 col-sm-12 col-xs-12" ng-show="updateCircleForm.uploadingImage.$error.maxSize">La imagen es demasiado grande. Se pueden subir imagenes de hasta 2MB</span> 
+				<span class="delete-link col-md-12 col-sm-12 col-xs-12" ng-show="publicForm.image.$error.maxSize">La imagen es demasiado grande. Se pueden subir imagenes de hasta 5MB</span> 
 			</div>
 			<div class="video-load-section" ng-show="publication.type=='video'">
 

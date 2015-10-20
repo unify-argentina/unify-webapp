@@ -3,14 +3,17 @@ unifyApp.directive('uwQuestion', function($rootScope, $document, $timeout) {
 	var link = function(scope, elm, attrs, ctrl) {
         scope.showTutorialText = function(){
 
+            $timeout.cancel($rootScope.questionTimeout);
             $rootScope.hideQuestionMarks=true;
             scope.showDescription=true; 
+
             var timmer = $timeout(function() {
                 scope.showDescription=false; 
                 $rootScope.showQuestions=false;
                 $document.unbind('click');
                 $rootScope.$apply();
             }, 10000);
+
             $document.bind('click', function(event) {
                 if(event.toElement.id!='questionMark'){
                     console.log(event);
@@ -21,12 +24,12 @@ unifyApp.directive('uwQuestion', function($rootScope, $document, $timeout) {
                     $rootScope.$apply();
                 }
             });
-            $rootScope.$apply();
+
         };
 
         $rootScope.$watch('showQuestions', function(newValue, oldValue) {
             if(newValue){
-                $timeout(function() {
+                $rootScope.questionTimeout=$timeout(function() {
                     if(!$rootScope.hideQuestionMarks){
                         $rootScope.showQuestions=false;
                         $rootScope.$apply();

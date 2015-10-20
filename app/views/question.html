@@ -1,5 +1,5 @@
 <div class="centered question-container">
-	<a href="" class="pulse-button" ng-click="showTutorialText();" ng-hide="$root.hideQuestionMarks">
+	<a href="" class="pulse-button" ng-click="$root.hideQuestionMarks=true;showTutorialText();" ng-show="!$root.hideQuestionMarks">
 		<i id="questionMark" class="fa fa-question"></i>
 	</a>
 	<div class="" ng-show="showDescription">
@@ -7,7 +7,7 @@
 			<span>{{uwDescription}}</span>
 		</div>
 		<div class="clearfix"></div>
-		<div class="col-md-12 col-sm-12 col-xs-12 nemo-question-container">
+		<div class="nemo-question-container">
 	    	<img src="resources/buzo.png" class="nemo-question" height="75px">
 	    </div>
     </div>

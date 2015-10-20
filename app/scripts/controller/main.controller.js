@@ -15,6 +15,14 @@ unifyApp.controller("MainController", function ($scope, $modal, $translate, $sta
 		}
 	}
 
+	mainController.goToProfile =function(){
+		if($state.current.name=='profile'){
+			$state.reload();
+		}else{
+			$state.go('profile');
+		}
+	}
+
 	mainController.goToMails =function(){
 		if($rootScope.email){
 			if($state.current.name=='emails'){
@@ -25,6 +33,10 @@ unifyApp.controller("MainController", function ($scope, $modal, $translate, $sta
 		}else{
 			$state.go('editProfile');
 		}
+	}
+
+	mainController.reload =function(){
+		$state.reload();
 	}
 
 	mainController.fontSize=AuthenticationService.getFontSize();

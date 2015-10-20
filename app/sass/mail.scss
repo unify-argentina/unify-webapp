@@ -198,3 +198,8 @@ a.pagination-forward{
 		margin: 0px;
 	}
 }
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+	.btn-action-icon{
+		margin: 0px;
+	}
+}

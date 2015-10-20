@@ -49,19 +49,22 @@
 						<div class="col-md-12 col-sm-12 col-xs-12  no-padding text-center" style="margin-top: 10px;" >
 							<div class="col-md-4 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id">
 								<a href="" class="move-link centered" ng-click="circleCtrl.movingCircle=true;" ><i class="fa fa-arrows-alt"></i></i>Mover</a>
-								<uw-question uw-description="'Clickeá aquí para mover este grupo dentro de otro grupo'" class="z-index-10" ng-show="$root.showQuestions" style="left: -30px; position: relative;"></uw-question>
+								<uw-question uw-description="'Acá podés mover este grupo a otro grupo'" class="z-index-10" ng-show="$root.showQuestions" style="left: -30px; position: relative;"></uw-question>
 							</div>
 							<div class="col-md-4 col-sm-12 col-xs-12 no-padding" ng-class="{'col-md-offset-4' : circleCtrl.circle_id == circleCtrl.mainCircle_id}">
 								<a href="" class="edit-link centered" ng-click="circleCtrl.edit();" ><i class="fa fa-pencil-square-o"></i>Editar</a>
-								<uw-question uw-description="'Clickeá aquí editar este grupo'" class="z-index-10" ng-show="$root.showQuestions" style="left: -30px; position: relative;"></uw-question>
+								<uw-question uw-description="'Acá podés editar nombre o foto de este grupo.'" class="z-index-10" ng-show="$root.showQuestions" style="left: -30px; position: relative;"></uw-question>
 							</div>
   							<div class="col-md-4 col-sm-12 col-xs-12  no-padding" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id">
 								<a href="" class="delete-link centered" ng-click="circleCtrl.askDeleteConfirmation();" ><i class="fa fa-times-circle"></i>Eliminar</a>
-								<uw-question uw-description="'Clickeá aquí para eliminar este grupo'" class="z-index-10" ng-show="$root.showQuestions" style="left: -30px; position: relative;"></uw-question>
+								<uw-question uw-description="'Acá podés eliminar este grupo'" class="z-index-10" ng-show="$root.showQuestions" style="left: -30px; position: relative;"></uw-question>
 							</div>
 						</div>
 						<div class="clearfix"></div>
-						<span class="circle-name btn-block">{{circleCtrl.circle.name}}</span>
+						<div>
+							<span class="circle-name btn-block">{{circleCtrl.circle.name}}</span>
+							<uw-question uw-description="'Este es el grupo en el cual estás parado ahora.'" class="z-index-10" ng-show="$root.showQuestions" style="position: relative; left: 55px;"></uw-question>
+						</div>
 					</div>
 				</div>
 				<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-show="circleCtrl.createCircle">
@@ -70,7 +73,7 @@
 							
 							<a href="" class="delete-link no-padding" ng-click="circleCtrl.newCircle.pictureFromFile=false;circleCtrl.newCircle.file=null;" ng-show="circleCtrl.newCircle.pictureFromFile"><i class="fa fa-times-circle"></i>Eliminar Foto</a>
 							
-							<input id="fileNewUploadInput" type="file" ngf-select ng-model="circleCtrl.newCircle.uploadingFile" name="uploadingFile" accept="image/*" ngf-max-size="2MB" style="display:none;">
+							<input id="fileNewUploadInput" type="file" ngf-select ng-model="circleCtrl.newCircle.uploadingFile" name="uploadingFile" accept="image/*" style="display:none;">
 														
 							<input id="fileNewToUpload" type="file" ngf-select ng-model="circleCtrl.newCircle.file" name="file" accept="image/*" ngf-max-size="2MB" style="display:none;">
 
@@ -80,13 +83,16 @@
 
 							<a href="" ng-click="circleCtrl.uploadNewFile();" class="btn btn-unify-default">{{!circleCtrl.newCircle.file ? 'Subir una foto' : 'Subir otra'}}</a>
 
-							<i ng-show="newCircleForm.file.$error.maxSize">Archivo demasiado grande {{profileCtlr.newUser.file.size / 1000000|number:1}}MB: max {{profileCtlr.newUser.file.$errorParam}}</i> 
+							<uw-question uw-description="'Para cargar una foto que identifique al grupo, clic acá. Ojo, no es obligatorio.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -8px; left: 35px;"></uw-question>
+							
+							<i class="delete-link col-md-12"  ng-show="newCircleForm.file.$error.maxSize">La imagen es demasiado grande, se pueden subir hasta imagenes de 5MB</i> 
 							
 							<div class="clearfix"></div>
 							
 		                    <label>Ingresá en nombre del nuevo grupo:</label>
 		                    
 							<input type="text" class="form-control form-input unify-border" name="circleCtrl.newCircle" ng-model="circleCtrl.newCircle.name" required>
+							<uw-question uw-description="'El nombre que le querés poner al grupo va acá. Esto sí es obligatorio.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -8px; left: 35px;"></uw-question>
 							<div style="margin-top: 10px;">
 								 <button type="submit" value="Submit" ng-disabled="newCircleForm.$invalid" ng-click="newCircleForm.$setPristine()" class="btn btn-unify-primary col-md-6">Crear</button>
 								<a class="btn btn-unify-primary-invert col-md-6" ng-click="circleCtrl.cancelCircle();">Cancelar</a>
@@ -100,9 +106,9 @@
 
 							<a href="" class="delete-link no-padding" ng-click="circleCtrl.editCircle.pictureFromFile=false;circleCtrl.editCircle.file=null;circleCtrl.editCircle.picture=null;" ng-show="circleCtrl.editCircle.picture || circleCtrl.editCircle.pictureFromFile"><i class="fa fa-times-circle"></i>Eliminar Foto</a>
 							
-							<input id="fileUploadInput" type="file" ngf-select ng-model="circleCtrl.editCircle.uploadingFile" name="uploadingFile" accept="image/*" ngf-max-size="2MB" style="display:none;">
+							<input id="fileUploadInput" type="file" ngf-select ng-model="circleCtrl.editCircle.uploadingFile" name="uploadingFile" accept="image/*" style="display:none;">
 							
-							<input id="fileToUpload" type="file" ngf-select ng-model="circleCtrl.editCircle.file" name="file" accept="image/*" ngf-max-size="2MB" style="display:none;">
+							<input id="fileToUpload" type="file" ngf-select ng-model="circleCtrl.editCircle.file" name="file" accept="image/*" ngf-max-size="5MB" style="display:none;">
 							
 							<img ng-src="{{circleCtrl.editCircle.picture}}" class="img-circle image-profile" ng-if="circleCtrl.editCircle.picture && !circleCtrl.editCircle.pictureFromFile">
 
@@ -112,12 +118,15 @@
 
 							<a href="" ng-click="circleCtrl.uploadFile();" class="btn btn-unify-default">{{!circleCtrl.editCircle.file ? 'Subir una foto' : 'Subir otra'}}</a>
 							
-							<span class="delete-link col-md-12" ng-show="updateCircleForm.file.$error.maxSize">La imagen es demasiado grande, se pueden subir hasta imagenes de 2MB</span> 
+							<uw-question uw-description="'Para cargar una foto que identifique al grupo, clic acá. Ojo, no es obligatorio.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -8px; left: 35px;"></uw-question>
+
+							<span class="delete-link col-md-12" ng-show="updateCircleForm.file.$error.maxSize">La imagen es demasiado grande, se pueden subir hasta imagenes de 5MB</span> 
 
 							<div class="clearfix"></div>
 
 		                    <label>Ingresá el nombre del grupo:</label>
 							<input type="text" class="form-control form-input unify-border" name="circleCtrl.editCircle" ng-model="circleCtrl.editCircle.name" required>
+							<uw-question uw-description="'El nombre que le querés poner al grupo va acá. Esto sí es obligatorio.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -8px; left: 35px;"></uw-question>
 							<div style="margin-top: 10px;">
 								<button type="submit" value="Submit" ng-disabled="updateCircleForm.$invalid" ng-click="updateCircleForm.$setPristine()" class="btn btn-unify-primary col-md-6">Guardar</button>
 								<a class="btn btn-unify-primary-invert col-md-6" ng-click="circleCtrl.cancelCircle();">Cancelar</a>
@@ -131,11 +140,14 @@
 						<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Grupos</span>
 						<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
 							<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.create();" style="margin-bottom: 5px;">Crear Grupo</a>
-							<uw-question uw-description="'Clickeá aquí para crear un grupo dentro de este grupo'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -15px; left: 35px;"></uw-question>
+							<uw-question uw-description="'Querés crear un nuevo contacto dentro de este grupo? Clickea acá.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -15px; left: 35px;"></uw-question>
 						</div>
-						<div class="clear"></div>
-						<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
-							<a href="" ng-click="circleCtrl.goToCircle(subcircle._id);" class="circle-child circle-child-circle" ng-repeat="subcircle in circleCtrl.tree.subcircles | orderBy: 'name'">{{subcircle.name}}</a>
+						<div class="clearfix"></div>
+						<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.tree.subcircles.length>0">
+							<div ng-repeat="subcircle in circleCtrl.tree.subcircles | orderBy: 'name'">
+								<a href="" ng-click="circleCtrl.goToCircle(subcircle._id);" class="circle-child circle-child-circle centered" >{{subcircle.name}}</a>
+								<uw-question uw-description="'Clickea acá para entrar a los grupos que ya definiste.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; left: 35px; margin-top:-15px;" ng-if="$first"></uw-question>
+							</div>
 						</div>
 						
 					</div>
@@ -145,11 +157,14 @@
 						
 						<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.createContact();" style="margin-bottom: 5px;">Crear Contacto</a>
 						<uw-question uw-description="'Clickeá aquí para crear un contacto dentro de este grupo'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -15px; left: 35px;"></uw-question>
-						<a href="#/contact/{{circleCtrl.circle_id}}/{{contact._id}}" class="circle-child" ng-repeat="contact in circleCtrl.circle.contacts | orderBy: 'name'" >
-							<img ng-src="{{contact.picture}}" class="img-circle image-contact-small" ng-if="contact.picture">
-							<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!contact.picture">
-							{{contact.name}}
-						</a>
+						<div ng-repeat="contact in circleCtrl.circle.contacts | orderBy: 'name'">
+							<a href="#/contact/{{circleCtrl.circle_id}}/{{contact._id}}" class="circle-child" >
+								<img ng-src="{{contact.picture}}" class="img-circle image-contact-small" ng-if="contact.picture">
+								<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!contact.picture">
+								{{contact.name}}
+							</a>
+							<uw-question uw-description="'Clickea acá para acceder a este conctacto.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; left: 35px; margin-top:-15px;" ng-if="$first"></uw-question>
+						</div>
 					</div>
 				</div>
 			</div>

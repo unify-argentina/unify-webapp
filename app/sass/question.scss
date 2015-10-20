@@ -8,12 +8,13 @@
 	a{
 		color: #dc911a;
     .fa-question{
-    border-radius: 100%;
-    font-size: 1.25em;
-    cursor: pointer;
-    background-color: #fff;
-    border: 2px solid #dc911a;
-    padding: 5px 9px;
+      border-radius: 100%;
+      font-size: 1.25em;
+      cursor: pointer;
+      background-color: #fff;
+      border: 2px solid #dc911a;
+      padding: 5px 9px;
+      color: #dc911a;
     }
 		&:hover, &:focus{
 	      color: lighten(#dc911a,10%);
@@ -42,7 +43,7 @@
 
 .nemo-question{
   position: relative;
-  right: -105px;
+  right: -205px;
   top: 50px;
 }
 
@@ -87,4 +88,20 @@
         height:0;
         visibility:hidden;
     }
+}
+
+.margin-right-question{
+  margin-right: -32px;
+}
+.margin-half-left-question{
+  margin-left: -16px;
+}
+.margin-left-question{
+  margin-left: -32px;
+}
+.margin-top-question{
+  margin-top: -32px;
+}
+.margin-bottom-question{
+  margin-bottom: -32px;
 }

@@ -83,7 +83,7 @@
 				</div>
 				<form name="profileForm" ng-submit="profileCtlr.save()" class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 form-horizontal" role="form" novalidate>
 					<div class="form-group">
-						<input id="fileUploadInput" type="file" ngf-select ng-model="profileCtlr.newUser.uploadingFile" name="file" accept="image/*" ngf-max-size="2MB" style="display:none;">
+						<input id="fileUploadInput" type="file" ngf-select ng-model="profileCtlr.newUser.uploadingFile" name="file" accept="image/*" ngf-max-size="5MB" style="display:none;">
                     </div>
 					<div class="col-md-12 col-sm-12 col-xs-12 text-center">
 						<img ng-src="{{profileCtlr.newUser.picture}}" class="img-circle image-contact" ng-show="!profileCtlr.newUser.pictureFromFile" ng-if="profileCtlr.newUser.picture">
@@ -110,7 +110,7 @@
 								<img ng-src="{{profileCtlr.user.pictureUploaded}}" ng-click="profileCtlr.newUser.picture=profileCtlr.user.pictureUploaded; profileCtlr.newUser.pictureFromFile=false;" class="img-circle image-edit centered" ng-show="profileCtlr.user.pictureUploaded && !profileCtlr.newUser.pictureFromFile">
 							</div>
 						</div>
-						<span class="delete-link col-md-12" ng-show="profileForm.file.$error.maxSize">La imagen es demasiado grande, se pueden subir hasta imagenes de 2MB</span> 
+						<span class="delete-link col-md-12" ng-show="profileForm.file.$error.maxSize">La imagen es demasiado grande, se pueden subir hasta imagenes de 5MB</span> 
 						<a href="" ng-click="profileCtlr.uploadFile();" class="btn btn-unify-default">{{!profileCtlr.newUser.file ? 'Subir' : 'Subir otra'}}</a>
 						
 					</div>
@@ -125,7 +125,8 @@
                     </div>
                     <div class="form-group fadeInUp animated">
 		                <button type="submit" value="Submit"        
-		                        ng-click="profileForm.$setPristine()"
+		                         ng-disabled="profileForm.$invalid"
+		                         ng-click="profileForm.$setPristine()"
 		                        class="btn btn-unify-primary col-md-6 col-sm-6 col-xs-6">Guardar</button>
 		                <a class="btn btn-unify-primary-invert col-md-6 col-sm-6 col-xs-6" ng-click="profileCtlr.editProfile=false;">Cancelar</a>
 	                </div>
