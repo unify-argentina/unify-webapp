@@ -2,7 +2,8 @@ unifyApp.directive('uwPublicInput', function($rootScope, PublicationService, Aut
   	var link = function(scope, elm, attrs, ctrl) {
        	scope.publicate = function(parent){
             
-            if(scope.publication.image==null){
+            if(scope.publication.image==null && scope.publication.video==null){
+                console.log("1");
                 PublicationService.publicState(
                     AuthenticationService.getUserId(),
                     scope.publication
@@ -29,6 +30,7 @@ unifyApp.directive('uwPublicInput', function($rootScope, PublicationService, Aut
                         parent.getFeed();
                         scope.init();
                     }else{
+                       $rootScope.errorMsg = data.errors[0].msg;
                     }
                 });
             }
