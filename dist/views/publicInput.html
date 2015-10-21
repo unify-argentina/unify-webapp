@@ -65,7 +65,7 @@
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<a href="" class="delete-link no-padding" ng-click="publication.video=null;" ng-show="publication.video"><i class="fa fa-times-circle"></i>Eliminar Video</a>
 				</div>
-				<input id="videoUploadInput" type="file" ngf-select ng-model="publication.uploadingVideo" name="uploadingVideo" accept="video/*" ngf-max-size="20MB" style="display:none;">
+				<input id="videoUploadInput" type="file" ngf-select ng-model="publication.uploadingVideo" name="uploadingVideo" accept="video/*" style="display:none;">
 				
 				<input id="videoToUpload" type="file" ngf-select ng-model="publication.video" name="video" accept="video/*" ngf-max-size="20MB" style="display:none;">
 
@@ -77,7 +77,7 @@
 
 				<img ngf-src="publication.video" class="centered public-video" ng-show="publication.video">
         		<video class="public-video" controls ngf-src="publication.video"></video>
-				<span class="delete-link col-md-12 col-sm-12 col-xs-12" ng-show="updateCircleForm.uploadingVideo.$error.maxSize">El video es demasiado grande. Se pueden subir videos de hasta 20MB</span> 
+				<span class="delete-link col-md-12 col-sm-12 col-xs-12" ng-show="publicForm.video.$error.maxSize">El video es demasiado grande. Se pueden subir videos de hasta 20MB</span> 
 			</div>
 		</div>
 		<div class="clearfix"></div>
