@@ -3,7 +3,6 @@ unifyApp.directive('uwPublicInput', function($rootScope, PublicationService, Aut
        	scope.publicate = function(parent){
             
             if(scope.publication.image==null && scope.publication.video==null){
-                console.log("1");
                 PublicationService.publicState(
                     AuthenticationService.getUserId(),
                     scope.publication
@@ -19,7 +18,7 @@ unifyApp.directive('uwPublicInput', function($rootScope, PublicationService, Aut
                 if(scope.publication.image!=null){
                     scope.publication.file=scope.publication.image;
                 }
-                if(scope.publication.video!=null){
+                else if(scope.publication.video!=null){
                     scope.publication.file=scope.publication.video;
                 }
                 PublicationService.publicFile(
