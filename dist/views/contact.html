@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			<div ng-if="!uwContactId">
+			<div ng-if="!uwContactId && contactCtrl.recomendedFriends">
 				<a href="" ng-click="contactCtrl.createFromRecommended=true;" class="btn btn-unify-default">Buscar amigos en Unify</a>
 				<uw-question uw-description="'Encontra a tus amigos que ya tienen Unify y agregalos facilmente!'" class="z-index-10 col-md-7 col-md-offset-5 col-sm-7 col-sm-offset-5 col-xs-7 col-xs-offset-5" ng-show="$root.showQuestions" style="position: relative; left: -10px; margin-top: -8px;"></uw-question>
 			</div>
