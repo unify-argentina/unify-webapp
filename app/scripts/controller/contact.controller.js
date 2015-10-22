@@ -27,6 +27,18 @@ unifyApp.controller("ContactController", function ($scope, $state, $rootScope, $
 		});
 	};
 
+	contactCtrl.getRecomendedFriends = function(){
+		ContactService.getRecomendedFriends(
+			AuthenticationService.getUserId()
+		).then(function(data) {
+			contactCtrl.recomendedFriends=data.recomended_friends.list;
+			if(data && data.errors==null){
+               $rootScope.errorMsg = data.errors[0].msg;
+			}
+		});
+	};
+
+
 	contactCtrl.getFriends = function(){	
 		if(contactCtrl.friends){	
 			if(contactCtrl.contact.facebook && contactCtrl.friends.facebook_friends){
@@ -44,6 +56,14 @@ unifyApp.controller("ContactController", function ($scope, $state, $rootScope, $
 				  return friend.id == contactCtrl.contact.instagram.id;
 				});
 			}
+		}
+	};
+
+	contactCtrl.checkFriend = function(friend){
+		if(friend.checked){
+			contactCtrl.friend_ids.push(friend._id);
+		}else{
+			_.pull(contactCtrl.friend_ids,friend._id);
 		}
 	};
 
@@ -134,6 +154,19 @@ unifyApp.controller("ContactController", function ($scope, $state, $rootScope, $
 		contactCtrl.contact.user_id = AuthenticationService.getUserId();
 		ContactService.updateContact(
 			contactCtrl.contact
+		).then(function(data) {
+			if(data.errors==null){
+				contactCtrl.parentController.closeContact();
+            }else{
+               $rootScope.errorMsg = data.errors[0].msg;
+			}
+		});
+	};
+
+	contactCtrl.saveRecomendedFriends = function(){
+		ContactService.saveContactMultiple(
+			AuthenticationService.getUserId(),
+			contactCtrl.friend_ids
 		).then(function(data) {
 			if(data.errors==null){
 				contactCtrl.parentController.closeContact();
@@ -241,6 +274,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $rootScope, $
 		contactCtrl.circle_id=circle_id;
 		contactCtrl.parentController=parentController;
 		contactCtrl.contact_id=contact_id;
+		contactCtrl.friend_ids=[];
 		if(!AuthenticationService.getFriends()){
 			AuthenticationService.getUserFriends(
 				AuthenticationService.getUserId()
@@ -270,6 +304,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $rootScope, $
 			}
 			contactCtrl.getCircleList();
 		}
+		contactCtrl.getRecomendedFriends();
 	};
 
 	contactCtrl.askDeleteConfirmation = function () {

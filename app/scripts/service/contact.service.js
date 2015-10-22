@@ -9,6 +9,21 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 			}
 		});
 
+		
+		var saveContactMultiple = function(user_id, user_ids){
+			var promise = $http.post(ENV.apiEndPoint + '/api/user/' + user_id + '/contact/multiple', 
+				{
+					user_id : user_id,
+					user_ids : user_ids
+				}
+			).then(function(response) {	
+        		return response.data;
+			}, function(response) {
+				return response.data;
+			});
+			return promise;
+		};
+
 		var saveContact = function(contact){
 			var promise = $http.post(ENV.apiEndPoint + '/api/user/' + contact.user_id + '/contact', 
 				{
@@ -99,12 +114,24 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 			return promise;
 		};
 
+		var getRecomendedFriends = function(user_id){
+			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/recomended_friends')
+			 .then(function(response) {	
+        		return response.data;
+			}, function(response) {
+				return response.data;
+			});
+			return promise;
+		};
+
 	return{
-		contact 		: contact,
-		saveContact		: saveContact,
-		updateContact	: updateContact,
-		getContactFeed	: getContactFeed,
-		like			: like,
-		unlike			: unlike
+		contact 				: contact,
+		saveContactMultiple		: saveContactMultiple,
+		saveContact				: saveContact,
+		updateContact			: updateContact,
+		getContactFeed			: getContactFeed,
+		like					: like,
+		unlike					: unlike,
+		getRecomendedFriends	: getRecomendedFriends
 	}
 });

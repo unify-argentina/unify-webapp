@@ -54,9 +54,9 @@ unifyApp.factory('ProfileService', 	function($http, $resource, ENV) {
 		};
 
 	return{
-		user 			: user,
-		saveUser		: saveUser,
-		savePassword	: savePassword,
-		getFeed			: getFeed
+		user 		: user,
+		saveUser	: saveUser,
+		savePassword: savePassword,
+		getFeed		: getFeed
 	}
 });
