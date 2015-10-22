@@ -82,8 +82,16 @@
 		</div>
 		<div class="clearfix"></div>
 		<div class="row public-input-footer">
+			<div class="pull-left no-padding">
+				<span ng-show="publication.text.length>140 && publication.twitter" style="color:#a21d22;">
+					Te pasaste {{publication.text.length-140}} {{publication.text.length-140 != 1 ? 'caracteres' : 'caracter'}} 
+				</span>
+				<span ng-show="publication.text.length<=140 && publication.twitter" style="color:#9e9e9e;">
+					{{140 - publication.text.length != 1 ? 'Te quedan' : 'Te queda'}} {{140-publication.text.length}} {{140 - publication.text.length != 1 ? 'caracteres' : 'caracter'}}
+				</span>
+			</div>
 			<div class="pull-right no-padding">
-				<button type="submit" value="Submit" ng-disabled="publicForm.$invalid || (!publication.facebook && !publication.twitter) || ((!publication.text && !publication.image) && (!publication.text && !publication.video))" class="btn btn-unify-default pull-right">Publicar</button>
+				<button type="submit" value="Submit" ng-disabled="publicForm.$invalid || (!publication.facebook && !publication.twitter) || ((!publication.text && !publication.image) && (!publication.text && !publication.video)) || (publication.twitter && publication.text.length>140)" class="btn btn-unify-default pull-right">Publicar</button>
 				<uw-question uw-description="'Publicá el contenido usando este botón.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12 text-center" ng-show="$root.showQuestions" style="position: relative; left: -30px; margin-top: -5px;"></uw-question>
 			</div>
 		</div>
