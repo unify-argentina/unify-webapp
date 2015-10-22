@@ -4,7 +4,7 @@
 		<div class="col-md-12 col-sm-12 col-xs-12 text-center fadeInDownBig animated" style="padding-bottom:10px;">
 			<span class="title-unify">{{uwContactId ? 'Editar Contacto' : 'Crear Contacto'}}</span>
 		</div>
-		<form name="contactForm" ng-submit="contactCtrl.save(uwContactId);" class="form-horizontal" role="form" novalidate>
+		<form name="contactForm" ng-submit="contactCtrl.save(uwContactId);" class="form-horizontal" role="form" ng-show="!contactCtrl.createFromRecommended" novalidate>
 			<div class="col-md-12">
 				<div class="col-md-4 col-sm-4 col-xs-12">
 
@@ -39,7 +39,11 @@
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			<div>
+			<div ng-if="!uwContactId">
+				<a href="" ng-click="contactCtrl.createFromRecommended=true;" class="btn btn-unify-default">Buscar amigos en Unify</a>
+				<uw-question uw-description="'Encontra a tus amigos que ya tienen Unify y agregalos facilmente!'" class="z-index-10 col-md-7 col-md-offset-5 col-sm-7 col-sm-offset-5 col-xs-7 col-xs-offset-5" ng-show="$root.showQuestions" style="position: relative; left: -10px; margin-top: -8px;"></uw-question>
+			</div>
+			<div style="padding-top:20px;">
 				<a href="" class="dark-link" ng-click="contactCtrl.refreshFriends();"><i class="fa fa-refresh"></i>Actualizar Amigos</a>
 				<uw-question uw-description="'Si algún contacto tuyo no aparece, probá actualizar las listas.'" class="z-index-10 col-md-7 col-md-offset-5 col-sm-7 col-sm-offset-5 col-xs-7 col-xs-offset-5" ng-show="$root.showQuestions" style="position: relative; left: -10px;"></uw-question>
 			</div>
@@ -138,6 +142,30 @@
 				<a href="" class="delete-link no-padding" ng-click="contactCtrl.askDeleteConfirmation();" ng-if="contactCtrl.contact_id"><i class="fa fa-times-circle"></i>Eliminar Contacto</a>
 			</div>
 		</form>
+		<div class="text-center" ng-show="contactCtrl.createFromRecommended" ng-if="contactCtrl.recomendedFriends">
+			<div class="fadeInLeft animated">
+				<div class="clearfix"></div>
+				<span class="unify-color font-18">Seleccioná los contactos que quieras agregar:</span>
+				<div class="clearfix"></div>
+				<div ng-repeat="friend in contactCtrl.recomendedFriends | orderBy: 'name'">
+					<label class="circle-child col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+						<input type="checkbox" ng-model="friend.checked" ng-change="contactCtrl.checkFriend(friend);" style="display: none;">
+						<img ng-src="{{friend.picture}}" class="img-circle image-contact-small" ng-if="friend.picture">
+						<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!friend.picture">
+						{{friend.name}}
+						<i class="pull-right check-multiple-contact fa" ng-class="{'fa-check-square-o': friend.checked,'fa-square-o': !friend.checked}"></i>
+					</label>
+				</div>
+				<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 no-padding">
+					<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
+						<button ng-disabled="contactCtrl.friend_ids.length<1" ng-click="contactCtrl.saveRecomendedFriends();" class="btn btn-unify-primary btn-block">Agregar Contactos</button>
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
+						<a class="btn-block btn btn-unify-primary-invert" ng-click="contactCtrl.createFromRecommended=false;contactCtrl.friend_ids=[];">Cancelar</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<div>
