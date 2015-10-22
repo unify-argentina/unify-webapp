@@ -187,17 +187,19 @@
 			<form name="newMailForm" ng-submit="mailCtlr.sendMail()"
 	          	class="form-horizontal fadeInRight animated" role="form" novalidate>
 	       		<div class="col-md-12 col-sm-12 col-xs-12 no-padding" style="margin-top: 20px;">
-					<div class="btn-action-group pull-left fadeInDownBig animated">
+					<div class="btn-action-group pull-left fadeInDownBig animated z-index-10">
 						<a ng-click="mailCtlr.writeMail=null" class="btn btn-action hidden-sm hidden-xs">Volver</a>
 						<span ng-click="mailCtlr.writeMail=null" class="fa-stack fa-lg btn-action-icon">
 						  <i class="fa fa-circle fa-stack-2x"></i>
 						  <i class="fa fa-arrow-left fa-stack-1x fa-inverse"></i>
 						</span>
+						<uw-question uw-description="'Clic acá para volver al menú principal de correo electrónico.'" class="z-index-10 col-md-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -10px; left: -40px;"></uw-question>
 					</div>
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="form-group">
 							<div class="no-padding col-sm-12 col-xs-12" ng-class="{'col-md-8' : !mailCtlr.writeMail.hasCCO && !mailCtlr.writeMail.hasCC,'col-md-10' : (mailCtlr.writeMail.hasCCO && !mailCtlr.writeMail.hasCC)||(!mailCtlr.writeMail.hasCCO && mailCtlr.writeMail.hasCC), 'col-md-12' : mailCtlr.writeMail.hasCCO && mailCtlr.writeMail.hasCC}">
 				              	<input class="form-control form-input"  ng-model="mailCtlr.writeMail.to" id="to" type='text' tabindex="1" placeholder="Ingresá a quien le vas a escribir" style="margin-top: 5px;" required/>
+				              	<uw-question uw-description="'Escribí los mails a los que queres escribir separados por una coma.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -8px; left: 70px;"></uw-question>
 							</div>
 							<div ng-show="!mailCtlr.writeMail.hasCC" class="col-md-2 col-sm-6 col-xs-6 no-padding" style="padding-top: 4px;">
 								<a ng-click="mailCtlr.writeMail.hasCC=true;" class="btn btn-unify-primary-invert btn-block">Agregar CC</a>
@@ -208,9 +210,11 @@
 						</div>
 						<div class="form-group" ng-show="mailCtlr.writeMail.hasCC">
 			              	<input class="form-control form-input" ng-model="mailCtlr.writeMail.cc" id="cc" type='text' placeholder="Ingresá a quien queres copiar"/>
+			              	<uw-question uw-description="'Escribí los mails a los que quieras enviar una copia del mail.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -8px; left: 70px;"></uw-question>
 						</div>
 						<div class="form-group" ng-show="mailCtlr.writeMail.hasCCO">
 			              	<input class="form-control form-input" ng-model="mailCtlr.writeMail.cco" id="cco" type='text' placeholder="Ingresá a quien queres copiar de forma oculta"/>
+			              	<uw-question uw-description="'Escribí los mails a los que quieras enviar una copia del mail sin que el resto lo vea.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -8px; left: 70px;"></uw-question>
 						</div>
 						<div class="form-group">
 			              	<input class="form-control form-input" ng-model="mailCtlr.writeMail.subject" id="subject" type='text' placeholder="Escribí el asunto de tu email"/>

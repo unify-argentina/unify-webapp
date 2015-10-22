@@ -32,7 +32,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $rootScope, $
 			AuthenticationService.getUserId()
 		).then(function(data) {
 			contactCtrl.recomendedFriends=data.recomended_friends.list;
-			if(data && data.errors==null){
+			if(data && data.errors!=null){
                $rootScope.errorMsg = data.errors[0].msg;
 			}
 		});
