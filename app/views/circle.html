@@ -174,7 +174,7 @@
 						<div class="circle-children" style="margin-top: 10px;">
 							<label class="col-md-12 col-sm-12 col-xs-12 no-padding cursor-pointer">
 								<input type="checkbox" ng-model="circleCtrl.showGroups" style="display: none;">
-								<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Grupos</span>
+								<span class="circle-section-name btn-block" style="margin-bottom: 5px;">{{circleCtrl.showGroups ? 'Ocultar Grupos' : 'Mostrar Grupos'}}</span>
 							</label>
 							<div class="clearfix"></div>
 							<div ng-show="circleCtrl.showGroups">
@@ -195,7 +195,7 @@
 						<div class="circle-children">
 							<label class="col-md-12 col-sm-12 col-xs-12 no-padding cursor-pointer">
 								<input type="checkbox" ng-model="circleCtrl.showContacts" style="display: none;">
-								<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Contactos</span>
+								<span class="circle-section-name btn-block" style="margin-bottom: 5px;">{{circleCtrl.showContacts ? 'Ocultar Contactos' : 'Mostrar Contactos'}}</span>
 							</label>
 							<div class="clearfix"></div>
 							<div ng-show="circleCtrl.showContacts">
