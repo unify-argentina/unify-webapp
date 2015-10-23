@@ -47,15 +47,15 @@
 						</div>
 						<div class="clearfix"></div>
 						<div class="col-md-12 col-sm-12 col-xs-12  no-padding text-center" style="margin-top: 10px;" >
-							<div class="col-md-4 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id">
+							<div class="col-md-4 col-sm-4 col-xs-4 no-padding" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id">
 								<a href="" class="move-link centered" ng-click="circleCtrl.movingCircle=true;" ><i class="fa fa-arrows-alt"></i></i>Mover</a>
 								<uw-question uw-description="'Acá podés mover este grupo a otro grupo'" class="z-index-10" ng-show="$root.showQuestions" style="left: -30px; position: relative;"></uw-question>
 							</div>
-							<div class="col-md-4 col-sm-12 col-xs-12 no-padding" ng-class="{'col-md-offset-4' : circleCtrl.circle_id == circleCtrl.mainCircle_id}">
+							<div class="col-md-4 col-sm-4 col-xs-4 no-padding" ng-class="{'col-md-offset-4 col-sm-offset-4 col-xs-offset-4' : circleCtrl.circle_id == circleCtrl.mainCircle_id}">
 								<a href="" class="edit-link centered" ng-click="circleCtrl.edit();" ><i class="fa fa-pencil-square-o"></i>Editar</a>
 								<uw-question uw-description="'Acá podés editar nombre o foto de este grupo.'" class="z-index-10" ng-show="$root.showQuestions" style="left: -30px; position: relative;"></uw-question>
 							</div>
-  							<div class="col-md-4 col-sm-12 col-xs-12  no-padding" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id">
+  							<div class="col-md-4 col-sm-4 col-xs-4  no-padding" ng-if="circleCtrl.circle_id !=circleCtrl.mainCircle_id">
 								<a href="" class="delete-link centered" ng-click="circleCtrl.askDeleteConfirmation();" ><i class="fa fa-times-circle"></i>Eliminar</a>
 								<uw-question uw-description="'Acá podés eliminar este grupo'" class="z-index-10" ng-show="$root.showQuestions" style="left: -30px; position: relative;"></uw-question>
 							</div>
@@ -135,35 +135,81 @@
 					</div>
 				</div>
 				<div class="clearfix"></div>
-				<div ng-hide="circleCtrl.createCircle || circleCtrl.editingCircle">
-					<div class="circle-children" style="margin-top: 20px;">
-						<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Grupos</span>
-						<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
-							<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.create();" style="margin-bottom: 5px;">Crear Grupo</a>
-							<uw-question uw-description="'Querés crear un nuevo contacto dentro de este grupo? Clickea acá.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -15px; left: 35px;"></uw-question>
+				<div class="hidden-xs">
+					<div ng-hide="circleCtrl.createCircle || circleCtrl.editingCircle">
+						<div class="circle-children" style="margin-top: 20px;">
+							<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Grupos</span>
+							<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+								<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.create();" style="margin-bottom: 5px;">Crear Grupo</a>
+								<uw-question uw-description="'Querés crear un nuevo contacto dentro de este grupo? Clickea acá.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -15px; left: 35px;"></uw-question>
+							</div>
+							<div class="clearfix"></div>
+							<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.tree.subcircles.length>0">
+								<div ng-repeat="subcircle in circleCtrl.tree.subcircles | orderBy: 'name'">
+									<a href="" ng-click="circleCtrl.goToCircle(subcircle._id);" class="circle-child circle-child-circle centered" >{{subcircle.name}}</a>
+									<uw-question uw-description="'Clickea acá para entrar a los grupos que ya definiste.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; left: 35px; margin-top:-15px;" ng-if="$first"></uw-question>
+								</div>
+							</div>
+							
 						</div>
 						<div class="clearfix"></div>
-						<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.tree.subcircles.length>0">
-							<div ng-repeat="subcircle in circleCtrl.tree.subcircles | orderBy: 'name'">
-								<a href="" ng-click="circleCtrl.goToCircle(subcircle._id);" class="circle-child circle-child-circle centered" >{{subcircle.name}}</a>
-								<uw-question uw-description="'Clickea acá para entrar a los grupos que ya definiste.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; left: 35px; margin-top:-15px;" ng-if="$first"></uw-question>
+						<div class="circle-children" style="margin-top: 25px;">
+							<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Contactos</span>
+							
+							<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.createContact();" style="margin-bottom: 5px;">Crear Contacto</a>
+							<uw-question uw-description="'Clickeá aquí para crear un contacto dentro de este grupo'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -15px; left: 35px;"></uw-question>
+							<div ng-repeat="contact in circleCtrl.circle.contacts | orderBy: 'name'">
+								<a href="#/contact/{{circleCtrl.circle_id}}/{{contact._id}}" class="circle-child" >
+									<img ng-src="{{contact.picture}}" class="img-circle image-contact-small" ng-if="contact.picture">
+									<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!contact.picture">
+									{{contact.name}}
+								</a>
+								<uw-question uw-description="'Clickea acá para acceder a este conctacto.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; left: 35px; margin-top:-15px;" ng-if="$first"></uw-question>
 							</div>
 						</div>
-						
 					</div>
-					<div class="clearfix"></div>
-					<div class="circle-children" style="margin-top: 25px;">
-						<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Contactos</span>
-						
-						<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.createContact();" style="margin-bottom: 5px;">Crear Contacto</a>
-						<uw-question uw-description="'Clickeá aquí para crear un contacto dentro de este grupo'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -15px; left: 35px;"></uw-question>
-						<div ng-repeat="contact in circleCtrl.circle.contacts | orderBy: 'name'">
-							<a href="#/contact/{{circleCtrl.circle_id}}/{{contact._id}}" class="circle-child" >
-								<img ng-src="{{contact.picture}}" class="img-circle image-contact-small" ng-if="contact.picture">
-								<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!contact.picture">
-								{{contact.name}}
-							</a>
-							<uw-question uw-description="'Clickea acá para acceder a este conctacto.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; left: 35px; margin-top:-15px;" ng-if="$first"></uw-question>
+				</div>
+				<div class="visible-xs-block visible-sm-block">
+					<div ng-hide="circleCtrl.createCircle || circleCtrl.editingCircle">
+						<div class="circle-children" style="margin-top: 10px;">
+							<label class="col-md-12 col-sm-12 col-xs-12 no-padding cursor-pointer">
+								<input type="checkbox" ng-model="circleCtrl.showGroups" style="display: none;">
+								<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Grupos</span>
+							</label>
+							<div class="clearfix"></div>
+							<div ng-show="circleCtrl.showGroups">
+								<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+									<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.create();" style="margin-bottom: 5px;">Crear Grupo</a>
+									<uw-question uw-description="'Querés crear un nuevo contacto dentro de este grupo? Clickea acá.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -15px; left: 35px;"></uw-question>
+								</div>
+								<div class="clearfix"></div>
+								<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="circleCtrl.tree.subcircles.length>0">
+									<div ng-repeat="subcircle in circleCtrl.tree.subcircles | orderBy: 'name'">
+										<a href="" ng-click="circleCtrl.goToCircle(subcircle._id);" class="circle-child circle-child-circle centered" >{{subcircle.name}}</a>
+										<uw-question uw-description="'Clickea acá para entrar a los grupos que ya definiste.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; left: 35px; margin-top:-15px;" ng-if="$first"></uw-question>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="circle-children">
+							<label class="col-md-12 col-sm-12 col-xs-12 no-padding cursor-pointer">
+								<input type="checkbox" ng-model="circleCtrl.showContacts" style="display: none;">
+								<span class="circle-section-name btn-block" style="margin-bottom: 5px;">Contactos</span>
+							</label>
+							<div class="clearfix"></div>
+							<div ng-show="circleCtrl.showContacts">
+								<a class="btn btn-unify-primary btn-block" ng-click="circleCtrl.createContact();" style="margin-bottom: 5px;">Crear Contacto</a>
+								<uw-question uw-description="'Clickeá aquí para crear un contacto dentro de este grupo'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; margin-top: -15px; left: 35px;"></uw-question>
+								<div ng-repeat="contact in circleCtrl.circle.contacts | orderBy: 'name'">
+									<a href="#/contact/{{circleCtrl.circle_id}}/{{contact._id}}" class="circle-child" >
+										<img ng-src="{{contact.picture}}" class="img-circle image-contact-small" ng-if="contact.picture">
+										<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!contact.picture">
+										{{contact.name}}
+									</a>
+									<uw-question uw-description="'Clickea acá para acceder a este conctacto.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; left: 35px; margin-top:-15px;" ng-if="$first"></uw-question>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
