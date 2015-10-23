@@ -270,7 +270,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $rootScope, $
 		}
 	});
 
-	contactCtrl.init = function(circle_id, contact_id, parentController){
+	contactCtrl.init = function(circle_id, contact_id, parentController, findFriends){
 		contactCtrl.circle_id=circle_id;
 		contactCtrl.parentController=parentController;
 		contactCtrl.contact_id=contact_id;
@@ -305,6 +305,7 @@ unifyApp.controller("ContactController", function ($scope, $state, $rootScope, $
 			contactCtrl.getCircleList();
 		}
 		contactCtrl.getRecomendedFriends();
+		contactCtrl.createFromRecommended=findFriends;
 	};
 
 	contactCtrl.askDeleteConfirmation = function () {

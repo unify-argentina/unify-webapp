@@ -6,7 +6,8 @@ unifyApp.directive('uwContactData', function() {
         scope:{
         	uwContactId: "=",
         	uwCircleId: "=",
-        	uwParentController: "="
+        	uwParentController: "=",
+        	uwFindFriends: "="
         }
     };
 });

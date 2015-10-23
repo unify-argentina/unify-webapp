@@ -1,4 +1,4 @@
-unifyApp.controller("CircleController", function ($scope, video, $modal, $rootScope, $stateParams, CircleService, FileService, AuthenticationService) {
+unifyApp.controller("CircleController", function ($scope, video, $modal, $rootScope, $stateParams, CircleService, FileService, AuthenticationService, ContactService) {
 
 	var circleCtrl = this;
 	if(!$stateParams.circle_id){
@@ -20,6 +20,9 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $rootSc
 					circleCtrl.getImageCircle();
 					circleCtrl.parent=circleCtrl.circle.parent;
 					circleCtrl.getCircleList();
+					if(circleCtrl.circle.empty_circle){
+						circleCtrl.getRecomendedFriends();
+					}
 	            }else{
 	               $rootScope.errorMsg = response.errors[0].msg;
 				}
@@ -269,6 +272,17 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $rootSc
 
 	circleCtrl.cancelContact = function(){
 		circleCtrl.editContact = false;
+	};
+
+	circleCtrl.getRecomendedFriends = function(){
+		ContactService.getRecomendedFriends(
+			AuthenticationService.getUserId()
+		).then(function(data) {
+			circleCtrl.recomendedFriends=data.recomended_friends.list;
+			if(data && data.errors!=null){
+               $rootScope.errorMsg = data.errors[0].msg;
+			}
+		});
 	};
 
 	circleCtrl.askDeleteConfirmation = function () {

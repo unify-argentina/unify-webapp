@@ -1,4 +1,4 @@
-<div id="contact" class="col-md-12 fadeInRight animated" style="margin-top: 20px;" ng-controller="ContactController as contactCtrl"  ng-init="contactCtrl.init(uwCircleId, uwContactId, uwParentController);">
+<div id="contact" class="col-md-12 fadeInRight animated" style="margin-top: 20px;" ng-controller="ContactController as contactCtrl"  ng-init="contactCtrl.init(uwCircleId, uwContactId, uwParentController, uwFindFriends);">
   	<uw-loader ng-if="!contactCtrl.contact"></uw-loader>
 	<div class="text-center" ng-if="contactCtrl.contact">
 		<div class="col-md-12 col-sm-12 col-xs-12 text-center fadeInDownBig animated" style="padding-bottom:10px;">
@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			<div ng-if="!uwContactId && contactCtrl.recomendedFriends">
+			<div ng-if="!uwContactId && contactCtrl.recomendedFriends.length>0">
 				<a href="" ng-click="contactCtrl.createFromRecommended=true;" class="btn btn-unify-default">Buscar amigos en Unify</a>
 				<uw-question uw-description="'Encontra a tus amigos que ya tienen Unify y agregalos facilmente!'" class="z-index-10 col-md-7 col-md-offset-5 col-sm-7 col-sm-offset-5 col-xs-7 col-xs-offset-5" ng-show="$root.showQuestions" style="position: relative; left: -10px; margin-top: -8px;"></uw-question>
 			</div>
