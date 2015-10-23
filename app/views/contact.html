@@ -148,7 +148,7 @@
 				<span class="unify-color font-18">Seleccioná los contactos que quieras agregar:</span>
 				<div class="clearfix"></div>
 				<div ng-repeat="friend in contactCtrl.recomendedFriends | orderBy: 'name'">
-					<label class="circle-child col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+					<label class="circle-child col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
 						<input type="checkbox" ng-model="friend.checked" ng-change="contactCtrl.checkFriend(friend);" style="display: none;">
 						<img ng-src="{{friend.picture}}" class="img-circle image-contact-small" ng-if="friend.picture">
 						<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!friend.picture">
@@ -156,7 +156,7 @@
 						<i class="pull-right check-multiple-contact fa" ng-class="{'fa-check-square-o': friend.checked,'fa-square-o': !friend.checked}"></i>
 					</label>
 				</div>
-				<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 no-padding">
+				<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 no-padding">
 					<div class="col-md-6 col-sm-6 col-xs-6 no-padding">
 						<button ng-disabled="contactCtrl.friend_ids.length<1" ng-click="contactCtrl.saveRecomendedFriends();" class="btn btn-unify-primary btn-block">Agregar Contactos</button>
 					</div>
