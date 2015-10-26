@@ -1,6 +1,8 @@
-unifyApp.directive('uwTimeLine', function($sce, $filter, $modal, ContactService, AuthenticationService) {
+unifyApp.directive('uwTimeLine', function($sce, $filter, $modal, $rootScope, CircleService, ProfileService, ContactService, AuthenticationService) {
   
   	var link = function(scope, elm, attrs, ctrl) {
+        scope.moreFeed=null;
+
         scope.boldHashtags = function(text, provider){
             var target = "_blank";
             var replacedText = $filter('linky')(text, target);
@@ -76,6 +78,63 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, $modal, ContactService,
             });
         };
         
+        scope.getMoreCircleFeed  = function(){
+            scope.moreFeed=null;
+            console.log("LALALA");
+            CircleService.getFeed(
+                AuthenticationService.getUserId(),
+                scope.uwCircleId
+            ).then(function(data) {
+                if(data){
+                    if(data.errors==null){
+                        if(data.circle_id==scope.uwCircleId)
+                        {
+                            scope.uwMedia.list=scope.uwMedia.list.concat(data.media.list);
+                            scope.uwMedia.count+=data.media.count;
+                        }
+                    }else{
+                       $rootScope.errorMsg = data.errors[0].msg;
+                    }
+                }
+            });
+        };
+
+        scope.getMoreProfileFeed = function(){
+            scope.moreFeed=null;
+            ProfileService.getFeed(
+                AuthenticationService.getUserId()
+            ).then(function(data) {
+                if(data.errors==null){
+                    if(data.user_id==AuthenticationService.getUserId())
+                    {
+                        scope.uwMedia.list=scope.uwMedia.list.concat(data.media.list);
+                        scope.uwMedia.count+=data.media.count;
+                    }
+                }else{
+                   $rootScope.errorMsg = data.errors[0].msg;
+                }
+            });
+        };
+
+        scope.getMoreContactFeed = function(){
+            scope.moreFeed=null;
+            ContactService.getContactFeed(
+                AuthenticationService.getUserId(),
+                scope.uwContactId
+            ).then(function(data) {
+                if(data.errors==null){
+                    if(data.contact_id==scope.uwContactId)
+                    {
+                        scope.uwMedia.list=scope.uwMedia.list.concat(data.media.list);
+                        scope.uwMedia.count+=data.media.count;
+                    }
+                }else{
+                   $rootScope.errorMsg = data.errors[0].msg;
+                }
+            });
+        };
+        
+    
     };
     return {
         restrict: 'E',
@@ -85,7 +144,11 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, $modal, ContactService,
         	uwMedia: "=",
         	uwName: "=",
             uwCircleId: "=",
-        	uwPicture: "="
+            uwContactId: "=",
+        	uwPicture: "=",
+            uwFromProfile: "=",
+            uwFromCircle: "=",
+            uwFromContact: "="
         }
     };
 });

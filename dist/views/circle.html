@@ -238,7 +238,7 @@
 			<div ng-show="!circleCtrl.editContact && !circleCtrl.movingCircle" style="margin-top: 10px;">
   				<div ng-if="!circleCtrl.circle.empty_circle">
 	  				<uw-loader ng-if="!circleCtrl.feed"></uw-loader>
-					<uw-time-line class="fadeInDown animated" uw-circle-id="circleCtrl.circle_id" uw-media="circleCtrl.feed" ng-if="circleCtrl.feed"></uw-time-line>
+					<uw-time-line class="fadeInDown animated" uw-circle-id="circleCtrl.circle_id" uw-media="circleCtrl.feed" ng-if="circleCtrl.feed" uw-from-circle="true"></uw-time-line>
 				</div>
 				<div ng-if="circleCtrl.circle.empty_circle" class="text-center message-empty">
 					<div class="fadeInUp animated">

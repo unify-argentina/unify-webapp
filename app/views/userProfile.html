@@ -91,7 +91,7 @@
 		<div class="col-md-9 col-sm-12 col-xs-12" style="margin-top: 10px;" ng-hide="profileCtlr.editProfile || profileCtlr.editPassword">
   			<uw-loader ng-if="!profileCtlr.feed"></uw-loader>
   			<uw-public-input ng-if="profileCtlr.feed" uw-parent="profileCtlr"></uw-public-input>
-			<uw-time-line uw-media="profileCtlr.feed" ng-if="profileCtlr.feed" uw-name="profileCtlr.user.name" uw-picture="profileCtlr.user.picture"></uw-time-line>
+			<uw-time-line uw-media="profileCtlr.feed" ng-if="profileCtlr.feed" uw-name="profileCtlr.user.name" uw-picture="profileCtlr.user.picture" uw-from-profile="true"></uw-time-line>
 		</div>
 		<div class="col-md-9 col-sm-12 col-xs-12" ng-show="profileCtlr.editProfile" style="margin-top: 20px;">
 			<div class="fadeInRight animated">

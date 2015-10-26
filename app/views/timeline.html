@@ -59,6 +59,15 @@
 		        <uw-video video-src="post.media_url" ng-if="post.media_url"></uw-video>
 			</div>
 		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="uwFromCircle" style="padding-top: 10px;">
+			<a href="" class="btn btn-unify-primary btn-block" ng-hide="moreFeed" ng-click="getMoreCircleFeed();">Cargar más</a>
+		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="uwFromContact" style="padding-top: 10px;">
+			<a href="" class="btn btn-unify-primary btn-block" ng-hide="moreFeed" ng-click="getMoreContactFeed();">Cargar más</a>
+		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="uwFromProfile" style="padding-top: 10px;">
+			<a href="" class="btn btn-unify-primary btn-block" ng-hide="moreFeed" ng-click="getMoreProfileFeed();">Cargar más</a>
+		</div>
 	</div>
 	<div ng-if="uwMedia.list.length == 0" class="text-center message-empty">
 		<div class="fadeInUp animated">			
