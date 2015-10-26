@@ -82,6 +82,16 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 			return promise;
 		};
 
+		var getMoreContactFeed = function(user_id, contact_id){
+			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/contact/'+contact_id+'/media')
+			 .then(function(response) {	
+        		return response.data;
+			}, function(response) {
+				return response.data;
+			});
+			return promise;
+		};
+
 		var like = function(user_id, facebook_id, twitter_id){
 			var promise = $http.post(ENV.apiEndPoint + '/api/user/' + user_id + '/media/like', 
 				{
@@ -130,6 +140,7 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 		saveContact				: saveContact,
 		updateContact			: updateContact,
 		getContactFeed			: getContactFeed,
+		getMoreContactFeed		: getMoreContactFeed,
 		like					: like,
 		unlike					: unlike,
 		getRecomendedFriends	: getRecomendedFriends

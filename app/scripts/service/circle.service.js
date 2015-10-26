@@ -114,7 +114,15 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 			return promise;
 		};
 
-		
+		var getMoreFeed = function(user_id, circle_id){
+			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/circle/'+circle_id+'/media')
+			 .then(function(response) {	
+        		return response.data;
+			}, function(response) {
+				return response.data;
+			});
+			return promise;
+		};
 
 	return{
 		circle 					: circle,
@@ -123,6 +131,7 @@ unifyApp.factory('CircleService', 	function($http, $resource, ENV) {
 		getCircleTree			: getCircleTree,
 		getCircleList			: getCircleList,
 		getCircleListExcluding	: getCircleListExcluding,
-		getFeed			: getFeed
+		getFeed					: getFeed,
+		getMoreFeed				: getMoreFeed
 	}
 });

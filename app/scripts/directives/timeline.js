@@ -80,8 +80,7 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, $modal, $rootScope, Cir
         
         scope.getMoreCircleFeed  = function(){
             scope.moreFeed=null;
-            console.log("LALALA");
-            CircleService.getFeed(
+            CircleService.getMoreFeed(
                 AuthenticationService.getUserId(),
                 scope.uwCircleId
             ).then(function(data) {
@@ -101,7 +100,7 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, $modal, $rootScope, Cir
 
         scope.getMoreProfileFeed = function(){
             scope.moreFeed=null;
-            ProfileService.getFeed(
+            ProfileService.getMoreFeed(
                 AuthenticationService.getUserId()
             ).then(function(data) {
                 if(data.errors==null){
@@ -118,7 +117,7 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, $modal, $rootScope, Cir
 
         scope.getMoreContactFeed = function(){
             scope.moreFeed=null;
-            ContactService.getContactFeed(
+            ContactService.getMoreContactFeed(
                 AuthenticationService.getUserId(),
                 scope.uwContactId
             ).then(function(data) {
