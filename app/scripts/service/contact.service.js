@@ -153,6 +153,8 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 		getMoreContactFeed		: getMoreContactFeed,
 		like					: like,
 		unlike					: unlike,
-		getRecomendedFriends	: getRecomendedFriends
+		getRecomendedFriends	: getRecomendedFriends,
+		getRecomended 			: getRecomended,
+		setRecomended 			: setRecomended
 	}
 });
