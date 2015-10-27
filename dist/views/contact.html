@@ -25,13 +25,13 @@
 					<i class="delete-link col-md-12"  ng-show="contactForm.file.$error.maxSize">La imagen es demasiado grande, se pueden subir hasta imagenes de 5MB</i> 
 
 				</div>
-				<div class="col-md-8 text-left">
+				<div class="col-md-8 text-left" style="padding-top:10px;">
 					<div class="form-group">
 						<label>Nombre del contacto:</label>
 						<input type="text" class="form-control form-input" name="name" ng-model="contactCtrl.contact.name" required>
 						<uw-question uw-description="'Elegí un nombre para el contacto que estás creando.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -8px; left: 70px;"></uw-question>
 					</div>
-					<div class="form-group">
+					<div class="form-group"  ng-if="$root.email">
 						<label>Mail del contacto:</label>
 						<input type="text" class="form-control form-input" name="name" ng-model="contactCtrl.contact.google.email" >
 						<uw-question uw-description="'Cargá una dirección de correo electrónico para el contacto que estás creando.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12 text-center" ng-show="$root.showQuestions" style="position: relative; margin-top: -8px; left: 70px;"></uw-question>
