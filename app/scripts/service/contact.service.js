@@ -1,6 +1,8 @@
 
 unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 
+		var recomended_friends=null;
+
 		var contact = $resource(ENV.apiEndPoint+'/api/user/:user_id/contact/:contact_id', {
 			contact_id: '@_id'
 		}, {
@@ -83,7 +85,7 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 		};
 
 		var getMoreContactFeed = function(user_id, contact_id){
-			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/contact/'+contact_id+'/media')
+			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/contact/'+contact_id+'/media/more')
 			 .then(function(response) {	
         		return response.data;
 			}, function(response) {
@@ -125,14 +127,22 @@ unifyApp.factory('ContactService', 	function($http, $resource, ENV) {
 		};
 
 		var getRecomendedFriends = function(user_id){
-			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/recomended_friends')
-			 .then(function(response) {	
-        		return response.data;
+			var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/recomended_friends')
+			.then(function(response) {	
+				return response.data;
 			}, function(response) {
 				return response.data;
 			});
 			return promise;
 		};
+
+		var getRecomended = function(){
+			return recomended_friends;
+		}
+
+		var setRecomended = function(recomended){
+			recomended_friends = recomended;
+		}
 
 	return{
 		contact 				: contact,

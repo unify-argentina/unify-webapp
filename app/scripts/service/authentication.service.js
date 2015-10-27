@@ -181,6 +181,7 @@ unifyApp.service('AuthenticationService', function ($http, $auth, $rootScope, $s
 		.then(function(response) {
 	    	localStorage.setItem('satellizer_token', response.data.token);
 	        console.log('You have successfully unlogged in: '+response.data.token); 
+	        loadDataUser(response.data);
 			$rootScope.hasFacebook=response.data.user.facebook != null;
 			$rootScope.hasTwitter=response.data.user.twitter != null;
 			$rootScope.hasInstagram=response.data.user.instagram != null;

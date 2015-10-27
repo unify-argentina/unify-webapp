@@ -28,14 +28,19 @@ unifyApp.controller("ContactController", function ($scope, $state, $rootScope, $
 	};
 
 	contactCtrl.getRecomendedFriends = function(){
-		ContactService.getRecomendedFriends(
-			AuthenticationService.getUserId()
-		).then(function(data) {
-			contactCtrl.recomendedFriends=data.recomended_friends.list;
-			if(data && data.errors!=null){
-               $rootScope.errorMsg = data.errors[0].msg;
-			}
-		});
+		if(ContactService.getRecomended()){
+			contactCtrl.recomendedFriends=ContactService.getRecomended();
+		}else{
+			ContactService.getRecomendedFriends(
+				AuthenticationService.getUserId()
+			).then(function(data) {
+				contactCtrl.recomendedFriends=data.recomended_friends.list;
+				ContactService.setRecomended(contactCtrl.recomendedFriends);
+				if(data && data.errors!=null){
+	               $rootScope.errorMsg = data.errors[0].msg;
+				}
+			});
+		}
 	};
 
 
@@ -130,6 +135,9 @@ unifyApp.controller("ContactController", function ($scope, $state, $rootScope, $
 	};
 
 	contactCtrl.saveContact = function(id){
+		if($rootScope.email==null){
+			contactCtrl.contact.google=null;
+		}
 		if(id){
 			contactCtrl.updateContact();
 		}else{

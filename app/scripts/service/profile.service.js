@@ -54,7 +54,7 @@ unifyApp.factory('ProfileService', 	function($http, $resource, ENV) {
 		};
 
 		var getMoreFeed = function(user_id){
-			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/media')
+			 var promise = $http.get(ENV.apiEndPoint + '/api/user/'+user_id+'/media/more')
 			 .then(function(response) {	
         		return response.data;
 			}, function(response) {

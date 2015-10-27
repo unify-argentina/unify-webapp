@@ -275,14 +275,19 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $rootSc
 	};
 
 	circleCtrl.getRecomendedFriends = function(){
-		ContactService.getRecomendedFriends(
-			AuthenticationService.getUserId()
-		).then(function(data) {
-			circleCtrl.recomendedFriends=data.recomended_friends.list;
-			if(data && data.errors!=null){
-               $rootScope.errorMsg = data.errors[0].msg;
-			}
-		});
+		if(ContactService.getRecomended()){
+			contactCtrl.recomendedFriends=ContactService.getRecomended();
+		}else{
+			ContactService.getRecomendedFriends(
+				AuthenticationService.getUserId()
+			).then(function(data) {
+				circleCtrl.recomendedFriends=data.recomended_friends.list;
+				ContactService.setRecomended(circleCtrl.recomendedFriends);
+				if(data && data.errors!=null){
+	               $rootScope.errorMsg = data.errors[0].msg;
+				}
+			});
+		}
 	};
 
 	circleCtrl.askDeleteConfirmation = function () {
