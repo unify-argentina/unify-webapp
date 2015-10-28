@@ -1,6 +1,10 @@
 <div class="col-md-12" ng-controller="VideoController as videoController" ng-init="videoController.addSource(videoSrc);"> 
 	<span class="col-md-12">{{post.text}}</span>
-	<button type="button" class="btn btn-unify-primary" ng-click="open(videoSrc)">Ver video</button>
+	<button type="button" class="btn btn-unify-primary centered" ng-click="open(videoSrc)">
+		<i class="fa fa-video-camera"></i>
+		<br>
+		Ver video
+	</button>
 
 	<div>
 	    <script type="text/ng-template" id="myModalContent.html">
