@@ -1,5 +1,5 @@
 {
-	"apiEndPoint"			:	"http://api.myunify.io",
+	"apiEndPoint"			:	"http://api-test-unify.herokuapp.com",
 	"name"					:	"production",
     "storageUserId"			:	"unifyUserId",
     "storageMainCircleId"	:	"unifyMainCircleId",
