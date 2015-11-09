@@ -7,7 +7,7 @@ unifyApp.controller("ContactProfileController", function ($scope, $state, $rootS
 			user_id : AuthenticationService.getUserId(),
 			contact_id : contact_id
 		},function(response){
-			if(response.errors==null){
+			if(response.errors==null || data.errors[0]==null){
 				contactCtrl.contact=response.contact;
             }else{
                $rootScope.errorMsg = response.errors[0].msg;
@@ -40,7 +40,7 @@ unifyApp.controller("ContactProfileController", function ($scope, $state, $rootS
 			user_id : AuthenticationService.getUserId(),
 			contact_id : contact_id
 		},function(response){
-			if(response.errors==null){
+			if(response.errors==null || data.errors[0]==null){
 				$state.go("dashboard");
             }else{
                $rootScope.errorMsg = response.errors[0].msg;
@@ -54,7 +54,7 @@ unifyApp.controller("ContactProfileController", function ($scope, $state, $rootS
 			AuthenticationService.getUserId(),
 			contactCtrl.contact_id
 		).then(function(data) {
-			if(data.errors==null){
+			if(data.errors==null || data.errors[0]==null){
 				if(data.contact_id==contactCtrl.contact_id)
 				{
 					contactCtrl.feed=data.media;

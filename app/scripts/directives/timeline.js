@@ -96,7 +96,7 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, $modal, $rootScope, Cir
                 scope.uwCircleId
             ).then(function(data) {
                 if(data){
-                    if(data.errors==null){
+                    if(data.errors==null  || data.errors[0]==null){
                         if(data.circle_id==scope.uwCircleId)
                         {   
                             if(data.media.list.length > 0){
@@ -119,7 +119,7 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, $modal, $rootScope, Cir
             ProfileService.getMoreFeed(
                 AuthenticationService.getUserId()
             ).then(function(data) {
-                if(data.errors==null){
+                if(data.errors==null || data.errors[0]==null){
                     if(data.user_id==AuthenticationService.getUserId())
                     {
                         if(data.media.list.length > 0){
@@ -142,7 +142,7 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, $modal, $rootScope, Cir
                 AuthenticationService.getUserId(),
                 scope.uwContactId
             ).then(function(data) {
-                if(data.errors==null){
+                if(data.errors==null || data.errors[0]==null){
                     if(data.contact_id==scope.uwContactId)
                     {
                         if(data.media.list.length > 0){

@@ -15,7 +15,7 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $rootSc
 			circle_id : circleCtrl.circle_id
 		},function(response){
 			if(response){
-				if(response.errors==null){
+				if(response.errors==null || data.errors[0]==null){
 					circleCtrl.circle=response.circle;
 					circleCtrl.getImageCircle();
 					circleCtrl.parent=circleCtrl.circle.parent;
@@ -52,7 +52,7 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $rootSc
 			circle_id : circleCtrl.circle_id
 		},function(response){
 			if(response){
-				if(response.errors==null){
+				if(response.errors==null || data.errors[0]==null){
 					circleCtrl.goToCircle(parent);
 	            }else{
 	               $rootScope.errorMsg = response.errors[0].msg;
@@ -78,7 +78,7 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $rootSc
 			circleCtrl.circle
 		).then(function(data) {
 			if(data){
-				if(data.errors==null){
+				if(data.errors==null || data.errors[0]==null){
 					circleCtrl.movingCircle=false;
 	            }else{
 	               $rootScope.errorMsg = data.errors[0].msg;
@@ -131,7 +131,7 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $rootSc
 			circleCtrl.editCircle
 		).then(function(data) {
 			if(data){
-				if(data.errors==null){
+				if(data.errors==null || data.errors[0]==null){
 					circleCtrl.circle.name=circleCtrl.editCircle.name;
 					circleCtrl.circle.picture=circleCtrl.editCircle.picture;
 					circleCtrl.editCircle = null;
@@ -159,7 +159,7 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $rootSc
 			circleCtrl.newCircle
 		).then(function(data) {
 			if(data){
-				if(data.errors==null){
+				if(data.errors==null || data.errors[0]==null){
 					circleCtrl.getCircleTree();
 					circleCtrl.createCircle=false;
 	            }else{
@@ -196,7 +196,7 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $rootSc
 			circleCtrl.circle_id
 		).then(function(data) {
 			if(data){
-				if(data.errors==null){
+				if(data.errors==null || data.errors[0]==null){
 					circleCtrl.tree=data.tree[0];
 	            }else{
 	               $rootScope.errorMsg = data.errors[0].msg;
@@ -212,7 +212,7 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $rootSc
 			circleCtrl.circle_id
 		).then(function(data) {
 			if(data){
-				if(data.errors==null){
+				if(data.errors==null || data.errors[0]==null){
 					circleCtrl.list=data;
 	            }else{
 	               $rootScope.errorMsg = data.errors[0].msg;
@@ -228,7 +228,7 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $rootSc
 			circleCtrl.circle_id
 		).then(function(data) {
 			if(data){
-				if(data.errors==null){
+				if(data.errors==null || data.errors[0]==null){
 					if(data.circle_id==circleCtrl.circle_id)
 					{
 						circleCtrl.feed=data.media;
@@ -283,7 +283,7 @@ unifyApp.controller("CircleController", function ($scope, video, $modal, $rootSc
 			).then(function(data) {
 				circleCtrl.recomendedFriends=data.recomended_friends.list;
 				ContactService.setRecomended(circleCtrl.recomendedFriends);
-				if(data && data.errors!=null){
+				if(data && data.errors!=null && data.errors[0]!=null){
 	               $rootScope.errorMsg = data.errors[0].msg;
 				}
 			});

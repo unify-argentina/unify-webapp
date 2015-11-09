@@ -73,7 +73,7 @@ unifyApp.controller("ProfileController", function (ProfileService, $scope, $root
 			AuthenticationService.getUserId(),
 			profileCtlr.password
 		).then(function(data) {
-			if(data.errors==null){
+			if(data.errors==null || data.errors[0]==null){
 				profileCtlr.editPassword=false;
             }else{
                $rootScope.errorMsg = data.errors[0].msg;
@@ -94,7 +94,7 @@ unifyApp.controller("ProfileController", function (ProfileService, $scope, $root
 			AuthenticationService.getUserId(),
 			profileCtlr.newUser
 		).then(function(data) {
-			if(data.errors==null){
+			if(data.errors==null || data.errors[0]==null){
 				profileCtlr.user.name=profileCtlr.newUser.name;
 				profileCtlr.user.email=profileCtlr.newUser.email;
 				profileCtlr.user.picture=profileCtlr.newUser.picture;
@@ -114,7 +114,7 @@ unifyApp.controller("ProfileController", function (ProfileService, $scope, $root
 		FileService.saveFile(
 			profileCtlr.newUser.file
 		).then(function(data) {
-			if(data.errors==null){
+			if(data.errors==null || data.errors[0]==null){
 				profileCtlr.newUser.picture=data.url;
 				profileCtlr.saveUser()
             }else{
@@ -128,7 +128,7 @@ unifyApp.controller("ProfileController", function (ProfileService, $scope, $root
 		ProfileService.getFeed(
 			AuthenticationService.getUserId()
 		).then(function(data) {
-			if(data.errors==null){
+			if(data.errors==null || data.errors[0]==null){
 				if(data.user_id==AuthenticationService.getUserId())
 				{
 					profileCtlr.feed=data.media;
