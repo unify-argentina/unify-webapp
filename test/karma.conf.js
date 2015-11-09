@@ -50,6 +50,7 @@ module.exports = function(config) {
       'app/lib/angular-moment/angular-moment.js',
       'app/lib/ng-file-upload/ng-file-upload.js',
       'app/lib/angular-utils-pagination/dirPagination.js',
+      'app/lib/ngInfiniteScroll/build/ng-infinite-scroll.js',
       'app/lib/angular-scenario/angular-scenario.js',
       // endbower
       "app/scripts/**/*.js",

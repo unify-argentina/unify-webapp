@@ -1,72 +1,79 @@
 <div class="timeline">
 	<div ng-if="uwMedia.list.length > 0">
-		<div class="post col-md-12 col-sm-12 col-xs-12 fadeInRight animated word-break" ng-repeat="post in uwMedia.list" ng-class="{'z-index-5': $first}">
-		    <div style="margin-bottom:5px;">
-			    <div class="col-md-9 col-sm-9 col-xs-8 no-padding">
-				    <div style="float: left; padding-right: 5px;">
-				    	<a href="#/contact/{{uwCircleId}}/{{post.contact.id}}">
-			    			<img ng-src="{{post.contact.picture}}" class="img-circle image-contact-small" ng-if="post.contact.picture">
-			    		</a>
-				    	<img ng-src="{{uwPicture}}" class="img-circle image-contact-small" ng-if="uwPicture">
-				    	<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!post.contact.picture && !uwPicture">
-				    </div>
-				    <div>
-			    	   	<span class="name" ng-if="post.contact.name">
+  		<div infinite-scroll='getMore()' infinite-scroll-disabled='loading || noMoreFeed' infinite-scroll-distance='2'>
+	 		<div class="post col-md-12 col-sm-12 col-xs-12 fadeInRight animated word-break" ng-repeat="post in uwMedia.list" ng-class="{'z-index-5': $first}">
+			    <div style="margin-bottom:5px;">
+				    <div class="col-md-9 col-sm-9 col-xs-8 no-padding">
+					    <div style="float: left; padding-right: 5px;">
 					    	<a href="#/contact/{{uwCircleId}}/{{post.contact.id}}">
-					    		<b>{{post.contact.name}}</b><br>
+				    			<img ng-src="{{post.contact.picture}}" class="img-circle image-contact-small" ng-if="post.contact.picture">
 				    		</a>
-				    		<span class="date font-thin">{{post.created_time | amCalendar}}</span>
-				    	</span>
-				    	<span class="name" ng-if="uwName">
-				    		<a><b>{{uwName}}</b></a><br>
-				    		<span class="date font-thin">{{post.created_time | amCalendar}}</span>
-				    	</span>
+					    	<img ng-src="{{uwPicture}}" class="img-circle image-contact-small" ng-if="uwPicture">
+					    	<img src="resources/contact/pulpix.png" class="img-circle image-contact-small" ng-if="!post.contact.picture && !uwPicture">
+					    </div>
+					    <div>
+				    	   	<span class="name" ng-if="post.contact.name">
+						    	<a href="#/contact/{{uwCircleId}}/{{post.contact.id}}">
+						    		<b>{{post.contact.name}}</b><br>
+					    		</a>
+					    		<span class="date font-thin">{{post.created_time | amCalendar}}</span>
+					    	</span>
+					    	<span class="name" ng-if="uwName">
+					    		<a><b>{{uwName}}</b></a><br>
+					    		<span class="date font-thin">{{post.created_time | amCalendar}}</span>
+					    	</span>
+					    </div>
 				    </div>
-			    </div>
-			    <div class="col-md-3 col-sm-3 col-xs-4 no-padding" >
-			    	<div class="pull-right">
-				    	<a href="{{post.link}}" target="_blank" class="pull-right">
-				    		<i class="fa" ng-class="{'fa-facebook-official': post.provider == 'facebook','fa-twitter': post.provider == 'twitter','fa-instagram': post.provider == 'instagram'}"></i>
-				    	</a>
-				    	<uw-question uw-description="'Este botón te indica de qué red vino el contenido y te permite ir a la publicación original.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; left: -103px; margin-top: -8px;" ng-if="$first"></uw-question>
-			    	</div>
-			    	<div class="pull-right" ng-class="{'margin-right-question': $first && $root.showQuestions}">
-				    	<a href="" class="like" ng-show="!post.user_has_liked && post.provider != 'instagram'" ng-click="like(post);" >
-				    		<span class="like-text">Me gusta</span>
-				    		<img src="resources/unify-liked.png" class="img-circle" height="33px" >
-				    	</a>
-				    	<a href="" class="liked" ng-show="post.user_has_liked  && post.provider != 'instagram'" ng-click="unlike(post);">
-				    		<span class="like-text">No me gusta más</span>
-				    		<img src="resources/unify-like.png" class="img-circle" height="33px">
-				    	</a>
-				    	<uw-question uw-description="'Este contenido te gusta o ya no? Reflejalo en Unify y también en la publicación original desde acá!'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; left: -35px; margin-top: -7px;" ng-if="$first"></uw-question>
-			    	</div>
-			    </div>
-			</div>
-			<div class="col-md-12 col-sm-12 col-xs-12"ng-if="post.type=='text'">
-				<span class="text-post" ng-bind-html="boldHashtags(post.text, post.provider)"></span>
-			</div>
-			<div ng-if="post.type=='image' || post.type=='photo' || post.type=='animated_gif'">
-				<div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom:10px;">
-					<span class="text-post" ng-bind-html="boldHashtags(post.text, post.provider)"></span>
-			    </div>
-			    <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
-					<img ng-src="{{post.media_url}}" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0" ng-click="openPhoto(post.media_url);">
+				    <div class="col-md-3 col-sm-3 col-xs-4 no-padding" >
+				    	<div class="pull-right">
+					    	<a href="{{post.link}}" target="_blank" class="pull-right">
+					    		<i class="fa" ng-class="{'fa-facebook-official': post.provider == 'facebook','fa-twitter': post.provider == 'twitter','fa-instagram': post.provider == 'instagram'}"></i>
+					    	</a>
+					    	<uw-question uw-description="'Este botón te indica de qué red vino el contenido y te permite ir a la publicación original.'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; left: -103px; margin-top: -8px;" ng-if="$first"></uw-question>
+				    	</div>
+				    	<div class="pull-right" ng-class="{'margin-right-question': $first && $root.showQuestions}">
+					    	<a href="" class="like" ng-show="!post.user_has_liked && post.provider != 'instagram'" ng-click="like(post);" >
+					    		<span class="like-text">Me gusta</span>
+					    		<img src="resources/unify-liked.png" class="img-circle" height="33px" >
+					    	</a>
+					    	<a href="" class="liked" ng-show="post.user_has_liked  && post.provider != 'instagram'" ng-click="unlike(post);">
+					    		<span class="like-text">No me gusta más</span>
+					    		<img src="resources/unify-like.png" class="img-circle" height="33px">
+					    	</a>
+					    	<uw-question uw-description="'Este contenido te gusta o ya no? Reflejalo en Unify y también en la publicación original desde acá!'" class="z-index-10 col-md-12 col-sm-12 col-xs-12" ng-show="$root.showQuestions" style="position: relative; left: -35px; margin-top: -7px;" ng-if="$first"></uw-question>
+				    	</div>
+				    </div>
 				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12"ng-if="post.type=='text'">
+					<span class="text-post" ng-bind-html="boldHashtags(post.text, post.provider)"></span>
+				</div>
+				<div ng-if="post.type=='image' || post.type=='photo' || post.type=='animated_gif'">
+					<div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom:10px;">
+						<span class="text-post" ng-bind-html="boldHashtags(post.text, post.provider)"></span>
+				    </div>
+				    <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+						<img ng-src="{{post.media_url}}" class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0" ng-click="openPhoto(post.media_url);">
+					</div>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12"  ng-if="post.type=='video'">
+					<span class="text-post" ng-bind-html="boldHashtags(post.text, post.provider)"></span>
+			        <uw-video video-src="post.media_url" ng-if="post.media_url"></uw-video>
+				</div>
+				<div class="clearfix"></div>
 			</div>
-			<div class="col-md-12 col-sm-12 col-xs-12"  ng-if="post.type=='video'">
-				<span class="text-post" ng-bind-html="boldHashtags(post.text, post.provider)"></span>
-		        <uw-video video-src="post.media_url" ng-if="post.media_url"></uw-video>
+			<div class="col-md-12 col-sm-12 col-xs-12 no-padding" style="padding-top: 10px;" ng-hide="noMoreFeed">
+				<a href="" class="btn btn-unify-primary btn-block" ng-hide="loading" ng-click="getMore();">Cargar más</a>
+				<span class="circle-section-name btn-block text-center" ng-show="loading">Cargando más contenido...</span>
 			</div>
-		</div>
-		<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="uwFromCircle" style="padding-top: 10px;">
-			<a href="" class="btn btn-unify-primary btn-block" ng-hide="moreFeed" ng-click="getMoreCircleFeed();">Cargar más</a>
-		</div>
-		<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="uwFromContact" style="padding-top: 10px;">
-			<a href="" class="btn btn-unify-primary btn-block" ng-hide="moreFeed" ng-click="getMoreContactFeed();">Cargar más</a>
-		</div>
-		<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="uwFromProfile" style="padding-top: 10px;">
-			<a href="" class="btn btn-unify-primary btn-block" ng-hide="moreFeed" ng-click="getMoreProfileFeed();">Cargar más</a>
+			<div class="clearfix"></div>
+			<!--
+			ng-if="uwFromCircle"
+			<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="uwFromContact" style="padding-top: 10px;">
+				<a href="" class="btn btn-unify-primary btn-block" ng-hide="moreFeed" ng-click="getMoreContactFeed();">Cargar más</a>
+			</div>
+			<div class="col-md-12 col-sm-12 col-xs-12 no-padding" ng-if="uwFromProfile" style="padding-top: 10px;">
+				<a href="" class="btn btn-unify-primary btn-block" ng-hide="moreFeed" ng-click="getMoreProfileFeed();">Cargar más</a>
+			</div>-->
 		</div>
 	</div>
 	<div ng-if="uwMedia.list.length == 0" class="text-center message-empty">

@@ -77,7 +77,18 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, $modal, $rootScope, Cir
                 }
             });
         };
-        
+        scope.getMore  = function(){
+            console.log("Carga!!");
+            scope.loading=true;
+            if(scope.uwFromCircle){
+                scope.getMoreCircleFeed();
+            }else if (scope.uwFromContact){
+                scope.getMoreContactFeed();
+            }else if (scope.uwFromProfile){
+                scope.getMoreProfileFeed();
+            }
+        }
+
         scope.getMoreCircleFeed  = function(){
             scope.moreFeed=null;
             CircleService.getMoreFeed(
@@ -87,9 +98,14 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, $modal, $rootScope, Cir
                 if(data){
                     if(data.errors==null){
                         if(data.circle_id==scope.uwCircleId)
-                        {
-                            scope.uwMedia.list=scope.uwMedia.list.concat(data.media.list);
-                            scope.uwMedia.count+=data.media.count;
+                        {   
+                            if(data.media.list.length > 0){
+                                scope.uwMedia.list=scope.uwMedia.list.concat(data.media.list);
+                                scope.uwMedia.count+=data.media.count;
+                            }else{
+                                scope.noMoreFeed=true;
+                            }
+                            scope.loading=false;
                         }
                     }else{
                        $rootScope.errorMsg = data.errors[0].msg;
@@ -106,8 +122,13 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, $modal, $rootScope, Cir
                 if(data.errors==null){
                     if(data.user_id==AuthenticationService.getUserId())
                     {
-                        scope.uwMedia.list=scope.uwMedia.list.concat(data.media.list);
-                        scope.uwMedia.count+=data.media.count;
+                        if(data.media.list.length > 0){
+                            scope.uwMedia.list=scope.uwMedia.list.concat(data.media.list);
+                            scope.uwMedia.count+=data.media.count;
+                        }else{
+                            scope.noMoreFeed=true;
+                        }
+                        scope.loading=false;
                     }
                 }else{
                    $rootScope.errorMsg = data.errors[0].msg;
@@ -124,8 +145,13 @@ unifyApp.directive('uwTimeLine', function($sce, $filter, $modal, $rootScope, Cir
                 if(data.errors==null){
                     if(data.contact_id==scope.uwContactId)
                     {
-                        scope.uwMedia.list=scope.uwMedia.list.concat(data.media.list);
-                        scope.uwMedia.count+=data.media.count;
+                        if(data.media.list.length > 0){
+                            scope.uwMedia.list=scope.uwMedia.list.concat(data.media.list);
+                            scope.uwMedia.count+=data.media.count;
+                        }else{
+                            scope.noMoreFeed=true;
+                        }
+                        scope.loading=false;
                     }
                 }else{
                    $rootScope.errorMsg = data.errors[0].msg;
